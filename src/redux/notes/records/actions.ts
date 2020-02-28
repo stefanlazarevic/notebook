@@ -25,5 +25,21 @@ export function insert(record: NoteRecord) {
 }
 
 export function update(record: NoteRecord) {
-  return async (dispatch: IDispatch, getState: () => any) => {};
+  return async (dispatch: IDispatch, getState: () => any) => {
+    const { notes } = getState();
+    const { records } = notes;
+
+    if (!record) {
+      throw Error(`NoteRecord must contain valid ID.`);
+    }
+
+    if (!records[record.id]) {
+      throw Error(`Record with ID ${record.id} is absent.`);
+    }
+
+    dispatch({
+      type: NotesRecordsActions.REPLACE,
+      payload: record
+    });
+  };
 }
