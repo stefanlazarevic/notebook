@@ -21,7 +21,7 @@ export default function EditorBar(props: any) {
       <button
         className="EditorBar__button"
         onMouseDown={props.onItalic}
-        title="Italics"
+        title="Italic"
       >
         <MdFormatItalic />
       </button>

@@ -1,9 +1,10 @@
 import React from "react";
+import { MdClose } from "react-icons/md";
+import { FiMinimize, FiMaximize } from "react-icons/fi";
 
 import "./NoteEditorHeader.css";
 
-import { MdClose } from "react-icons/md";
-import { FiMinimize, FiMaximize } from "react-icons/fi";
+import EditorTitle from "./components/Title/EditorTitle";
 
 export default function NoteEditorHeader(props: any) {
   return (
@@ -11,7 +12,7 @@ export default function NoteEditorHeader(props: any) {
       <button
         className="NoteEditorHeader__button"
         title="Close"
-        tabIndex={2}
+        tabIndex={3}
         onClick={props.onClose}
       >
         <MdClose className="icon" />
@@ -19,7 +20,7 @@ export default function NoteEditorHeader(props: any) {
       <button
         className="NoteEditorHeader__button"
         title={props.maximized ? "Minimize" : "Maximize"}
-        tabIndex={1}
+        tabIndex={2}
         onClick={props.onResize}
       >
         {props.maximized ? (
@@ -28,6 +29,7 @@ export default function NoteEditorHeader(props: any) {
           <FiMaximize className="icon" />
         )}
       </button>
+      <EditorTitle />
     </header>
   );
 }

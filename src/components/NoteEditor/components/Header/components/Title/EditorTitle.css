@@ -1,0 +1,13 @@
+.EditorTitle {
+  background-color: var(--note-header-background-color);
+  color: var(--note-header-text-color);
+  border: none;
+  flex: 1;
+  padding-left: 15px;
+  font-size: 18px;
+  outline: none;
+}
+
+.EditorTitle:focus {
+  outline: none;
+}
