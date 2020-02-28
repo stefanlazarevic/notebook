@@ -1,7 +1,10 @@
 /* VARIABLES */
 :root {
-  --app-background-color: #202225;
-  --app-text-color: #fff;
+  --app-background-color: #1b1c1f;
+  --app-text-color: #fffcf2;
+  --app-text-disabled-color: #ccc5b9;
+  --note-default-background-color: #ffdb70;
+  --note-default-text-color: #212121;
 }
 
 /* RESET */

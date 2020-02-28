@@ -1,0 +1,42 @@
+:root {
+  --note-header-background-color: #202225;
+  --note-header-text-color: #fffcf2;
+}
+
+.NoteEditor__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.NoteEditor__wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.NoteEditor__canvas {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: calc((100vh - 70%) / 2);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  min-width: 320px;
+  max-width: 700px;
+  height: 70%;
+  background-color: var(--note-default-background-color);
+  color: var(--note-default-text-color);
+}
+
+.NoteEditor__canvas.maximized {
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: 100%;
+  transform: none;
+}
