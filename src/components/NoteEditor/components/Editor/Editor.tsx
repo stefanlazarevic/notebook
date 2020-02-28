@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+  useRef,
+  forwardRef,
+  useImperativeHandle
+} from "react";
 import { Editor as DraftEditor, EditorState, RichUtils } from "draft-js";
 
 import "./Editor.css";
@@ -12,8 +17,9 @@ import {
   STRIKETHROUGH
 } from "./StyleMap";
 
-export default function Editor(props: any) {
+const Editor = forwardRef((props: any, ref: any) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const draftEditorRef = useRef<any>();
 
   function handleContentBold(event?: React.MouseEvent) {
     if (event) {
@@ -47,6 +53,18 @@ export default function Editor(props: any) {
     setEditorState(RichUtils.toggleInlineStyle(editorState, STRIKETHROUGH));
   }
 
+  useImperativeHandle(ref, () => ({
+    getPlainText() {
+      return editorState.getCurrentContent().getPlainText();
+    },
+    focus() {
+      draftEditorRef.current.focus();
+    },
+    blur() {
+      draftEditorRef.current.blur();
+    }
+  }));
+
   return (
     <div id="Editor" className="Editor">
       <div className="EditorBar__wrapper">
@@ -59,6 +77,7 @@ export default function Editor(props: any) {
       </div>
       <div className="DraftEditor__wrapper">
         <DraftEditor
+          ref={draftEditorRef}
           editorState={editorState}
           onChange={setEditorState}
           customStyleMap={customStyleMap}
@@ -66,4 +85,6 @@ export default function Editor(props: any) {
       </div>
     </div>
   );
-}
+});
+
+export default Editor;

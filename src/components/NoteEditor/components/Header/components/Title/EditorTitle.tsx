@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 
 import "./EditorTitle.css";
 
-export default function EditorTitle(props: any) {
-  const [value, setValue] = useState(props.initialValue || "");
+const EditorTitle = forwardRef((props: any, ref: any) => {
+  const inputRef = useRef<any>();
+  // const [value, setValue] = useState(props.initialValue || "");
 
-  useEffect(() => {
-    setValue(props.initialValue);
-  }, [props.initialValue]);
+  // function handleInputChange(event?: React.ChangeEvent<HTMLInputElement>) {
+  //   if (event) {
+  //     setValue(event.target.value);
+  //   }
+  // }
 
-  function handleInputChange(event?: React.ChangeEvent) {
-    if (event) {
-      setValue(event.target.nodeValue);
+  useImperativeHandle(ref, () => ({
+    getValue() {
+      return inputRef.current ? inputRef.current.value : "";
     }
-  }
+  }));
 
   return (
     <input
       type="text"
       className="EditorTitle"
-      value={value}
-      onChange={handleInputChange}
+      ref={inputRef}
+      defaultValue={props.initialValue}
       placeholder="New title"
-      autoFocus={value === ""}
     />
   );
-}
+});
+
+export default EditorTitle;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { MdClose } from "react-icons/md";
 import { FiMinimize, FiMaximize } from "react-icons/fi";
 
@@ -6,7 +6,7 @@ import "./NoteEditorHeader.css";
 
 import EditorTitle from "./components/Title/EditorTitle";
 
-export default function NoteEditorHeader(props: any) {
+const NoteEditorHeader = forwardRef((props: any, ref: any) => {
   return (
     <header id="NoteEditorHeader" className="NoteEditorHeader">
       <button
@@ -29,7 +29,9 @@ export default function NoteEditorHeader(props: any) {
           <FiMaximize className="icon" />
         )}
       </button>
-      <EditorTitle />
+      <EditorTitle ref={ref} />
     </header>
   );
-}
+});
+
+export default NoteEditorHeader;
