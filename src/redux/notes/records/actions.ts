@@ -23,3 +23,7 @@ export function insert(record: NoteRecord) {
     });
   };
 }
+
+export function update(record: NoteRecord) {
+  return async (dispatch: IDispatch, getState: () => any) => {};
+}

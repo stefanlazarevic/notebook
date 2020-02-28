@@ -57,10 +57,44 @@ describe("Notes/Records/Actions", () => {
   it("insert (missing or duplicate id)", () => {
     const record = TEST_RECORD;
 
-    return store.dispatch(action.insert(record)).catch(error => {
+    return store.dispatch(action.insert(record)).catch((error: Error) => {
       expect(error.message).toBe(
         `Record with the ID ${record.id} already exists.`
       );
+    });
+  });
+
+  it("update", () => {
+    const record: NoteRecord = {
+      ...TEST_RECORD,
+      title: "New title",
+      content: "<p>new content</p>"
+    };
+
+    return store.dispatch(action.update(record)).then(() => {
+      const dispatchedActions = store.getActions();
+      const expectedAction = {
+        type: NotesRecordsActions.REPLACE,
+        payload: record
+      };
+
+      expect(dispatchedActions[0]).toEqual(expectedAction);
+    });
+  });
+
+  it("update (missing record)", () => {
+    return store
+      .dispatch(action.update((null as unknown) as NoteRecord))
+      .catch((error: Error) => {
+        expect(error.message).toBe(`NoteRecord must contain valid ID.`);
+      });
+  });
+
+  it("update (missing record)", () => {
+    const record: NoteRecord = { ...TEST_RECORD, id: "y44ueqoo2px1k" };
+
+    return store.dispatch(action.update(record)).catch((error: Error) => {
+      expect(error.message).toBe(`Record with ID ${record.id} is absent.`);
     });
   });
 });
