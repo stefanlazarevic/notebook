@@ -1,0 +1,20 @@
+.Editor {
+  padding: 0 10px;
+}
+
+.EditorBar__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.DraftEditor__wrapper {
+  font-family: "Roboto", "Lato";
+  font-size: 18px;
+  overflow: scroll;
+}
+
+.DraftEditor__wrapper::-webkit-scrollbar {
+  display: none;
+}
