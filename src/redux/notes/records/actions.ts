@@ -10,11 +10,11 @@ export function insert(record: NoteRecord) {
     const { records } = notes;
 
     if (!record) {
-      throw Error(`Record object is absent.`);
+      throw Error(`NoteRecord object is absent.`);
     }
 
     if (!record.id || records[record.id]) {
-      throw Error(`Record with the ID ${record.id} already exists.`);
+      throw Error(`NoteRecord with the ID ${record.id} already exists.`);
     }
 
     dispatch({
@@ -34,12 +34,32 @@ export function update(record: NoteRecord) {
     }
 
     if (!records[record.id]) {
-      throw Error(`Record with ID ${record.id} is absent.`);
+      throw Error(`NoteRecord with ID ${record.id} is absent.`);
     }
 
     dispatch({
       type: NotesRecordsActions.REPLACE,
       payload: record
+    });
+  };
+}
+
+export function remove(id: string) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { records } = notes;
+
+    if (!id || !records[id]) {
+      throw Error(`NoteRecord with the ID ${id} is absent.`);
+    }
+
+    delete records[id];
+
+    dispatch({
+      type: NotesRecordsActions.REPLACE_ALL,
+      payload: {
+        ...records
+      }
     });
   };
 }

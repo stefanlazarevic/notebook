@@ -50,7 +50,7 @@ describe("Notes/Records/Actions", () => {
     return store
       .dispatch(action.insert((null as unknown) as NoteRecord))
       .catch(error => {
-        expect(error.message).toBe(`Record object is absent.`);
+        expect(error.message).toBe(`NoteRecord object is absent.`);
       });
   });
 
@@ -59,7 +59,7 @@ describe("Notes/Records/Actions", () => {
 
     return store.dispatch(action.insert(record)).catch((error: Error) => {
       expect(error.message).toBe(
-        `Record with the ID ${record.id} already exists.`
+        `NoteRecord with the ID ${record.id} already exists.`
       );
     });
   });
@@ -94,7 +94,29 @@ describe("Notes/Records/Actions", () => {
     const record: NoteRecord = { ...TEST_RECORD, id: "y44ueqoo2px1k" };
 
     return store.dispatch(action.update(record)).catch((error: Error) => {
-      expect(error.message).toBe(`Record with ID ${record.id} is absent.`);
+      expect(error.message).toBe(`NoteRecord with ID ${record.id} is absent.`);
+    });
+  });
+
+  it("remove", () => {
+    const ID = "test";
+
+    return store.dispatch(action.remove(ID)).then(() => {
+      const dispatchedActions = store.getActions();
+      const expectedAction = {
+        type: NotesRecordsActions.REPLACE_ALL,
+        payload: {}
+      };
+
+      expect(dispatchedActions[0]).toEqual(expectedAction);
+    });
+  });
+
+  it("detele (missing or invalid ID)", () => {
+    const ID = "ovbuan123le";
+
+    return store.dispatch(action.remove(ID)).catch((error: Error) => {
+      expect(error.message).toBe(`NoteRecord with the ID ${ID} is absent.`);
     });
   });
 });
