@@ -1,5 +1,6 @@
 import { NoteRecord, NotesRecordsActions } from "./types";
 import { IDispatch, AppState } from "../../types";
+import utils from "../../../utils/index";
 
 /**
  * Insert new NoteRecord object in the NotesRecords state Map.
@@ -53,13 +54,23 @@ export function remove(id: string) {
       throw Error(`NoteRecord with the ID ${id} is absent.`);
     }
 
-    delete records[id];
-
     dispatch({
       type: NotesRecordsActions.REPLACE_ALL,
-      payload: {
-        ...records
-      }
+      payload: utils.object.deleteProperty(id, records)
     });
+  };
+}
+
+export function updateOrInsert(record: NoteRecord) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { records } = notes;
+
+    if (records[record.id]) {
+      dispatch(update(record));
+      return;
+    }
+
+    dispatch(insert(record));
   };
 }

@@ -55,7 +55,7 @@ describe("Notes/Records/Actions", () => {
   });
 
   it("insert (missing or duplicate id)", () => {
-    const record = TEST_RECORD;
+    const record: NoteRecord = TEST_RECORD;
 
     return store.dispatch(action.insert(record)).catch((error: Error) => {
       expect(error.message).toBe(
@@ -117,6 +117,42 @@ describe("Notes/Records/Actions", () => {
 
     return store.dispatch(action.remove(ID)).catch((error: Error) => {
       expect(error.message).toBe(`NoteRecord with the ID ${ID} is absent.`);
+    });
+  });
+
+  it("updateOrInsert (update)", () => {
+    const record: NoteRecord = {
+      ...TEST_RECORD,
+      title: "Update test",
+      content: "Hello"
+    };
+
+    return store.dispatch(action.updateOrInsert(record)).then(() => {
+      const dispatchedActions = store.getActions();
+      const expectedAction = {
+        type: NotesRecordsActions.REPLACE,
+        payload: record
+      };
+
+      expect(dispatchedActions[0]).toEqual(expectedAction);
+    });
+  });
+
+  it("updateOrInsert (insert)", () => {
+    const record: NoteRecord = {
+      id: "kajenv8gqu7eiroa1",
+      title: "Update test",
+      content: "Hello"
+    };
+
+    return store.dispatch(action.updateOrInsert(record)).then(() => {
+      const dispatchedActions = store.getActions();
+      const expectedAction = {
+        type: NotesRecordsActions.REPLACE_ALL,
+        payload: record
+      };
+
+      expect(dispatchedActions[0]).toEqual(expectedAction);
     });
   });
 });
