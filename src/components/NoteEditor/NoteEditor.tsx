@@ -7,6 +7,7 @@ import Editor from "./components/Editor/Editor";
 import { NoteRecord } from "../../redux/notes/records/types";
 import { NoteEditorProps } from "./NoteEditorProps";
 import utils from "../../utils";
+import { NoteEditorFooter } from "./components/Footer";
 
 export default function NoteEditor(props: NoteEditorProps) {
   const [maximized, setMaximized] = useState(props.maximized);
@@ -52,7 +53,7 @@ export default function NoteEditor(props: NoteEditorProps) {
               ref={titleRef}
             />
             <Editor ref={editorRef} />
-            <button onClick={save}>Save</button>
+            <NoteEditorFooter onSave={save} />
           </div>
         </div>
       </div>

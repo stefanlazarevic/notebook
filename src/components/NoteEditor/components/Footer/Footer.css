@@ -1,0 +1,19 @@
+.NoteEditorFooter {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 15px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.NoteEditorFooter__button {
+  background-color: var(--note-success-color);
+  color: var(--note-header-text-color);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 50px;
+  height: 25px;
+}

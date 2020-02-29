@@ -65,8 +65,16 @@ const Editor = forwardRef((props: any, ref: any) => {
     }
   }));
 
+  function focus() {
+    if (draftEditorRef && draftEditorRef.current && editorState) {
+      if (!editorState.getSelection().getHasFocus()) {
+        setEditorState(EditorState.moveFocusToEnd(editorState));
+      }
+    }
+  }
+
   return (
-    <div id="Editor" className="Editor">
+    <div id="Editor" className="Editor" onClick={focus}>
       <div className="EditorBar__wrapper">
         <EditorBar
           onBold={handleContentBold}
