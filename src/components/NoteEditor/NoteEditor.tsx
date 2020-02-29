@@ -46,7 +46,11 @@ export default function NoteEditor(props: NoteEditorProps) {
           }`.trim()}
         >
           <div className="NoteEditorCanvas__wrapper">
-            <NoteEditorHeader onResize={toggleMaximizedState} ref={titleRef} />
+            <NoteEditorHeader
+              onResize={toggleMaximizedState}
+              onClose={props.close}
+              ref={titleRef}
+            />
             <Editor ref={editorRef} />
             <button onClick={save}>Save</button>
           </div>

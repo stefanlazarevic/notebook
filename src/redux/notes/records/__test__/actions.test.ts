@@ -1,8 +1,9 @@
 import configureStore, { MockStoreEnhanced } from "redux-mock-store";
 import thunk from "redux-thunk";
 import * as action from "../actions";
-import { NoteRecord, NotesRecordsActions } from "../types";
+import { NoteRecord, NotesRecordsActions, NotesRecords } from "../types";
 import { AppState, IDispatch } from "../../../types";
+import { NotesState } from "../../types";
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -39,7 +40,10 @@ describe("Notes/Records/Actions", () => {
       const dispatchedActions = store.getActions();
       const expectedAction = {
         type: NotesRecordsActions.REPLACE_ALL,
-        payload: record
+        payload: {
+          ...(INITIAL_STATE.notes as NotesState).records,
+          [record.id]: record
+        }
       };
 
       expect(dispatchedActions[0]).toEqual(expectedAction);
@@ -149,7 +153,10 @@ describe("Notes/Records/Actions", () => {
       const dispatchedActions = store.getActions();
       const expectedAction = {
         type: NotesRecordsActions.REPLACE_ALL,
-        payload: record
+        payload: {
+          ...(INITIAL_STATE.notes as NotesState).records,
+          [record.id]: record
+        }
       };
 
       expect(dispatchedActions[0]).toEqual(expectedAction);

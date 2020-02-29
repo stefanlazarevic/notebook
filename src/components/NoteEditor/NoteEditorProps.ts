@@ -6,6 +6,7 @@ export type NoteEditorProps = {
   id?: string;
 
   updateOrInsert: (record: NoteRecord) => void;
+  close: () => void;
 };
 
 export const NoteEditorDefaultProps: Partial<NoteEditorProps> = {

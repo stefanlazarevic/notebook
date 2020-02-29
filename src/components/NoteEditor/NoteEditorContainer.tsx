@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { connect } from "react-redux";
+import { connect, batch } from "react-redux";
 
 import NoteEditor from "./NoteEditor";
 import { AppState, IDispatch } from "../../redux/types";
 import { NoteRecord } from "../../redux/notes/records/types";
 import { updateOrInsert } from "../../redux/notes/records/actions";
+import { close, open } from "../../redux/editor/actions";
 
 function NoteEditorContainer(props: any) {
   return (
@@ -20,14 +21,22 @@ function NoteEditorContainer(props: any) {
 }
 
 function mapStateToProps(state: AppState) {
+  const { editor } = state;
+
   return {
-    open: true
+    open: editor.open,
+    id: editor.id
   };
 }
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
-    updateOrInsert: (record: NoteRecord) => dispatch(updateOrInsert(record))
+    updateOrInsert: (record: NoteRecord) =>
+      batch(() => {
+        dispatch(updateOrInsert(record));
+        dispatch(open(record.id));
+      }),
+    close: () => dispatch(close())
   };
 }
 

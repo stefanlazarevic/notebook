@@ -3,7 +3,7 @@ import { NotesRecords, NotesRecordsActions } from "./types";
 export default function notesRecordsReducer(
   state: NotesRecords = {},
   action: any
-) {
+): NotesRecords {
   switch (action.type) {
     case NotesRecordsActions.REPLACE:
       return {
