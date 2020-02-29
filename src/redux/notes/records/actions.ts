@@ -20,7 +20,7 @@ export function insert(record: NoteRecord) {
 
     dispatch({
       type: NotesRecordsActions.REPLACE_ALL,
-      payload: record
+      payload: { ...records, [record.id]: record }
     });
   };
 }

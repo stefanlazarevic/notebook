@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import NoteEditor from "./NoteEditor";
 import { AppState, IDispatch } from "../../redux/types";
+import { NoteRecord } from "../../redux/notes/records/types";
+import { updateOrInsert } from "../../redux/notes/records/actions";
 
 function NoteEditorContainer(props: any) {
   return (
@@ -24,7 +26,9 @@ function mapStateToProps(state: AppState) {
 }
 
 function mapDispatchToProps(dispatch: IDispatch) {
-  return {};
+  return {
+    updateOrInsert: (record: NoteRecord) => dispatch(updateOrInsert(record))
+  };
 }
 
 export default connect(

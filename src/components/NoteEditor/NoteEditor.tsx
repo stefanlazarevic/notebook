@@ -5,8 +5,10 @@ import "./NoteEditor.css";
 import { NoteEditorHeader } from "./components/Header";
 import Editor from "./components/Editor/Editor";
 import { NoteRecord } from "../../redux/notes/records/types";
+import { NoteEditorProps } from "./NoteEditorProps";
+import utils from "../../utils";
 
-export default function NoteEditor(props: any) {
+export default function NoteEditor(props: NoteEditorProps) {
   const [maximized, setMaximized] = useState(props.maximized);
   const titleRef = useRef<any>();
   const editorRef = useRef<any>();
@@ -18,6 +20,7 @@ export default function NoteEditor(props: any) {
   function save() {
     let title = "";
     let content = "";
+    let id = props.id || utils.string.generateRandomString();
 
     if (titleRef && titleRef.current) {
       title = titleRef.current.getValue();
@@ -27,9 +30,11 @@ export default function NoteEditor(props: any) {
       content = editorRef.current.getPlainText();
     }
 
-    const record: NoteRecord = { id: "test", title, content };
+    const record: NoteRecord = { id, title, content };
 
-    console.log("Save", record);
+    if (typeof props.updateOrInsert === "function") {
+      props.updateOrInsert(record);
+    }
   }
 
   return (
