@@ -4,7 +4,7 @@ import { FiMinimize, FiMaximize } from "react-icons/fi";
 
 import "./NoteEditorHeader.css";
 
-import NoteEditorTitle from "./components/Title/NoteEditorTitle";
+import NoteEditorHeaderInput from "./components/Title/NoteEditorHeaderInput";
 import { NoteEditorHeaderProps } from "./NoteEditorHeaderProps";
 import NoteEditorHeaderButton from "./components/Button/NoteEditorHeaderButton";
 
@@ -12,7 +12,7 @@ const NoteEditorHeader = forwardRef(
   (props: NoteEditorHeaderProps, ref: any) => {
     return (
       <header id="NoteEditorHeader" className="NoteEditorHeader">
-        <NoteEditorTitle ref={ref} />
+        <NoteEditorHeaderInput ref={ref} />
         <NoteEditorHeaderButton
           title={props.maximized ? "Minimize" : "Maximize"}
           onClick={props.onResize}

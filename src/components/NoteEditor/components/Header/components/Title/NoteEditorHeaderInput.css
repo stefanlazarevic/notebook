@@ -1,4 +1,4 @@
-.EditorTitle {
+.NoteEditorHeaderInput {
   background-color: var(--note-header-background-color);
   color: var(--note-header-text-color);
   border: none;
@@ -8,6 +8,6 @@
   outline: none;
 }
 
-.EditorTitle:focus {
+.NoteEditorHeaderInput:focus {
   outline: none;
 }
