@@ -1,17 +1,26 @@
-export const STRIKETHROUGH = "STRIKETHROUGH";
-export const BOLD = "BOLD";
-export const ITALIC = "ITALIC";
-export const UNDERLINE = "UNDERLINE";
-export const CODE = "CODE";
-export const HIGHLIGHT = "HIGHLIGHT";
+export enum EditorInlineStyleTypes {
+  STRIKETHROUGH = "STRIKETHROUGH",
+  BOLD = "BOLD",
+  ITALIC = "ITALIC",
+  UNDERLINE = "UNDERLINE",
+  CODE = "CODE",
+  HIGHLIGHT = "HIGHLIGHT"
+}
 
 export const customStyleMap = {
-  [STRIKETHROUGH]: {
+  [EditorInlineStyleTypes.STRIKETHROUGH]: {
     textDecoration: "line-through"
   },
-  [HIGHLIGHT]: {
+  [EditorInlineStyleTypes.HIGHLIGHT]: {
     backgroundColor: "#b2ffb2"
   }
 };
 
-export const STYLES = [STRIKETHROUGH, BOLD, ITALIC, UNDERLINE, CODE, HIGHLIGHT];
+export const INLINE_STYLES = [
+  EditorInlineStyleTypes.STRIKETHROUGH,
+  EditorInlineStyleTypes.BOLD,
+  EditorInlineStyleTypes.ITALIC,
+  EditorInlineStyleTypes.UNDERLINE,
+  EditorInlineStyleTypes.CODE,
+  EditorInlineStyleTypes.HIGHLIGHT
+];

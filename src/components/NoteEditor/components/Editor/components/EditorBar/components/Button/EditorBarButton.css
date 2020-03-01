@@ -1,0 +1,21 @@
+.EditorBarButton {
+  background-color: var(--note-default-background-color);
+  color: var(--note-default-text-color);
+  border: none;
+  outline: none;
+  font-size: 20px;
+  padding: 5px 5px 2px;
+  border-radius: 4px;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 1px dotted transparent;
+}
+
+.EditorBarButton:focus {
+  border-color: var(--note-default-text-color);
+}
+
+.EditorBarButton[data-active="true"] {
+  background-color: var(--note-default-text-color);
+  color: var(--app-text-color);
+}

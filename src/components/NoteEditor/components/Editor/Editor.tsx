@@ -4,53 +4,60 @@ import React, {
   forwardRef,
   useImperativeHandle
 } from "react";
-import { Editor as DraftEditor, EditorState, RichUtils } from "draft-js";
+import {
+  Editor as DraftEditor,
+  EditorState,
+  RichUtils,
+  Modifier,
+  ContentState
+} from "draft-js";
 
 import "./Editor.css";
 
 import EditorBar from "./components/EditorBar/EditorBar";
 import {
   customStyleMap,
-  BOLD,
-  ITALIC,
-  UNDERLINE,
-  STRIKETHROUGH
+  EditorInlineStyleTypes,
+  INLINE_STYLES
 } from "./StyleMap";
 
 const Editor = forwardRef((props: any, ref: any) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const draftEditorRef = useRef<any>();
 
-  function handleContentBold(event?: React.MouseEvent) {
+  function toggleInlineStyle(
+    event: React.MouseEvent,
+    style: EditorInlineStyleTypes
+  ) {
     if (event) {
       event.preventDefault();
     }
 
-    setEditorState(RichUtils.toggleInlineStyle(editorState, BOLD));
+    setEditorState(RichUtils.toggleInlineStyle(editorState, style));
   }
 
-  function handleContentItalic(event?: React.MouseEvent) {
+  function clearInlineStyles(event: React.MouseEvent) {
     if (event) {
       event.preventDefault();
     }
 
-    setEditorState(RichUtils.toggleInlineStyle(editorState, ITALIC));
-  }
-
-  function handleContentUnderline(event?: React.MouseEvent) {
-    if (event) {
-      event.preventDefault();
-    }
-
-    setEditorState(RichUtils.toggleInlineStyle(editorState, UNDERLINE));
-  }
-
-  function handleContentStrikethrought(event?: Event) {
-    if (event) {
-      event.preventDefault();
-    }
-
-    setEditorState(RichUtils.toggleInlineStyle(editorState, STRIKETHROUGH));
+    setEditorState(
+      EditorState.createWithContent(
+        INLINE_STYLES.reduce(
+          (
+            contentState: ContentState,
+            INLINE_STYLE: EditorInlineStyleTypes
+          ) => {
+            return Modifier.removeInlineStyle(
+              contentState,
+              editorState.getSelection(),
+              INLINE_STYLE
+            );
+          },
+          editorState.getCurrentContent()
+        )
+      )
+    );
   }
 
   useImperativeHandle(ref, () => ({
@@ -76,12 +83,7 @@ const Editor = forwardRef((props: any, ref: any) => {
   return (
     <div id="Editor" className="Editor" onClick={focus}>
       <div className="EditorBar__wrapper">
-        <EditorBar
-          onBold={handleContentBold}
-          onItalic={handleContentItalic}
-          onUnderline={handleContentUnderline}
-          onStrikethrough={handleContentStrikethrought}
-        />
+        <EditorBar onAction={toggleInlineStyle} onReset={clearInlineStyles} />
       </div>
       <div className="DraftEditor__wrapper">
         <DraftEditor
