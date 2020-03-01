@@ -6,23 +6,15 @@ import "./NoteEditorHeader.css";
 
 import NoteEditorTitle from "./components/Title/NoteEditorTitle";
 import { NoteEditorHeaderProps } from "./NoteEditorHeaderProps";
+import NoteEditorHeaderButton from "./components/Button/NoteEditorHeaderButton";
 
 const NoteEditorHeader = forwardRef(
   (props: NoteEditorHeaderProps, ref: any) => {
     return (
       <header id="NoteEditorHeader" className="NoteEditorHeader">
-        <button
-          className="NoteEditorHeader__button"
-          title="Close"
-          tabIndex={3}
-          onClick={props.onClose}
-        >
-          <MdClose className="icon" />
-        </button>
-        <button
-          className="NoteEditorHeader__button"
+        <NoteEditorTitle ref={ref} />
+        <NoteEditorHeaderButton
           title={props.maximized ? "Minimize" : "Maximize"}
-          tabIndex={2}
           onClick={props.onResize}
         >
           {props.maximized ? (
@@ -30,8 +22,10 @@ const NoteEditorHeader = forwardRef(
           ) : (
             <FiMaximize className="icon" />
           )}
-        </button>
-        <NoteEditorTitle ref={ref} />
+        </NoteEditorHeaderButton>
+        <NoteEditorHeaderButton title="Close" onClick={props.onClose}>
+          <MdClose className="icon" />
+        </NoteEditorHeaderButton>
       </header>
     );
   }

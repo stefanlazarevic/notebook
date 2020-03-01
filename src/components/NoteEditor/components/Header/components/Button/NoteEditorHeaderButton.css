@@ -1,0 +1,14 @@
+.NoteEditorHeaderButton {
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  background-color: var(--note-header-background-color);
+  color: var(--note-header-text-color);
+  padding-top: 3px;
+  margin-left: 2px;
+}
+
+.NoteEditorHeaderButton .icon {
+  width: 24px;
+  height: 24px;
+}

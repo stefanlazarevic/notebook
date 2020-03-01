@@ -1,21 +1,6 @@
 .NoteEditorHeader {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   background-color: var(--note-header-background-color);
   padding: 5px 0;
-}
-
-.NoteEditorHeader .NoteEditorHeader__button {
-  cursor: pointer;
-  appearance: none;
-  border: none;
-  background-color: var(--note-header-background-color);
-  color: var(--note-header-text-color);
-  padding-top: 3px;
-  margin-left: 2px;
-}
-
-.NoteEditorHeader .NoteEditorHeader__button .icon {
-  width: 24px;
-  height: 24px;
 }
