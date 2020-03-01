@@ -1,1 +1,1 @@
-export { default as NoteEditorHeader } from "./Header";
+export { default as NoteEditorHeader } from "./NoteEditorHeader";

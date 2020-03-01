@@ -1,16 +1,9 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
 
-import "./EditorTitle.css";
+import "./NoteEditorTitle.css";
 
 const EditorTitle = forwardRef((props: any, ref: any) => {
   const inputRef = useRef<any>();
-  // const [value, setValue] = useState(props.initialValue || "");
-
-  // function handleInputChange(event?: React.ChangeEvent<HTMLInputElement>) {
-  //   if (event) {
-  //     setValue(event.target.value);
-  //   }
-  // }
 
   useImperativeHandle(ref, () => ({
     getValue() {

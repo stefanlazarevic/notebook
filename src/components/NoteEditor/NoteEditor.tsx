@@ -18,6 +18,10 @@ export default function NoteEditor(props: NoteEditorProps) {
     setMaximized(!maximized);
   }
 
+  /**
+   * 1. Perform validation before saving. (Optional)
+   * 2. Generate unique not used ID.
+   */
   function save() {
     let title = "";
     let content = "";
@@ -48,6 +52,7 @@ export default function NoteEditor(props: NoteEditorProps) {
         >
           <div className="NoteEditorCanvas__wrapper">
             <NoteEditorHeader
+              maximized={maximized}
               onResize={toggleMaximizedState}
               onClose={props.close}
               ref={titleRef}
