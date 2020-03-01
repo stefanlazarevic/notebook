@@ -4,7 +4,7 @@ export type NoteEditorState = {
 };
 
 export const NoteEditorDefaultState = {
-  open: true,
+  open: false,
   id: undefined
 };
 
