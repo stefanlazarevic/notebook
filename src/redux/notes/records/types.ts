@@ -1,7 +1,9 @@
+import { RawDraftContentState } from "draft-js";
+
 export type NoteRecord = {
   id: string;
   title: string;
-  content: string;
+  content: RawDraftContentState;
 };
 
 export type NotesRecords = {

@@ -1,7 +1,7 @@
 import configureStore, { MockStoreEnhanced } from "redux-mock-store";
 import thunk from "redux-thunk";
 import * as action from "../actions";
-import { NoteRecord, NotesRecordsActions, NotesRecords } from "../types";
+import { NoteRecord, NotesRecordsActions } from "../types";
 import { AppState, IDispatch } from "../../../types";
 import { NotesState } from "../../types";
 
@@ -11,7 +11,7 @@ const mockStore = configureStore(middlewares);
 const TEST_RECORD: NoteRecord = {
   id: "test",
   title: "Hello world",
-  content: "<h1>Lorem ipsum</h1>"
+  content: { entityMap: {}, blocks: [] }
 };
 
 const INITIAL_STATE: Partial<AppState> = {
@@ -33,7 +33,7 @@ describe("Notes/Records/Actions", () => {
     const record: NoteRecord = {
       id: "tyero9pkdcl1",
       title: "Test",
-      content: "<p>Hello World</p>"
+      content: { entityMap: {}, blocks: [] }
     };
 
     return store.dispatch(action.insert(record)).then(() => {
@@ -72,7 +72,7 @@ describe("Notes/Records/Actions", () => {
     const record: NoteRecord = {
       ...TEST_RECORD,
       title: "New title",
-      content: "<p>new content</p>"
+      content: { entityMap: {}, blocks: [] }
     };
 
     return store.dispatch(action.update(record)).then(() => {
@@ -128,7 +128,7 @@ describe("Notes/Records/Actions", () => {
     const record: NoteRecord = {
       ...TEST_RECORD,
       title: "Update test",
-      content: "Hello"
+      content: { entityMap: {}, blocks: [] }
     };
 
     return store.dispatch(action.updateOrInsert(record)).then(() => {
@@ -146,7 +146,7 @@ describe("Notes/Records/Actions", () => {
     const record: NoteRecord = {
       id: "kajenv8gqu7eiroa1",
       title: "Update test",
-      content: "Hello"
+      content: { entityMap: {}, blocks: [] }
     };
 
     return store.dispatch(action.updateOrInsert(record)).then(() => {

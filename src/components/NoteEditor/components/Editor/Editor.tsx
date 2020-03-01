@@ -9,7 +9,8 @@ import {
   EditorState,
   RichUtils,
   Modifier,
-  ContentState
+  ContentState,
+  convertToRaw
 } from "draft-js";
 
 import "./Editor.css";
@@ -63,6 +64,9 @@ const Editor = forwardRef((props: any, ref: any) => {
   useImperativeHandle(ref, () => ({
     getPlainText() {
       return editorState.getCurrentContent().getPlainText();
+    },
+    getHTML() {
+      return convertToRaw(editorState.getCurrentContent());
     },
     focus() {
       draftEditorRef.current.focus();

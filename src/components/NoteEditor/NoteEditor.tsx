@@ -8,6 +8,7 @@ import { NoteRecord } from "../../redux/notes/records/types";
 import { NoteEditorProps } from "./NoteEditorProps";
 import utils from "../../utils";
 import { NoteEditorFooter } from "./components/Footer";
+import { RawDraftContentState } from "draft-js";
 
 export default function NoteEditor(props: NoteEditorProps) {
   const [maximized, setMaximized] = useState(props.maximized);
@@ -24,7 +25,7 @@ export default function NoteEditor(props: NoteEditorProps) {
    */
   function save() {
     let title = "";
-    let content = "";
+    let content: RawDraftContentState = { entityMap: {}, blocks: [] };
     let id = props.id || utils.string.generateRandomString();
 
     if (titleRef && titleRef.current) {
@@ -32,7 +33,7 @@ export default function NoteEditor(props: NoteEditorProps) {
     }
 
     if (editorRef && editorRef.current) {
-      content = editorRef.current.getPlainText();
+      content = editorRef.current.getHTML();
     }
 
     const record: NoteRecord = { id, title, content };
