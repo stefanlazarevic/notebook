@@ -2,7 +2,11 @@ import React from "react";
 
 import "./NoteEditorHeaderButton.css";
 
-export default function NoteEditorHeaderButton(props: any) {
+import { NoteEditorHeaderButtonProps } from "./NoteEditorHeaderButtonProps";
+
+export default function NoteEditorHeaderButton(
+  props: NoteEditorHeaderButtonProps
+) {
   function handleClick() {
     if (typeof props.onClick === "function") {
       props.onClick();
