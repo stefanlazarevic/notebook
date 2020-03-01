@@ -1,0 +1,12 @@
+.AppHeader {
+  display: flex;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  background-color: var(--note-header-background-color);
+}
+
+.AppHeader .title {
+  font-family: "Roboto", "Lato";
+  margin: 0;
+  font-size: 2rem;
+}
