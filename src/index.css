@@ -20,6 +20,9 @@
   --app-text-10-darker-color: rgb(216, 216, 216);
   --app-text-15-darker-color: rgb(203, 203, 203);
   --app-text-40-darker-color: rgb(138, 138, 138);
+
+  /*  */
+  --app-success-color: rgb(76, 174, 79);
 }
 
 /* RESET */
