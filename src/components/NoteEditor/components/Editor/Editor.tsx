@@ -10,7 +10,8 @@ import {
   RichUtils,
   Modifier,
   ContentState,
-  convertToRaw
+  convertToRaw,
+  DraftInlineStyle
 } from "draft-js";
 
 import "./Editor.css";
@@ -28,13 +29,15 @@ const Editor = forwardRef((props: any, ref: any) => {
 
   function toggleInlineStyle(
     event: React.MouseEvent,
-    style: EditorInlineStyleTypes
+    style?: EditorInlineStyleTypes
   ) {
     if (event) {
       event.preventDefault();
     }
 
-    setEditorState(RichUtils.toggleInlineStyle(editorState, style));
+    if (style) {
+      setEditorState(RichUtils.toggleInlineStyle(editorState, style));
+    }
   }
 
   function clearInlineStyles(event: React.MouseEvent) {
@@ -84,10 +87,18 @@ const Editor = forwardRef((props: any, ref: any) => {
     }
   }
 
+  function getCurrentBlockStyles(): DraftInlineStyle {
+    return editorState.getCurrentInlineStyle();
+  }
+
   return (
     <div id="Editor" className="Editor" onClick={focus}>
       <div className="EditorBar__wrapper">
-        <EditorBar onAction={toggleInlineStyle} onReset={clearInlineStyles} />
+        <EditorBar
+          onAction={toggleInlineStyle}
+          onReset={clearInlineStyles}
+          currentInlineStyles={getCurrentBlockStyles()}
+        />
       </div>
       <div className="DraftEditor__wrapper">
         <DraftEditor

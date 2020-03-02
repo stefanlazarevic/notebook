@@ -11,8 +11,9 @@ import "./EditorBar.css";
 
 import EditorBarButton from "./components/Button/EditorBarButton";
 import { EditorInlineStyleTypes } from "../../StyleMap";
+import { EditorBarProps } from "./EditorBarProps";
 
-export default function EditorBar(props: any) {
+export default function EditorBar(props: EditorBarProps) {
   function handleButtonClick(
     event: React.MouseEvent,
     action?: EditorInlineStyleTypes
@@ -28,6 +29,7 @@ export default function EditorBar(props: any) {
         onClick={handleButtonClick}
         action={EditorInlineStyleTypes.BOLD}
         title="Bold"
+        active={props.currentInlineStyles.has(EditorInlineStyleTypes.BOLD)}
       >
         <MdFormatBold />
       </EditorBarButton>
@@ -35,6 +37,7 @@ export default function EditorBar(props: any) {
         onClick={handleButtonClick}
         action={EditorInlineStyleTypes.ITALIC}
         title="Italic"
+        active={props.currentInlineStyles.has(EditorInlineStyleTypes.ITALIC)}
       >
         <MdFormatItalic />
       </EditorBarButton>
@@ -42,6 +45,7 @@ export default function EditorBar(props: any) {
         onClick={handleButtonClick}
         action={EditorInlineStyleTypes.UNDERLINE}
         title="Underline"
+        active={props.currentInlineStyles.has(EditorInlineStyleTypes.UNDERLINE)}
       >
         <MdFormatUnderlined />
       </EditorBarButton>
@@ -49,6 +53,9 @@ export default function EditorBar(props: any) {
         onClick={handleButtonClick}
         action={EditorInlineStyleTypes.STRIKETHROUGH}
         title="Strikethrough"
+        active={props.currentInlineStyles.has(
+          EditorInlineStyleTypes.STRIKETHROUGH
+        )}
       >
         <MdStrikethroughS />
       </EditorBarButton>

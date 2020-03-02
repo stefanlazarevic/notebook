@@ -15,6 +15,7 @@ export default function EditorBarButton(props: EditorBarButtonProps) {
       className="EditorBarButton"
       title={props.title}
       onMouseDown={handleMouseDown}
+      data-active={props.active}
     >
       {props.children || props.text}
     </button>
