@@ -11,7 +11,10 @@ import {
   Modifier,
   ContentState,
   convertToRaw,
-  DraftInlineStyle
+  DraftInlineStyle,
+  getDefaultKeyBinding,
+  DraftEditorCommand,
+  DraftHandleValue
 } from "draft-js";
 
 import "./Editor.css";
@@ -22,13 +25,14 @@ import {
   EditorInlineStyleTypes,
   INLINE_STYLES
 } from "./StyleMap";
+import KeyCodeMap from "./KeyBindings";
 
 const Editor = forwardRef((props: any, ref: any) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const draftEditorRef = useRef<any>();
 
   function toggleInlineStyle(
-    event: React.MouseEvent,
+    event?: React.MouseEvent,
     style?: EditorInlineStyleTypes
   ) {
     if (event) {
@@ -91,6 +95,53 @@ const Editor = forwardRef((props: any, ref: any) => {
     return editorState.getCurrentInlineStyle();
   }
 
+  function keyBindingFn(event: React.KeyboardEvent<any>): string | null {
+    const isControlKey = event?.ctrlKey;
+    const isShiftKey = event?.shiftKey;
+    const keyCode = event?.keyCode;
+    const key = KeyCodeMap.get(keyCode);
+
+    if (isControlKey && key === "b") {
+      return EditorInlineStyleTypes.BOLD;
+    }
+
+    if (isControlKey && key === "i") {
+      return EditorInlineStyleTypes.ITALIC;
+    }
+
+    if (isControlKey && key === "u") {
+      return EditorInlineStyleTypes.UNDERLINE;
+    }
+
+    if (isControlKey && isShiftKey && key === "s") {
+      return EditorInlineStyleTypes.STRIKETHROUGH;
+    }
+
+    return getDefaultKeyBinding(event);
+  }
+
+  function handleKeyCommand(
+    command: DraftEditorCommand | EditorInlineStyleTypes | string,
+    editorState: EditorState
+  ): DraftHandleValue {
+    switch (command) {
+      case EditorInlineStyleTypes.BOLD:
+        toggleInlineStyle(undefined, EditorInlineStyleTypes.BOLD);
+        return "handled";
+      case EditorInlineStyleTypes.ITALIC:
+        toggleInlineStyle(undefined, EditorInlineStyleTypes.ITALIC);
+        return "handled";
+      case EditorInlineStyleTypes.UNDERLINE:
+        toggleInlineStyle(undefined, EditorInlineStyleTypes.UNDERLINE);
+        return "handled";
+      case EditorInlineStyleTypes.STRIKETHROUGH:
+        toggleInlineStyle(undefined, EditorInlineStyleTypes.STRIKETHROUGH);
+        return "handled";
+      default:
+        return "not-handled";
+    }
+  }
+
   return (
     <div id="Editor" className="Editor" onClick={focus}>
       <div className="EditorBar__wrapper">
@@ -106,6 +157,8 @@ const Editor = forwardRef((props: any, ref: any) => {
           editorState={editorState}
           onChange={setEditorState}
           customStyleMap={customStyleMap}
+          keyBindingFn={keyBindingFn}
+          handleKeyCommand={handleKeyCommand}
         />
       </div>
     </div>
