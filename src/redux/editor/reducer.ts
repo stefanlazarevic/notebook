@@ -4,7 +4,7 @@ import {
   NoteEditorStateActions
 } from "./types";
 
-export function editorReducer(
+export default function editorReducer(
   state: NoteEditorState = NoteEditorDefaultState,
   action: any
 ): NoteEditorState {
