@@ -26,6 +26,7 @@ import {
   INLINE_STYLES
 } from "./StyleMap";
 import KeyCodeMap from "./KeyBindings";
+import { NoteEditorCustomCommand } from "./CustomActions";
 
 const Editor = forwardRef((props: any, ref: any) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -50,20 +51,23 @@ const Editor = forwardRef((props: any, ref: any) => {
     }
 
     setEditorState(
-      EditorState.createWithContent(
-        INLINE_STYLES.reduce(
-          (
-            contentState: ContentState,
-            INLINE_STYLE: EditorInlineStyleTypes
-          ) => {
-            return Modifier.removeInlineStyle(
-              contentState,
-              editorState.getSelection(),
-              INLINE_STYLE
-            );
-          },
-          editorState.getCurrentContent()
-        )
+      EditorState.forceSelection(
+        EditorState.createWithContent(
+          INLINE_STYLES.reduce(
+            (
+              contentState: ContentState,
+              INLINE_STYLE: EditorInlineStyleTypes
+            ) => {
+              return Modifier.removeInlineStyle(
+                contentState,
+                editorState.getSelection(),
+                INLINE_STYLE
+              );
+            },
+            editorState.getCurrentContent()
+          )
+        ),
+        editorState.getSelection()
       )
     );
   }
@@ -117,11 +121,23 @@ const Editor = forwardRef((props: any, ref: any) => {
       return EditorInlineStyleTypes.STRIKETHROUGH;
     }
 
+    if (isControlKey && key === "z") {
+      return NoteEditorCustomCommand.UNDO;
+    }
+
+    if (isControlKey && key === "y") {
+      return NoteEditorCustomCommand.REDO;
+    }
+
     return getDefaultKeyBinding(event);
   }
 
   function handleKeyCommand(
-    command: DraftEditorCommand | EditorInlineStyleTypes | string,
+    command:
+      | DraftEditorCommand
+      | EditorInlineStyleTypes
+      | NoteEditorCustomCommand
+      | string,
     editorState: EditorState
   ): DraftHandleValue {
     switch (command) {
@@ -136,6 +152,12 @@ const Editor = forwardRef((props: any, ref: any) => {
         return "handled";
       case EditorInlineStyleTypes.STRIKETHROUGH:
         toggleInlineStyle(undefined, EditorInlineStyleTypes.STRIKETHROUGH);
+        return "handled";
+      case NoteEditorCustomCommand.UNDO:
+        setEditorState(EditorState.undo(editorState));
+        return "handled";
+      case NoteEditorCustomCommand.REDO:
+        setEditorState(EditorState.redo(editorState));
         return "handled";
       default:
         return "not-handled";

@@ -2,7 +2,7 @@
   display: flex;
   padding: 10px 15px;
   margin-bottom: 20px;
-  background-color: var(--note-header-background-color);
+  background-color: var(--app-background-5-lighter-color);
 }
 
 .AppHeader .title {
@@ -10,4 +10,5 @@
   margin: 0;
   font-size: 2rem;
   flex: 1;
+  color: var(--app-text-base-color);
 }

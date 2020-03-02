@@ -1,6 +1,6 @@
 .NoteEditorHeader {
   display: flex;
   flex-direction: row;
-  background-color: var(--note-header-background-color);
-  padding: 5px 0;
+  background-color: var(--app-background-5-lighter-color);
+  padding: 5px 5px 5px 0;
 }

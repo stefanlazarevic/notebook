@@ -2,13 +2,18 @@
   cursor: pointer;
   appearance: none;
   border: none;
-  background-color: var(--note-header-background-color);
-  color: var(--note-header-text-color);
-  padding-top: 3px;
+  background-color: var(--app-background-5-lighter-color);
+  color: var(--app-text-base-color);
+  padding-top: 4px;
   margin-left: 2px;
 }
 
 .NoteEditorHeaderButton .icon {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
+}
+
+.NoteEditorHeaderButton:focus,
+.NoteEditorHeaderButton:hover {
+  background-color: var(--app-background-10-lighter-color);
 }

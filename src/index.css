@@ -1,10 +1,25 @@
 /* VARIABLES */
 :root {
-  --app-background-color: #1b1c1f;
-  --app-text-color: #fffcf2;
-  --app-text-disabled-color: #828282;
-  --note-default-background-color: #ffdb70;
-  --note-default-text-color: #212121;
+  /* Base background color */
+  --app-background-base-color: rgb(27, 28, 31);
+
+  /* Background color variations (Generated at: www.colorbook.io) */
+  --app-background-5-lighter-color: rgb(39, 40, 45);
+  --app-background-10-lighter-color: rgb(51, 53, 58);
+  --app-background-15-lighter-color: rgb(63, 65, 72);
+  --app-background-5-darker-color: rgb(15, 16, 17);
+  --app-background-10-darker-color: rgb(3, 3, 4);
+  --app-background-15-darker-color: rgb(0, 0, 0);
+
+  /* Base text color */
+  --app-text-base-color: rgb(242, 242, 242);
+
+  /* Text color variations */
+  --app-text-5-lighter-color: rgb(255, 255, 255);
+  --app-text-5-darker-color: rgb(229, 229, 229);
+  --app-text-10-darker-color: rgb(216, 216, 216);
+  --app-text-15-darker-color: rgb(203, 203, 203);
+  --app-text-40-darker-color: rgb(138, 138, 138);
 }
 
 /* RESET */
@@ -21,6 +36,9 @@ body {
 }
 
 body {
-  background-color: var(--app-background-color);
-  color: var(--app-text-color);
+  background-color: var(--app-background-base-color);
+  color: var(--app-text-base-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }

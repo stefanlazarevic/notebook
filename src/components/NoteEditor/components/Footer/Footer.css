@@ -8,8 +8,7 @@
 }
 
 .NoteEditorFooter__button {
-  background-color: var(--note-success-color);
-  color: var(--note-header-text-color);
+  color: var(--note-editor-theme-text-color);
   border: none;
   outline: none;
   cursor: pointer;

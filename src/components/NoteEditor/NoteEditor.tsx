@@ -19,6 +19,12 @@ export default function NoteEditor(props: NoteEditorProps) {
     setMaximized(!maximized);
   }
 
+  function getCanvasClassNames() {
+    return ["NodeEditorCanvas", "theme-1", maximized ? "maximized" : ""].join(
+      " "
+    );
+  }
+
   /**
    * 1. Perform validation before saving. (Optional)
    * 2. Generate unique not used ID.
@@ -46,11 +52,7 @@ export default function NoteEditor(props: NoteEditorProps) {
   return (
     <div id="NoteEditor" className="NoteEditor__container">
       <div className="NoteEditor__wrapper">
-        <div
-          className={`NoteEditor__canvas ${
-            maximized ? "maximized" : ""
-          }`.trim()}
-        >
+        <div className={getCanvasClassNames().trim()}>
           <div className="NoteEditorCanvas__wrapper">
             <NoteEditorHeader
               maximized={maximized}

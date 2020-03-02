@@ -7,8 +7,8 @@
   width: 40px;
   font-size: 24px;
   line-height: 1.8em;
-  background-color: var(--note-header-background-color);
-  color: var(--note-header-text-color);
+  background-color: var(--app-background-5-lighter-color);
+  color: var(--app-text-base-color);
   outline: none;
   cursor: pointer;
   border: 0;
@@ -20,9 +20,10 @@
 }
 
 .AppHeaderControls button:hover {
-  background-color: #3c4148;
+  background-color: var(--app-background-10-lighter-color);
+  color: var(--app-text-5-lighter-color);
 }
 
 .AppHeaderControls button:disabled {
-  color: var(--app-text-disabled-color);
+  color: var(--app-text-40-darker-color);
 }

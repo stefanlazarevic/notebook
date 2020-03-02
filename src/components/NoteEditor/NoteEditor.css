@@ -1,7 +1,7 @@
 :root {
-  --note-header-background-color: #272a2e;
-  --note-header-text-color: #fffcf2;
-  --note-success-color: #57b557;
+  /* --note-editor-theme-background-color: #ffdb70; */
+  --note-editor-theme-background-color: #ffdb70;
+  --note-editor-theme-text-color: #212121;
 }
 
 .NoteEditor__container {
@@ -19,7 +19,7 @@
   height: 100%;
 }
 
-.NoteEditor__canvas {
+.NodeEditorCanvas {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -30,11 +30,14 @@
   min-width: 320px;
   max-width: 700px;
   height: 70%;
-  background-color: var(--note-default-background-color);
-  color: var(--note-default-text-color);
 }
 
-.NoteEditor__canvas.maximized {
+.NodeEditorCanvas.theme-1 {
+  background-color: var(--note-editor-theme-background-color);
+  color: var(--note-editor-theme-text-color);
+}
+
+.NodeEditorCanvas.maximized {
   top: 0;
   left: 0;
   max-width: 100%;
