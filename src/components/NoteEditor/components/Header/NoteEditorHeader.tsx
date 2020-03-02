@@ -7,12 +7,14 @@ import "./NoteEditorHeader.css";
 import NoteEditorHeaderInput from "./components/Title/NoteEditorHeaderInput";
 import { NoteEditorHeaderProps } from "./NoteEditorHeaderProps";
 import NoteEditorHeaderButton from "./components/Button/NoteEditorHeaderButton";
+import SavedContentBubble from "./components/SavedContentBubble/SavedContentBubble";
 
 const NoteEditorHeader = forwardRef(
   (props: NoteEditorHeaderProps, ref: any) => {
     return (
       <header id="NoteEditorHeader" className="NoteEditorHeader">
         <NoteEditorHeaderInput ref={ref} onChange={props.onChange} />
+        <SavedContentBubble saved={props.saved} />
         <NoteEditorHeaderButton
           title={props.maximized ? "Minimize" : "Maximize"}
           onClick={props.onResize}

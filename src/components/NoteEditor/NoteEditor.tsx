@@ -14,6 +14,8 @@ import KeyCodeMap from "./components/Editor/KeyBindings";
 
 export default function NoteEditor(props: NoteEditorProps) {
   const [maximized, setMaximized] = useState(props.maximized);
+  const [saved, setSaved] = useState(Boolean(props.id));
+
   const titleRef = useRef<any>();
   const editorRef = useRef<any>();
   const saveIntervalRef = useRef<NodeJS.Timeout>();
@@ -35,6 +37,10 @@ export default function NoteEditor(props: NoteEditorProps) {
       saveIntervalRef.current = setTimeout(() => {
         save();
       }, 5000);
+    }
+
+    if (saved) {
+      setSaved(false);
     }
   }
 
@@ -88,6 +94,8 @@ export default function NoteEditor(props: NoteEditorProps) {
       if (props.saveAndClose && !props.autoSave) {
         props.close();
       }
+
+      setSaved(true);
     }
   }
 
@@ -106,6 +114,7 @@ export default function NoteEditor(props: NoteEditorProps) {
               onClose={props.close}
               ref={titleRef}
               onChange={handleNoteEditorChange}
+              saved={saved}
             />
             <Editor
               ref={editorRef}
