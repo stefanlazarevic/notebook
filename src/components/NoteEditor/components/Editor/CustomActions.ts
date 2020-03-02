@@ -1,4 +1,5 @@
 export enum NoteEditorCustomCommand {
   UNDO = "UNDO",
-  REDO = "REDO"
+  REDO = "REDO",
+  SAVE = "SAVE"
 }

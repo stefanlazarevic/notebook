@@ -21,6 +21,7 @@ const NoteEditorHeaderInput = forwardRef(
         ref={inputRef}
         defaultValue={props.initialValue}
         placeholder="New title"
+        onChange={props.onChange}
       />
     );
   }

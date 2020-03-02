@@ -1,5 +1,5 @@
 import { IDispatch, AppState } from "../../types";
-import { EditorSettingsActions, EditorTextDirection } from "./types";
+import { EditorSettingsActions } from "./types";
 
 export function setAutoSave(value: boolean) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
@@ -44,33 +44,6 @@ export function toggleSaveAndClose() {
     const { saveAndClose } = editor;
 
     dispatch(setSaveAndClose(!saveAndClose));
-  };
-}
-
-export function setTextDirection(value: EditorTextDirection) {
-  return async (dispatch: IDispatch, getState: () => AppState) => {
-    dispatch({
-      type: EditorSettingsActions.REPLACE,
-      payload: { direction: value }
-    });
-  };
-}
-
-export function toggleTextDirection() {
-  return async (dispatch: IDispatch, getState: () => AppState) => {
-    const { settings } = getState();
-    const { editor } = settings;
-    const { direction } = editor;
-
-    dispatch({
-      type: EditorSettingsActions.REPLACE,
-      payload: {
-        direction:
-          direction === EditorTextDirection.LTR
-            ? EditorTextDirection.RTL
-            : EditorTextDirection.LTR
-      }
-    });
   };
 }
 

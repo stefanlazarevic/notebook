@@ -12,7 +12,7 @@ const NoteEditorHeader = forwardRef(
   (props: NoteEditorHeaderProps, ref: any) => {
     return (
       <header id="NoteEditorHeader" className="NoteEditorHeader">
-        <NoteEditorHeaderInput ref={ref} />
+        <NoteEditorHeaderInput ref={ref} onChange={props.onChange} />
         <NoteEditorHeaderButton
           title={props.maximized ? "Minimize" : "Maximize"}
           onClick={props.onResize}

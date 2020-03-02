@@ -1,28 +1,66 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { RawDraftContentState } from "draft-js";
 
 import "./NoteEditor.css";
 
-import { NoteEditorHeader } from "./components/Header";
+import utils from "../../utils";
+
 import Editor from "./components/Editor/Editor";
+import { NoteEditorHeader } from "./components/Header";
 import { NoteRecord } from "../../redux/notes/records/types";
 import { NoteEditorProps } from "./NoteEditorProps";
-import utils from "../../utils";
 import { NoteEditorFooter } from "./components/Footer";
-import { RawDraftContentState } from "draft-js";
+import KeyCodeMap from "./components/Editor/KeyBindings";
 
 export default function NoteEditor(props: NoteEditorProps) {
   const [maximized, setMaximized] = useState(props.maximized);
   const titleRef = useRef<any>();
   const editorRef = useRef<any>();
+  const saveIntervalRef = useRef<NodeJS.Timeout>();
 
   function toggleMaximizedState() {
     setMaximized(!maximized);
   }
 
   function getCanvasClassNames() {
-    return ["NodeEditorCanvas", "theme-1", maximized ? "maximized" : ""].join(
-      " "
-    );
+    return ["NodeEditorCanvas", maximized ? "maximized" : ""].join(" ");
+  }
+
+  function handleNoteEditorChange() {
+    if (saveIntervalRef.current) {
+      clearTimeout(saveIntervalRef.current);
+    }
+
+    if (props.autoSave && props.id) {
+      saveIntervalRef.current = setTimeout(() => {
+        save();
+      }, 5000);
+    }
+  }
+
+  useEffect(() => {
+    return function componentWillUnmount() {
+      if (saveIntervalRef.current) {
+        clearTimeout(saveIntervalRef.current);
+      }
+    };
+  });
+
+  function handleContainerKeyDown(event: React.KeyboardEvent<any>) {
+    const isControlKey = event.ctrlKey;
+    const isShiftKey = event.shiftKey;
+    const keyCode = event.keyCode;
+    const key = KeyCodeMap.get(keyCode);
+
+    if (isControlKey && !isShiftKey && key === "s") {
+      event.preventDefault();
+
+      if (saveIntervalRef.current) {
+        clearTimeout(saveIntervalRef.current);
+      }
+
+      save();
+    }
   }
 
   /**
@@ -46,11 +84,19 @@ export default function NoteEditor(props: NoteEditorProps) {
 
     if (typeof props.updateOrInsert === "function") {
       props.updateOrInsert(record);
+
+      if (props.saveAndClose && !props.autoSave) {
+        props.close();
+      }
     }
   }
 
   return (
-    <div id="NoteEditor" className="NoteEditor__container">
+    <div
+      id="NoteEditor"
+      className="NoteEditor__container"
+      onKeyDown={handleContainerKeyDown}
+    >
       <div className="NoteEditor__wrapper">
         <div className={getCanvasClassNames().trim()}>
           <div className="NoteEditorCanvas__wrapper">
@@ -59,8 +105,13 @@ export default function NoteEditor(props: NoteEditorProps) {
               onResize={toggleMaximizedState}
               onClose={props.close}
               ref={titleRef}
+              onChange={handleNoteEditorChange}
             />
-            <Editor ref={editorRef} />
+            <Editor
+              ref={editorRef}
+              spellCheck={props.spellCheck}
+              onChange={handleNoteEditorChange}
+            />
             <NoteEditorFooter onSave={save} />
           </div>
         </div>

@@ -21,11 +21,16 @@ function NoteEditorContainer(props: any) {
 }
 
 function mapStateToProps(state: AppState) {
-  const { editor } = state;
+  const { editor, settings } = state;
+  const { editor: editorSettings } = settings;
+  const { spellCheck, autoSave, saveAndClose } = editorSettings;
 
   return {
     open: editor.open,
-    id: editor.id
+    id: editor.id,
+    spellCheck,
+    autoSave,
+    saveAndClose
   };
 }
 

@@ -30,9 +30,6 @@
   min-width: 320px;
   max-width: 700px;
   height: 70%;
-}
-
-.NodeEditorCanvas.theme-1 {
   background-color: var(--note-editor-theme-background-color);
   color: var(--note-editor-theme-text-color);
 }

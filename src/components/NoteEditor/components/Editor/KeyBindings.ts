@@ -1,4 +1,4 @@
-const KeyCodeMap = new Map();
+const KeyCodeMap: Map<number, string> = new Map();
 KeyCodeMap.set(66, "b");
 KeyCodeMap.set(73, "i");
 KeyCodeMap.set(83, "s");

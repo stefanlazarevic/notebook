@@ -32,6 +32,14 @@ const Editor = forwardRef((props: any, ref: any) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const draftEditorRef = useRef<any>();
 
+  function updateEditorState(editorState: EditorState) {
+    setEditorState(editorState);
+
+    if (typeof props.onChange === "function") {
+      props.onChange();
+    }
+  }
+
   function toggleInlineStyle(
     event?: React.MouseEvent,
     style?: EditorInlineStyleTypes
@@ -41,7 +49,7 @@ const Editor = forwardRef((props: any, ref: any) => {
     }
 
     if (style) {
-      setEditorState(RichUtils.toggleInlineStyle(editorState, style));
+      updateEditorState(RichUtils.toggleInlineStyle(editorState, style));
     }
   }
 
@@ -50,7 +58,7 @@ const Editor = forwardRef((props: any, ref: any) => {
       event.preventDefault();
     }
 
-    setEditorState(
+    updateEditorState(
       EditorState.forceSelection(
         EditorState.createWithContent(
           INLINE_STYLES.reduce(
@@ -90,7 +98,7 @@ const Editor = forwardRef((props: any, ref: any) => {
   function focus() {
     if (draftEditorRef && draftEditorRef.current && editorState) {
       if (!editorState.getSelection().getHasFocus()) {
-        setEditorState(EditorState.moveFocusToEnd(editorState));
+        updateEditorState(EditorState.moveFocusToEnd(editorState));
       }
     }
   }
@@ -117,8 +125,13 @@ const Editor = forwardRef((props: any, ref: any) => {
       return EditorInlineStyleTypes.UNDERLINE;
     }
 
+    // Control + Shift + S has higher priority in actions than Control + S. (FizzBuzz issue)
     if (isControlKey && isShiftKey && key === "s") {
       return EditorInlineStyleTypes.STRIKETHROUGH;
+    }
+
+    if (isControlKey && key === "s") {
+      return NoteEditorCustomCommand.SAVE;
     }
 
     if (isControlKey && key === "z") {
@@ -154,10 +167,12 @@ const Editor = forwardRef((props: any, ref: any) => {
         toggleInlineStyle(undefined, EditorInlineStyleTypes.STRIKETHROUGH);
         return "handled";
       case NoteEditorCustomCommand.UNDO:
-        setEditorState(EditorState.undo(editorState));
+        updateEditorState(EditorState.undo(editorState));
         return "handled";
       case NoteEditorCustomCommand.REDO:
-        setEditorState(EditorState.redo(editorState));
+        updateEditorState(EditorState.redo(editorState));
+        return "handled";
+      case NoteEditorCustomCommand.SAVE:
         return "handled";
       default:
         return "not-handled";
@@ -177,10 +192,11 @@ const Editor = forwardRef((props: any, ref: any) => {
         <DraftEditor
           ref={draftEditorRef}
           editorState={editorState}
-          onChange={setEditorState}
+          onChange={updateEditorState}
           customStyleMap={customStyleMap}
           keyBindingFn={keyBindingFn}
           handleKeyCommand={handleKeyCommand}
+          spellCheck={props.spellCheck}
         />
       </div>
     </div>

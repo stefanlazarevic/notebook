@@ -3,4 +3,5 @@ export type NoteEditorHeaderProps = {
 
   onClose: () => void;
   onResize: () => void;
+  onChange: () => void;
 };
