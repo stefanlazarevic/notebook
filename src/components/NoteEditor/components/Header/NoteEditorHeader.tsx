@@ -14,7 +14,7 @@ const NoteEditorHeader = forwardRef(
     return (
       <header id="NoteEditorHeader" className="NoteEditorHeader">
         <NoteEditorHeaderInput ref={ref} onChange={props.onChange} />
-        <SavedContentBubble saved={props.saved} />
+        {props.id && <SavedContentBubble saved={props.saved} />}
         <NoteEditorHeaderButton
           title={props.maximized ? "Minimize" : "Maximize"}
           onClick={props.onResize}

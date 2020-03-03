@@ -32,11 +32,18 @@ const Editor = forwardRef((props: any, ref: any) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const draftEditorRef = useRef<any>();
 
-  function updateEditorState(editorState: EditorState) {
-    setEditorState(editorState);
+  function updateEditorState(newEditorState: EditorState) {
+    setEditorState(newEditorState);
 
-    if (typeof props.onChange === "function") {
-      props.onChange();
+    if (typeof props.onChange === "function" && props.saved) {
+      const equalContents = newEditorState
+        .getCurrentContent()
+        .getBlockMap()
+        .equals(editorState.getCurrentContent().getBlockMap());
+
+      if (!equalContents) {
+        props.onChange();
+      }
     }
   }
 

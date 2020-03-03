@@ -8,7 +8,7 @@ export default function SavedContentBubble(props: any) {
       return "All changes has been saved.";
     }
 
-    return "";
+    return "Some changes are not saved.";
   }
 
   return (

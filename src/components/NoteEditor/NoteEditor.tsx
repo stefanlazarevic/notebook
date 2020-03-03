@@ -44,14 +44,6 @@ export default function NoteEditor(props: NoteEditorProps) {
     }
   }
 
-  useEffect(() => {
-    return function componentWillUnmount() {
-      if (saveIntervalRef.current) {
-        clearTimeout(saveIntervalRef.current);
-      }
-    };
-  });
-
   function handleContainerKeyDown(event: React.KeyboardEvent<any>) {
     const isControlKey = event.ctrlKey;
     const isShiftKey = event.shiftKey;
@@ -114,12 +106,14 @@ export default function NoteEditor(props: NoteEditorProps) {
               onClose={props.close}
               ref={titleRef}
               onChange={handleNoteEditorChange}
+              id={props.id}
               saved={saved}
             />
             <Editor
               ref={editorRef}
               spellCheck={props.spellCheck}
               onChange={handleNoteEditorChange}
+              saved={saved}
             />
             <NoteEditorFooter onSave={save} />
           </div>
