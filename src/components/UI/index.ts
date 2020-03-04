@@ -1,3 +1,5 @@
 import Switch from "./Switch/Switch";
+import LabeledSwitch from "./LabeledSwitch/LabeledSwitch";
+import FormBlock from "./FormBlock/FormBlock";
 
-export { Switch };
+export { FormBlock, LabeledSwitch, Switch };
