@@ -5,8 +5,6 @@ import React, {
   useEffect
 } from "react";
 
-import "./EditorSettings.css";
-
 import { FormBlock, LabeledSwitch } from "../../../UI";
 import SettingSection from "../SettingSection/SettingSection";
 import { ISettingsSection } from "../SettingSection/types";

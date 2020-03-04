@@ -20,11 +20,12 @@ function SettingsDrawerContainer(props: any) {
 
 function mapStateToProps(state: AppState) {
   const { settings } = state;
-  const { editor } = settings;
+  const { editor, notes } = settings;
 
   return {
     open: true,
-    editor
+    editor,
+    notes
   };
 }
 

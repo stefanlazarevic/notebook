@@ -7,9 +7,11 @@ import SettingsDrawerFooter from "./components/Footer/SettingsDrawerFooter";
 import EditorSettings from "./components/EditorSettings/EditorSettings";
 import { EditorSettingsState } from "../../redux/settings/editor/types";
 import { ISettingsSection } from "./components/SettingSection/types";
+import NotesSettings from "./components/NotesSettings/NotesSettings";
 
 export default function SettingsDrawer(props: any) {
   const editorSettingsRef = useRef<ISettingsSection>();
+  const notesSettingsRef = useRef<ISettingsSection>();
 
   function apply() {
     let editorSettingsState: EditorSettingsState = {};
@@ -25,6 +27,10 @@ export default function SettingsDrawer(props: any) {
     if (editorSettingsRef.current) {
       editorSettingsRef.current.reset();
     }
+
+    if (notesSettingsRef.current) {
+      notesSettingsRef.current.reset();
+    }
   }
 
   return (
@@ -33,12 +39,8 @@ export default function SettingsDrawer(props: any) {
         <SettingsDrawerHeader />
         {/* FormComponent */}
         <div style={{ flex: 1, overflowY: "auto" }}>
-          <EditorSettings
-            ref={editorSettingsRef}
-            autoSave={props.editor.autoSave}
-            saveAndClose={props.editor.saveAndClose}
-            spellCheck={props.editor.spellCheck}
-          />
+          <EditorSettings ref={editorSettingsRef} {...props.editor} />
+          <NotesSettings ref={notesSettingsRef} {...props.notes} />
         </div>
         <SettingsDrawerFooter onApply={apply} onReset={reset} />
       </div>

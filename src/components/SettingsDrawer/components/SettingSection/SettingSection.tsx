@@ -7,7 +7,9 @@ export default function SettingSection(title: string) {
     return forwardRef((props: any, ref: any) => {
       return (
         <section className="SettingSection">
-          <h4 className="SettingSection__title">{title}</h4>
+          <h4 className="SettingSection__title">
+            <span>{title}</span>
+          </h4>
           <SettingComponent ref={ref} {...props} />
         </section>
       );
