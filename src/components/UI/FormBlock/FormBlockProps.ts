@@ -1,5 +1,5 @@
 import React from "react";
 
-export type FormBlockProps = {
+export interface FormBlockProps {
   children?: React.ReactNode;
-};
+}

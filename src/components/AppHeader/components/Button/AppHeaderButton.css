@@ -1,0 +1,34 @@
+.AppHeaderButton {
+  /* Reset */
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  outline: 0;
+
+  /* Dimensions */
+  width: 40px;
+  height: 40px;
+
+  /* Content */
+  font-size: 24px; /* @todo Switch to REM. */
+  line-height: 1.4rem;
+
+  /* Colors */
+  background-color: var(--app-background-5-lighter-color);
+  color: var(--app-text-base-color);
+
+  /* Border */
+  border-radius: 4px;
+}
+
+.AppHeaderButton:hover,
+.AppHeaderButton:focus {
+  /* Colors */
+  background-color: var(--app-background-10-lighter-color);
+  color: var(--app-text-5-lighter-color);
+}
+
+.AppHeaderButton:disabled {
+  /* Colors */
+  color: var(--app-text-40-darker-color);
+}

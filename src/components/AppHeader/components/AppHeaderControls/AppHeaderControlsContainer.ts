@@ -5,7 +5,8 @@ import { open } from "../../../../redux/editor/actions";
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
-    openNoteEditor: () => dispatch(open())
+    onCreateNewFile: () => dispatch(open()),
+    onCreateNewFolder: () => undefined
   };
 }
 

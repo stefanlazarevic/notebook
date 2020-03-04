@@ -6,7 +6,7 @@ import { AppHeaderControlsContainer } from "./components/AppHeaderControls";
 export default function AppHeader(props: any) {
   return (
     <header id="AppHeader" className="AppHeader">
-      <h1 className="title">Notebook</h1>
+      <h1 className="AppHeader__title">Notebook</h1>
       <AppHeaderControlsContainer />
     </header>
   );

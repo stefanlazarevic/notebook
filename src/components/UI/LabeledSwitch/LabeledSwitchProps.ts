@@ -1,12 +1,5 @@
-export type LabeledSwitchProps = {
-  checked?: boolean;
-  defaultChecked?: boolean;
-  rounded?: boolean;
-  disabled?: boolean;
+import { SwitchProps } from "../Switch/SwitchProps";
 
-  name?: string;
-  id: string;
+export interface LabeledSwitchProps extends SwitchProps {
   label: string;
-
-  onChange: () => void;
-};
+}

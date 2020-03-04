@@ -5,7 +5,7 @@
   background-color: var(--app-background-5-lighter-color);
 }
 
-.AppHeader .title {
+.AppHeader__title {
   font-family: "Roboto", "Lato";
   margin: 0;
   font-size: 2rem;

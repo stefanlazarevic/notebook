@@ -1,4 +1,4 @@
-export type SwitchProps = {
+export interface SwitchProps {
   checked?: boolean;
   defaultChecked?: boolean;
   rounded?: boolean;
@@ -8,4 +8,4 @@ export type SwitchProps = {
   id: string;
 
   onChange: () => void;
-};
+}
