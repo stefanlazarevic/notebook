@@ -1,13 +1,20 @@
-import React, { useState, forwardRef } from "react";
+import React, {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  useEffect
+} from "react";
 
 import "./EditorSettings.css";
 
 import { FormBlock, LabeledSwitch } from "../../../UI";
+import SettingSection from "../SettingSection/SettingSection";
+import { ISettingsSection } from "../SettingSection/types";
 
-export default forwardRef((props: any, ref: any) => {
-  const [autoSave, setAutoSave] = useState(props.autoSave);
-  const [saveAndClose, setSaveAndClose] = useState(props.saveAndClose);
-  const [spellcheck, setSpellcheck] = useState(props.spellcheck);
+const EditorSettings = forwardRef((props: any, ref: any) => {
+  const [autoSave, setAutoSave] = useState(!!props.autoSave);
+  const [saveAndClose, setSaveAndClose] = useState(!!props.saveAndClose);
+  const [spellCheck, setSpellCheck] = useState(!!props.spellCheck);
 
   function updateAutoSave(value: boolean) {
     if (value) {
@@ -17,9 +24,38 @@ export default forwardRef((props: any, ref: any) => {
     setAutoSave(value);
   }
 
+  useEffect(() => {
+    setAutoSave(!!props.autoSave);
+  }, [props.autoSave]);
+
+  useEffect(() => {
+    setSaveAndClose(!!props.saveAndClose);
+  }, [props.saveAndClose]);
+
+  useEffect(() => {
+    setSpellCheck(!!props.spellCheck);
+  }, [props.spellCheck]);
+
+  useImperativeHandle(
+    ref,
+    (): ISettingsSection => ({
+      getState() {
+        return {
+          autoSave,
+          saveAndClose,
+          spellCheck
+        };
+      },
+      reset() {
+        setAutoSave(!!props.autoSave);
+        setSaveAndClose(!!props.saveAndClose);
+        setSpellCheck(!!props.spellCheck);
+      }
+    })
+  );
+
   return (
     <div className="EditorSettings">
-      <h4>Editor</h4>
       <FormBlock>
         <LabeledSwitch
           id="auto-save"
@@ -44,10 +80,12 @@ export default forwardRef((props: any, ref: any) => {
           id="spellcheck"
           name="spellcheck"
           label="Spell check"
-          checked={spellcheck}
-          onChange={() => setSpellcheck(!spellcheck)}
+          checked={spellCheck}
+          onChange={() => setSpellCheck(!spellCheck)}
         />
       </FormBlock>
     </div>
   );
 });
+
+export default SettingSection("Editor")(EditorSettings);

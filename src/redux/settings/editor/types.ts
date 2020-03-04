@@ -11,7 +11,7 @@ export type EditorSettingsState = {
 
 export const EditorSettingsDefaultState: EditorSettingsState = {
   autoSave: true,
-  saveAndClose: true,
+  saveAndClose: false,
   spellCheck: false
 };
 

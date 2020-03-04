@@ -1,0 +1,9 @@
+.SettingSection {
+  margin-bottom: 40px;
+}
+
+.SettingSection__title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
