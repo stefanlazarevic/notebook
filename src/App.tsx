@@ -4,6 +4,7 @@ import "./App.css";
 
 import NoteEditorContainer from "./components/NoteEditor/NoteEditorContainer";
 import AppHeader from "./components/AppHeader/AppHeader";
+import SettingsDrawerContainer from "./components/SettingsDrawer/SettingsDrawerContainer";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
       <AppHeader />
       {/* Test component */}
       <NoteEditorContainer />
+      {/* Test component */}
+      <SettingsDrawerContainer />
     </div>
   );
 }

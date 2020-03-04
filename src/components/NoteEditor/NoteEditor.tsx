@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { RawDraftContentState } from "draft-js";
 
 import "./NoteEditor.css";

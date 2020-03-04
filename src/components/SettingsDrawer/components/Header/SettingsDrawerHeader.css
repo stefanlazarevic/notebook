@@ -1,0 +1,29 @@
+.SettingsDrawerHeader {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.SettingsDrawerHeader__title {
+  font-family: Roboto, Lato;
+  font-size: 28px;
+  margin: 0;
+  flex: 1;
+}
+
+.SettingsDrawerHeader__button {
+  appearance: none;
+  background-color: var(--app-background-5-lighter-color);
+  outline: 0;
+  border: none;
+  color: var(--app-text-base-color);
+  font-size: 20px;
+  padding-top: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.SettingsDrawerHeader__button:hover,
+.SettingsDrawerHeader__button:focus {
+  background-color: var(--app-background-10-lighter-color);
+}
