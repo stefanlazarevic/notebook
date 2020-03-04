@@ -3,16 +3,20 @@ import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import "./NoteEditorHeaderInput.css";
 
 import { NoteEditorHeaderInputProps } from "./NoteEditorHeaderInputProps";
+import { TitleReference } from "../../../../NoteEditorReferences";
 
 const NoteEditorHeaderInput = forwardRef(
   (props: NoteEditorHeaderInputProps, ref: any) => {
     const inputRef = useRef<any>();
 
-    useImperativeHandle(ref, () => ({
-      getValue() {
-        return inputRef.current ? inputRef.current.value : "";
-      }
-    }));
+    useImperativeHandle(
+      ref,
+      (): TitleReference => ({
+        getValue() {
+          return inputRef.current ? inputRef.current.value : "";
+        }
+      })
+    );
 
     return (
       <input

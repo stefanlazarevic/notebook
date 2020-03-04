@@ -11,13 +11,14 @@ import { NoteRecord } from "../../redux/notes/records/types";
 import { NoteEditorProps } from "./NoteEditorProps";
 import { NoteEditorFooter } from "./components/Footer";
 import KeyCodeMap from "./components/Editor/KeyBindings";
+import { TitleReference, EditorReference } from "./NoteEditorReferences";
 
 export default function NoteEditor(props: NoteEditorProps) {
-  const [maximized, setMaximized] = useState(props.maximized);
+  const [maximized, setMaximized] = useState(Boolean(props.maximized));
   const [saved, setSaved] = useState(Boolean(props.id));
 
-  const titleRef = useRef<any>();
-  const editorRef = useRef<any>();
+  const titleReference = useRef<TitleReference>();
+  const editorReference = useRef<EditorReference>();
   const saveIntervalRef = useRef<NodeJS.Timeout>();
 
   function toggleMaximizedState() {
@@ -70,12 +71,12 @@ export default function NoteEditor(props: NoteEditorProps) {
     let content: RawDraftContentState = { entityMap: {}, blocks: [] };
     let id = props.id || utils.string.generateRandomString();
 
-    if (titleRef && titleRef.current) {
-      title = titleRef.current.getValue();
+    if (titleReference && titleReference.current) {
+      title = titleReference.current.getValue();
     }
 
-    if (editorRef && editorRef.current) {
-      content = editorRef.current.getHTML();
+    if (editorReference && editorReference.current) {
+      content = editorReference.current.getRawDraftContentState();
     }
 
     const record: NoteRecord = { id, title, content };
@@ -104,13 +105,13 @@ export default function NoteEditor(props: NoteEditorProps) {
               maximized={maximized}
               onResize={toggleMaximizedState}
               onClose={props.close}
-              ref={titleRef}
+              ref={titleReference}
               onChange={handleNoteEditorChange}
               id={props.id}
               saved={saved}
             />
             <Editor
-              ref={editorRef}
+              ref={editorReference}
               spellCheck={props.spellCheck}
               onChange={handleNoteEditorChange}
               saved={saved}

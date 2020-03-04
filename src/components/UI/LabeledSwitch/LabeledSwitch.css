@@ -2,7 +2,7 @@
   display: block;
 }
 
-.LabeledSwitch label {
+.LabeledSwitch__label {
   display: block;
   margin-bottom: 10px;
   cursor: pointer;

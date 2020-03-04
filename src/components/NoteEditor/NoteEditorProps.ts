@@ -1,6 +1,6 @@
 import { NoteRecord } from "../../redux/notes/records/types";
 
-export type NoteEditorProps = {
+export interface NoteEditorProps {
   open: boolean;
   maximized?: boolean;
   id?: string;
@@ -10,7 +10,7 @@ export type NoteEditorProps = {
 
   updateOrInsert: (record: NoteRecord) => void;
   close: () => void;
-};
+}
 
 export const NoteEditorDefaultProps: Partial<NoteEditorProps> = {
   open: false,

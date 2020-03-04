@@ -27,6 +27,7 @@ import {
 } from "./StyleMap";
 import KeyCodeMap from "./KeyBindings";
 import { NoteEditorCustomCommand } from "./CustomActions";
+import { EditorReference } from "../../NoteEditorReferences";
 
 const Editor = forwardRef((props: any, ref: any) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -87,20 +88,23 @@ const Editor = forwardRef((props: any, ref: any) => {
     );
   }
 
-  useImperativeHandle(ref, () => ({
-    getPlainText() {
-      return editorState.getCurrentContent().getPlainText();
-    },
-    getHTML() {
-      return convertToRaw(editorState.getCurrentContent());
-    },
-    focus() {
-      draftEditorRef.current.focus();
-    },
-    blur() {
-      draftEditorRef.current.blur();
-    }
-  }));
+  useImperativeHandle(
+    ref,
+    (): EditorReference => ({
+      getPlainText() {
+        return editorState.getCurrentContent().getPlainText();
+      },
+      getRawDraftContentState() {
+        return convertToRaw(editorState.getCurrentContent());
+      },
+      focus() {
+        draftEditorRef.current.focus();
+      },
+      blur() {
+        draftEditorRef.current.blur();
+      }
+    })
+  );
 
   function focus() {
     if (draftEditorRef && draftEditorRef.current && editorState) {

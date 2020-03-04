@@ -8,7 +8,9 @@ import { LabeledSwitchProps } from "./LabeledSwitchProps";
 export default function LabeledSwitch(props: LabeledSwitchProps) {
   return (
     <div className="LabeledSwitch">
-      <label htmlFor={props.id}>{props.label}</label>
+      <label htmlFor={props.id} className="LabeledSwitch__label">
+        {props.label}
+      </label>
       <Switch
         id={props.id}
         name={props.name}
