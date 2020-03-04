@@ -1,4 +1,4 @@
-export type SwitchProps = {
+export type LabeledSwitchProps = {
   checked?: boolean;
   defaultChecked?: boolean;
   rounded?: boolean;
@@ -6,6 +6,7 @@ export type SwitchProps = {
 
   name?: string;
   id: string;
+  label: string;
 
   onChange: () => void;
 };

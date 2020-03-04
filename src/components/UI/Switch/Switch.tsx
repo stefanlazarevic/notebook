@@ -14,6 +14,7 @@ export default function Switch(props: SwitchProps) {
         defaultChecked={props.defaultChecked}
         checked={props.checked}
         onChange={props.onChange}
+        disabled={props.disabled}
       />
       <span className={`SwitchSlider ${props.rounded ? "round" : ""}`} />
     </label>

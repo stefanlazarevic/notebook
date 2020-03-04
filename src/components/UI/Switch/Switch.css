@@ -45,6 +45,11 @@ input:focus + .SwitchSlider {
   box-shadow: 0 0 1px var(--app-success-color);
 }
 
+input:disabled + .SwitchSlider {
+  background-color: var(--app-text-15-darker-color);
+  cursor: not-allowed;
+}
+
 input:checked + .SwitchSlider:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
