@@ -1,5 +1,7 @@
 import React, { useState, forwardRef } from "react";
 
+import "./EditorSettings.css";
+
 import { FormBlock, LabeledSwitch } from "../../../UI";
 
 export default forwardRef((props: any, ref: any) => {
