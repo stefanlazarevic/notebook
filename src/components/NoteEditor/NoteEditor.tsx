@@ -34,7 +34,7 @@ export default function NoteEditor(props: NoteEditorProps) {
       clearTimeout(saveIntervalRef.current);
     }
 
-    if (props.autoSave && props.id) {
+    if (props.autoSave && Boolean(props.id)) {
       saveIntervalRef.current = setTimeout(() => {
         save();
       }, 5000);
@@ -69,7 +69,7 @@ export default function NoteEditor(props: NoteEditorProps) {
   function save() {
     let title = "";
     let content: RawDraftContentState = { entityMap: {}, blocks: [] };
-    let id = props.id || utils.string.generateRandomString();
+    let id = props.id || utils.string.generateRandom();
 
     if (titleReference && titleReference.current) {
       title = titleReference.current.getValue();

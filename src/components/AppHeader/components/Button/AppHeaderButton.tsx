@@ -10,6 +10,7 @@ export default function AppHeaderButton(props: AppHeaderButtonProps) {
       className="AppHeaderButton"
       disabled={props.disabled}
       title={props.title}
+      onClick={props.onClick}
     >
       {props.children}
     </button>

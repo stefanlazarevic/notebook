@@ -1,4 +1,4 @@
-export function generateRandomString(length: number = 16): string {
+export function generateRandom(length: number = 16): string {
   let output = "";
 
   if (length <= 0) {

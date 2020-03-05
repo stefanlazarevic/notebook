@@ -1,9 +1,9 @@
 import utils from "..";
 
 describe("Utils/String", () => {
-  it("generateRandomString", () => {
-    const randomOne = utils.string.generateRandomString();
-    const randomTwo = utils.string.generateRandomString();
+  it("generateRandom", () => {
+    const randomOne = utils.string.generateRandom();
+    const randomTwo = utils.string.generateRandom();
 
     expect(randomOne.length).toBe(16);
     expect(randomOne).not.toBe(randomTwo);
