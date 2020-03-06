@@ -1,0 +1,21 @@
+:root {
+  --app-editor-header-background-color: rgb(39, 40, 45);
+  --app-editor-header-text-color: rgb(242, 242, 242);
+
+  --app-editor-header-background-ligher-color: rgb(51, 53, 58);
+}
+
+.AppEditorHeader {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 40px;
+
+  padding: 0 5px;
+
+  background-color: var(--app-editor-header-background-color);
+  color: var(--app-editor-header-text-color);
+}

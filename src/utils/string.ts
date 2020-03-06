@@ -15,3 +15,7 @@ export function generateRandom(length: number = 16): string {
 
   return output;
 }
+
+export function isString(value: any): boolean {
+  return typeof value === "string";
+}

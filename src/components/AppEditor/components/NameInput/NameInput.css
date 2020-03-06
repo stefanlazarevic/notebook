@@ -1,0 +1,19 @@
+.NameInput {
+  appearance: none;
+
+  position: relative;
+
+  flex: 1;
+
+  border: none;
+
+  outline: 0;
+
+  font-size: 1.2rem;
+
+  padding-right: 5px;
+  padding-left: 10px;
+
+  background-color: var(--app-editor-header-background-color);
+  color: var(--app-editor-header-text-color);
+}

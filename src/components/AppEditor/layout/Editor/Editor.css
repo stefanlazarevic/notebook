@@ -1,0 +1,21 @@
+.Editor {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  overflow-y: hidden;
+}
+
+.EditorWrapper {
+  overflow-y: auto;
+
+  padding: 0 10px 0 15px;
+
+  flex: 1;
+}
+
+.EditorWrapper::-webkit-scrollbar {
+  display: none;
+}

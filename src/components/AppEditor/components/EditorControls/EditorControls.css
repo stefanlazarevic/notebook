@@ -1,0 +1,21 @@
+.EditorControls {
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin: 20px 0;
+}
+
+.EditorControls .EditorControlButton:not(:first-child):not(:last-child) {
+  margin: 0 5px;
+}
+
+.EditorControls .EditorControlButton:first-child {
+  margin-right: 5px;
+}
+
+.EditorControls .EditorControlButton:last-child {
+  margin-left: 5px;
+}

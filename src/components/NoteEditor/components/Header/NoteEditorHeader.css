@@ -1,7 +1,0 @@
-.NoteEditorHeader {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: var(--app-background-5-lighter-color);
-  padding: 5px 5px 5px 0;
-}

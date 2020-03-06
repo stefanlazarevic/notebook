@@ -1,0 +1,32 @@
+.ChangeIndicator {
+  width: 30px;
+  height: 30px;
+
+  text-align: center;
+
+  line-height: 32px;
+}
+
+.ChangeIndicatorDot {
+  display: inline-block;
+
+  border-radius: 50%;
+
+  width: 12px;
+  height: 12px;
+}
+
+/* Idle */
+.ChangeIndicatorDot[data-state="0"] {
+  background-color: var(--app-editor-text-lighter-color);
+}
+
+/* Success */
+.ChangeIndicatorDot[data-state="1"] {
+  background-color: var(--app-success-color);
+}
+
+/* Unsaved */
+.ChangeIndicatorDot[data-state="2"] {
+  background-color: var(--app-danger-color);
+}
