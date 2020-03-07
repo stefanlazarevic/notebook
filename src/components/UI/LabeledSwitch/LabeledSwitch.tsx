@@ -18,6 +18,7 @@ export default function LabeledSwitch(props: LabeledSwitchProps) {
         disabled={props.disabled}
         checked={props.checked}
         defaultChecked={props.defaultChecked}
+        rounded={props.rounded}
       />
     </div>
   );

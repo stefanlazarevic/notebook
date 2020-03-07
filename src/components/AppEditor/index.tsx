@@ -25,16 +25,17 @@ function AppEditorContainer(props: AppEditorContainerProps) {
 }
 
 function mapStateToProps(state: AppState) {
-  const { editor } = state;
+  const { editor, settings } = state;
   const { open, id } = editor;
+  const { editor: editorSettings } = settings;
 
   return {
     open,
     maximized: false,
     id,
-    autoSave: true,
-    saveAndClose: false,
-    spellCheck: true
+    autoSave: Boolean(editorSettings.autoSave),
+    saveAndClose: Boolean(editorSettings.saveAndClose),
+    spellCheck: Boolean(editorSettings.spellCheck)
   };
 }
 

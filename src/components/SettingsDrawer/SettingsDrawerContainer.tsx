@@ -23,7 +23,7 @@ function mapStateToProps(state: AppState) {
   const { editor, notes } = settings;
 
   return {
-    open: false,
+    open: true,
     editor,
     notes
   };

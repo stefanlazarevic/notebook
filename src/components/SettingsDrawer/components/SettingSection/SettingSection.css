@@ -7,10 +7,10 @@
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 22px;
-  color: var(--app-info-color);
+  color: var(--app-text-base-color);
 }
 
-.SettingSection__title:after {
+/* .SettingSection__title:after {
   content: "";
   display: block;
   position: absolute;
@@ -19,9 +19,9 @@
   background: var(--app-text-base-color);
   width: 100%;
   z-index: -1;
-}
+} */
 
-.SettingSection__title span {
+/* .SettingSection__title span {
   background-color: var(--app-background-5-lighter-color);
   padding-right: 10px;
-}
+} */

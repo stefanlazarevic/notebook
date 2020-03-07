@@ -38,7 +38,7 @@ export default function SettingsDrawer(props: any) {
       <div className="SettingsDrawer__container">
         <SettingsDrawerHeader />
         {/* FormComponent */}
-        <div style={{ flex: 1, overflowY: "auto" }}>
+        <div style={{ flex: 1, overflowY: "auto", padding: "20px 15px 0" }}>
           <EditorSettings ref={editorSettingsRef} {...props.editor} />
           <NotesSettings ref={notesSettingsRef} {...props.notes} />
         </div>

@@ -1,8 +1,7 @@
 .SettingsDrawer {
   position: fixed;
   top: 0;
-  right: 0;
-  padding: 0 15px;
+  left: 0;
   min-width: 350px;
   height: 100vh;
   background-color: var(--app-background-5-lighter-color);

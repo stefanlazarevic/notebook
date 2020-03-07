@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   height: 60px;
+  padding: 0 15px;
+  background-color: var(--app-background-10-lighter-color);
 }
 
 .SettingsDrawerHeader__title {
@@ -13,17 +15,19 @@
 
 .SettingsDrawerHeader__button {
   appearance: none;
-  background-color: var(--app-background-5-lighter-color);
+  background-color: var(--app-background-10-lighter-color);
   outline: 0;
   border: none;
   color: var(--app-text-base-color);
-  font-size: 20px;
+  font-size: 24px;
   padding-top: 5px;
   border-radius: 4px;
   cursor: pointer;
+  width: 40px;
+  height: 40px;
 }
 
 .SettingsDrawerHeader__button:hover,
 .SettingsDrawerHeader__button:focus {
-  background-color: var(--app-background-10-lighter-color);
+  background-color: var(--app-background-5-lighter-color);
 }

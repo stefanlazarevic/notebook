@@ -39,6 +39,7 @@ const NotesSettings = forwardRef((props: any, ref: any) => {
           label="Soft Delete"
           checked={softDelete}
           onChange={() => setSoftDelete(!softDelete)}
+          rounded={true}
         />
       </FormBlock>
     </div>

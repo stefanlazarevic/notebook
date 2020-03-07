@@ -61,6 +61,7 @@ const EditorSettings = forwardRef((props: any, ref: any) => {
           label="Auto Save"
           checked={autoSave}
           onChange={() => updateAutoSave(!autoSave)}
+          rounded={true}
         />
       </FormBlock>
       <FormBlock>
@@ -71,6 +72,7 @@ const EditorSettings = forwardRef((props: any, ref: any) => {
           disabled={autoSave}
           checked={saveAndClose}
           onChange={() => setSaveAndClose(!saveAndClose)}
+          rounded={true}
         />
       </FormBlock>
       <FormBlock>
@@ -80,6 +82,7 @@ const EditorSettings = forwardRef((props: any, ref: any) => {
           label="Spell check"
           checked={spellCheck}
           onChange={() => setSpellCheck(!spellCheck)}
+          rounded={true}
         />
       </FormBlock>
     </div>
