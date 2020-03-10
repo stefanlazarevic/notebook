@@ -54,6 +54,16 @@ export function deleteExistingGroup(groupID: NoteGroupID) {
   };
 }
 
+/**
+ * 1. Find target group by targetGroupID.
+ * 2. Concatenate all children ids to the target group.
+ *
+ * // Sync.
+ * 3. Create a dictionary using ids from children.
+ * 4. If group is a child put it's parent in the dictionary (map).
+ * 5. If record is a child update it's parent to target.
+ * 6.
+ */
 export function moveToGroup(targetGroupID: NoteGroupID, children: string[]) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
@@ -77,35 +87,49 @@ export function moveToGroup(targetGroupID: NoteGroupID, children: string[]) {
       ...originalRecords
     };
 
-    const map = new Map();
+    const childrenSet = new Set<string>();
+    const parentsSet = new Set<string>();
 
-    // Keep track of all moving ids.
-    for (let i = 0; i < children.length; i++) {
-      map.set(children[i], true);
-    }
-
-    // Handle group moving.
     for (let i = 0; i < children.length; i++) {
       const id = children[i];
+      childrenSet.add(id);
+
+      const record = records[id];
       const group = groups[id];
 
-      if (group && group.parent) {
-        const parentGroup = groups[group.parent];
+      if (record) {
+        parentsSet.add(record.parent);
 
-        groups[parentGroup.id] = {
-          ...parentGroup,
-          children: parentGroup.children.filter(id => !map.has(id))
+        records[record.id] = {
+          ...record,
+          parent: targetGroup.id
+        };
+
+        continue;
+      }
+
+      if (group) {
+        if (group.parent) {
+          parentsSet.add(group.parent);
+        }
+
+        groups[group.id] = {
+          ...group,
+          parent: targetGroup.id
         };
       }
     }
 
-    // Handle records moving.
-    for (let i = 0; i < children.length; i++) {
-      const id = children[i];
-      const record = records[id];
+    parentsSet.forEach((groupID: string) => {
+      if (targetGroup.id !== groupID) {
+        const group = groups[groupID];
 
-      records[record.id].parent = targetGroup.id;
-    }
+        groups[group.id] = {
+          ...group,
+          children: group.children.filter(id => !childrenSet.has(id))
+        };
+      }
+    });
 
     batch(() => {
       dispatch({

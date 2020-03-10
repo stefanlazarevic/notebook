@@ -2,7 +2,10 @@
 import { connect } from "react-redux";
 
 import Notes from "./Notes";
-import { AppState } from "../../redux/types";
+import { AppState, IDispatch } from "../../redux/types";
+import { NoteGroupID } from "../../redux/notes/groups/types";
+import { moveToGroup } from "../../redux/notes/groups/actions";
+import { openGroup } from "../../redux/notes/group/actions";
 
 function mapStateToProps(state: AppState) {
   const { notes } = state;
@@ -17,4 +20,12 @@ function mapStateToProps(state: AppState) {
   };
 }
 
-export default connect(mapStateToProps, null)(Notes);
+function mapDispatchToProps(dispatch: IDispatch) {
+  return {
+    moveToGroup: (targetGroupID: NoteGroupID, children: string[]) =>
+      dispatch(moveToGroup(targetGroupID, children)),
+    openGroup: (groupID: NoteGroupID) => dispatch(openGroup(groupID))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notes);

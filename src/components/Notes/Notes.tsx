@@ -15,18 +15,23 @@ export default function Notes(props: any) {
           return (
             <div className="NotesRow" key={index}>
               {chunk.map(id => {
-                const item = props.getGroup(id) || props.getRecord(id);
+                if (props.getGroup(id)) {
+                  return (
+                    <NoteGroup
+                      key={id}
+                      id={id}
+                      index={index}
+                      onDrop={props.moveToGroup}
+                      onDoubleClick={props.openGroup}
+                    />
+                  );
+                }
 
-                return <Note key={item.id} id={item.id} title={item.title} />;
+                return <Note key={id} id={id} index={index} />;
               })}
             </div>
           );
         })}
-
-      <NoteGroup />
-      <NoteGroup />
-      <NoteGroup />
-      <NoteGroup />
     </div>
   );
 }
