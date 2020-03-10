@@ -157,3 +157,20 @@ export function ungroup(groupID: NoteGroupID, children: string[]) {
     }
   };
 }
+
+export function swapGroupChildren(sourceIndex: number, targetIndex: number) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { group: groupID, groups } = notes;
+
+    const group = groups[groupID];
+
+    dispatch({
+      type: NotesGroupsActions.REPLACE,
+      payload: {
+        ...group,
+        children: utils.array.swap(sourceIndex, targetIndex, group.children)
+      }
+    });
+  };
+}

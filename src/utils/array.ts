@@ -40,31 +40,39 @@ export function chunk(array: any[] = [], size: number) {
 }
 
 export function swap(
-  array: any[] = [],
-  firstIndex: number,
-  secondIndex: number
+  sourceIndex: number,
+  targetIndex: number,
+  array: any[] = []
 ) {
-  if (firstIndex < 0 || secondIndex < 0) {
+  console.log(sourceIndex, targetIndex);
+  if (sourceIndex < 0 || targetIndex < 0) {
     throw Error("Swap indexes must be greater than or equal to 0.");
   }
 
-  if (firstIndex >= array.length || secondIndex >= array.length) {
+  if (sourceIndex >= array.length || targetIndex >= array.length) {
     throw Error("Swap indexes must be less than the size of array.");
   }
 
-  const swapped = Array(array.length);
-  const first = array[secondIndex];
-  const second = array[firstIndex];
+  const output = Array(array.length);
 
-  for (let i = 0; i < swapped.length; i++) {
-    if (i === firstIndex) {
-      swapped[i] = first;
-    } else if (i === secondIndex) {
-      swapped[i] = second;
-    } else {
-      swapped[i] = array[i];
+  const source = array[targetIndex];
+  const target = array[sourceIndex];
+
+  for (let i = 0; i < array.length; i++) {
+    if (i === sourceIndex) {
+      output[i] = source;
+      continue;
     }
+
+    if (i === targetIndex) {
+      output[i] = target;
+      continue;
+    }
+
+    output[i] = array[i];
   }
 
-  return swapped;
+  console.log(output);
+
+  return output;
 }

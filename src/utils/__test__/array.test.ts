@@ -23,9 +23,9 @@ describe("Utils/Array", () => {
   });
 
   it("swap", () => {
-    const input = [1, 2, 3, 4, 5, 6];
-    const output = [4, 2, 3, 1, 5, 6];
+    const input = [1, 2, 3, 4];
+    const output = [1, 2, 4, 3];
 
-    expect(utils.array.swap(input, 0, 3)).toEqual(output);
+    expect(utils.array.swap(2, 3, input)).toEqual(output);
   });
 });

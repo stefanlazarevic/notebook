@@ -11,11 +11,13 @@ export default function Notes(props: any) {
     <div className="Notes">
       {utils.array
         .chunk(props.records, 7)
-        .map((chunk: any[], index: number) => {
+        .map((chunk: any[], rowIndex: number) => {
           return (
-            <div className="NotesRow" key={index}>
-              {chunk.map(id => {
+            <div className="NotesRow" key={rowIndex}>
+              {chunk.map((id, index: number) => {
                 if (props.getGroup(id)) {
+                  const group = props.getGroup(id);
+
                   return (
                     <NoteGroup
                       key={id}
@@ -23,11 +25,22 @@ export default function Notes(props: any) {
                       index={index}
                       onDrop={props.moveToGroup}
                       onDoubleClick={props.openGroup}
+                      title={group.title}
                     />
                   );
                 }
 
-                return <Note key={id} id={id} index={index} />;
+                const record = props.getRecord(id);
+
+                return (
+                  <Note
+                    key={id}
+                    id={id}
+                    index={index}
+                    title={record.title}
+                    onDrop={props.swapGroupChildren}
+                  />
+                );
               })}
             </div>
           );

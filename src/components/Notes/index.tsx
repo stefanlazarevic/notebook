@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 import Notes from "./Notes";
 import { AppState, IDispatch } from "../../redux/types";
 import { NoteGroupID } from "../../redux/notes/groups/types";
-import { moveToGroup } from "../../redux/notes/groups/actions";
+import {
+  moveToGroup,
+  swapGroupChildren
+} from "../../redux/notes/groups/actions";
 import { openGroup } from "../../redux/notes/group/actions";
 
 function mapStateToProps(state: AppState) {
@@ -24,7 +27,9 @@ function mapDispatchToProps(dispatch: IDispatch) {
   return {
     moveToGroup: (targetGroupID: NoteGroupID, children: string[]) =>
       dispatch(moveToGroup(targetGroupID, children)),
-    openGroup: (groupID: NoteGroupID) => dispatch(openGroup(groupID))
+    openGroup: (groupID: NoteGroupID) => dispatch(openGroup(groupID)),
+    swapGroupChildren: (sourceIndex: number, targetIndex: number) =>
+      dispatch(swapGroupChildren(sourceIndex, targetIndex))
   };
 }
 

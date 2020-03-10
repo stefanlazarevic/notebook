@@ -8,17 +8,22 @@ export default function Note(props: any) {
   }
 
   function dragStart(event: React.DragEvent<HTMLDivElement>) {
-    event.dataTransfer.setData("text/plain", props.id);
+    event.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({ index: props.index, id: props.id })
+    );
   }
 
   function handleDrop(event: any) {
     event.preventDefault();
 
-    const sourceId = event.dataTransfer.getData("text/plain");
-    const targetId = props.id;
+    const data = JSON.parse(event.dataTransfer.getData("text/plain"));
 
-    if (typeof props.onReorder === "function") {
-      props.onReorder(sourceId, targetId);
+    const sourceIndex = parseInt(data && data.index);
+    const targetIndex = props.index;
+
+    if (typeof props.onDrop === "function" && !Number.isNaN(sourceIndex)) {
+      props.onDrop(sourceIndex, targetIndex);
     }
   }
 
