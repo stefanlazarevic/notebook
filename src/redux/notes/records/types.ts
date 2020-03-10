@@ -1,9 +1,11 @@
 import { RawDraftContentState } from "draft-js";
+import { NoteGroupID } from "../groups/types";
 
 export type NoteRecordID = string;
 
 export type NoteRecord = {
   id: NoteRecordID;
+  parent: NoteGroupID;
   title: string;
   content: RawDraftContentState;
 };

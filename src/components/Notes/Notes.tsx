@@ -2,6 +2,8 @@ import React from "react";
 import Note from "./components/Note/Note";
 
 import "./Notes.css";
+
+import NoteGroup from "./components/Group/Group";
 import utils from "../../utils";
 
 export default function Notes(props: any) {
@@ -20,6 +22,11 @@ export default function Notes(props: any) {
             </div>
           );
         })}
+
+      <NoteGroup />
+      <NoteGroup />
+      <NoteGroup />
+      <NoteGroup />
     </div>
   );
 }

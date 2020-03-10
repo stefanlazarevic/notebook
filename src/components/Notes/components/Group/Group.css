@@ -1,0 +1,47 @@
+.NoteGroup {
+  display: block;
+
+  position: relative;
+
+  width: 250px;
+  height: 250px;
+}
+
+.NoteGroup:first-child:not(:last-child) {
+  margin-right: 10px;
+}
+
+.NoteGroup:last-child:not(:first-child) {
+  margin-left: 10px;
+}
+
+.NoteGroup:not(:first-child):not(:last-child) {
+  margin: 0 10px;
+}
+
+.NoteGroupFront {
+  position: absolute;
+  top: 2.5%;
+  left: 2.5%;
+
+  width: 90%;
+  height: 90%;
+  z-index: 2;
+
+  background-color: var(--app-editor-background-ligher-color);
+}
+
+.NoteGroupBack {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+
+  width: 85%;
+  height: 85%;
+
+  z-index: 1;
+
+  background-color: var(--app-editor-background-darker-color);
+
+  transform: rotate(10deg);
+}

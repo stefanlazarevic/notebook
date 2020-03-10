@@ -12,7 +12,7 @@ import {
 import { NoteRecord } from "../../redux/notes/records/types";
 import { updateOrInsert } from "../../redux/notes/records/actions";
 import { NoteGroupID } from "../../redux/notes/groups/types";
-import { insert } from "../../redux/notes/groups/actions";
+import { moveToGroup } from "../../redux/notes/groups/actions";
 
 function AppEditorContainer(props: AppEditorContainerProps) {
   return (
@@ -39,18 +39,18 @@ function mapStateToProps(state: AppState) {
     autoSave: Boolean(editorSettings.autoSave),
     saveAndClose: Boolean(editorSettings.saveAndClose),
     spellCheck: Boolean(editorSettings.spellCheck),
-    group
+    groupID: group
   };
 }
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
     onClose: () => dispatch(closeAppEditor()),
-    onSave: (group: NoteGroupID, record: NoteRecord) => {
+    onSave: (groupID: NoteGroupID, record: NoteRecord) => {
       batch(() => {
         dispatch(updateOrInsert(record));
         dispatch(openAppEditor(record.id));
-        dispatch(insert(group, record.id));
+        dispatch(moveToGroup(groupID, [record.id]));
       });
     }
   };

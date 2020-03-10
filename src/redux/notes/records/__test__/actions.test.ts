@@ -10,12 +10,13 @@ const mockStore = configureStore(middlewares);
 
 const TEST_RECORD: NoteRecord = {
   id: "test",
+  parent: "root",
   title: "Hello world",
   content: { entityMap: {}, blocks: [] }
 };
 
 const INITIAL_STATE: Partial<AppState> = {
-  notes: { records: { [TEST_RECORD.id]: TEST_RECORD } }
+  notes: { records: { [TEST_RECORD.id]: TEST_RECORD } } as NotesState
 };
 
 describe("Notes/Records/Actions", () => {
@@ -32,6 +33,7 @@ describe("Notes/Records/Actions", () => {
   it("insert", () => {
     const record: NoteRecord = {
       id: "tyero9pkdcl1",
+      parent: "root",
       title: "Test",
       content: { entityMap: {}, blocks: [] }
     };
@@ -145,6 +147,7 @@ describe("Notes/Records/Actions", () => {
   it("updateOrInsert (insert)", () => {
     const record: NoteRecord = {
       id: "kajenv8gqu7eiroa1",
+      parent: "root",
       title: "Update test",
       content: { entityMap: {}, blocks: [] }
     };

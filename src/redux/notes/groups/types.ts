@@ -3,6 +3,7 @@ export type NoteGroupID = string;
 export interface NoteGroup {
   id: NoteGroupID;
   parent?: string;
+  title: string;
   children: string[];
 }
 
@@ -19,6 +20,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = {
   root: {
     id: "root",
     parent: undefined,
+    title: "/",
     children: []
   }
 };

@@ -7,10 +7,10 @@ export interface AppEditorProps {
   autoSave: boolean;
   saveAndClose: boolean;
   spellCheck: boolean;
-  group: NoteGroupID;
+  groupID: NoteGroupID;
 
   onClose?: () => void;
-  onSave?: (group: NoteGroupID, record: NoteRecord) => void;
+  onSave?: (groupID: NoteGroupID, record: NoteRecord) => void;
 }
 
 export interface AppEditorContainerProps extends AppEditorProps {
