@@ -40,7 +40,7 @@ export default function AppEditor(props: AppEditorProps) {
     }
 
     if (typeof props.onSave === "function") {
-      props.onSave(record);
+      props.onSave(props.group, record);
 
       if (props.saveAndClose && !props.autoSave) {
         if (typeof props.onClose === "function") {

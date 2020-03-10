@@ -1,7 +1,9 @@
 import { RawDraftContentState } from "draft-js";
 
+export type NoteRecordID = string;
+
 export type NoteRecord = {
-  id: string;
+  id: NoteRecordID;
   title: string;
   content: RawDraftContentState;
 };

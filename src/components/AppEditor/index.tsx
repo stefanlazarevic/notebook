@@ -11,6 +11,8 @@ import {
 } from "../../redux/editor/actions";
 import { NoteRecord } from "../../redux/notes/records/types";
 import { updateOrInsert } from "../../redux/notes/records/actions";
+import { NoteGroupID } from "../../redux/notes/groups/types";
+import { insert } from "../../redux/notes/groups/actions";
 
 function AppEditorContainer(props: AppEditorContainerProps) {
   return (
@@ -25,9 +27,10 @@ function AppEditorContainer(props: AppEditorContainerProps) {
 }
 
 function mapStateToProps(state: AppState) {
-  const { editor, settings } = state;
+  const { editor, settings, notes } = state;
   const { open, id } = editor;
   const { editor: editorSettings } = settings;
+  const { group } = notes;
 
   return {
     open,
@@ -35,17 +38,19 @@ function mapStateToProps(state: AppState) {
     id,
     autoSave: Boolean(editorSettings.autoSave),
     saveAndClose: Boolean(editorSettings.saveAndClose),
-    spellCheck: Boolean(editorSettings.spellCheck)
+    spellCheck: Boolean(editorSettings.spellCheck),
+    group
   };
 }
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
     onClose: () => dispatch(closeAppEditor()),
-    onSave: (record: NoteRecord) => {
+    onSave: (group: NoteGroupID, record: NoteRecord) => {
       batch(() => {
         dispatch(updateOrInsert(record));
         dispatch(openAppEditor(record.id));
+        dispatch(insert(group, record.id));
       });
     }
   };

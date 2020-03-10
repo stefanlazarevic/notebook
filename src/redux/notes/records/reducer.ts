@@ -1,6 +1,6 @@
 import { NotesRecords, NotesRecordsActions } from "./types";
 
-export default function notesRecordsReducer(
+export default function recordsReducer(
   state: NotesRecords = {},
   action: any
 ): NotesRecords {

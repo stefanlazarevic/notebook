@@ -1,6 +1,11 @@
 import { combineReducers } from "redux";
-import notesRecordsReducer from "./records/reducer";
+
+import recordsReducer from "./records/reducer";
+import groupsReducer from "./groups/reducer";
+import groupReducer from "./pointer/reducer";
 
 export default combineReducers({
-  records: notesRecordsReducer
+  group: groupReducer,
+  groups: groupsReducer,
+  records: recordsReducer
 });

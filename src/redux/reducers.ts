@@ -6,5 +6,5 @@ import settingsReducers from "./settings/reducers";
 export default combineReducers({
   notes: notesReducers,
   editor: editorReducer,
-  settings: settingsReducers
+  settings: settingsReducers,
 });

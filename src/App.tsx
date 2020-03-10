@@ -4,7 +4,8 @@ import "./App.css";
 
 import AppHeader from "./components/AppHeader/AppHeader";
 import AppEditorContainer from "./components/AppEditor";
-import SettingsDrawerContainer from "./components/SettingsDrawer/SettingsDrawerContainer";
+// import SettingsDrawerContainer from "./components/SettingsDrawer/SettingsDrawerContainer";
+import NotesContainer from "./components/Notes";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
       {/* Test component */}
       <AppEditorContainer />
       {/* Test component */}
-      <SettingsDrawerContainer />
+      {/* <SettingsDrawerContainer /> */}
+      {/* Test component */}
+      <NotesContainer />
     </div>
   );
 }
