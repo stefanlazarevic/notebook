@@ -7,7 +7,7 @@ import AppEditor from "./AppEditor";
 import { AppState, IDispatch } from "../../redux/types";
 import { closeEditor, openEditor } from "../../redux/editor/actions";
 import { NoteRecord } from "../../redux/notes/records/types";
-import { updateOrInsert } from "../../redux/notes/records/actions";
+import { insertRecord, updateRecord } from "../../redux/notes/records/actions";
 import { NoteGroupID } from "../../redux/notes/groups/types";
 import { moveToGroup } from "../../redux/notes/groups/actions";
 
@@ -51,11 +51,12 @@ function mapDispatchToProps(dispatch: IDispatch) {
     onClose: () => dispatch(closeEditor()),
     onSave: (groupID: NoteGroupID, record: NoteRecord) => {
       batch(() => {
-        dispatch(updateOrInsert(record));
+        dispatch(insertRecord(record));
         dispatch(openEditor(record.id));
         dispatch(moveToGroup(groupID, [record.id]));
       });
-    }
+    },
+    onUpdate: (record: NoteRecord) => dispatch(updateRecord(record))
   };
 }
 

@@ -13,6 +13,7 @@ export interface AppEditorProps {
 
   onClose?: () => void;
   onSave?: (groupID: NoteGroupID, record: NoteRecord) => void;
+  onUpdate?: (record: NoteRecord) => void;
 }
 
 export interface AppEditorContainerProps extends AppEditorProps {

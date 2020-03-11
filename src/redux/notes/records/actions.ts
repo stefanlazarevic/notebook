@@ -5,7 +5,7 @@ import utils from "../../../utils/index";
 /**
  * Insert new NoteRecord object in the NotesRecords state Map.
  */
-export function insert(record: NoteRecord) {
+export function insertRecord(record: NoteRecord) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
     const { records } = notes;
@@ -25,7 +25,7 @@ export function insert(record: NoteRecord) {
   };
 }
 
-export function update(record: NoteRecord) {
+export function updateRecord(record: NoteRecord) {
   return async (dispatch: IDispatch, getState: () => any) => {
     const { notes } = getState();
     const { records } = notes;
@@ -45,7 +45,7 @@ export function update(record: NoteRecord) {
   };
 }
 
-export function remove(id: string) {
+export function removeRecord(id: string) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
     const { records } = notes;
@@ -58,19 +58,5 @@ export function remove(id: string) {
       type: NotesRecordsActions.REPLACE_ALL,
       payload: utils.object.deleteProperty(id, records)
     });
-  };
-}
-
-export function updateOrInsert(record: NoteRecord) {
-  return async (dispatch: IDispatch, getState: () => AppState) => {
-    const { notes } = getState();
-    const { records } = notes;
-
-    if (records[record.id]) {
-      dispatch(update(record));
-      return;
-    }
-
-    dispatch(insert(record));
   };
 }

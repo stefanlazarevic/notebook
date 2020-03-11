@@ -40,13 +40,23 @@ export default function AppEditor(props: AppEditorProps) {
       record.content = editorReference.current.getRawDraftContentState();
     }
 
-    if (typeof props.onSave === "function") {
+    if (typeof props.onSave === "function" && !props.id) {
       props.onSave(props.groupID, record);
 
       if (props.saveAndClose && !props.autoSave) {
-        if (typeof props.onClose === "function") {
-          closeEditor();
-        }
+        closeEditor();
+      } else {
+        setIndicatorState(ChangeIndicatorState.SAVED);
+      }
+
+      return;
+    }
+
+    if (typeof props.onUpdate === "function" && props.id) {
+      props.onUpdate(record);
+
+      if (props.saveAndClose && !props.autoSave) {
+        closeEditor();
       } else {
         setIndicatorState(ChangeIndicatorState.SAVED);
       }
