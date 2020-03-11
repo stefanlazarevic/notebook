@@ -4,7 +4,12 @@ import React, {
   useImperativeHandle,
   useRef
 } from "react";
-import { EditorState, Editor as DraftEditor, convertToRaw } from "draft-js";
+import {
+  EditorState,
+  Editor as DraftEditor,
+  convertToRaw,
+  convertFromRaw
+} from "draft-js";
 
 import "./Editor.css";
 
@@ -15,7 +20,11 @@ import { EditorProps } from "./EditorProps";
 import EditorControls from "../../components/EditorControls/EditorControls";
 
 export default forwardRef((props: EditorProps, ref: any) => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [editorState, setEditorState] = useState(
+    props.rawContentState
+      ? EditorState.createWithContent(convertFromRaw(props.rawContentState))
+      : EditorState.createEmpty()
+  );
 
   const draftEditorReference = useRef<DraftEditor>(null);
 

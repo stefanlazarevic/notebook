@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./Group.css";
+import "./Record.css";
 
-export default function NoteGroup(props: any) {
+export default function NoteRecord(props: any) {
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
   }
@@ -18,38 +18,36 @@ export default function NoteGroup(props: any) {
     event.preventDefault();
 
     const data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    const sourceId = data && data.id;
-    const targetId = props.id;
+
+    const sourceIndex = parseInt(data && data.index);
+    const targetIndex = props.index;
 
     if (
       typeof props.onDrop === "function" &&
-      sourceId &&
-      sourceId !== targetId
+      !Number.isNaN(sourceIndex) &&
+      sourceIndex !== targetIndex
     ) {
-      props.onDrop(targetId, [sourceId]);
+      props.onDrop(sourceIndex, targetIndex);
     }
   }
 
-  function handleDoubleClick(event: React.MouseEvent) {
-    if (typeof props.onDoubleClick === "function") {
-      props.onDoubleClick(props.id);
+  function handleClick() {
+    if (typeof props.onClick === "function") {
+      props.onClick(props.id);
     }
   }
 
   return (
     <div
-      className="NoteGroup"
+      className="NoteRecord"
       draggable="true"
       onDragOver={allowDrop}
       onDragStart={dragStart}
       onDrop={handleDrop}
-      onDoubleClick={handleDoubleClick}
+      onClick={handleClick}
     >
-      <div className="NoteGroupBack"></div>
-      <div className="NoteGroupFront">
-        <h5 className="NoteGroupTitle">
-          <span>{props.title}</span>
-        </h5>
+      <div className="NoteRecordCard">
+        <h4 className="NoteRecordTitle">{props.title}</h4>
       </div>
     </div>
   );

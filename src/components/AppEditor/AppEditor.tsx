@@ -129,6 +129,7 @@ export default function AppEditor(props: AppEditorProps) {
             ref={editorReference}
             spellCheck={props.spellCheck}
             onChange={handleDetectedChange}
+            rawContentState={props.content}
           />
         </div>
       </div>

@@ -1,3 +1,5 @@
+type MapCallbackFunction = (element: any, index: number, array: any[]) => void;
+
 export function first(array: any[] = []): any {
   if (!array || array.length <= 0) {
     return undefined;
@@ -44,7 +46,6 @@ export function swap(
   targetIndex: number,
   array: any[] = []
 ) {
-  console.log(sourceIndex, targetIndex);
   if (sourceIndex < 0 || targetIndex < 0) {
     throw Error("Swap indexes must be greater than or equal to 0.");
   }
@@ -72,7 +73,25 @@ export function swap(
     output[i] = array[i];
   }
 
-  console.log(output);
+  return output;
+}
+
+export function mapReversed(callback: MapCallbackFunction, array: any = []) {
+  const output = Array(array.length);
+
+  for (let i = array.length - 1; i > -1; i--) {
+    output[array.length - i - 1] = callback(array[i], i, array);
+  }
+
+  return output;
+}
+
+export function map(callback: MapCallbackFunction, array: any = []) {
+  const output = Array(array.length);
+
+  for (let i = 0; i < array.length; i++) {
+    output[i] = callback(array[i], i, array);
+  }
 
   return output;
 }
