@@ -68,7 +68,12 @@ export default function NoteRecord(props: any) {
           <h4 className="NoteRecordTitle">{props.title}</h4>
         </div>
       </ContextMenuTrigger>
-      <RecordContextMenu id={props.id} onOpen={handleClick} />
+      <RecordContextMenu
+        id={props.id}
+        parent={props.parent}
+        onOpen={handleClick}
+        onUngroup={props.moveToGroup}
+      />
     </div>
   );
 }

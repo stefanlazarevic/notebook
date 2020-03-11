@@ -16,14 +16,16 @@ function mapStateToProps(state: AppState, ownProps: any) {
   const { id, index, tabIndex } = ownProps;
 
   const { notes } = state;
-  const { records, groups } = notes;
+  const { records, groups, group: groupID } = notes;
 
+  const group = groups[groupID];
   const note = records[id] || groups[id];
 
   return {
     index,
     tabIndex,
-    ...note
+    ...note,
+    parent: group.parent
   };
 }
 

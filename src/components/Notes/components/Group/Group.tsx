@@ -26,11 +26,11 @@ export default function NoteGroup(props: NoteGroupProps) {
     const targetId = props.id;
 
     if (
-      typeof props.onDrop === "function" &&
+      typeof props.moveToGroup === "function" &&
       sourceId &&
       sourceId !== targetId
     ) {
-      props.onDrop(targetId, [sourceId]);
+      props.moveToGroup(targetId, [sourceId]);
     }
   }
 
@@ -70,7 +70,12 @@ export default function NoteGroup(props: NoteGroupProps) {
           </h5>
         </div>
       </ContextMenuTrigger>
-      <GroupContextMenu id={props.id} onOpen={handleDoubleClick} />
+      <GroupContextMenu
+        id={props.id}
+        parent={props.parent}
+        onOpen={handleDoubleClick}
+        onUngroup={props.moveToGroup}
+      />
     </div>
   );
 }
