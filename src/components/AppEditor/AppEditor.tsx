@@ -65,11 +65,11 @@ export default function AppEditor(props: AppEditorProps) {
 
   function handleCanvasKeyDown(event: React.KeyboardEvent<any>) {
     const isControlKey = event.ctrlKey;
-    // const isShiftKey = event.shiftKey;
+    const isShiftKey = event.shiftKey;
     const keyCode = event.keyCode;
     const key = KeycodeMap[keyCode];
 
-    if (isControlKey && key === "s") {
+    if (isControlKey && !isShiftKey && key === "s") {
       event.preventDefault();
 
       if (saveTimeoutReference.current) {
