@@ -2,8 +2,11 @@ import React from "react";
 
 import "./Group.css";
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
+import { NoteGroupProps } from "./GroupProps";
+import { ContextMenuTrigger } from "react-contextmenu";
+import GroupContextMenu from "./components/GroupContextMenu/GroupContextMenu";
 
-export default function NoteGroup(props: any) {
+export default function NoteGroup(props: NoteGroupProps) {
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
   }
@@ -59,12 +62,15 @@ export default function NoteGroup(props: any) {
       tabIndex={props.tabIndex}
       onKeyDown={handleKeyDown}
     >
-      <div className="NoteGroupBack"></div>
-      <div className="NoteGroupFront">
-        <h5 className="NoteGroupTitle">
-          <span>{props.title}</span>
-        </h5>
-      </div>
+      <ContextMenuTrigger id={props.id} holdToDisplay={-1}>
+        <div className="NoteGroupBack"></div>
+        <div className="NoteGroupFront">
+          <h5 className="NoteGroupTitle">
+            <span>{props.title}</span>
+          </h5>
+        </div>
+      </ContextMenuTrigger>
+      <GroupContextMenu id={props.id} onOpen={handleDoubleClick} />
     </div>
   );
 }

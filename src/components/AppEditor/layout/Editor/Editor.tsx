@@ -54,7 +54,7 @@ export default forwardRef((props: EditorProps, ref: any) => {
     })
   );
 
-  function focusEditor() {
+  function focusEditor(event?: React.MouseEvent) {
     if (draftEditorReference.current) {
       draftEditorReference.current.focus();
     }
@@ -80,7 +80,7 @@ export default forwardRef((props: EditorProps, ref: any) => {
         inlineStyles={getCurrentInlineStyle()}
         onClick={handleCommand}
       />
-      <div className="EditorWrapper" onClick={focusEditor}>
+      <div className="EditorWrapper" onMouseDown={focusEditor}>
         <DraftEditor
           ref={draftEditorReference}
           editorState={editorState}

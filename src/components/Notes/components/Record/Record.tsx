@@ -1,7 +1,10 @@
 import React from "react";
+import { ContextMenuTrigger } from "react-contextmenu";
 
 import "./Record.css";
+
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
+import RecordContextMenu from "./components/RecordContextMenu/RecordContextMenu";
 
 export default function NoteRecord(props: any) {
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {
@@ -60,9 +63,12 @@ export default function NoteRecord(props: any) {
       tabIndex={props.tabIndex}
       onKeyDown={handleKeyDown}
     >
-      <div className="NoteRecordCard">
-        <h4 className="NoteRecordTitle">{props.title}</h4>
-      </div>
+      <ContextMenuTrigger id={props.id} holdToDisplay={-1}>
+        <div className="NoteRecordCard">
+          <h4 className="NoteRecordTitle">{props.title}</h4>
+        </div>
+      </ContextMenuTrigger>
+      <RecordContextMenu id={props.id} onOpen={handleClick} />
     </div>
   );
 }
