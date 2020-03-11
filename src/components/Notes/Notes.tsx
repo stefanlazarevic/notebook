@@ -39,6 +39,7 @@ export default function Notes(props: any) {
                     index={index}
                     title={record.title}
                     onDrop={props.swapGroupChildren}
+                    onClick={props.openEditor}
                   />
                 );
               })}

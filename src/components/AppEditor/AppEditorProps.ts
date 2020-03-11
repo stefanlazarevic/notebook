@@ -3,6 +3,8 @@ import { NoteGroupID } from "../../redux/notes/groups/types";
 
 export interface AppEditorProps {
   id?: string;
+  title?: string;
+
   maximized: boolean;
   autoSave: boolean;
   saveAndClose: boolean;

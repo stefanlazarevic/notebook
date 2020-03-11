@@ -1,7 +1,8 @@
 import { IDispatch, AppState } from "../types";
 import { NoteEditorStateActions } from "./types";
+import { NoteRecordID } from "../notes/records/types";
 
-export function close() {
+export function closeEditor() {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     dispatch({
       type: NoteEditorStateActions.REPLACE_ALL,
@@ -13,7 +14,7 @@ export function close() {
   };
 }
 
-export function open(id?: string) {
+export function openEditor(id?: NoteRecordID) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     dispatch({
       type: NoteEditorStateActions.REPLACE,

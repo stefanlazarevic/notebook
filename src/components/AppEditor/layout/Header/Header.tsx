@@ -11,7 +11,11 @@ import ChangeIndicator from "../../components/ChangeIndicator/ChangeIndicator";
 export default forwardRef((props: AppEditorHeaderProps, ref: any) => {
   return (
     <div className="AppEditorHeader">
-      <NameInput ref={ref} onChange={props.onChange} />
+      <NameInput
+        ref={ref}
+        defaultValue={props.defaultValue}
+        onChange={props.onChange}
+      />
       <ChangeIndicator state={props.indicatorState} />
       <ResizeButton maximized={props.maximized} onClick={props.onResize} />
       <CloseButton onClick={props.onClose} />

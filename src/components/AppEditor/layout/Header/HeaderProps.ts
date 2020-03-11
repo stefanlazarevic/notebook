@@ -5,6 +5,7 @@ export interface AppEditorHeaderProps {
   maximized: boolean;
   ref: NameInputReference;
   indicatorState: ChangeIndicatorState;
+  defaultValue?: string;
 
   onResize?: (maximized: boolean) => void;
   onClose?: () => void;

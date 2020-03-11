@@ -23,7 +23,7 @@ describe("Editor/Actions", () => {
   });
 
   it("close", () => {
-    return store.dispatch(action.close()).then(() => {
+    return store.dispatch(action.closeEditor()).then(() => {
       const dispatchedActions = store.getActions();
       const expectedAction = {
         type: NoteEditorStateActions.REPLACE_ALL,

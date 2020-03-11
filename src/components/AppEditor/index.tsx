@@ -5,10 +5,7 @@ import { connect, batch } from "react-redux";
 import { AppEditorContainerProps } from "./AppEditorProps";
 import AppEditor from "./AppEditor";
 import { AppState, IDispatch } from "../../redux/types";
-import {
-  close as closeAppEditor,
-  open as openAppEditor
-} from "../../redux/editor/actions";
+import { closeEditor, openEditor } from "../../redux/editor/actions";
 import { NoteRecord } from "../../redux/notes/records/types";
 import { updateOrInsert } from "../../redux/notes/records/actions";
 import { NoteGroupID } from "../../redux/notes/groups/types";
@@ -30,26 +27,32 @@ function mapStateToProps(state: AppState) {
   const { editor, settings, notes } = state;
   const { open, id } = editor;
   const { editor: editorSettings } = settings;
-  const { group } = notes;
+  const { group, records } = notes;
+
+  let record;
+
+  if (id) {
+    record = records[id];
+  }
 
   return {
     open,
     maximized: false,
-    id,
     autoSave: Boolean(editorSettings.autoSave),
     saveAndClose: Boolean(editorSettings.saveAndClose),
     spellCheck: Boolean(editorSettings.spellCheck),
-    groupID: group
+    groupID: group,
+    ...record
   };
 }
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
-    onClose: () => dispatch(closeAppEditor()),
+    onClose: () => dispatch(closeEditor()),
     onSave: (groupID: NoteGroupID, record: NoteRecord) => {
       batch(() => {
         dispatch(updateOrInsert(record));
-        dispatch(openAppEditor(record.id));
+        dispatch(openEditor(record.id));
         dispatch(moveToGroup(groupID, [record.id]));
       });
     }

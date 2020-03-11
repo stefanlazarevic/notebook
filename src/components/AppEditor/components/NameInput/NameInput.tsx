@@ -27,6 +27,7 @@ export default forwardRef((props: NameInputProps, ref) => {
       className="NameInput"
       placeholder="New title"
       type="text"
+      defaultValue={props.defaultValue}
       onChange={props.onChange}
       autoFocus={true}
     />

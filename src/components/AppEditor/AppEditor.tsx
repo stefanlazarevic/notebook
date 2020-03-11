@@ -111,6 +111,7 @@ export default function AppEditor(props: AppEditorProps) {
             ref={nameInputReference}
             onClose={props.onClose}
             onResize={setMaximized}
+            defaultValue={props.title}
             indicatorState={indicatorState}
             onChange={handleDetectedChange}
           />

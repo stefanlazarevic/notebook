@@ -27,6 +27,12 @@ export default function Note(props: any) {
     }
   }
 
+  function handleClick() {
+    if (typeof props.onClick === "function") {
+      props.onClick(props.id);
+    }
+  }
+
   return (
     <div
       className="Note"
@@ -34,6 +40,7 @@ export default function Note(props: any) {
       onDragOver={allowDrop}
       onDragStart={dragStart}
       onDrop={handleDrop}
+      onClick={handleClick}
     >
       <div className="NoteCard">
         <h4 className="NoteCardTitle">{props.title}</h4>
