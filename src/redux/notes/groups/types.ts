@@ -21,7 +21,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = {
     id: "root",
     parent: undefined,
     title: "/",
-    children: ["fakultet", "ostalo"]
+    children: ["fakultet", "ostalo", "instruction"]
   },
   fakultet: {
     id: "fakultet",
