@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./Group.css";
+import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 
 export default function NoteGroup(props: any) {
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {
@@ -36,6 +37,17 @@ export default function NoteGroup(props: any) {
     }
   }
 
+  function handleKeyDown(event: React.KeyboardEvent<any>) {
+    const { keyCode } = event;
+    const key = KeycodeMap[keyCode];
+
+    if (key === "enter" && typeof props.onDoubleClick === "function") {
+      event.preventDefault();
+
+      props.onDoubleClick(props.id);
+    }
+  }
+
   return (
     <div
       className="NoteGroup"
@@ -44,6 +56,8 @@ export default function NoteGroup(props: any) {
       onDragStart={dragStart}
       onDrop={handleDrop}
       onDoubleClick={handleDoubleClick}
+      tabIndex={props.tabIndex}
+      onKeyDown={handleKeyDown}
     >
       <div className="NoteGroupBack"></div>
       <div className="NoteGroupFront">

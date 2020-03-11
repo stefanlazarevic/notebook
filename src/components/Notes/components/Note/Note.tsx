@@ -13,6 +13,7 @@ export default function Note(props: any) {
           title={props.title}
           onDrop={props.moveToGroup}
           onDoubleClick={props.openGroup}
+          tabIndex={props.tabIndex}
         />
       ) : (
         <NoteRecord
@@ -21,6 +22,7 @@ export default function Note(props: any) {
           title={props.title}
           onClick={props.openEditor}
           onDrop={props.swapGroupChildren}
+          tabIndex={props.tabIndex}
         />
       )}
     </>

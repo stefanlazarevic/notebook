@@ -1,5 +1,5 @@
 import React from "react";
-import { MdCreate, MdCreateNewFolder } from "react-icons/md";
+import { MdCreateNewFolder, MdNote } from "react-icons/md";
 
 import { DefaultControlsProps } from "./DefaultControlsProps";
 import AppHeaderButton from "../../Button/AppHeaderButton";
@@ -15,7 +15,7 @@ export default function DefaultControls(props: DefaultControlsProps) {
         <MdCreateNewFolder />
       </AppHeaderButton>
       <AppHeaderButton title="Create new file" onClick={props.onCreateNewFile}>
-        <MdCreate />
+        <MdNote />
       </AppHeaderButton>
     </>
   );

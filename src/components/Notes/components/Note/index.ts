@@ -13,8 +13,7 @@ import { openEditor } from "../../../../redux/editor/actions";
 import { NoteRecordID } from "../../../../redux/notes/records/types";
 
 function mapStateToProps(state: AppState, ownProps: any) {
-  const id = ownProps.id;
-  const index = ownProps.index;
+  const { id, index, tabIndex } = ownProps;
 
   const { notes } = state;
   const { records, groups } = notes;
@@ -23,6 +22,7 @@ function mapStateToProps(state: AppState, ownProps: any) {
 
   return {
     index,
+    tabIndex,
     ...note
   };
 }

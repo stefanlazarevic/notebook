@@ -2,6 +2,7 @@
   display: flex;
   padding: 10px 15px;
   background-color: var(--app-background-5-lighter-color);
+  border-bottom: 1px solid var(--app-background-15-darker-color);
 }
 
 .AppHeader__title {

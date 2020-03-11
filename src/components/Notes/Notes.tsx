@@ -15,7 +15,14 @@ export default function Notes(props: any) {
           return (
             <div className="NotesRow" key={rowIndex}>
               {chunk.map((id: string, index: number) => {
-                return <NoteContainer key={id} id={id} index={index} />;
+                return (
+                  <NoteContainer
+                    key={id}
+                    id={id}
+                    index={index}
+                    tabIndex={rowIndex + index}
+                  />
+                );
               })}
             </div>
           );
