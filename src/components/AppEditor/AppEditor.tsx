@@ -45,7 +45,7 @@ export default function AppEditor(props: AppEditorProps) {
 
       if (props.saveAndClose && !props.autoSave) {
         if (typeof props.onClose === "function") {
-          props.onClose();
+          closeEditor();
         }
       } else {
         setIndicatorState(ChangeIndicatorState.SAVED);
@@ -70,6 +70,12 @@ export default function AppEditor(props: AppEditorProps) {
         save();
       }
     }
+
+    if (key === "esc") {
+      event.preventDefault();
+
+      closeEditor();
+    }
   }
 
   function handleDetectedChange() {
@@ -83,6 +89,16 @@ export default function AppEditor(props: AppEditorProps) {
       saveTimeoutReference.current = setTimeout(() => {
         save();
       }, 3000);
+    }
+  }
+
+  function closeEditor() {
+    if (saveTimeoutReference.current) {
+      clearTimeout(saveTimeoutReference.current);
+    }
+
+    if (typeof props.onClose === "function") {
+      props.onClose();
     }
   }
 

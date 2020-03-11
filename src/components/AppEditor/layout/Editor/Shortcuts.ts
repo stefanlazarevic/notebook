@@ -6,6 +6,7 @@ export interface IKeycodeMap {
 }
 
 export const KeycodeMap: IKeycodeMap = {
+  27: "esc",
   66: "b",
   67: "c",
   73: "i",
