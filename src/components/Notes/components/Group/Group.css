@@ -7,18 +7,6 @@
   height: 250px;
 }
 
-.NoteGroup:first-child:not(:last-child) {
-  margin-right: 10px;
-}
-
-.NoteGroup:last-child:not(:first-child) {
-  margin-left: 10px;
-}
-
-.NoteGroup:not(:first-child):not(:last-child) {
-  margin: 0 10px;
-}
-
 .NoteGroupFront {
   position: absolute;
   top: 4.5%;

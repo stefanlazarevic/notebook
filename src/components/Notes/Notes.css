@@ -1,8 +1,10 @@
 .Notes {
   position: relative;
 
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 250px));
+  grid-column-gap: 23px;
+  grid-row-gap: 40px;
 
   padding: 0 15px;
 }

@@ -14,18 +14,6 @@
   background-color: var(--app-editor-background-darker-color);
 }
 
-.NoteRecord:first-child:not(:last-child) {
-  margin-right: 10px;
-}
-
-.NoteRecord:last-child:not(:first-child) {
-  margin-left: 10px;
-}
-
-.NoteRecord:not(:first-child):not(:last-child) {
-  margin: 0 10px;
-}
-
 .NoteRecordTitle {
   margin: 0;
   color: var(--app-editor-text-lighter-color);
