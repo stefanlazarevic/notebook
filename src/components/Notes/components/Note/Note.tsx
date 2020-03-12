@@ -15,6 +15,7 @@ export default function Note(props: any) {
           onDoubleClick={props.openGroup}
           tabIndex={props.tabIndex}
           parent={props.parent}
+          groupParent={props.groupParent}
         />
       ) : (
         <NoteRecord
@@ -26,6 +27,8 @@ export default function Note(props: any) {
           tabIndex={props.tabIndex}
           moveToGroup={props.moveToGroup}
           parent={props.parent}
+          groupParent={props.groupParent}
+          removeRecordFromGroup={props.removeRecordFromGroup}
         />
       )}
     </>

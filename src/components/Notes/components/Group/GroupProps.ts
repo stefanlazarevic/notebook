@@ -6,7 +6,8 @@ export interface NoteGroupProps {
 
   tabIndex?: number;
   title?: string;
-  parent?: NoteGroupID;
+  parent: NoteGroupID;
+  groupParent?: NoteGroupID;
 
   moveToGroup?: (targetGroupID: NoteGroupID, children: string[]) => void;
   onDoubleClick?: (targetGroupID: NoteGroupID) => void;

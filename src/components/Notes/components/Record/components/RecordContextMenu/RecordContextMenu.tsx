@@ -14,7 +14,15 @@ export default function RecordContextMenu(props: any) {
     event.stopPropagation();
 
     if (typeof props.onUngroup === "function") {
-      props.onUngroup(props.parent, [props.id]);
+      props.onUngroup(props.groupParent, [props.id]);
+    }
+  }
+
+  function remove(event: React.MouseEvent<any>) {
+    event.stopPropagation();
+
+    if (typeof props.onRemove === "function") {
+      props.onRemove(props.parent, props.id);
     }
   }
 
@@ -23,8 +31,11 @@ export default function RecordContextMenu(props: any) {
       <MenuItem disabled={false} onClick={open}>
         Open
       </MenuItem>
-      <MenuItem disabled={!Boolean(props.parent)} onClick={ungroup}>
+      <MenuItem disabled={!Boolean(props.groupParent)} onClick={ungroup}>
         Ungroup
+      </MenuItem>
+      <MenuItem disabled={false} onClick={remove}>
+        Delete
       </MenuItem>
     </ContextMenu>
   );

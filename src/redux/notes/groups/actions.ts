@@ -176,3 +176,27 @@ export function swapGroupChildren(sourceIndex: number, targetIndex: number) {
     });
   };
 }
+
+export function removeFromGroup(groupID: NoteGroupID, children: any[]) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { groups } = notes;
+
+    const group = groups[groupID];
+    const childrenSet = new Set();
+
+    for (let i = 0; i < children.length; i++) {
+      const id = children[i];
+
+      childrenSet.add(id);
+    }
+
+    dispatch({
+      type: NotesGroupsActions.REPLACE,
+      payload: {
+        ...group,
+        children: group.children.filter(id => !childrenSet.has(id))
+      }
+    });
+  };
+}

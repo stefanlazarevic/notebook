@@ -14,7 +14,7 @@ export default function GroupContextMenu(props: any) {
     event.stopPropagation();
 
     if (typeof props.onUngroup === "function") {
-      props.onUngroup(props.parent, [props.id]);
+      props.onUngroup(props.groupParent, [props.id]);
     }
   }
 
@@ -23,7 +23,7 @@ export default function GroupContextMenu(props: any) {
       <MenuItem disabled={false} onClick={open}>
         Open
       </MenuItem>
-      <MenuItem disabled={!Boolean(props.parent)} onClick={ungroup}>
+      <MenuItem disabled={!Boolean(props.groupParent)} onClick={ungroup}>
         Ungroup
       </MenuItem>
     </ContextMenu>
