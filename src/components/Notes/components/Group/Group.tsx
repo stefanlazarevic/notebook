@@ -73,6 +73,7 @@ export default function NoteGroup(props: NoteGroupProps) {
       <GroupContextMenu
         id={props.id}
         parent={props.parent}
+        groupParent={props.groupParent}
         onOpen={handleDoubleClick}
         onUngroup={props.moveToGroup}
       />

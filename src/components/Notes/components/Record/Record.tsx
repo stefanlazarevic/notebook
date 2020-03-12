@@ -71,6 +71,7 @@ export default function NoteRecord(props: any) {
       <RecordContextMenu
         id={props.id}
         parent={props.parent}
+        groupParent={props.groupParent}
         onOpen={handleClick}
         onUngroup={props.moveToGroup}
         onRemove={props.removeRecordFromGroup}
