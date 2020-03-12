@@ -1,4 +1,4 @@
-.BackButton {
+.HomeButton {
   width: 40px;
   height: 40px;
 
@@ -16,7 +16,7 @@
   outline: 0;
 }
 
-.BackButton:hover,
-.BackButton:focus {
+.HomeButton:hover,
+.HomeButton:focus {
   background-color: var(--app-background-10-darker-color);
 }
