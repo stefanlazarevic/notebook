@@ -4,11 +4,10 @@ import { createPortal } from "react-dom";
 
 import "./OverlayContainer.css";
 
-import { OverlayType } from "./types";
-
 import ConfirmationOverlay from "./components/Confirmation/Confirmation";
 import { AppState } from "../../redux/types";
 import utils from "../../utils";
+import { OverlayType } from "../../redux/overlays/types";
 
 function OverlayContainer(props: any) {
   return props.overlays.length
@@ -28,7 +27,7 @@ function OverlayContainer(props: any) {
 
 function mapStateToProps(state: AppState) {
   return {
-    overlays: [{ type: OverlayType.CONFIRMATION, id: "afasfa" }]
+    overlays: state.overlays
   };
 }
 
