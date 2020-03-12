@@ -1,0 +1,12 @@
+.OverlayHeader {
+  display: flex;
+  align-items: center;
+  background: var(--app-background-5-lighter-color);
+  padding: 5px 10px;
+}
+
+.OverlayHeaderTitle {
+  font-size: 1rem;
+  flex: 1;
+  padding-right: 30px;
+}

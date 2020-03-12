@@ -35,7 +35,15 @@ export default function NoteRecord(props: any) {
     }
   }
 
-  function handleClick() {
+  function handleClick(event?: React.MouseEvent) {
+    if (event) {
+      const target = event.target as HTMLElement;
+
+      if (target.classList.contains("react-contextmenu-item")) {
+        return;
+      }
+    }
+
     if (typeof props.onClick === "function") {
       props.onClick(props.id);
     }

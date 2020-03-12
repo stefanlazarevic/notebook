@@ -1,0 +1,22 @@
+.ConfirmationOverlay {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  background: var(--app-background-10-lighter-color);
+  min-width: 320px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ConfirmationOverlay button:first-child {
+  margin-right: 10px;
+}
+
+.ConfirmationOverlay .OverlayFooter {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

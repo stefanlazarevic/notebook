@@ -66,8 +66,6 @@ export function deleteExistingGroup(groupID: NoteGroupID) {
  */
 export function moveToGroup(targetGroupID: NoteGroupID, children: string[]) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
-    console.log(targetGroupID, children);
-
     const { notes } = getState();
     const { groups: originalGroups, records: originalRecords } = notes;
 
