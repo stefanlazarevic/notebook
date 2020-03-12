@@ -11,10 +11,10 @@ export interface AppEditorProps {
   autoSave: boolean;
   saveAndClose: boolean;
   spellCheck: boolean;
-  groupID: NoteGroupID;
+  currentGroupID: NoteGroupID;
 
   onClose?: () => void;
-  onSave?: (groupID: NoteGroupID, record: NoteRecord) => void;
+  onSave?: (currentGroupID: NoteGroupID, record: NoteRecord) => void;
   onUpdate?: (record: NoteRecord) => void;
 }
 

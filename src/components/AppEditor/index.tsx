@@ -27,7 +27,7 @@ function mapStateToProps(state: AppState) {
   const { editor, settings, notes } = state;
   const { open, id } = editor;
   const { editor: editorSettings } = settings;
-  const { group, records } = notes;
+  const { currentGroupID, records } = notes;
 
   let record;
 
@@ -41,7 +41,7 @@ function mapStateToProps(state: AppState) {
     autoSave: Boolean(editorSettings.autoSave),
     saveAndClose: Boolean(editorSettings.saveAndClose),
     spellCheck: Boolean(editorSettings.spellCheck),
-    groupID: group,
+    currentGroupID,
     ...record
   };
 }
@@ -49,11 +49,11 @@ function mapStateToProps(state: AppState) {
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
     onClose: () => dispatch(closeEditor()),
-    onSave: (groupID: NoteGroupID, record: NoteRecord) => {
+    onSave: (currentGroupID: NoteGroupID, record: NoteRecord) => {
       batch(() => {
         dispatch(insertRecord(record));
         dispatch(openEditor(record.id));
-        dispatch(moveToGroup(groupID, [record.id]));
+        dispatch(moveToGroup(currentGroupID, [record.id]));
       });
     },
     onUpdate: (record: NoteRecord) => dispatch(updateRecord(record))

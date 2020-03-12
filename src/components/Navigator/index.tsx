@@ -7,19 +7,20 @@ import { openGroup, openParentGroup } from "../../redux/notes/group/actions";
 
 function mapStateToProps(state: AppState) {
   const { notes } = state;
-  const { group: groupID, groups } = notes;
+  const { currentGroupID, groups } = notes;
 
-  const currentGroup = groups[groupID];
+  const currentGroup = groups[currentGroupID];
 
   return {
     open: Boolean(currentGroup.parent),
-    currentGroupID: groupID
+    currentGroupID
   };
 }
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
-    openGroup: (groupID: NoteGroupID) => dispatch(openGroup(groupID)),
+    openGroup: (targetGroupID: NoteGroupID) =>
+      dispatch(openGroup(targetGroupID)),
     openParentGroup: (currentGroupID: NoteGroupID) =>
       dispatch(openParentGroup(currentGroupID))
   };

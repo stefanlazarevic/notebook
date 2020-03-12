@@ -163,9 +163,9 @@ export function ungroup(groupID: NoteGroupID, children: string[]) {
 export function swapGroupChildren(sourceIndex: number, targetIndex: number) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
-    const { group: groupID, groups } = notes;
+    const { currentGroupID, groups } = notes;
 
-    const group = groups[groupID];
+    const group = groups[currentGroupID];
 
     dispatch({
       type: NotesGroupsActions.REPLACE,

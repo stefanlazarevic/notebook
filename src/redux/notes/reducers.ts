@@ -5,7 +5,7 @@ import groupsReducer from "./groups/reducer";
 import groupReducer from "./group/reducer";
 
 export default combineReducers({
-  group: groupReducer,
+  currentGroupID: groupReducer,
   groups: groupsReducer,
   records: recordsReducer
 });

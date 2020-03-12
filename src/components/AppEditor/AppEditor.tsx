@@ -27,7 +27,7 @@ export default function AppEditor(props: AppEditorProps) {
   function save() {
     const record: NoteRecord = {
       id: props.id || utils.string.generateRandom(),
-      parent: props.groupID,
+      parent: props.currentGroupID,
       title: "",
       content: { entityMap: {}, blocks: [] }
     };
@@ -41,7 +41,7 @@ export default function AppEditor(props: AppEditorProps) {
     }
 
     if (typeof props.onSave === "function" && !props.id) {
-      props.onSave(props.groupID, record);
+      props.onSave(props.currentGroupID, record);
 
       if (props.saveAndClose && !props.autoSave) {
         closeEditor();

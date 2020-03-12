@@ -18,9 +18,9 @@ function mapStateToProps(state: AppState, ownProps: any) {
   const { id, index, tabIndex } = ownProps;
 
   const { notes } = state;
-  const { records, groups, group: groupID } = notes;
+  const { records, groups, currentGroupID } = notes;
 
-  const group = groups[groupID];
+  const group = groups[currentGroupID];
   const note = records[id] || groups[id];
 
   return {
@@ -35,14 +35,18 @@ function mapDispatchToProps(dispatch: IDispatch) {
   return {
     moveToGroup: (targetGroupID: NoteGroupID, children: string[]) =>
       dispatch(moveToGroup(targetGroupID, children)),
-    openGroup: (groupID: NoteGroupID) => dispatch(openGroup(groupID)),
+    openGroup: (targetGroupID: NoteGroupID) =>
+      dispatch(openGroup(targetGroupID)),
     swapGroupChildren: (sourceIndex: number, targetIndex: number) =>
       dispatch(swapGroupChildren(sourceIndex, targetIndex)),
     openEditor: (recordID: NoteRecordID) => dispatch(openEditor(recordID)),
-    removeRecordFromGroup: (groupID: NoteGroupID, recordID: NoteRecordID) => {
+    removeRecordFromGroup: (
+      targetGroupID: NoteGroupID,
+      recordID: NoteRecordID
+    ) => {
       batch(() => {
         dispatch(removeRecord(recordID));
-        dispatch(removeFromGroup(groupID, [recordID]));
+        dispatch(removeFromGroup(targetGroupID, [recordID]));
       });
     }
   };

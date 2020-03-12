@@ -13,10 +13,10 @@ const getGroupChildrenSelector = createSelector(
 
 function mapStateToProps(state: AppState) {
   const { notes } = state;
-  const { group } = notes;
+  const { currentGroupID } = notes;
 
   return {
-    children: getGroupChildrenSelector(state, group)
+    children: getGroupChildrenSelector(state, currentGroupID)
   };
 }
 
