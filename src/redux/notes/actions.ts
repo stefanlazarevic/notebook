@@ -2,6 +2,7 @@ import { NoteGroupID, NoteGroup } from "./groups/types";
 import { IDispatch, AppState } from "../types";
 import { NotesActions } from "./types";
 import { NoteRecord, NoteRecordID } from "./records/types";
+import utils from "../../utils";
 
 /**
  * Navigate to the group.
@@ -243,5 +244,25 @@ export function ungroup(id: NoteRecordID | NoteGroupID) {
     const targetGroup = groups[currentGroup.parent];
 
     dispatch(moveToGroup(targetGroup.id, id));
+  };
+}
+
+export function swapCurrentGroupChildren(
+  sourceIndex: number,
+  targetIndex: number
+) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { currentGroupID, groups } = notes;
+
+    const group = groups[currentGroupID];
+
+    dispatch({
+      type: NotesActions.REORDER,
+      payload: {
+        ...group,
+        children: utils.array.swap(sourceIndex, targetIndex, group.children)
+      }
+    });
   };
 }

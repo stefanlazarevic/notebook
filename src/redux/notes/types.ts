@@ -15,5 +15,6 @@ export enum NotesActions {
   CREATE_GROUP = "Notes/Actions/CREATE_GROUP",
   REMOVE_GROUP = "Notes/Actions/REMOVE_GROUP",
   MOVE_GROUP = "Notes/Actions/MOVE_GROUP",
-  MOVE_RECORD = "Notes/Actions/MOVE_RECORD"
+  MOVE_RECORD = "Notes/Actions/MOVE_RECORD",
+  REORDER = "Notes/Actions/REORDER"
 }

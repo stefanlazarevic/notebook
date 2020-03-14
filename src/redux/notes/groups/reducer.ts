@@ -1,8 +1,4 @@
-import {
-  NotesGroups,
-  DEFAULT_NOTES_GROUPS_STATE,
-  NotesGroupsActions
-} from "./types";
+import { NotesGroups, DEFAULT_NOTES_GROUPS_STATE } from "./types";
 import { NotesActions } from "../types";
 import utils from "../../../utils";
 
@@ -11,11 +7,6 @@ export default function groupsReducer(
   action: any
 ) {
   switch (action.type) {
-    case NotesGroupsActions.REPLACE:
-      return { ...state, [action.payload.id]: action.payload };
-    case NotesGroupsActions.REPLACE_ALL:
-      return { ...action.payload };
-    // New
     case NotesActions.CREATE_RECORD:
       return {
         ...state,
@@ -93,6 +84,13 @@ export default function groupsReducer(
           children: state[action.payload.parent].children.filter(
             id => id !== action.payload.id
           )
+        }
+      };
+    case NotesActions.REORDER:
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...action.payload
         }
       };
     default:
