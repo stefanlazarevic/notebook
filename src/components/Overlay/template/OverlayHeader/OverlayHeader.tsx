@@ -15,7 +15,11 @@ export default function OverlayHeader(props: OverlayHeaderProps) {
   return (
     <header className="OverlayHeader">
       <span className="OverlayHeaderTitle">{props.title}</span>
-      <button className="OverlayHeaderButton" onClick={close}>
+      <button
+        className="OverlayHeaderButton"
+        onClick={close}
+        tabIndex={props.tabIndex}
+      >
         <MdClose />
       </button>
     </header>

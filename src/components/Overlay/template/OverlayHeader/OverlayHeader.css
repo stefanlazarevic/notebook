@@ -7,6 +7,8 @@
   background: var(--app-background-5-lighter-color);
 
   padding: 5px 10px;
+
+  height: 40px;
 }
 
 .OverlayHeaderTitle {
@@ -14,6 +16,25 @@
   flex: 1;
 
   font-size: 1rem;
+}
 
-  padding-right: 30px;
+.OverlayHeaderButton {
+  width: 30px;
+  height: 30px;
+
+  cursor: pointer;
+
+  background-color: var(--app-background-5-ligher-color);
+  color: var(--app-text-base-color);
+
+  border: 0;
+  border-radius: 4px;
+
+  font-size: 1.2rem;
+  line-height: 0em;
+}
+
+.OverlayHeaderButton:hover,
+.OverlayHeaderButton:focus {
+  background-color: var(--app-background-base-color);
 }

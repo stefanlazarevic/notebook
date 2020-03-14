@@ -1,9 +1,10 @@
 .OverlayBody {
   position: relative;
 
-  display: flex;
-  flex-direction: column;
   flex: 1;
 
   padding: 20px 10px 20px;
+
+  background-color: var(--app-background-base-color);
+  border-top: 1px solid var(--app-background-10-darker-color);
 }

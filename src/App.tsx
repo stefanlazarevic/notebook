@@ -7,6 +7,7 @@ import NavigatorContainer from "./components/Navigator";
 import AppEditorContainer from "./components/AppEditor";
 // import SettingsDrawerContainer from "./components/SettingsDrawer/SettingsDrawerContainer";
 import NotesContainer from "./components/Notes";
+import OverlayContainer from "./components/Overlay";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       {/* <SettingsDrawerContainer /> */}
       {/* Test component */}
       <NotesContainer />
+      <OverlayContainer />
     </div>
   );
 }

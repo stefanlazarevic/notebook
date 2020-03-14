@@ -8,12 +8,13 @@ import { openEditor } from "../../../../redux/editor/actions";
 import { NoteRecordID } from "../../../../redux/notes/records/types";
 import {
   openGroup,
-  removeRecord,
   removeGroup,
   moveToGroup,
   ungroup,
   swapCurrentGroupChildren
 } from "../../../../redux/notes/actions";
+import { showOverlay } from "../../../../redux/overlays/actions";
+import { OverlayType } from "../../../../redux/overlays/types";
 
 function mapStateToProps(state: AppState, ownProps: any) {
   const { id, index, tabIndex } = ownProps;
@@ -41,7 +42,12 @@ function mapDispatchToProps(dispatch: IDispatch) {
     swapGroupChildren: (sourceIndex: number, targetIndex: number) =>
       dispatch(swapCurrentGroupChildren(sourceIndex, targetIndex)),
     openEditor: (recordID: NoteRecordID) => dispatch(openEditor(recordID)),
-    removeRecord: (recordID: NoteRecordID) => dispatch(removeRecord(recordID)),
+    removeRecord: (recordID: NoteRecordID) =>
+      dispatch(
+        showOverlay(OverlayType.DELETE_RECORD, {
+          recordID
+        })
+      ),
     removeGroup: (groupID: NoteGroupID) => dispatch(removeGroup(groupID)),
     ungroup: (id: NoteGroupID | NoteRecordID) => dispatch(ungroup(id))
   };

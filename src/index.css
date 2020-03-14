@@ -25,6 +25,8 @@
   --app-success-color: rgb(76, 174, 79);
   --app-danger-color: rgb(207, 63, 33);
   --app-info-color: rgb(131, 230, 230);
+
+  --app-text-danger-color: rgb(255, 99, 67);
 }
 
 /* RESET */
@@ -48,4 +50,29 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+#app-overlays-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+#app-overlays-root:empty {
+  display: none;
+  visibility: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
