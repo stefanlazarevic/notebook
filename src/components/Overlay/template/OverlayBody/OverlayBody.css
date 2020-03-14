@@ -1,0 +1,9 @@
+.OverlayBody {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  padding: 20px 10px 20px;
+}
