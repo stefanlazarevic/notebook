@@ -184,7 +184,10 @@ export function removeGroup(targetGroupID: NoteGroupID) {
 
     dispatch({
       type: NotesActions.REMOVE_GROUP,
-      payload: group
+      payload: group,
+      meta: {
+        requiresConfirmation: true
+      }
     });
   };
 }
