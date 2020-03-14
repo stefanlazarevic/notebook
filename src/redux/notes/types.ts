@@ -6,3 +6,7 @@ export type NotesState = {
   groups: NotesGroups;
   records: NotesRecords;
 };
+
+export enum NotesActions {
+  OPEN_GROUP = "Notes/Actions/Group/OPEN_GROUP"
+}

@@ -9,10 +9,10 @@ import {
   swapGroupChildren,
   removeFromGroup
 } from "../../../../redux/notes/groups/actions";
-import { openGroup } from "../../../../redux/notes/group/actions";
 import { openEditor } from "../../../../redux/editor/actions";
 import { NoteRecordID } from "../../../../redux/notes/records/types";
 import { removeRecord } from "../../../../redux/notes/records/actions";
+import { openGroup } from "../../../../redux/notes/actions";
 
 function mapStateToProps(state: AppState, ownProps: any) {
   const { id, index, tabIndex } = ownProps;

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Navigator from "./Navigator";
 import { AppState, IDispatch } from "../../redux/types";
 import { NoteGroupID } from "../../redux/notes/groups/types";
-import { openGroup, openParentGroup } from "../../redux/notes/group/actions";
+import { openGroup, openParentGroup } from "../../redux/notes/actions";
 
 function mapStateToProps(state: AppState) {
   const { notes } = state;
