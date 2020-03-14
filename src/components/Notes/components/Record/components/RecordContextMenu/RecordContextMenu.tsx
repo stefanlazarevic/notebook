@@ -22,7 +22,7 @@ export default function RecordContextMenu(props: any) {
     event.stopPropagation();
 
     if (typeof props.onRemove === "function") {
-      props.onRemove(props.parent, props.id);
+      props.onRemove(props.id);
     }
   }
 

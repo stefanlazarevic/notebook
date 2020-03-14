@@ -8,5 +8,7 @@ export type NotesState = {
 };
 
 export enum NotesActions {
-  OPEN_GROUP = "Notes/Actions/Group/OPEN_GROUP"
+  OPEN_GROUP = "Notes/Actions/Group/OPEN_GROUP",
+  INSERT_RECORD = "Notes/Actions/INSERT_RECORD",
+  REMOVE_RECORD = "Notes/Actions/REMOVE_RECORD"
 }

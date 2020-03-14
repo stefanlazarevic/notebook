@@ -28,7 +28,7 @@ export default function Note(props: any) {
           moveToGroup={props.moveToGroup}
           parent={props.parent}
           groupParent={props.groupParent}
-          removeRecordFromGroup={props.removeRecordFromGroup}
+          removeRecord={props.removeRecord}
         />
       )}
     </>

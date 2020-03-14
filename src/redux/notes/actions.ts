@@ -1,6 +1,7 @@
 import { NoteGroupID } from "./groups/types";
 import { IDispatch, AppState } from "../types";
 import { NotesActions } from "./types";
+import { NoteRecord, NoteRecordID } from "./records/types";
 
 /**
  * Navigate to the group.
@@ -45,6 +46,57 @@ export function openRootGroup() {
     dispatch({
       type: NotesActions.OPEN_GROUP,
       payload: "root"
+    });
+  };
+}
+
+/**
+ * Insert newly created record in the redux state.
+ *
+ * @param targetGroupID Group in which new record should be put.
+ * @param record NoteRecord object
+ */
+export function insertRecord(targetGroupID: NoteGroupID, record: NoteRecord) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { records, groups } = notes;
+    const group = groups[targetGroupID];
+
+    if (!record.id || records[record.id]) {
+      throw Error(`NoteRecord with the ID ${record.id} already exists.`);
+    }
+
+    if (!group) {
+      throw Error(`NoteGroup with the ID ${targetGroupID} is absent`);
+    }
+
+    dispatch({
+      type: NotesActions.INSERT_RECORD,
+      payload: {
+        ...record,
+        parent: targetGroupID
+      }
+    });
+  };
+}
+
+export function removeRecord(recordID: NoteRecordID) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { records } = notes;
+    const record = records[recordID];
+
+    if (!recordID) {
+      throw Error("NoteRecord ID is absent.");
+    }
+
+    if (!record) {
+      throw Error(`NoteRecord with the ID ${recordID} is absent.`);
+    }
+
+    dispatch({
+      type: NotesActions.REMOVE_RECORD,
+      payload: record
     });
   };
 }
