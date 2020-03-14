@@ -4,16 +4,14 @@ import Note from "./Note";
 
 import { AppState, IDispatch } from "../../../../redux/types";
 import { NoteGroupID } from "../../../../redux/notes/groups/types";
-import {
-  moveToGroup,
-  swapGroupChildren
-} from "../../../../redux/notes/groups/actions";
+import { swapGroupChildren } from "../../../../redux/notes/groups/actions";
 import { openEditor } from "../../../../redux/editor/actions";
 import { NoteRecordID } from "../../../../redux/notes/records/types";
 import {
   openGroup,
   removeRecord,
-  removeGroup
+  removeGroup,
+  moveToGroup
 } from "../../../../redux/notes/actions";
 
 function mapStateToProps(state: AppState, ownProps: any) {
@@ -35,8 +33,8 @@ function mapStateToProps(state: AppState, ownProps: any) {
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
-    moveToGroup: (targetGroupID: NoteGroupID, children: string[]) =>
-      dispatch(moveToGroup(targetGroupID, children)),
+    moveToGroup: (targetGroupID: NoteGroupID, id: NoteGroupID | NoteRecordID) =>
+      dispatch(moveToGroup(targetGroupID, id)),
     openGroup: (targetGroupID: NoteGroupID) =>
       dispatch(openGroup(targetGroupID)),
     swapGroupChildren: (sourceIndex: number, targetIndex: number) =>

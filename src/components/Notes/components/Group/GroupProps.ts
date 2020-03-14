@@ -33,7 +33,7 @@ export interface NoteGroupProps {
 
   childrenCount?: number;
 
-  moveToGroup?: (targetGroupID: NoteGroupID, children: string[]) => void;
+  moveToGroup?: (targetGroupID: NoteGroupID, id: NoteGroupID) => void;
   onDoubleClick?: (targetGroupID: NoteGroupID) => void;
   removeGroup?: (targetGroupID: NoteGroupID) => void;
 }

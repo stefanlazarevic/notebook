@@ -23,6 +23,14 @@ export default function recordsReducer(
           ...action.payload
         }
       };
+    case NotesActions.MOVE_RECORD:
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...state[action.payload.id],
+          parent: action.payload.targetGroupID
+        }
+      };
     default:
       return state;
   }

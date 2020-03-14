@@ -59,6 +59,27 @@ export default function groupsReducer(
           )
         }
       };
+    case NotesActions.MOVE_GROUP:
+    case NotesActions.MOVE_RECORD:
+      return {
+        ...state,
+        [action.payload.targetGroupID]: {
+          ...state[action.payload.targetGroupID],
+          children: state[action.payload.targetGroupID].children.concat(
+            action.payload.id
+          )
+        },
+        [action.payload.parent]: {
+          ...state[action.payload.parent],
+          children: state[action.payload.parent].children.filter(
+            id => id !== action.payload.id
+          )
+        },
+        [action.payload.id]: {
+          ...state[action.payload.id],
+          parent: action.payload.targetGroupID
+        }
+      };
     default:
       return state;
   }

@@ -1,33 +1,8 @@
 import { NoteGroupID, NotesGroupsActions } from "../groups/types";
 import { IDispatch, AppState } from "../../types";
 import utils from "../../../utils";
-import { batch } from "react-redux";
-import { NotesActions } from "../types";
-
-export function deleteExistingGroup(groupID: NoteGroupID) {
-  return async (dispatch: IDispatch, getState: () => AppState) => {
-    const { notes } = getState();
-    const { groups } = notes;
-
-    const group = groups[groupID];
-
-    // Deletion is allowed only if the group is empty.
-    if (group && group.parent && group.children.length === 0) {
-      const parentGroup = groups[group.parent];
-
-      dispatch({
-        type: NotesGroupsActions.REPLACE_ALL,
-        payload: utils.object.deleteProperty(groupID, {
-          ...groups,
-          [parentGroup.id]: {
-            ...parentGroup,
-            children: parentGroup.children.filter(id => id !== groupID)
-          }
-        })
-      });
-    }
-  };
-}
+// import { batch } from "react-redux";
+// import { NotesActions } from "../types";
 
 /**
  * 1. Find target group by targetGroupID.
@@ -39,86 +14,86 @@ export function deleteExistingGroup(groupID: NoteGroupID) {
  * 5. If record is a child update it's parent to target.
  * 6.
  */
-export function moveToGroup(targetGroupID: NoteGroupID, children: string[]) {
-  return async (dispatch: IDispatch, getState: () => AppState) => {
-    const { notes } = getState();
-    const { groups: originalGroups, records: originalRecords } = notes;
+// export function moveToGroup(targetGroupID: NoteGroupID, children: string[]) {
+//   return async (dispatch: IDispatch, getState: () => AppState) => {
+//     const { notes } = getState();
+//     const { groups: originalGroups, records: originalRecords } = notes;
 
-    const targetGroup = originalGroups[targetGroupID];
+//     const targetGroup = originalGroups[targetGroupID];
 
-    if (!targetGroup) {
-      return;
-    }
+//     if (!targetGroup) {
+//       return;
+//     }
 
-    const groups = {
-      ...originalGroups,
-      [targetGroupID]: {
-        ...targetGroup,
-        children: targetGroup.children.concat(children)
-      }
-    };
+//     const groups = {
+//       ...originalGroups,
+//       [targetGroupID]: {
+//         ...targetGroup,
+//         children: targetGroup.children.concat(children)
+//       }
+//     };
 
-    const records = {
-      ...originalRecords
-    };
+//     const records = {
+//       ...originalRecords
+//     };
 
-    const childrenSet = new Set<string>();
-    const parentsSet = new Set<string>();
+//     const childrenSet = new Set<string>();
+//     const parentsSet = new Set<string>();
 
-    for (let i = 0; i < children.length; i++) {
-      const id = children[i];
-      childrenSet.add(id);
+//     for (let i = 0; i < children.length; i++) {
+//       const id = children[i];
+//       childrenSet.add(id);
 
-      const record = records[id];
-      const group = groups[id];
+//       const record = records[id];
+//       const group = groups[id];
 
-      if (record) {
-        parentsSet.add(record.parent);
+//       if (record) {
+//         parentsSet.add(record.parent);
 
-        records[record.id] = {
-          ...record,
-          parent: targetGroup.id
-        };
+//         records[record.id] = {
+//           ...record,
+//           parent: targetGroup.id
+//         };
 
-        continue;
-      }
+//         continue;
+//       }
 
-      if (group) {
-        if (group.parent) {
-          parentsSet.add(group.parent);
-        }
+//       if (group) {
+//         if (group.parent) {
+//           parentsSet.add(group.parent);
+//         }
 
-        groups[group.id] = {
-          ...group,
-          parent: targetGroup.id
-        };
-      }
-    }
+//         groups[group.id] = {
+//           ...group,
+//           parent: targetGroup.id
+//         };
+//       }
+//     }
 
-    parentsSet.forEach((groupID: string) => {
-      if (targetGroup.id !== groupID) {
-        const group = groups[groupID];
+//     parentsSet.forEach((groupID: string) => {
+//       if (targetGroup.id !== groupID) {
+//         const group = groups[groupID];
 
-        groups[group.id] = {
-          ...group,
-          children: group.children.filter(id => !childrenSet.has(id))
-        };
-      }
-    });
+//         groups[group.id] = {
+//           ...group,
+//           children: group.children.filter(id => !childrenSet.has(id))
+//         };
+//       }
+//     });
 
-    batch(() => {
-      dispatch({
-        type: NotesGroupsActions.REPLACE_ALL,
-        payload: groups
-      });
+//     batch(() => {
+//       dispatch({
+//         type: NotesGroupsActions.REPLACE_ALL,
+//         payload: groups
+//       });
 
-      dispatch({
-        type: NotesActions.UPDATE_RECORD,
-        payload: records
-      });
-    });
-  };
-}
+//       dispatch({
+//         type: NotesActions.UPDATE_RECORD,
+//         payload: records
+//       });
+//     });
+//   };
+// }
 
 export function ungroup(groupID: NoteGroupID, children: string[]) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
@@ -128,7 +103,7 @@ export function ungroup(groupID: NoteGroupID, children: string[]) {
     const group = groups[groupID];
 
     if (group && group.parent) {
-      dispatch(moveToGroup(group.parent, children));
+      // dispatch(moveToGroup(group.parent, children));
     }
   };
 }

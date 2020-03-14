@@ -30,7 +30,7 @@ export default function NoteGroup(props: NoteGroupProps) {
       sourceId &&
       sourceId !== targetId
     ) {
-      props.moveToGroup(targetId, [sourceId]);
+      props.moveToGroup(targetId, sourceId);
     }
   }
 

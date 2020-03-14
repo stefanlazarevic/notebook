@@ -187,3 +187,44 @@ export function removeGroup(targetGroupID: NoteGroupID) {
     });
   };
 }
+
+export function moveToGroup(
+  targetGroupID: NoteGroupID,
+  id: NoteGroupID | NoteRecordID
+) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { groups, records } = notes;
+    const targetGroup = groups[targetGroupID];
+    const group = groups[id];
+    const record = records[id];
+
+    if (!targetGroup) {
+      throw Error(`NoteGroup with ID ${targetGroupID} is absent.`);
+    }
+
+    if (!group && !record) {
+      throw Error(`ID ${id} does not belong to any NoteRecord or NoteGroup.`);
+    }
+
+    if (group) {
+      dispatch({
+        type: NotesActions.MOVE_GROUP,
+        payload: {
+          ...group,
+          targetGroupID: targetGroupID
+        }
+      });
+    }
+
+    if (record) {
+      dispatch({
+        type: NotesActions.MOVE_RECORD,
+        payload: {
+          ...record,
+          targetGroupID: targetGroupID
+        }
+      });
+    }
+  };
+}
