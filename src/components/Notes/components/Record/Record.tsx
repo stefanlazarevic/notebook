@@ -75,6 +75,7 @@ export default function NoteRecord(props: any) {
         onOpen={handleClick}
         onUngroup={props.ungroup}
         onRemove={props.removeRecord}
+        onRename={props.renameRecord}
       />
     </div>
   );

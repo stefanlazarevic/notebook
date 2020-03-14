@@ -1,5 +1,6 @@
 export enum OverlayType {
-  DELETE_RECORD
+  DELETE_RECORD,
+  RENAME_RECORD
 }
 
 export interface Overlay {

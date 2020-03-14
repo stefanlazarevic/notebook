@@ -26,10 +26,21 @@ export default function RecordContextMenu(props: any) {
     }
   }
 
+  function rename(event: React.MouseEvent<any>) {
+    event.stopPropagation();
+
+    if (typeof props.onRename === "function") {
+      props.onRename(props.id);
+    }
+  }
+
   return (
     <ContextMenu id={props.id}>
       <MenuItem disabled={false} onClick={open}>
         Open
+      </MenuItem>
+      <MenuItem disabled={false} onClick={rename}>
+        Rename
       </MenuItem>
       <MenuItem disabled={!Boolean(props.groupParent)} onClick={ungroup}>
         Ungroup

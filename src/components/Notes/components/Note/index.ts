@@ -49,7 +49,9 @@ function mapDispatchToProps(dispatch: IDispatch) {
         })
       ),
     removeGroup: (groupID: NoteGroupID) => dispatch(removeGroup(groupID)),
-    ungroup: (id: NoteGroupID | NoteRecordID) => dispatch(ungroup(id))
+    ungroup: (id: NoteGroupID | NoteRecordID) => dispatch(ungroup(id)),
+    renameRecord: (recordID: NoteRecordID) =>
+      dispatch(showOverlay(OverlayType.RENAME_RECORD, { recordID }))
   };
 }
 

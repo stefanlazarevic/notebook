@@ -9,6 +9,7 @@ import utils from "../../utils";
 import { OverlayType } from "../../redux/overlays/types";
 
 import DeleteRecordOverlay from "./components/DeleteRecordOverlay/DeleteRecordOverlay";
+import RenameRecordOverlay from "./components/RenameRecordOverlay/RenameRecordOverlay";
 
 function OverlayContainer(props: any) {
   return props.overlays.length
@@ -19,6 +20,14 @@ function OverlayContainer(props: any) {
               case OverlayType.DELETE_RECORD:
                 return (
                   <DeleteRecordOverlay
+                    key={overlay.id}
+                    {...props}
+                    {...overlay}
+                  />
+                );
+              case OverlayType.RENAME_RECORD:
+                return (
+                  <RenameRecordOverlay
                     key={overlay.id}
                     {...props}
                     {...overlay}

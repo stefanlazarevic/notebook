@@ -1,0 +1,52 @@
+.RenameRecordOverlay {
+  position: absolute;
+
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 400px;
+}
+
+.RenameRecordOverlay input {
+  width: 100%;
+
+  padding: 5px 10px;
+
+  border-radius: 4px;
+
+  border: 0;
+
+  outline: 0;
+
+  background-color: var(--app-background-5-lighter-color);
+  color: var(--app-text-base-color);
+}
+
+.RenameRecordOverlay .OverlayFooter button {
+  appearance: none;
+
+  color: var(--app-text-base-color);
+  background-color: var(--app-background-base-color);
+
+  cursor: pointer;
+
+  outline: 0;
+
+  border: 0;
+
+  text-transform: uppercase;
+
+  padding: 0;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.RenameRecordOverlay .OverlayFooter button:focus {
+  outline: 1px dotted var(--app-text-base-color);
+}
+
+.RenameRecordOverlay .OverlayFooter button:first-child {
+  margin-right: 15px;
+}
