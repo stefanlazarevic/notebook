@@ -15,7 +15,7 @@ export default function groupsReducer(
     case NotesGroupsActions.REPLACE_ALL:
       return { ...action.payload };
     // New
-    case NotesActions.INSERT_RECORD:
+    case NotesActions.CREATE_RECORD:
       return {
         ...state,
         [action.payload.parent]: {
@@ -33,6 +33,19 @@ export default function groupsReducer(
           children: state[action.payload.parent].children.filter(
             id => id !== action.payload.id
           )
+        }
+      };
+    case NotesActions.CREATE_GROUP:
+      return {
+        ...state,
+        [action.payload.parent]: {
+          ...state[action.payload.parent],
+          children: state[action.payload.parent].children.concat(
+            action.payload.id
+          )
+        },
+        [action.payload.id]: {
+          ...action.payload
         }
       };
     default:

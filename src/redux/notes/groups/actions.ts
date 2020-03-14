@@ -1,34 +1,8 @@
-import { NoteGroupID, NotesGroupsActions, NoteGroup } from "../groups/types";
-import { NoteRecordID } from "../records/types";
+import { NoteGroupID, NotesGroupsActions } from "../groups/types";
 import { IDispatch, AppState } from "../../types";
 import utils from "../../../utils";
 import { batch } from "react-redux";
 import { NotesActions } from "../types";
-
-type GroupOrRecordID = NoteGroupID | NoteRecordID;
-
-export function createNewGroup(parentGroupID: NoteGroupID, group: NoteGroup) {
-  return async (dispatch: IDispatch, getState: () => AppState) => {
-    const { notes } = getState();
-    const { groups } = notes;
-
-    const parentGroup = groups[parentGroupID];
-
-    if (parentGroup && !groups[group.id]) {
-      dispatch({
-        type: NotesGroupsActions.REPLACE_ALL,
-        payload: {
-          ...groups,
-          [parentGroupID]: {
-            ...parentGroup,
-            children: parentGroup.children.concat(group.id)
-          },
-          [group.id]: { ...group, parent: parentGroupID }
-        }
-      });
-    }
-  };
-}
 
 export function deleteExistingGroup(groupID: NoteGroupID) {
   return async (dispatch: IDispatch, getState: () => AppState) => {

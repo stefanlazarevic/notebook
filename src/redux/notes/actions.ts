@@ -1,4 +1,4 @@
-import { NoteGroupID } from "./groups/types";
+import { NoteGroupID, NoteGroup } from "./groups/types";
 import { IDispatch, AppState } from "../types";
 import { NotesActions } from "./types";
 import { NoteRecord, NoteRecordID } from "./records/types";
@@ -56,7 +56,7 @@ export function openRootGroup() {
  * @param targetGroupID Group in which new record should be put.
  * @param record NoteRecord object
  */
-export function insertRecord(targetGroupID: NoteGroupID, record: NoteRecord) {
+export function createRecord(targetGroupID: NoteGroupID, record: NoteRecord) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
     const { records, groups } = notes;
@@ -71,7 +71,7 @@ export function insertRecord(targetGroupID: NoteGroupID, record: NoteRecord) {
     }
 
     dispatch({
-      type: NotesActions.INSERT_RECORD,
+      type: NotesActions.CREATE_RECORD,
       payload: {
         ...record,
         parent: targetGroupID
@@ -80,6 +80,11 @@ export function insertRecord(targetGroupID: NoteGroupID, record: NoteRecord) {
   };
 }
 
+/**
+ * Remove existing record.
+ *
+ * @param recordID Record id to remove.
+ */
 export function removeRecord(recordID: NoteRecordID) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
@@ -101,6 +106,11 @@ export function removeRecord(recordID: NoteRecordID) {
   };
 }
 
+/**
+ * Update existing record.
+ *
+ * @param changedRecord Modified NoteRecord object.
+ */
 export function updateRecord(changedRecord: NoteRecord) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
@@ -121,6 +131,37 @@ export function updateRecord(changedRecord: NoteRecord) {
     dispatch({
       type: NotesActions.UPDATE_RECORD,
       payload: changedRecord
+    });
+  };
+}
+
+/**
+ * Create new group.
+ *
+ * @param targetGroupID Group ID where new group should be inserted.
+ * @param group NoteGroup object.
+ */
+export function createNewGroup(targetGroupID: NoteGroupID, group: NoteGroup) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { groups } = notes;
+
+    const targetGroup = groups[targetGroupID];
+
+    if (!targetGroup) {
+      throw Error(`NoteGroup with ID ${targetGroupID} is absent.`);
+    }
+
+    if (groups[group.id]) {
+      throw Error(`NoteGroup with ID ${group.id} already exist.`);
+    }
+
+    dispatch({
+      type: NotesActions.CREATE_GROUP,
+      payload: {
+        ...group,
+        parent: targetGroupID
+      }
     });
   };
 }

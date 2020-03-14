@@ -7,7 +7,7 @@ export default function recordsReducer(
   action: any
 ): NotesRecords {
   switch (action.type) {
-    case NotesActions.INSERT_RECORD:
+    case NotesActions.CREATE_RECORD:
       return {
         ...state,
         [action.payload.id]: {

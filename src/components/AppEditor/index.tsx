@@ -8,7 +8,7 @@ import { AppState, IDispatch } from "../../redux/types";
 import { closeEditor, openEditor } from "../../redux/editor/actions";
 import { NoteRecord } from "../../redux/notes/records/types";
 import { NoteGroupID } from "../../redux/notes/groups/types";
-import { insertRecord, updateRecord } from "../../redux/notes/actions";
+import { createRecord, updateRecord } from "../../redux/notes/actions";
 
 function AppEditorContainer(props: AppEditorContainerProps) {
   return (
@@ -50,7 +50,7 @@ function mapDispatchToProps(dispatch: IDispatch) {
     onClose: () => dispatch(closeEditor()),
     onSave: (currentGroupID: NoteGroupID, record: NoteRecord) => {
       batch(() => {
-        dispatch(insertRecord(currentGroupID, record));
+        dispatch(createRecord(currentGroupID, record));
         dispatch(openEditor(record.id));
       });
     },
