@@ -1,4 +1,4 @@
-import { connect, batch } from "react-redux";
+import { connect } from "react-redux";
 
 import Note from "./Note";
 
@@ -6,8 +6,7 @@ import { AppState, IDispatch } from "../../../../redux/types";
 import { NoteGroupID } from "../../../../redux/notes/groups/types";
 import {
   moveToGroup,
-  swapGroupChildren,
-  removeFromGroup
+  swapGroupChildren
 } from "../../../../redux/notes/groups/actions";
 import { openEditor } from "../../../../redux/editor/actions";
 import { NoteRecordID } from "../../../../redux/notes/records/types";

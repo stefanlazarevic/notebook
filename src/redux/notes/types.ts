@@ -10,5 +10,6 @@ export type NotesState = {
 export enum NotesActions {
   OPEN_GROUP = "Notes/Actions/Group/OPEN_GROUP",
   INSERT_RECORD = "Notes/Actions/INSERT_RECORD",
-  REMOVE_RECORD = "Notes/Actions/REMOVE_RECORD"
+  REMOVE_RECORD = "Notes/Actions/REMOVE_RECORD",
+  UPDATE_RECORD = "Notes/Actions/UPDATE_RECORD"
 }

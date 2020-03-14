@@ -100,3 +100,27 @@ export function removeRecord(recordID: NoteRecordID) {
     });
   };
 }
+
+export function updateRecord(changedRecord: NoteRecord) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { records } = notes;
+
+    const record = records[changedRecord.id];
+
+    if (!record) {
+      throw Error(`NoteRecord with ID ${changedRecord.id} is absent.`);
+    }
+
+    if (record.parent !== changedRecord.parent) {
+      throw Error(
+        `Changing record location is not permitted. If your intention was moving record to another group, consider using the "moveToGroup" function.`
+      );
+    }
+
+    dispatch({
+      type: NotesActions.UPDATE_RECORD,
+      payload: changedRecord
+    });
+  };
+}

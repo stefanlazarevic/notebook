@@ -7,9 +7,8 @@ import AppEditor from "./AppEditor";
 import { AppState, IDispatch } from "../../redux/types";
 import { closeEditor, openEditor } from "../../redux/editor/actions";
 import { NoteRecord } from "../../redux/notes/records/types";
-import { updateRecord } from "../../redux/notes/records/actions";
 import { NoteGroupID } from "../../redux/notes/groups/types";
-import { insertRecord } from "../../redux/notes/actions";
+import { insertRecord, updateRecord } from "../../redux/notes/actions";
 
 function AppEditorContainer(props: AppEditorContainerProps) {
   return (

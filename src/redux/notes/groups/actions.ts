@@ -1,8 +1,9 @@
 import { NoteGroupID, NotesGroupsActions, NoteGroup } from "../groups/types";
-import { NoteRecordID, NotesRecordsActions } from "../records/types";
+import { NoteRecordID } from "../records/types";
 import { IDispatch, AppState } from "../../types";
 import utils from "../../../utils";
 import { batch } from "react-redux";
+import { NotesActions } from "../types";
 
 type GroupOrRecordID = NoteGroupID | NoteRecordID;
 
@@ -138,7 +139,7 @@ export function moveToGroup(targetGroupID: NoteGroupID, children: string[]) {
       });
 
       dispatch({
-        type: NotesRecordsActions.REPLACE_ALL,
+        type: NotesActions.UPDATE_RECORD,
         payload: records
       });
     });
@@ -170,30 +171,6 @@ export function swapGroupChildren(sourceIndex: number, targetIndex: number) {
       payload: {
         ...group,
         children: utils.array.swap(sourceIndex, targetIndex, group.children)
-      }
-    });
-  };
-}
-
-export function removeFromGroup(groupID: NoteGroupID, children: any[]) {
-  return async (dispatch: IDispatch, getState: () => AppState) => {
-    const { notes } = getState();
-    const { groups } = notes;
-
-    const group = groups[groupID];
-    const childrenSet = new Set();
-
-    for (let i = 0; i < children.length; i++) {
-      const id = children[i];
-
-      childrenSet.add(id);
-    }
-
-    dispatch({
-      type: NotesGroupsActions.REPLACE,
-      payload: {
-        ...group,
-        children: group.children.filter(id => !childrenSet.has(id))
       }
     });
   };
