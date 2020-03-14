@@ -228,3 +228,20 @@ export function moveToGroup(
     }
   };
 }
+
+export function ungroup(id: NoteRecordID | NoteGroupID) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { currentGroupID, groups } = notes;
+
+    const currentGroup = groups[currentGroupID];
+
+    if (!currentGroup.parent) {
+      throw Error(`Ungroup is not allowed in root group.`);
+    }
+
+    const targetGroup = groups[currentGroup.parent];
+
+    dispatch(moveToGroup(targetGroup.id, id));
+  };
+}

@@ -18,6 +18,7 @@ export default function Note(props: any) {
           groupParent={props.groupParent}
           childrenCount={props.children.length}
           removeGroup={props.removeGroup}
+          ungroup={props.ungroup}
         />
       ) : (
         <NoteRecord
@@ -31,6 +32,7 @@ export default function Note(props: any) {
           parent={props.parent}
           groupParent={props.groupParent}
           removeRecord={props.removeRecord}
+          ungroup={props.ungroup}
         />
       )}
     </>

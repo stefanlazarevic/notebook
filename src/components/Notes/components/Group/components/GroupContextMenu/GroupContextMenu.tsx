@@ -14,7 +14,7 @@ export default function GroupContextMenu(props: any) {
     event.stopPropagation();
 
     if (typeof props.onUngroup === "function") {
-      props.onUngroup(props.groupParent, [props.id]);
+      props.onUngroup(props.id);
     }
   }
 

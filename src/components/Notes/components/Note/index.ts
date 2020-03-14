@@ -11,7 +11,8 @@ import {
   openGroup,
   removeRecord,
   removeGroup,
-  moveToGroup
+  moveToGroup,
+  ungroup
 } from "../../../../redux/notes/actions";
 
 function mapStateToProps(state: AppState, ownProps: any) {
@@ -41,7 +42,8 @@ function mapDispatchToProps(dispatch: IDispatch) {
       dispatch(swapGroupChildren(sourceIndex, targetIndex)),
     openEditor: (recordID: NoteRecordID) => dispatch(openEditor(recordID)),
     removeRecord: (recordID: NoteRecordID) => dispatch(removeRecord(recordID)),
-    removeGroup: (groupID: NoteGroupID) => dispatch(removeGroup(groupID))
+    removeGroup: (groupID: NoteGroupID) => dispatch(removeGroup(groupID)),
+    ungroup: (id: NoteGroupID | NoteRecordID) => dispatch(ungroup(id))
   };
 }
 
