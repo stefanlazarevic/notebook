@@ -10,7 +10,11 @@ import {
 } from "../../../../redux/notes/groups/actions";
 import { openEditor } from "../../../../redux/editor/actions";
 import { NoteRecordID } from "../../../../redux/notes/records/types";
-import { openGroup, removeRecord } from "../../../../redux/notes/actions";
+import {
+  openGroup,
+  removeRecord,
+  removeGroup
+} from "../../../../redux/notes/actions";
 
 function mapStateToProps(state: AppState, ownProps: any) {
   const { id, index, tabIndex } = ownProps;
@@ -38,7 +42,8 @@ function mapDispatchToProps(dispatch: IDispatch) {
     swapGroupChildren: (sourceIndex: number, targetIndex: number) =>
       dispatch(swapGroupChildren(sourceIndex, targetIndex)),
     openEditor: (recordID: NoteRecordID) => dispatch(openEditor(recordID)),
-    removeRecord: (recordID: NoteRecordID) => dispatch(removeRecord(recordID))
+    removeRecord: (recordID: NoteRecordID) => dispatch(removeRecord(recordID)),
+    removeGroup: (groupID: NoteGroupID) => dispatch(removeGroup(groupID))
   };
 }
 

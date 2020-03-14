@@ -4,6 +4,7 @@ import {
   NotesGroupsActions
 } from "./types";
 import { NotesActions } from "../types";
+import utils from "../../../utils";
 
 export default function groupsReducer(
   state: NotesGroups = DEFAULT_NOTES_GROUPS_STATE,
@@ -46,6 +47,16 @@ export default function groupsReducer(
         },
         [action.payload.id]: {
           ...action.payload
+        }
+      };
+    case NotesActions.REMOVE_GROUP:
+      return {
+        ...utils.object.deleteProperty(action.payload.id, state),
+        [action.payload.parent]: {
+          ...state[action.payload.parent],
+          children: state[action.payload.parent].children.filter(
+            id => id !== action.payload.id
+          )
         }
       };
     default:

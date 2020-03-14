@@ -18,6 +18,14 @@ export default function GroupContextMenu(props: any) {
     }
   }
 
+  function remove(event: React.MouseEvent<any>) {
+    event.stopPropagation();
+
+    if (typeof props.onRemove === "function") {
+      props.onRemove(props.id);
+    }
+  }
+
   return (
     <ContextMenu id={props.id}>
       <MenuItem disabled={false} onClick={open}>
@@ -25,6 +33,9 @@ export default function GroupContextMenu(props: any) {
       </MenuItem>
       <MenuItem disabled={!Boolean(props.groupParent)} onClick={ungroup}>
         Ungroup
+      </MenuItem>
+      <MenuItem disabled={Boolean(props.childrenCount)} onClick={remove}>
+        Delete
       </MenuItem>
     </ContextMenu>
   );

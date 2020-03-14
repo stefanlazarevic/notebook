@@ -16,6 +16,8 @@ export default function Note(props: any) {
           tabIndex={props.tabIndex}
           parent={props.parent}
           groupParent={props.groupParent}
+          childrenCount={props.children.length}
+          removeGroup={props.removeGroup}
         />
       ) : (
         <NoteRecord

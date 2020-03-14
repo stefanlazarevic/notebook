@@ -165,3 +165,25 @@ export function createNewGroup(targetGroupID: NoteGroupID, group: NoteGroup) {
     });
   };
 }
+
+export function removeGroup(targetGroupID: NoteGroupID) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { groups } = notes;
+
+    const group = groups[targetGroupID];
+
+    if (!group) {
+      throw Error(`NoteGroup with ID ${targetGroupID} is absent.`);
+    }
+
+    if (group.children.length > 0) {
+      throw Error(`NoteGroup must be empty before removing.`);
+    }
+
+    dispatch({
+      type: NotesActions.REMOVE_GROUP,
+      payload: group
+    });
+  };
+}
