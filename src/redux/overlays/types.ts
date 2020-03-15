@@ -1,11 +1,19 @@
+import { NoteRecordID } from "../notes/records/types";
+import { NoteGroupID } from "../notes/groups/types";
+
 export enum OverlayType {
   DELETE_RECORD,
   RENAME_RECORD
 }
 
+export type OverlayID = string;
+
 export interface Overlay {
-  id: string;
+  id: OverlayID;
   type: OverlayType;
+
+  recordID?: NoteRecordID;
+  groupID?: NoteGroupID;
 }
 
 export type OverlayState = Overlay[];

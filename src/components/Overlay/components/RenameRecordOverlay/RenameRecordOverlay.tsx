@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { connect, batch } from "react-redux";
 
 import "./RenameRecordOverlay.css";
@@ -11,32 +11,9 @@ import { updateRecord } from "../../../../redux/notes/actions";
 import { closeOverlay } from "../../../../redux/overlays/actions";
 import OverlayBody from "../../template/OverlayBody/OverlayBody";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
-import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
-import utils from "../../../../utils";
 
 function RenameRecordOverlay(props: any) {
   const titleReference = useRef<HTMLInputElement>(null);
-  let overlayTabElements = useRef<any>([]);
-
-  useEffect(() => {
-    if (overlayTabElements.current) {
-      overlayTabElements.current = utils.dom.getTabbableElements(
-        "RenameRecordOverlay"
-      );
-    }
-
-    return () => {
-      if (overlayTabElements.current) {
-        overlayTabElements.current = [];
-      }
-    };
-  }, []);
-
-  function close() {
-    if (typeof props.onClose === "function") {
-      props.onClose(props.id);
-    }
-  }
 
   function confirm() {
     if (typeof props.onConfirm === "function") {
@@ -48,64 +25,16 @@ function RenameRecordOverlay(props: any) {
 
       const record = { ...props.record, title };
 
-      props.onConfirm(record, props.id);
-    }
-  }
-
-  function handleKeyDown(event: React.KeyboardEvent<any>) {
-    const { keyCode, target } = event;
-    const isShiftKey = event.shiftKey;
-    const key = KeycodeMap[keyCode];
-
-    if (key === "esc") {
-      close();
-    }
-
-    if (key === "tab" && isShiftKey) {
-      if (
-        overlayTabElements &&
-        target === utils.array.first(overlayTabElements.current)
-      ) {
-        event.preventDefault();
-
-        utils.array.last(overlayTabElements.current).focus();
-      }
-
-      return;
-    }
-
-    if (key === "tab") {
-      if (
-        overlayTabElements &&
-        target === utils.array.last(overlayTabElements.current)
-      ) {
-        event.preventDefault();
-
-        utils.array.first(overlayTabElements.current).focus();
-      }
-    }
-  }
-
-  function handleInputKeyDown(event: React.KeyboardEvent<any>) {
-    const { keyCode } = event;
-    const key = KeycodeMap[keyCode];
-
-    if (key === "enter") {
-      event.preventDefault();
-      confirm();
+      props.onConfirm(record, props.overlayID);
     }
   }
 
   return (
-    <div
-      id="RenameRecordOverlay"
-      className="RenameRecordOverlay"
-      onKeyDown={handleKeyDown}
-    >
+    <div className="RenameRecordOverlay">
       <OverlayHeader
         id={props.id}
         title="Rename Note"
-        onClose={close}
+        onClose={props.onClose}
       ></OverlayHeader>
       <OverlayBody>
         <input
@@ -113,14 +42,13 @@ function RenameRecordOverlay(props: any) {
           type="text"
           defaultValue={props.record.title}
           autoFocus={true}
-          onKeyDown={handleInputKeyDown}
         />
       </OverlayBody>
       <OverlayFooter>
         <button onClick={confirm} tabIndex={0}>
           Confirm
         </button>
-        <button onClick={close} tabIndex={0}>
+        <button onClick={props.onClose} tabIndex={0}>
           Cancel
         </button>
       </OverlayFooter>
@@ -145,8 +73,7 @@ function mapDispatchToProps(dispatch: IDispatch) {
         dispatch(updateRecord(record));
         dispatch(closeOverlay(id));
       });
-    },
-    onClose: (id: string) => dispatch(closeOverlay(id))
+    }
   };
 }
 

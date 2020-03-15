@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { connect, batch } from "react-redux";
 
 import OverlayHeader from "../../template/OverlayHeader/OverlayHeader";
@@ -10,81 +10,19 @@ import { NoteRecordID } from "../../../../redux/notes/records/types";
 
 import "./DeleteRecordOverlay.css";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
-import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
-import utils from "../../../../utils";
 
 function DeleteRecordOverlay(props: any) {
-  let overlayTabElements = useRef<any>([]);
-
-  useEffect(() => {
-    if (overlayTabElements.current) {
-      overlayTabElements.current = utils.dom.getTabbableElements(
-        "DeleteRecordOverlay"
-      );
-    }
-
-    return () => {
-      if (overlayTabElements.current) {
-        overlayTabElements.current = [];
-      }
-    };
-  }, []);
-
-  function close() {
-    if (typeof props.onClose === "function") {
-      props.onClose(props.id);
-    }
-  }
-
   function confirm() {
     if (typeof props.onConfirm === "function") {
-      props.onConfirm(props.recordID, props.id);
-    }
-  }
-
-  function handleKeyDown(event: React.KeyboardEvent<any>) {
-    const { keyCode, target } = event;
-    const isShiftKey = event.shiftKey;
-    const key = KeycodeMap[keyCode];
-
-    if (key === "esc") {
-      close();
-    }
-
-    if (key === "tab" && isShiftKey) {
-      if (
-        overlayTabElements &&
-        target === utils.array.first(overlayTabElements.current)
-      ) {
-        event.preventDefault();
-
-        utils.array.last(overlayTabElements.current).focus();
-      }
-
-      return;
-    }
-
-    if (key === "tab") {
-      if (
-        overlayTabElements &&
-        target === utils.array.last(overlayTabElements.current)
-      ) {
-        event.preventDefault();
-
-        utils.array.first(overlayTabElements.current).focus();
-      }
+      props.onConfirm(props.recordID, props.overlayID);
     }
   }
 
   return (
-    <div
-      id="DeleteRecordOverlay"
-      className="DeleteRecordOverlay"
-      onKeyDown={handleKeyDown}
-    >
+    <div className="DeleteRecordOverlay">
       <OverlayHeader
         id={props.id}
-        onClose={close}
+        onClose={props.onClose}
         title="Delete Note"
         tabIndex={0}
       />
@@ -95,7 +33,7 @@ function DeleteRecordOverlay(props: any) {
         <button onClick={confirm} tabIndex={0}>
           Delete Note
         </button>
-        <button onClick={close} tabIndex={0}>
+        <button onClick={props.onClose} tabIndex={0}>
           Keep Note
         </button>
       </OverlayFooter>
@@ -110,8 +48,7 @@ function mapDispatchToProps(dispatch: IDispatch) {
         dispatch(removeRecord(recordID));
         dispatch(closeOverlay(id));
       });
-    },
-    onClose: (id: string) => dispatch(closeOverlay(id))
+    }
   };
 }
 

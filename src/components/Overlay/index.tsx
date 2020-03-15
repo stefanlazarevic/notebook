@@ -4,38 +4,39 @@ import { createPortal } from "react-dom";
 
 import "./OverlayContainer.css";
 
-import { AppState } from "../../redux/types";
+import { AppState, IDispatch } from "../../redux/types";
 import utils from "../../utils";
-import { OverlayType } from "../../redux/overlays/types";
+import OverlayMap from "./OverlayMap";
+import Overlay from "./Overlay";
+import { OverlayContainerProps } from "./OverlayContainerProps";
+import { Overlay as IOverlay, OverlayID } from "../../redux/overlays/types";
+import { closeOverlay } from "../../redux/overlays/actions";
 
-import DeleteRecordOverlay from "./components/DeleteRecordOverlay/DeleteRecordOverlay";
-import RenameRecordOverlay from "./components/RenameRecordOverlay/RenameRecordOverlay";
-
-function OverlayContainer(props: any) {
+function OverlayContainer(props: OverlayContainerProps) {
   return props.overlays.length
     ? createPortal(
         <div className="OverlayContainer">
-          {utils.array.mapReversed((overlay: any) => {
-            switch (overlay.type) {
-              case OverlayType.DELETE_RECORD:
-                return (
-                  <DeleteRecordOverlay
-                    key={overlay.id}
-                    {...props}
-                    {...overlay}
+          {utils.array.mapReversed((overlay: IOverlay) => {
+            const OverlayComponent = OverlayMap.get(overlay.type);
+
+            if (OverlayComponent) {
+              return (
+                <Overlay
+                  key={overlay.id}
+                  id={overlay.id}
+                  onClose={props.onClose}
+                >
+                  <OverlayComponent
+                    overlayID={overlay.id}
+                    recordID={overlay.recordID}
+                    groupID={overlay.groupID}
+                    onClose={props.onClose}
                   />
-                );
-              case OverlayType.RENAME_RECORD:
-                return (
-                  <RenameRecordOverlay
-                    key={overlay.id}
-                    {...props}
-                    {...overlay}
-                  />
-                );
-              default:
-                return null;
+                </Overlay>
+              );
             }
+
+            return null;
           }, props.overlays)}
         </div>,
         document.getElementById("app-overlays-root") as HTMLDivElement
@@ -49,4 +50,10 @@ function mapStateToProps(state: AppState) {
   };
 }
 
-export default connect(mapStateToProps)(OverlayContainer);
+function mapDispatchToProps(dispatch: IDispatch) {
+  return {
+    onClose: (id: OverlayID) => dispatch(closeOverlay(id))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OverlayContainer);
