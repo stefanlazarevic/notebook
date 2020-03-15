@@ -1,3 +1,10 @@
+.App {
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+}
+
 .react-contextmenu {
   background-color: var(--app-background-10-lighter-color);
   background-clip: padding-box;
@@ -58,6 +65,7 @@
   margin-bottom: 3px;
   padding: 2px 0;
 }
+
 .react-contextmenu-item--divider:hover {
   background-color: transparent;
   border-color: rgba(0, 0, 0, 0.15);

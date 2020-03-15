@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
 
+import "./CreateGroupOverlay.css";
+
 import OverlayHeader from "../../template/OverlayHeader/OverlayHeader";
 import OverlayBody from "../../template/OverlayBody/OverlayBody";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
@@ -12,7 +14,9 @@ import utils from "../../../../utils";
 function CreateGroupOverlay(props: any) {
   const nameReference = useRef<HTMLInputElement>(null);
 
-  function create() {
+  function create(event: React.FormEvent) {
+    event.preventDefault();
+
     const group: NoteGroup = {
       id: utils.string.generateRandom(),
       title: "",
@@ -32,7 +36,7 @@ function CreateGroupOverlay(props: any) {
   }
 
   return (
-    <div className="CreateGroupOverlay">
+    <form className="CreateGroupOverlay" onSubmit={create}>
       <OverlayHeader
         id={props.id}
         title="Create Group"
@@ -48,10 +52,10 @@ function CreateGroupOverlay(props: any) {
         />
       </OverlayBody>
       <OverlayFooter>
-        <button onClick={create}>Create Group</button>
+        <button type="submit">Create Group</button>
         <button onClick={props.onClose}>Cancel</button>
       </OverlayFooter>
-    </div>
+    </form>
   );
 }
 
