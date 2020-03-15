@@ -1,12 +1,18 @@
 import React from "react";
 import { ContextMenuTrigger } from "react-contextmenu";
+import { stateToHTML } from "draft-js-export-html";
 
 import "./Record.css";
 
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 import RecordContextMenu from "./components/RecordContextMenu/RecordContextMenu";
+import { convertFromRaw, SelectionState, ContentState } from "draft-js";
+import utils from "../../../../utils";
 
 export default function NoteRecord(props: any) {
+  const contentState = convertFromRaw(props.content);
+  const blocks = contentState.getBlocksAsArray().slice(0, 7);
+
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
   }
@@ -66,6 +72,13 @@ export default function NoteRecord(props: any) {
       <ContextMenuTrigger id={props.id} holdToDisplay={-1}>
         <div className="NoteRecordCard">
           <h4 className="NoteRecordTitle">{props.title}</h4>
+          <div className="NoteRecordContent">
+            <p
+              dangerouslySetInnerHTML={{
+                __html: stateToHTML(ContentState.createFromBlockArray(blocks))
+              }}
+            ></p>
+          </div>
         </div>
       </ContextMenuTrigger>
       <RecordContextMenu
