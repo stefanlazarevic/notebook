@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from "react";
 import utils from "../../utils";
 import { KeycodeMap } from "../AppEditor/layout/Editor/Shortcuts";
 
+import "./Overlay.css";
+
 export default function Overlay(props: any) {
   let overlayTabElements = useRef<any>([]);
 

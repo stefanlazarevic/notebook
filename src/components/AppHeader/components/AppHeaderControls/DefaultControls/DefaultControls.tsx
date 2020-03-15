@@ -10,7 +10,6 @@ export default function DefaultControls(props: DefaultControlsProps) {
       <AppHeaderButton
         title="Create new folder"
         onClick={props.onCreateNewFolder}
-        disabled={true}
       >
         <MdCreateNewFolder />
       </AppHeaderButton>

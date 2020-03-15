@@ -2,7 +2,7 @@ import { IDispatch, AppState } from "../types";
 import { OverlaysActions, OverlayType } from "./types";
 import utils from "../../utils";
 
-export function showOverlay(type: OverlayType, props: any) {
+export function showOverlay(type: OverlayType, props?: any) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     dispatch({
       type: OverlaysActions.OPEN_OVERLAY,
