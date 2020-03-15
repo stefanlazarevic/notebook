@@ -6,8 +6,7 @@ import "./Record.css";
 
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 import RecordContextMenu from "./components/RecordContextMenu/RecordContextMenu";
-import { convertFromRaw, SelectionState, ContentState } from "draft-js";
-import utils from "../../../../utils";
+import { convertFromRaw, ContentState } from "draft-js";
 
 export default function NoteRecord(props: any) {
   const contentState = convertFromRaw(props.content);
