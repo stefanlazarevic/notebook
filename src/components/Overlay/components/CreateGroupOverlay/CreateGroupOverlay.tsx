@@ -10,6 +10,7 @@ import { IDispatch, AppState } from "../../../../redux/types";
 import { NoteGroupID, NoteGroup } from "../../../../redux/notes/groups/types";
 import { createNewGroup } from "../../../../redux/notes/actions";
 import utils from "../../../../utils";
+import FormInput from "../../../UI/FormInput/FormInput";
 
 function CreateGroupOverlay(props: any) {
   const nameReference = useRef<HTMLInputElement>(null);
@@ -43,8 +44,7 @@ function CreateGroupOverlay(props: any) {
         onClose={props.onClose}
       />
       <OverlayBody>
-        <p>Please enter group name.</p>
-        <input
+        <FormInput
           ref={nameReference}
           type="text"
           placeholder="Group name"

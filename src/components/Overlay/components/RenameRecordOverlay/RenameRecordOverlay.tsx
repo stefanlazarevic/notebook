@@ -11,12 +11,16 @@ import { updateRecord } from "../../../../redux/notes/actions";
 import { closeOverlay } from "../../../../redux/overlays/actions";
 import OverlayBody from "../../template/OverlayBody/OverlayBody";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
+import FormInput from "../../../UI/FormInput/FormInput";
 
 function RenameRecordOverlay(props: any) {
   const titleReference = useRef<HTMLInputElement>(null);
 
-  function confirm() {
-    if (typeof props.onConfirm === "function") {
+  function save(event: React.FormEvent) {
+    console.log("Submitting");
+    event.preventDefault();
+
+    if (typeof props.onSave === "function") {
       let title = props.record.title;
 
       if (titleReference.current) {
@@ -25,34 +29,31 @@ function RenameRecordOverlay(props: any) {
 
       const record = { ...props.record, title };
 
-      props.onConfirm(record, props.overlayID);
+      props.onSave(record, props.overlayID);
     }
   }
 
   return (
-    <div className="RenameRecordOverlay">
+    <form className="RenameRecordOverlay" onSubmit={save}>
       <OverlayHeader
         id={props.id}
         title="Rename Note"
         onClose={props.onClose}
       ></OverlayHeader>
       <OverlayBody>
-        <input
+        <FormInput
           ref={titleReference}
           type="text"
+          name="title"
           defaultValue={props.record.title}
           autoFocus={true}
         />
       </OverlayBody>
       <OverlayFooter>
-        <button onClick={confirm} tabIndex={0}>
-          Confirm
-        </button>
-        <button onClick={props.onClose} tabIndex={0}>
-          Cancel
-        </button>
+        <button type="button">Save</button>
+        <button onClick={props.onClose}>Cancel</button>
       </OverlayFooter>
-    </div>
+    </form>
   );
 }
 
@@ -68,7 +69,7 @@ function mapStateToProps(state: AppState, ownProps: any) {
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
-    onConfirm: (record: NoteRecord, id: string) => {
+    onSave: (record: NoteRecord, id: string) => {
       batch(() => {
         dispatch(updateRecord(record));
         dispatch(closeOverlay(id));

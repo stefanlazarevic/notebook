@@ -1,0 +1,19 @@
+.FormInput {
+  display: block;
+
+  width: 100%;
+
+  padding: 7px 10px;
+
+  border: 1px solid transparent;
+
+  outline: 0;
+}
+
+.FormInput:focus {
+  border-color: var(--app-info-color);
+}
+
+.FormInput.rounded {
+  border-radius: 4px;
+}

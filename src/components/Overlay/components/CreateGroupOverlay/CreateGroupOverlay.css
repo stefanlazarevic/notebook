@@ -1,3 +1,8 @@
 .CreateGroupOverlay {
   width: 400px;
 }
+
+.CreateGroupOverlay .FormInput {
+  background-color: var(--app-background-5-lighter-color);
+  color: var(--app-text-color);
+}
