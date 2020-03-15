@@ -37,4 +37,5 @@ export interface NoteGroupProps {
   ungroup?: (id: NoteGroupID) => void;
   onDoubleClick?: (targetGroupID: NoteGroupID) => void;
   removeGroup?: (targetGroupID: NoteGroupID) => void;
+  renameGroup?: (targetGroupID: NoteGroupID) => void;
 }

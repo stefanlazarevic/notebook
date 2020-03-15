@@ -1,42 +1,43 @@
 import React, { useRef } from "react";
 import { connect, batch } from "react-redux";
 
-import "./RenameRecordOverlay.css";
+import "./RenameGroupOverlay.css";
 
 import OverlayHeader from "../../template/OverlayHeader/OverlayHeader";
-
-import { IDispatch, AppState } from "../../../../redux/types";
-import { NoteRecord } from "../../../../redux/notes/records/types";
-import { updateRecord } from "../../../../redux/notes/actions";
-import { closeOverlay } from "../../../../redux/overlays/actions";
 import OverlayBody from "../../template/OverlayBody/OverlayBody";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
+
+import { IDispatch, AppState } from "../../../../redux/types";
+import { updateGroup } from "../../../../redux/notes/actions";
+import { closeOverlay } from "../../../../redux/overlays/actions";
+import { NoteGroup } from "../../../../redux/notes/groups/types";
+import { OverlayID } from "../../../../redux/overlays/types";
 import FormInput from "../../../UI/FormInput/FormInput";
 
-function RenameRecordOverlay(props: any) {
+function RenameGroupOverlay(props: any) {
   const titleReference = useRef<HTMLInputElement>(null);
 
   function save(event: React.FormEvent) {
     event.preventDefault();
 
     if (typeof props.onSave === "function") {
-      let title = props.record.title;
+      let title = props.group.title;
 
       if (titleReference.current) {
         title = titleReference.current.value;
       }
 
-      const record = { ...props.record, title };
+      const group = { ...props.group, title };
 
-      props.onSave(record, props.overlayID);
+      props.onSave(group, props.overlayID);
     }
   }
 
   return (
-    <form className="RenameRecordOverlay" onSubmit={save}>
+    <form className="RenameGroupOverlay" onSubmit={save}>
       <OverlayHeader
         id={props.id}
-        title="Rename Note"
+        title="Rename Group"
         onClose={props.onClose}
       ></OverlayHeader>
       <OverlayBody>
@@ -44,12 +45,12 @@ function RenameRecordOverlay(props: any) {
           ref={titleReference}
           type="text"
           name="title"
-          defaultValue={props.record.title}
+          defaultValue={props.group.title}
           autoFocus={true}
         />
       </OverlayBody>
       <OverlayFooter>
-        <button type="button">Save</button>
+        <button type="submit">Save</button>
         <button onClick={props.onClose}>Cancel</button>
       </OverlayFooter>
     </form>
@@ -58,26 +59,23 @@ function RenameRecordOverlay(props: any) {
 
 function mapStateToProps(state: AppState, ownProps: any) {
   const { notes } = state;
-  const { records } = notes;
-  const record = records[ownProps.recordID];
+  const { groups } = notes;
+  const group = groups[ownProps.groupID];
 
   return {
-    record
+    group
   };
 }
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
-    onSave: (record: NoteRecord, id: string) => {
+    onSave: (group: NoteGroup, id: OverlayID) => {
       batch(() => {
-        dispatch(updateRecord(record));
+        dispatch(updateGroup(group));
         dispatch(closeOverlay(id));
       });
     }
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RenameRecordOverlay);
+export default connect(mapStateToProps, mapDispatchToProps)(RenameGroupOverlay);

@@ -167,6 +167,27 @@ export function createNewGroup(targetGroupID: NoteGroupID, group: NoteGroup) {
   };
 }
 
+export function updateGroup(updatedGroup: NoteGroup) {
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const { notes } = getState();
+    const { groups } = notes;
+    const group = groups[updatedGroup.id];
+
+    if (!group) {
+      throw Error(`NoteGroup with ID ${updatedGroup.id} is absent.`);
+    }
+
+    dispatch({
+      type: NotesActions.UPDATE_GROUP,
+      payload: {
+        ...updatedGroup,
+        id: group.id,
+        children: group.children
+      }
+    });
+  };
+}
+
 export function removeGroup(targetGroupID: NoteGroupID) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();

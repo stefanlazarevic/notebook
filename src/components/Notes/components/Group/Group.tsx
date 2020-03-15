@@ -74,10 +74,11 @@ export default function NoteGroup(props: NoteGroupProps) {
         id={props.id}
         parent={props.parent}
         groupParent={props.groupParent}
+        childrenCount={props.childrenCount}
         onOpen={handleDoubleClick}
         onUngroup={props.ungroup}
         onRemove={props.removeGroup}
-        childrenCount={props.childrenCount}
+        onRename={props.renameGroup}
       />
     </div>
   );

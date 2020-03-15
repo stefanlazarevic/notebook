@@ -40,6 +40,14 @@ export default function groupsReducer(
           ...action.payload
         }
       };
+    case NotesActions.UPDATE_GROUP:
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...state[action.payload.id],
+          ...action.payload
+        }
+      };
     case NotesActions.REMOVE_GROUP:
       return {
         ...utils.object.deleteProperty(action.payload.id, state),

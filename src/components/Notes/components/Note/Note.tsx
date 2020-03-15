@@ -19,6 +19,7 @@ export default function Note(props: any) {
           childrenCount={props.children.length}
           removeGroup={props.removeGroup}
           ungroup={props.ungroup}
+          renameGroup={props.renameGroup}
         />
       ) : (
         <NoteRecord

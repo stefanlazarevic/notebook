@@ -1,0 +1,36 @@
+.RenameGroupOverlay {
+  width: 400px;
+}
+
+.RenameGroupOverlay .FormInput {
+  background-color: var(--app-background-5-lighter-color);
+  color: var(--app-text-base-color);
+}
+
+.RenameGroupOverlay .OverlayFooter button {
+  appearance: none;
+
+  color: var(--app-text-base-color);
+  background-color: var(--app-background-base-color);
+
+  cursor: pointer;
+
+  outline: 0;
+
+  border: 0;
+
+  text-transform: uppercase;
+
+  padding: 0;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.RenameGroupOverlay .OverlayFooter button:focus {
+  outline: 1px dotted var(--app-text-base-color);
+}
+
+.RenameGroupOverlay .OverlayFooter button:first-child {
+  margin-right: 15px;
+}
