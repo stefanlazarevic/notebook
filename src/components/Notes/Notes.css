@@ -23,3 +23,21 @@
 
   margin-bottom: 15px;
 }
+
+.EmptyNotesHeading {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 1.5rem;
+
+  text-align: center;
+
+  color: var(--app-text-40-darker-color);
+}
+
+.EmptyNotesHeading svg {
+  margin-left: 5px;
+}

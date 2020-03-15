@@ -5,6 +5,7 @@ import "./Notes.css";
 import utils from "../../utils";
 
 import NoteContainer from "./components/Note";
+import { MdNoteAdd } from "react-icons/md";
 
 export default function Notes(props: any) {
   return (
@@ -16,6 +17,11 @@ export default function Notes(props: any) {
           );
         }, props.children)}
       </div>
+      {!Boolean(props.children.length) && (
+        <h4 className="EmptyNotesHeading">
+          No records found. Create new record using <MdNoteAdd />
+        </h4>
+      )}
     </div>
   );
 }
