@@ -2,6 +2,9 @@ import { RawDraftContentState } from "draft-js";
 import { NoteGroupID } from "../groups/types";
 import instructionsContentState from "../../../data/instructionsContentState";
 
+/**
+ * A `NoteRecord` unique identifier.
+ */
 export type NoteRecordID = string;
 
 export type NoteRecord = {

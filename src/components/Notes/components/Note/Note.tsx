@@ -26,15 +26,14 @@ export default function Note(props: any) {
           id={props.id}
           index={props.index}
           title={props.title}
-          onClick={props.openEditor}
-          onDrop={props.swapGroupChildren}
+          onOpen={props.openEditor}
+          onSwap={props.swapGroupChildren}
           tabIndex={props.tabIndex}
-          moveToGroup={props.moveToGroup}
           parent={props.parent}
-          groupParent={props.groupParent}
-          removeRecord={props.removeRecord}
-          ungroup={props.ungroup}
-          renameRecord={props.renameRecord}
+          currentGroupParent={props.groupParent}
+          onRemove={props.removeRecord}
+          onUngroup={props.ungroup}
+          onRename={props.renameRecord}
           content={props.content}
         />
       )}

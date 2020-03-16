@@ -8,8 +8,9 @@ import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 import RecordContextMenu from "./components/RecordContextMenu/RecordContextMenu";
 import { convertFromRaw } from "draft-js";
 import utils from "../../../../utils";
+import { RecordProps } from "./RecordProps";
 
-export default function NoteRecord(props: any) {
+export default function NoteRecord(props: RecordProps) {
   const contentState = convertFromRaw(props.content);
 
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {
@@ -23,7 +24,7 @@ export default function NoteRecord(props: any) {
     );
   }
 
-  function handleDrop(event: any) {
+  function drop(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
 
     const data = JSON.parse(event.dataTransfer.getData("text/plain"));
@@ -32,17 +33,51 @@ export default function NoteRecord(props: any) {
     const targetIndex = props.index;
 
     if (
-      typeof props.onDrop === "function" &&
+      typeof props.onSwap === "function" &&
       !Number.isNaN(sourceIndex) &&
       sourceIndex !== targetIndex
     ) {
-      props.onDrop(sourceIndex, targetIndex);
+      props.onSwap(sourceIndex, targetIndex);
     }
   }
 
-  function handleClick() {
-    if (typeof props.onClick === "function") {
-      props.onClick(props.id);
+  function open(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (typeof props.onOpen === "function") {
+      props.onOpen(props.id);
+    }
+  }
+
+  function ungroup(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (typeof props.onUngroup === "function") {
+      props.onUngroup(props.id);
+    }
+  }
+
+  function remove(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (typeof props.onRemove === "function") {
+      props.onRemove(props.id);
+    }
+  }
+
+  function rename(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (typeof props.onRename === "function") {
+      props.onRename(props.id);
     }
   }
 
@@ -50,10 +85,10 @@ export default function NoteRecord(props: any) {
     const { keyCode } = event;
     const key = KeycodeMap[keyCode];
 
-    if (key === "enter" && typeof props.onClick === "function") {
+    if (key === "enter") {
       event.preventDefault();
 
-      props.onClick(props.id);
+      open();
     }
   }
 
@@ -63,8 +98,8 @@ export default function NoteRecord(props: any) {
       draggable="true"
       onDragOver={allowDrop}
       onDragStart={dragStart}
-      onDrop={handleDrop}
-      onClick={handleClick}
+      onDrop={drop}
+      onClick={open}
       tabIndex={props.tabIndex}
       onKeyDown={handleKeyDown}
     >
@@ -82,12 +117,10 @@ export default function NoteRecord(props: any) {
       </ContextMenuTrigger>
       <RecordContextMenu
         id={props.id}
-        parent={props.parent}
-        groupParent={props.groupParent}
-        onOpen={handleClick}
-        onUngroup={props.ungroup}
-        onRemove={props.removeRecord}
-        onRename={props.renameRecord}
+        onOpen={open}
+        onUngroup={props.currentGroupParent && ungroup}
+        onRemove={remove}
+        onRename={rename}
       />
     </div>
   );
