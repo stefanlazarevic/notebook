@@ -7,6 +7,9 @@ export default function RecordContextMenu(props: any) {
       <MenuItem disabled={!Boolean(props.onOpen)} onClick={props.onOpen}>
         Open
       </MenuItem>
+      <MenuItem disabled={!Boolean(props.onPrint)} onClick={props.onPrint}>
+        Print
+      </MenuItem>
       <MenuItem divider />
       <MenuItem disabled={!Boolean(props.onCopy)} onClick={props.onCopy}>
         Copy

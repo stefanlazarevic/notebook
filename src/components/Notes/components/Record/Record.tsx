@@ -81,6 +81,16 @@ export default function NoteRecord(props: NoteRecordProps) {
     }
   }
 
+  function print(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (typeof props.onPrint === "function") {
+      props.onPrint(contentState);
+    }
+  }
+
   function handleKeyDown(event: React.KeyboardEvent<any>) {
     const { keyCode } = event;
     const key = KeycodeMap[keyCode];
@@ -121,6 +131,7 @@ export default function NoteRecord(props: NoteRecordProps) {
         onUngroup={props.currentGroupParent && ungroup}
         onRemove={remove}
         onRename={rename}
+        onPrint={print}
       />
     </div>
   );

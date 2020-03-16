@@ -1,4 +1,4 @@
-import { RawDraftContentState } from "draft-js";
+import { RawDraftContentState, ContentState } from "draft-js";
 import { NoteRecordID } from "../../../../redux/notes/records/types";
 import { NoteGroupID } from "../../../../redux/notes/groups/types";
 
@@ -59,6 +59,14 @@ export interface NoteRecordCallbackProps {
    * @optional
    */
   onCut?: (id: NoteRecordID) => void;
+
+  /**
+   * Callback function executed on `print` action.
+   *
+   * @param contentState `NoteRecord` content state
+   * @optional
+   */
+  onPrint?: (contentState: ContentState) => void;
 }
 
 export interface NoteRecordProps extends NoteRecordCallbackProps {

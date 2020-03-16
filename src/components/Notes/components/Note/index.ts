@@ -15,6 +15,8 @@ import {
 } from "../../../../redux/notes/actions";
 import { showOverlay } from "../../../../redux/overlays/actions";
 import { OverlayType } from "../../../../redux/overlays/types";
+import utils from "../../../../utils";
+import { ContentState } from "draft-js";
 
 function mapStateToProps(state: AppState, ownProps: any) {
   const { id, index, tabIndex } = ownProps;
@@ -53,7 +55,8 @@ function mapDispatchToProps(dispatch: IDispatch) {
     renameRecord: (recordID: NoteRecordID) =>
       dispatch(showOverlay(OverlayType.RENAME_RECORD, { recordID })),
     renameGroup: (groupID: NoteGroupID) =>
-      dispatch(showOverlay(OverlayType.RENAME_GROUP, { groupID }))
+      dispatch(showOverlay(OverlayType.RENAME_GROUP, { groupID })),
+    print: (contentState: ContentState) => utils.editor.print(contentState)
   };
 }
 

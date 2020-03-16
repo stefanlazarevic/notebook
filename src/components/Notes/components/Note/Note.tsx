@@ -35,6 +35,7 @@ export default function Note(props: any) {
           onUngroup={props.ungroup}
           onRename={props.renameRecord}
           content={props.content}
+          onPrint={props.print}
         />
       )}
     </>
