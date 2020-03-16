@@ -6,11 +6,11 @@ import "./Record.css";
 
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 import RecordContextMenu from "./components/RecordContextMenu/RecordContextMenu";
-import { convertFromRaw, ContentState } from "draft-js";
+import { convertFromRaw } from "draft-js";
+import utils from "../../../../utils";
 
 export default function NoteRecord(props: any) {
   const contentState = convertFromRaw(props.content);
-  const blocks = contentState.getBlocksAsArray().slice(0, 7);
 
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
@@ -74,7 +74,7 @@ export default function NoteRecord(props: any) {
           <div className="NoteRecordContent">
             <p
               dangerouslySetInnerHTML={{
-                __html: stateToHTML(ContentState.createFromBlockArray(blocks))
+                __html: stateToHTML(utils.editor.truncate(contentState, 150))
               }}
             ></p>
           </div>
