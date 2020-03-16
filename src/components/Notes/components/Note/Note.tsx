@@ -11,15 +11,15 @@ export default function Note(props: any) {
           id={props.id}
           index={props.index}
           title={props.title}
-          moveToGroup={props.moveToGroup}
-          onDoubleClick={props.openGroup}
+          onRename={props.renameGroup}
+          onUngroup={props.ungroup}
+          onOpen={props.openGroup}
           tabIndex={props.tabIndex}
           parent={props.parent}
-          groupParent={props.groupParent}
-          childrenCount={props.children.length}
-          removeGroup={props.removeGroup}
-          ungroup={props.ungroup}
-          renameGroup={props.renameGroup}
+          currentGroupParent={props.groupParent}
+          hasChildren={Boolean(props.children.length)}
+          onRemove={props.removeGroup}
+          onMoveIn={props.moveToGroup}
         />
       ) : (
         <NoteRecord

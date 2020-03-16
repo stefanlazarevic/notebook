@@ -8,9 +8,9 @@ import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 import RecordContextMenu from "./components/RecordContextMenu/RecordContextMenu";
 import { convertFromRaw } from "draft-js";
 import utils from "../../../../utils";
-import { RecordProps } from "./RecordProps";
+import { NoteRecordProps } from "./RecordProps";
 
-export default function NoteRecord(props: RecordProps) {
+export default function NoteRecord(props: NoteRecordProps) {
   const contentState = convertFromRaw(props.content);
 
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {

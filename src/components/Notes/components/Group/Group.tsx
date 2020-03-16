@@ -14,11 +14,14 @@ export default function NoteGroup(props: NoteGroupProps) {
   function dragStart(event: React.DragEvent<HTMLDivElement>) {
     event.dataTransfer.setData(
       "text/plain",
-      JSON.stringify({ index: props.index, id: props.id })
+      JSON.stringify({
+        index: props.index,
+        id: props.id
+      })
     );
   }
 
-  function handleDrop(event: any) {
+  function drop(event: any) {
     event.preventDefault();
 
     const data = JSON.parse(event.dataTransfer.getData("text/plain"));
@@ -26,17 +29,51 @@ export default function NoteGroup(props: NoteGroupProps) {
     const targetId = props.id;
 
     if (
-      typeof props.moveToGroup === "function" &&
+      typeof props.onMoveIn === "function" &&
       sourceId &&
       sourceId !== targetId
     ) {
-      props.moveToGroup(targetId, sourceId);
+      props.onMoveIn(targetId, sourceId);
     }
   }
 
-  function handleDoubleClick(event: React.MouseEvent) {
-    if (typeof props.onDoubleClick === "function") {
-      props.onDoubleClick(props.id);
+  function open(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (typeof props.onOpen === "function") {
+      props.onOpen(props.id);
+    }
+  }
+
+  function remove(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (typeof props.onRemove === "function") {
+      props.onRemove(props.id);
+    }
+  }
+
+  function rename(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (typeof props.onRename === "function") {
+      props.onRename(props.id);
+    }
+  }
+
+  function ungroup(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    if (typeof props.onUngroup === "function") {
+      props.onUngroup(props.id);
     }
   }
 
@@ -44,10 +81,10 @@ export default function NoteGroup(props: NoteGroupProps) {
     const { keyCode } = event;
     const key = KeycodeMap[keyCode];
 
-    if (key === "enter" && typeof props.onDoubleClick === "function") {
+    if (key === "enter") {
       event.preventDefault();
 
-      props.onDoubleClick(props.id);
+      open();
     }
   }
 
@@ -57,8 +94,8 @@ export default function NoteGroup(props: NoteGroupProps) {
       draggable="true"
       onDragOver={allowDrop}
       onDragStart={dragStart}
-      onDrop={handleDrop}
-      onDoubleClick={handleDoubleClick}
+      onDrop={drop}
+      onDoubleClick={open}
       tabIndex={props.tabIndex}
       onKeyDown={handleKeyDown}
     >
@@ -72,13 +109,10 @@ export default function NoteGroup(props: NoteGroupProps) {
       </ContextMenuTrigger>
       <GroupContextMenu
         id={props.id}
-        parent={props.parent}
-        groupParent={props.groupParent}
-        childrenCount={props.childrenCount}
-        onOpen={handleDoubleClick}
-        onUngroup={props.ungroup}
-        onRemove={props.removeGroup}
-        onRename={props.renameGroup}
+        onOpen={open}
+        onUngroup={props.currentGroupParent && ungroup}
+        onRemove={!props.hasChildren && remove}
+        onRename={rename}
       />
     </div>
   );

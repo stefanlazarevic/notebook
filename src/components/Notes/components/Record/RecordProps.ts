@@ -2,7 +2,7 @@ import { RawDraftContentState } from "draft-js";
 import { NoteRecordID } from "../../../../redux/notes/records/types";
 import { NoteGroupID } from "../../../../redux/notes/groups/types";
 
-export interface RecordCallbackProps {
+export interface NoteRecordCallbackProps {
   /**
    * Callback function executed on `drop` action.
    *
@@ -61,7 +61,7 @@ export interface RecordCallbackProps {
   onCut?: (id: NoteRecordID) => void;
 }
 
-export interface RecordProps extends RecordCallbackProps {
+export interface NoteRecordProps extends NoteRecordCallbackProps {
   /**
    * A `NoteRecord` content.
    */
@@ -90,7 +90,7 @@ export interface RecordProps extends RecordCallbackProps {
   title: string;
 
   /**
-   * A group identifier in which this record exists.
+   * A `NoteGroup` identifier which contains this record.
    *
    * @required
    */

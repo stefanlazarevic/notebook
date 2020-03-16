@@ -2,51 +2,28 @@ import React from "react";
 import { ContextMenu, MenuItem } from "react-contextmenu";
 
 export default function GroupContextMenu(props: any) {
-  function open(event: React.MouseEvent<any>) {
-    event.stopPropagation();
-
-    if (typeof props.onOpen === "function") {
-      props.onOpen();
-    }
-  }
-
-  function ungroup(event: React.MouseEvent<any>) {
-    event.stopPropagation();
-
-    if (typeof props.onUngroup === "function") {
-      props.onUngroup(props.id);
-    }
-  }
-
-  function remove(event: React.MouseEvent<any>) {
-    event.stopPropagation();
-
-    if (typeof props.onRemove === "function") {
-      props.onRemove(props.id);
-    }
-  }
-
-  function rename(event: React.MouseEvent<any>) {
-    event.preventDefault();
-
-    if (typeof props.onRename === "function") {
-      props.onRename(props.id);
-    }
-  }
-
   return (
     <ContextMenu id={props.id}>
-      <MenuItem disabled={false} onClick={open}>
+      <MenuItem disabled={!Boolean(props.onOpen)} onClick={props.onOpen}>
         Open
       </MenuItem>
-      <MenuItem disabled={false} onClick={rename}>
+      <MenuItem divider />
+      <MenuItem disabled={!Boolean(props.onCopy)} onClick={props.onCopy}>
+        Copy
+      </MenuItem>
+      <MenuItem disabled={!Boolean(props.onCut)} onClick={props.onCut}>
+        Cut
+      </MenuItem>
+      <MenuItem disabled={!Boolean(props.onRename)} onClick={props.onRename}>
         Rename
       </MenuItem>
-      <MenuItem disabled={!Boolean(props.groupParent)} onClick={ungroup}>
+      <MenuItem divider />
+      <MenuItem disabled={!Boolean(props.onUngroup)} onClick={props.onUngroup}>
         Ungroup
       </MenuItem>
-      <MenuItem disabled={Boolean(props.childrenCount)} onClick={remove}>
-        Delete
+      <MenuItem divider />
+      <MenuItem disabled={!Boolean(props.onRemove)} onClick={props.onRemove}>
+        Remove
       </MenuItem>
     </ContextMenu>
   );
