@@ -1,0 +1,50 @@
+@page {
+  size: A4;
+  margin: 12.9mm 9.6mm;
+}
+
+@page {
+  @bottom-left {
+    content: counter(page) "/" counter(pages);
+  }
+}
+
+#print-mount {
+  display: none;
+}
+
+@media print {
+  .react-no-print {
+    display: none !important;
+  }
+
+  #print-mount {
+    display: block;
+    background: #fff;
+  }
+}
+
+@media print {
+  h1,
+  h2 {
+    margin: 6mm 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: sans-serif;
+    color: #000;
+  }
+
+  p {
+    font-family: sans-serif;
+    color: #1f1f1f;
+    line-height: 6mm;
+    orphans: 2;
+    widows: 2;
+  }
+}

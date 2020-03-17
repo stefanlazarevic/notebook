@@ -15,7 +15,7 @@ import { closeOverlay } from "../../redux/overlays/actions";
 function OverlayContainer(props: OverlayContainerProps) {
   return props.overlays.length
     ? createPortal(
-        <div className="OverlayContainer">
+        <div className="OverlayContainer react-no-print">
           {utils.array.mapReversed((overlay: IOverlay) => {
             const OverlayComponent = OverlayMap.get(overlay.type);
 

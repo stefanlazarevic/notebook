@@ -87,7 +87,7 @@ export default function NoteRecord(props: NoteRecordProps) {
     }
 
     if (typeof props.onPrint === "function") {
-      props.onPrint(contentState);
+      props.onPrint(props.id);
     }
   }
 

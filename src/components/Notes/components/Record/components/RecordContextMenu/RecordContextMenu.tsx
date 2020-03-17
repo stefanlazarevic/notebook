@@ -3,7 +3,7 @@ import { ContextMenu, MenuItem } from "react-contextmenu";
 
 export default function RecordContextMenu(props: any) {
   return (
-    <ContextMenu id={props.id}>
+    <ContextMenu id={props.id} className="react-no-print">
       <MenuItem disabled={!Boolean(props.onOpen)} onClick={props.onOpen}>
         Open
       </MenuItem>

@@ -55,9 +55,19 @@ export function truncate(
 
 export function print(contentState: ContentState): boolean {
   const HTML = stateToHTML(contentState);
+  const width = 1366;
+  const height = 768;
 
   if (window) {
-    const printWindow = window.open("", "TITLE", "height=768, width=1366");
+    const top =
+      window.top.outerHeight / 2 - height / 2 + window.top.screenY - height / 2;
+    const left = window.top.outerWidth / 2 + window.top.screenX - width / 2;
+
+    const printWindow = window.open(
+      "",
+      "TITLE",
+      `height=${height}, width=${width}, top=${top}, left=${left}`
+    );
 
     if (printWindow) {
       printWindow.document.write("<html>");

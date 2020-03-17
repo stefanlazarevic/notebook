@@ -63,10 +63,10 @@ export interface NoteRecordCallbackProps {
   /**
    * Callback function executed on `print` action.
    *
-   * @param contentState `NoteRecord` content state
+   * @param id A `NoteRecord` unique identifier.
    * @optional
    */
-  onPrint?: (contentState: ContentState) => void;
+  onPrint?: (id: NoteRecordID) => void;
 }
 
 export interface NoteRecordProps extends NoteRecordCallbackProps {
