@@ -1,5 +1,4 @@
 import { EditorState, Modifier, ContentState, ContentBlock } from "draft-js";
-import { stateToHTML } from "draft-js-export-html";
 
 export function clear(editorState: EditorState): EditorState {
   const selection = editorState.getSelection();
@@ -51,39 +50,4 @@ export function truncate(
   }
 
   return contentState;
-}
-
-export function print(contentState: ContentState): boolean {
-  const HTML = stateToHTML(contentState);
-  const width = 1366;
-  const height = 768;
-
-  if (window) {
-    const top =
-      window.top.outerHeight / 2 - height / 2 + window.top.screenY - height / 2;
-    const left = window.top.outerWidth / 2 + window.top.screenX - width / 2;
-
-    const printWindow = window.open(
-      "",
-      "TITLE",
-      `height=${height}, width=${width}, top=${top}, left=${left}`
-    );
-
-    if (printWindow) {
-      printWindow.document.write("<html>");
-      printWindow.document.write("<head><title>TITLE</title></head>");
-      printWindow.document.write("<body>");
-      printWindow.document.write(HTML);
-      printWindow.document.write("</body>");
-      printWindow.document.write("</html>");
-      printWindow.document.close();
-      printWindow.focus();
-      printWindow.print();
-      printWindow.close();
-
-      return true;
-    }
-  }
-
-  return false;
 }
