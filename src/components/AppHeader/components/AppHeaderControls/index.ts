@@ -1,1 +1,3 @@
-export { default as AppHeaderControlsContainer } from "./AppHeaderControlsContainer";
+import AppHeaderControls from "./AppHeaderControls";
+
+export default AppHeaderControls;

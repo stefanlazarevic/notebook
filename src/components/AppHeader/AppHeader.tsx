@@ -1,13 +1,13 @@
 import React from "react";
 
 import "./AppHeader.css";
-import { AppHeaderControlsContainer } from "./components/AppHeaderControls";
+import AppHeaderControls from "./components/AppHeaderControls";
 
 export default function AppHeader(props: any) {
   return (
     <header id="AppHeader" className="AppHeader">
       <h1 className="AppHeader__title">Notebook</h1>
-      <AppHeaderControlsContainer />
+      <AppHeaderControls />
     </header>
   );
 }
