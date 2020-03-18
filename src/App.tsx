@@ -3,7 +3,7 @@ import React from "react";
 import "./App.css";
 
 import AppHeader from "./components/AppHeader/AppHeader";
-import NavigatorContainer from "./components/Navigator";
+import Navigator from "./components/Navigator";
 import AppEditorContainer from "./components/AppEditor";
 // import SettingsDrawerContainer from "./components/SettingsDrawer/SettingsDrawerContainer";
 import NotesContainer from "./components/Notes";
@@ -15,7 +15,7 @@ function App() {
     <>
       <div className="App react-no-print">
         <AppHeader />
-        <NavigatorContainer />
+        <Navigator />
         {/* Test component */}
         <AppEditorContainer />
         {/* Test component */}
