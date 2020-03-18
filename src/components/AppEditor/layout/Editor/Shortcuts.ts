@@ -9,6 +9,7 @@ export const KeycodeMap: IKeycodeMap = {
   9: "tab",
   13: "enter",
   27: "esc",
+  32: "space",
   66: "b",
   67: "c",
   73: "i",

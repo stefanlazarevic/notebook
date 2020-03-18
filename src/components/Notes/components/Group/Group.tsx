@@ -2,11 +2,30 @@ import React from "react";
 
 import "./Group.css";
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
-import { NoteGroupProps } from "./GroupProps";
 import { ContextMenuTrigger } from "react-contextmenu";
 import GroupContextMenu from "./components/GroupContextMenu/GroupContextMenu";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  openGroup,
+  removeGroup,
+  ungroupGroup,
+  moveToGroup
+} from "../../../../redux/notes/actions";
+import { OverlayType } from "../../../../redux/overlays/types";
+import { showOverlay } from "../../../../redux/overlays/actions";
+import { AppState } from "../../../../redux/types";
 
-export default function NoteGroup(props: NoteGroupProps) {
+export default function NoteGroup(props: any) {
+  const dispatch = useDispatch();
+
+  const currentGroupParentID = useSelector(
+    (state: AppState) => state.notes.groups[state.notes.currentGroupID].parent
+  );
+
+  const isEmpty = useSelector(
+    (state: AppState) => state.notes.groups[props.id].children.length === 0
+  );
+
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {
     event.preventDefault();
   }
@@ -26,14 +45,9 @@ export default function NoteGroup(props: NoteGroupProps) {
 
     const data = JSON.parse(event.dataTransfer.getData("text/plain"));
     const sourceId = data && data.id;
-    const targetId = props.id;
 
-    if (
-      typeof props.onMoveIn === "function" &&
-      sourceId &&
-      sourceId !== targetId
-    ) {
-      props.onMoveIn(targetId, sourceId);
+    if (sourceId && sourceId !== props.id) {
+      dispatch(moveToGroup(props.id, sourceId));
     }
   }
 
@@ -42,9 +56,7 @@ export default function NoteGroup(props: NoteGroupProps) {
       event.stopPropagation();
     }
 
-    if (typeof props.onOpen === "function") {
-      props.onOpen(props.id);
-    }
+    dispatch(openGroup(props.id));
   }
 
   function remove(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -52,9 +64,7 @@ export default function NoteGroup(props: NoteGroupProps) {
       event.stopPropagation();
     }
 
-    if (typeof props.onRemove === "function") {
-      props.onRemove(props.id);
-    }
+    dispatch(removeGroup(props.id));
   }
 
   function rename(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -62,9 +72,7 @@ export default function NoteGroup(props: NoteGroupProps) {
       event.stopPropagation();
     }
 
-    if (typeof props.onRename === "function") {
-      props.onRename(props.id);
-    }
+    dispatch(showOverlay(OverlayType.RENAME_GROUP, { id: props.id }));
   }
 
   function ungroup(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -72,16 +80,14 @@ export default function NoteGroup(props: NoteGroupProps) {
       event.stopPropagation();
     }
 
-    if (typeof props.onUngroup === "function") {
-      props.onUngroup(props.id);
-    }
+    dispatch(ungroupGroup(props.id));
   }
 
   function handleKeyDown(event: React.KeyboardEvent<any>) {
     const { keyCode } = event;
     const key = KeycodeMap[keyCode];
 
-    if (key === "enter") {
+    if (key === "enter" || key === "space") {
       event.preventDefault();
 
       open();
@@ -110,8 +116,8 @@ export default function NoteGroup(props: NoteGroupProps) {
       <GroupContextMenu
         id={props.id}
         onOpen={open}
-        onUngroup={props.currentGroupParent && ungroup}
-        onRemove={!props.hasChildren && remove}
+        onUngroup={Boolean(currentGroupParentID) && ungroup}
+        onRemove={isEmpty && remove}
         onRename={rename}
       />
     </div>

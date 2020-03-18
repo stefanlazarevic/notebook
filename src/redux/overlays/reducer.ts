@@ -5,7 +5,7 @@ export default function overlaysReducer(state: OverlayState = [], action: any) {
     case OverlaysActions.OPEN_OVERLAY:
       return [...state, action.payload];
     case OverlaysActions.CLOSE_OVERLAY:
-      return state.filter(({ id }) => id !== action.payload);
+      return state.filter(({ overlayID }) => overlayID !== action.payload);
     default:
       return state;
   }

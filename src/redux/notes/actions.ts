@@ -254,7 +254,7 @@ export function moveToGroup(
   };
 }
 
-export function ungroup(id: NoteRecordID | NoteGroupID) {
+export function ungroupGroup(id: NoteRecordID | NoteGroupID) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
     const { currentGroupID, groups } = notes;
@@ -270,6 +270,8 @@ export function ungroup(id: NoteRecordID | NoteGroupID) {
     dispatch(moveToGroup(targetGroup.id, id));
   };
 }
+
+export const ungroupRecord = ungroupGroup;
 
 export function swapCurrentGroupChildren(
   sourceIndex: number,

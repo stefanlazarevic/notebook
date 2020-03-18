@@ -8,9 +8,24 @@ import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 import RecordContextMenu from "./components/RecordContextMenu/RecordContextMenu";
 import { convertFromRaw } from "draft-js";
 import utils from "../../../../utils";
-import { NoteRecordProps } from "./RecordProps";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  swapCurrentGroupChildren,
+  ungroupRecord
+} from "../../../../redux/notes/actions";
+import { openEditor } from "../../../../redux/editor/actions";
+import { showOverlay } from "../../../../redux/overlays/actions";
+import { OverlayType } from "../../../../redux/overlays/types";
+import { queuePrintRecords } from "../../../../redux/print/actions";
+import { AppState } from "../../../../redux/types";
 
-export default function NoteRecord(props: NoteRecordProps) {
+export default function NoteRecord(props: any) {
+  const dispatch = useDispatch();
+
+  const currentGroupParentID = useSelector(
+    (state: AppState) => state.notes.groups[state.notes.currentGroupID].parent
+  );
+
   const contentState = convertFromRaw(props.content);
 
   function allowDrop(event: React.DragEvent<HTMLDivElement>) {
@@ -32,12 +47,8 @@ export default function NoteRecord(props: NoteRecordProps) {
     const sourceIndex = parseInt(data && data.index);
     const targetIndex = props.index;
 
-    if (
-      typeof props.onSwap === "function" &&
-      !Number.isNaN(sourceIndex) &&
-      sourceIndex !== targetIndex
-    ) {
-      props.onSwap(sourceIndex, targetIndex);
+    if (!Number.isNaN(sourceIndex) && sourceIndex !== targetIndex) {
+      dispatch(swapCurrentGroupChildren(sourceIndex, targetIndex));
     }
   }
 
@@ -46,9 +57,7 @@ export default function NoteRecord(props: NoteRecordProps) {
       event.stopPropagation();
     }
 
-    if (typeof props.onOpen === "function") {
-      props.onOpen(props.id);
-    }
+    dispatch(openEditor(props.id));
   }
 
   function ungroup(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -56,9 +65,7 @@ export default function NoteRecord(props: NoteRecordProps) {
       event.stopPropagation();
     }
 
-    if (typeof props.onUngroup === "function") {
-      props.onUngroup(props.id);
-    }
+    dispatch(ungroupRecord(props.id));
   }
 
   function remove(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -66,9 +73,7 @@ export default function NoteRecord(props: NoteRecordProps) {
       event.stopPropagation();
     }
 
-    if (typeof props.onRemove === "function") {
-      props.onRemove(props.id);
-    }
+    dispatch(showOverlay(OverlayType.DELETE_RECORD, { id: props.id }));
   }
 
   function rename(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -76,9 +81,7 @@ export default function NoteRecord(props: NoteRecordProps) {
       event.stopPropagation();
     }
 
-    if (typeof props.onRename === "function") {
-      props.onRename(props.id);
-    }
+    dispatch(showOverlay(OverlayType.RENAME_RECORD, { id: props.id }));
   }
 
   function print(event?: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -86,16 +89,14 @@ export default function NoteRecord(props: NoteRecordProps) {
       event.stopPropagation();
     }
 
-    if (typeof props.onPrint === "function") {
-      props.onPrint(props.id);
-    }
+    dispatch(queuePrintRecords([props.id]));
   }
 
   function handleKeyDown(event: React.KeyboardEvent<any>) {
     const { keyCode } = event;
     const key = KeycodeMap[keyCode];
 
-    if (key === "enter") {
+    if (key === "enter" || key === "space") {
       event.preventDefault();
 
       open();
@@ -128,7 +129,7 @@ export default function NoteRecord(props: NoteRecordProps) {
       <RecordContextMenu
         id={props.id}
         onOpen={open}
-        onUngroup={props.currentGroupParent && ungroup}
+        onUngroup={Boolean(currentGroupParentID) && ungroup}
         onRemove={remove}
         onRename={rename}
         onPrint={print}

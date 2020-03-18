@@ -1,18 +1,25 @@
 import React, { useRef } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector, batch } from "react-redux";
 
 import "./CreateGroupOverlay.css";
 
 import OverlayHeader from "../../template/OverlayHeader/OverlayHeader";
 import OverlayBody from "../../template/OverlayBody/OverlayBody";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
-import { IDispatch, AppState } from "../../../../redux/types";
-import { NoteGroupID, NoteGroup } from "../../../../redux/notes/groups/types";
-import { createNewGroup } from "../../../../redux/notes/actions";
+import { NoteGroup } from "../../../../redux/notes/groups/types";
 import utils from "../../../../utils";
 import FormInput from "../../../UI/FormInput/FormInput";
+import { createNewGroup } from "../../../../redux/notes/actions";
+import { closeOverlay } from "../../../../redux/overlays/actions";
+import { AppState } from "../../../../redux/types";
 
-function CreateGroupOverlay(props: any) {
+export default function CreateGroupOverlay(props: any) {
+  const dispatch = useDispatch();
+
+  const currentGroupID = useSelector(
+    (state: AppState) => state.notes.currentGroupID
+  );
+
   const nameReference = useRef<HTMLInputElement>(null);
 
   function create(event: React.FormEvent) {
@@ -22,24 +29,23 @@ function CreateGroupOverlay(props: any) {
       id: utils.string.generateRandom(),
       title: "",
       children: [],
-      parent: props.currentGroupID
+      parent: currentGroupID
     };
 
     if (nameReference.current) {
       group.title = nameReference.current.value;
     }
 
-    if (typeof props.createNewGroup === "function") {
-      props.createNewGroup(group.parent, group);
-    }
-
-    props.onClose();
+    batch(() => {
+      dispatch(createNewGroup(currentGroupID, group));
+      dispatch(closeOverlay(props.overlayID));
+    });
   }
 
   return (
     <form className="CreateGroupOverlay" onSubmit={create}>
       <OverlayHeader
-        id={props.id}
+        id={props.overlayID}
         title="Create Group"
         onClose={props.onClose}
       />
@@ -58,22 +64,3 @@ function CreateGroupOverlay(props: any) {
     </form>
   );
 }
-
-function mapStateToProps(state: AppState) {
-  const { notes } = state;
-  const { currentGroupID } = notes;
-
-  return {
-    currentGroupID
-  };
-}
-
-function mapDispatchToProps(dispatch: IDispatch) {
-  return {
-    createNewGroup: (targetGroupID: NoteGroupID, group: NoteGroup) => {
-      dispatch(createNewGroup(targetGroupID, group));
-    }
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateGroupOverlay);

@@ -12,6 +12,9 @@ export type NoteRecord = {
   parent: NoteGroupID;
   title: string;
   content: RawDraftContentState;
+
+  // Temporary typescript workaround.
+  children?: any;
 };
 
 export type NotesRecords = {

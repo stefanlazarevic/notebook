@@ -9,6 +9,8 @@ import { MdNoteAdd } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/types";
 import { NotesProps } from "./NotesProps";
+import { NoteGroupID } from "../../redux/notes/groups/types";
+import { NoteRecordID } from "../../redux/notes/records/types";
 
 export default function Notes(props: NotesProps) {
   const currentGroupID = useSelector(
@@ -22,7 +24,7 @@ export default function Notes(props: NotesProps) {
   return (
     <div className="NotesWrapper">
       <div className="Notes">
-        {utils.array.map((id: any[], index: number) => {
+        {utils.array.map((id: NoteGroupID | NoteRecordID, index: number) => {
           return (
             <NoteContainer key={id} id={id} index={index} tabIndex={index} />
           );
