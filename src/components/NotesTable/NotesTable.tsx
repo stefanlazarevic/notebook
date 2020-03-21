@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Table,
   Column,
@@ -10,7 +10,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../redux/types";
 import { MdFolder } from "react-icons/md";
 import {
-  swapCurrentGroupChildren,
   moveToGroup,
   openGroup,
   ungroupGroup,
@@ -19,12 +18,85 @@ import {
 
 import "./NotesTable.css";
 import { ContextMenuTrigger, ContextMenu, MenuItem } from "react-contextmenu";
-import { NoteGroupID } from "../../redux/notes/groups/types";
 import { showOverlay } from "../../redux/overlays/actions";
 import { OverlayType } from "../../redux/overlays/types";
+import { Container, Bar, Section } from "react-simple-resizer";
+
+function Row(props: any) {
+  const dispatch = useDispatch();
+
+  const group = useSelector((state: AppState) => state.notes.groups[props.id]);
+
+  function allowDrop(event: React.DragEvent) {
+    event.preventDefault();
+  }
+
+  function dragStart(event: React.DragEvent) {
+    event.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({
+        index: props.index,
+        id: props.id
+      })
+    );
+  }
+
+  function drop(event: React.DragEvent) {
+    event.preventDefault();
+
+    const data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    const sourceId = data && data.id;
+
+    if (sourceId !== props.id) {
+      dispatch(moveToGroup(props.id, sourceId));
+    }
+  }
+
+  function open(event: React.MouseEvent) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    dispatch(openGroup(props.id));
+  }
+
+  function collectDataForContextMenu() {
+    return { id: props.id, index: props.index, open };
+  }
+
+  return (
+    <ContextMenuTrigger
+      id="group-context-menu"
+      holdToDisplay={-1}
+      attributes={{
+        className: "NotesRow",
+        tabIndex: props.index,
+        style: props.style,
+        draggable: true,
+        onDragOver: allowDrop,
+        onDragStart: dragStart,
+        onDrop: drop,
+        onDoubleClick: open
+      }}
+      collect={collectDataForContextMenu}
+    >
+      <div {...props.columns[0].props}>
+        <MdFolder className="FolderIcon" />
+        <span>{props.id}</span>
+      </div>
+      <div {...props.columns[1].props}>{group.title}</div>
+    </ContextMenuTrigger>
+  );
+}
 
 function AutoSizerContent(props: Size) {
-  const dispatch = useDispatch();
+  const table = useRef(null);
+  const resizeContainer = useRef<any>(null);
+  const [columnWidth, setColumnWidth] = useState([props.width, props.width]);
+
+  useEffect(() => {
+    setColumnWidth([props.width, props.width]);
+  }, [props.width]);
 
   const currentGroupID = useSelector(
     (state: AppState) => state.notes.currentGroupID
@@ -34,7 +106,46 @@ function AutoSizerContent(props: Size) {
     (state: AppState) => state.notes.groups[currentGroupID].children
   );
 
-  const groups = useSelector((state: AppState) => state.notes.groups);
+  function headerRowRenderer(props: any) {
+    function afterResizing() {
+      if (resizeContainer.current) {
+        const resizer = resizeContainer.current.getResizer();
+
+        setColumnWidth(() =>
+          props.columns.map((_: any, index: number) =>
+            resizer.getSectionSize(index)
+          )
+        );
+      }
+    }
+
+    return (
+      <Container
+        ref={resizeContainer}
+        className={props.className}
+        style={props.style}
+        afterResizing={afterResizing}
+      >
+        {props.columns.map((column: any, index: number) => (
+          <>
+            {index !== 0 && (
+              <Bar
+                size={5}
+                style={{
+                  background: "#888888",
+                  cursor: "col-resize",
+                  height: "100%"
+                }}
+              />
+            )}
+            <Section>
+              <div key={column.key} {...column.props} />
+            </Section>
+          </>
+        ))}
+      </Container>
+    );
+  }
 
   /**
    * Function which extract data from collection and passes it to the rowRenderer as `rowData`.
@@ -42,73 +153,20 @@ function AutoSizerContent(props: Size) {
   function rowGetter({ index }: { index: number }) {
     const id = childrenIdentifiers[index];
 
-    const group = groups[id];
-
-    return { id, index, title: group.title };
-  }
-
-  function headerRowRenderer(props: any) {
-    return <div>Name</div>;
+    return { id, index };
   }
 
   function rowRenderer(props: TableRowProps) {
-    function allowDrop(event: React.DragEvent) {
-      event.preventDefault();
-    }
-
-    function dragStart(event: React.DragEvent) {
-      event.dataTransfer.setData(
-        "text/plain",
-        JSON.stringify({
-          index: props.rowData.index,
-          id: props.rowData.id
-        })
-      );
-    }
-
-    function drop(event: React.DragEvent) {
-      event.preventDefault();
-
-      const data = JSON.parse(event.dataTransfer.getData("text/plain"));
-      const sourceId = data && data.id;
-
-      if (sourceId !== props.rowData.id) {
-        dispatch(moveToGroup(props.rowData.id, sourceId));
-      }
-    }
-
-    function open(event: React.MouseEvent) {
-      if (event) {
-        event.stopPropagation();
-      }
-
-      dispatch(openGroup(props.rowData.id));
-    }
-
-    function collectDataForContextMenu() {
-      return { id: props.rowData.id, index: props.rowData.index };
-    }
+    const id = childrenIdentifiers[props.rowData.index];
 
     return (
-      <ContextMenuTrigger
-        id="group-context-menu"
-        key={props.rowData.id}
-        holdToDisplay={-1}
-        attributes={{
-          className: "NotesRow",
-          tabIndex: props.rowData.index,
-          style: props.style,
-          draggable: true,
-          onDragOver: allowDrop,
-          onDragStart: dragStart,
-          onDrop: drop,
-          onDoubleClick: open
-        }}
-        collect={collectDataForContextMenu}
-      >
-        <MdFolder className="FolderIcon" />
-        <span>{props.rowData.title}</span>
-      </ContextMenuTrigger>
+      <Row
+        id={id}
+        key={id}
+        index={props.rowData.index}
+        style={props.style}
+        columns={props.columns}
+      />
     );
   }
 
@@ -122,6 +180,7 @@ function AutoSizerContent(props: Size) {
 
   return (
     <Table
+      ref={table}
       width={props.width}
       height={props.height}
       className="NotesTable"
@@ -133,7 +192,20 @@ function AutoSizerContent(props: Size) {
       noRowsRenderer={noRowsRenderer}
       headerRowRenderer={headerRowRenderer}
     >
-      <Column dataKey="id" width={props.width} />
+      <Column
+        dataKey="id"
+        label="ID"
+        width={
+          typeof columnWidth[0] === "number" ? columnWidth[0] : props.width
+        }
+      />
+      <Column
+        dataKey="title"
+        label="Name"
+        width={
+          typeof columnWidth[1] === "number" ? columnWidth[1] : props.width
+        }
+      />
     </Table>
   );
 }
@@ -144,7 +216,7 @@ export default function NotesTable(props: any) {
   function open(event: React.MouseEvent, data: any) {
     event.preventDefault();
 
-    dispatch(openGroup(data.id));
+    data.open();
   }
 
   function rename(event: React.MouseEvent, data: any) {
@@ -166,7 +238,7 @@ export default function NotesTable(props: any) {
   }
 
   return (
-    <div style={{ flex: 1 }}>
+    <div style={{ flex: 1, overflowX: "auto", overflowY: "hidden" }}>
       <AutoSizer>
         {({ width, height }) => (
           <AutoSizerContent {...props} width={width} height={height} />

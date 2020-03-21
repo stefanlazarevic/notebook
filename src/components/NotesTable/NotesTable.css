@@ -1,13 +1,21 @@
 .NotesRow {
-  padding: 0 5px;
+  display: flex;
 }
 
 .NotesRow__empty {
   text-align: center;
 }
 
+.NotesRow:nth-child(even):hover {
+  background-color: var(--app-background-10-lighter-color);
+}
+
 .NotesRow:nth-child(odd) {
   background-color: var(--app-background-5-lighter-color);
+}
+
+.NotesRow:nth-child(odd):hover {
+  background-color: var(--app-background-10-lighter-color);
 }
 
 .NotesRow .FolderIcon {

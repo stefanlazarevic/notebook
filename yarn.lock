@@ -8562,6 +8562,13 @@ react-scripts@3.4.0:
   optionalDependencies:
     fsevents "2.1.2"
 
+react-simple-resizer@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-simple-resizer/-/react-simple-resizer-2.1.0.tgz#9645d2bc2f1ee043435804619826cad0bf2511d7"
+  integrity sha512-iiPER+vuKsW5+6+HroNnahc2Cah6UpO4w9SeuGw1pf/6p/F/vAD4+4288yJS5fLY4xJpDNEiOiRBk2kLUui6nw==
+  dependencies:
+    rxjs "^6.3.3"
+
 react-virtualized@^9.21.2:
   version "9.21.2"
   resolved "https://registry.yarnpkg.com/react-virtualized/-/react-virtualized-9.21.2.tgz#02e6df65c1e020c8dbf574ec4ce971652afca84e"
@@ -9023,7 +9030,7 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
-rxjs@^6.5.3:
+rxjs@^6.3.3, rxjs@^6.5.3:
   version "6.5.4"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.4.tgz#e0777fe0d184cec7872df147f303572d414e211c"
   integrity sha512-naMQXcgEo3csAEGvw/NydRA0fuS2nDZJiw1YUWFKU7aPPAPGZEsD4Iimit96qwCieH6y614MCLYwdkrWx7z/7Q==
