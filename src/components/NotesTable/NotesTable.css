@@ -1,0 +1,15 @@
+.NotesRow {
+  padding: 0 5px;
+}
+
+.NotesRow__empty {
+  text-align: center;
+}
+
+.NotesRow:nth-child(odd) {
+  background-color: var(--app-background-5-lighter-color);
+}
+
+.NotesRow .FolderIcon {
+  margin-right: 5px;
+}

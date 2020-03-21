@@ -9,6 +9,7 @@ import AppEditorContainer from "./components/AppEditor";
 import NotesContainer from "./components/Notes";
 import OverlayContainer from "./components/Overlay";
 import RecordPrintContainer from "./components/RecordPrint";
+import NotesTable from "./components/NotesTable/NotesTable";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
         {/* Test component */}
         {/* <SettingsDrawerContainer /> */}
         {/* Test component */}
-        <NotesContainer />
+        {/* <NotesContainer /> */}
+        <NotesTable />
         <OverlayContainer />
       </div>
       <RecordPrintContainer />
