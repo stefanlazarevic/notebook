@@ -1,4 +1,6 @@
 import React from "react";
+import { Container, Section, Bar } from "react-simple-resizer";
+import AutoSizer from "react-virtualized-auto-sizer";
 
 import "./App.css";
 
@@ -23,7 +25,26 @@ function App() {
         {/* <SettingsDrawerContainer /> */}
         {/* Test component */}
         {/* <NotesContainer /> */}
-        <NotesTable />
+        <div className="AppPanel">
+          <AutoSizer>
+            {({ width, height }) => (
+              <Container style={{ width, height }}>
+                <Section
+                  style={{ background: "#27282d" }}
+                  defaultSize={300}
+                  maxSize={300}
+                ></Section>
+                <Bar
+                  size={5}
+                  style={{ background: "#888888", cursor: "col-resize" }}
+                />
+                <Section minSize={600}>
+                  <NotesTable />
+                </Section>
+              </Container>
+            )}
+          </AutoSizer>
+        </div>
         <OverlayContainer />
       </div>
       <RecordPrintContainer />

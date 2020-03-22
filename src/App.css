@@ -82,3 +82,7 @@
   position: absolute;
   right: 7px;
 }
+
+.AppPanel {
+  flex: 1;
+}

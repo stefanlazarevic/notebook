@@ -9,7 +9,7 @@
 
   border: 0;
 
-  background-color: var(--app-background-5-darker-color);
+  background-color: var(--app-background-10-lighter-color);
 
   cursor: pointer;
 
@@ -18,5 +18,5 @@
 
 .HomeButton:hover,
 .HomeButton:focus {
-  background-color: var(--app-background-10-darker-color);
+  background-color: var(--app-background-5-lighter-color);
 }

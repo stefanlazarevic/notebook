@@ -111,7 +111,7 @@ export default function NotesTable(props: any) {
             }}
           >
             <Column label="Name" width={240} />
-            <Column label="Date Modified" width={200} />
+            <Column label="Last Modified" width={200} />
             <Column label="Type" width={100} />
           </Table>
         )}
