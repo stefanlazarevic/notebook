@@ -17,6 +17,10 @@
   background-color: #fff;
 }
 
+.VTHeader:hover .VTColumnResizer {
+  background-color: #fff;
+}
+
 .VTRow {
   background-color: #040404;
 }

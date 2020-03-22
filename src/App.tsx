@@ -12,6 +12,8 @@ import AppEditorContainer from "./components/AppEditor";
 import OverlayContainer from "./components/Overlay";
 import RecordPrintContainer from "./components/RecordPrint";
 import NotesTable from "./components/NotesTable/NotesTable";
+import { MdHome, MdFolder } from "react-icons/md";
+import { IoMdTrash, IoMdStar } from "react-icons/io";
 
 function App() {
   return (
@@ -33,7 +35,28 @@ function App() {
                   style={{ background: "#27282d" }}
                   defaultSize={300}
                   maxSize={300}
-                ></Section>
+                >
+                  <div className="Aside">
+                    <div className="AsideItem">
+                      <MdHome /> Home
+                    </div>
+                    <div className="AsideItem">
+                      <IoMdTrash /> Recycle
+                    </div>
+                    <hr />
+                    <details className="AsideItem">
+                      <summary>
+                        <IoMdStar /> Favorites
+                      </summary>
+                      <div className="AsideItem">
+                        <MdFolder /> Fakultet
+                      </div>
+                      <div className="AsideItem">
+                        <MdFolder /> Ostalo
+                      </div>
+                    </details>
+                  </div>
+                </Section>
                 <Bar
                   size={5}
                   style={{ background: "#888888", cursor: "col-resize" }}

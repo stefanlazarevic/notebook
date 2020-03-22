@@ -50,7 +50,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
     }
   };
 
-  for (let i = 0; i < 1300; i++) {
+  for (let i = 0; i < 0; i++) {
     const id = utils.string.generateRandom(6);
 
     groups[id] = {

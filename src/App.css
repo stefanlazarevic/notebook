@@ -86,3 +86,55 @@
 .AppPanel {
   flex: 1;
 }
+
+.Aside {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  overflow-y: auto;
+
+  padding: 20px 15px;
+}
+
+.AsideItem {
+  display: flex;
+
+  align-items: center;
+
+  padding: 10px 0;
+
+  cursor: pointer;
+
+  font-size: 1.2rem;
+
+  overflow: hidden;
+
+  word-wrap: unset;
+}
+
+.AsideItem svg {
+  display: inline-block;
+
+  margin-right: 10px;
+}
+
+.Aside hr {
+  background: #888;
+  width: 100%;
+  height: 1px;
+  border: 0;
+}
+
+.AsideItem > .AsideItem {
+  padding-left: 15px;
+}
+
+.Aside summary::-webkit-details-marker {
+  display: none;
+}
+
+.Aside summary {
+  margin-bottom: 10px;
+}
