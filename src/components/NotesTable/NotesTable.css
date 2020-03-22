@@ -1,0 +1,29 @@
+.VTHeader {
+  background-color: var(--app-background-5-darker-color);
+  border-bottom: 2px solid var(--app-text-base-color);
+}
+
+.VTHeaderCell {
+  border-right: 1px solid var(--app-text-base-color);
+}
+
+.VTColumnResizer {
+  background-color: var(--app-text-base-color);
+}
+
+.VTRowOdd {
+  background-color: var(--app-background-5-lighter-color);
+}
+
+.VTRowEven {
+  background-color: var(--app-background-base-color);
+}
+
+.VTRowOdd:hover,
+.VTRowEven:hover {
+  background-color: var(--app-background-10-lighter-color);
+}
+
+.NotesWrapper {
+  flex: 1;
+}
