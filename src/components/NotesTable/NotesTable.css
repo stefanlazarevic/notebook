@@ -1,6 +1,6 @@
 .VTHeader {
   background-color: var(--app-background-5-darker-color);
-  border-bottom: 2px solid var(--app-text-base-color);
+  border-bottom: 0;
 }
 
 .VTHeaderCell {
@@ -22,6 +22,20 @@
 .VTRowOdd:hover,
 .VTRowEven:hover {
   background-color: var(--app-background-10-lighter-color);
+}
+
+.VTRow.selected {
+  background-color: var(--app-background-15-lighter-color);
+}
+
+.VTCell {
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.VTCell,
+.VTHeaderCell {
+  overflow: hidden;
 }
 
 .NotesWrapper {
