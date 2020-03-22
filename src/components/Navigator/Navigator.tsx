@@ -20,17 +20,21 @@ export default function Navigator(props: NavigatorProps) {
   );
 
   function goBack() {
-    dispatch(openParentGroup(currentGroupID));
+    if (parentGroupID) {
+      dispatch(openParentGroup(currentGroupID));
+    }
   }
 
   function goHome() {
-    dispatch(openGroup("root"));
+    if (currentGroupID !== "root") {
+      dispatch(openGroup("root"));
+    }
   }
 
   return (
-    <div className="Navigator" data-open={Boolean(parentGroupID)}>
-      <BackButton onClick={goBack} />
-      <HomeButton onClick={goHome} />
+    <div className="Navigator" data-open={true}>
+      <BackButton onClick={goBack} disabled={parentGroupID} />
+      <HomeButton onClick={goHome} disabled={currentGroupID === "root"} />
     </div>
   );
 }

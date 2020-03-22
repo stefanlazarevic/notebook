@@ -1,13 +1,13 @@
-.VTCell span {
+.VTCell span,
+.VTCell .GroupTitle {
   padding: 0 5px;
   font-size: 1.1rem;
+  white-space: nowrap;
 }
 
 .VTCell .GroupTitle {
-  padding: 0 5px;
   display: flex;
   align-items: center;
-  font-size: 1.1rem;
 }
 
 .VTCell .GroupTitle svg {

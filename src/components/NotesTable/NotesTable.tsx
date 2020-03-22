@@ -110,7 +110,7 @@ export default function NotesTable(props: any) {
               useIsScrolling: true
             }}
           >
-            <Column label="Name" width={200} />
+            <Column label="Name" width={240} />
             <Column label="Date Modified" width={200} />
             <Column label="Type" width={100} />
           </Table>

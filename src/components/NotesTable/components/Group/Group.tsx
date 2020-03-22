@@ -67,6 +67,15 @@ export default function Group(props: GroupProps) {
     return { id: props.id, index: props.index, open, rename, remove, ungroup };
   }
 
+  function timeConverter(UNIX_timestamp: number) {
+    const d = new Date(UNIX_timestamp);
+    const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
+    const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
+    const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+
+    return `${da}/${mo}/${ye}`;
+  }
+
   return (
     <ContextMenuTrigger
       id="group-menu"
@@ -88,13 +97,10 @@ export default function Group(props: GroupProps) {
       }}
     >
       <div className="VTCell" style={{ width: props.getColumnWidth(0) }}>
-        <div className="GroupTitle">
-          <MdFolder />
-          {props.title}
-        </div>
+        <div className="GroupTitle">{props.title}</div>
       </div>
       <div className="VTCell" style={{ width: props.getColumnWidth(1) }}>
-        <span>{props.updatedAt}</span>
+        <span>{props.updatedAt ? timeConverter(props.updatedAt) : "-"}</span>
       </div>
       <div className="VTCell" style={{ width: props.getColumnWidth(2) }}>
         <span>{props.type}</span>

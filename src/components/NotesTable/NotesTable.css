@@ -1,5 +1,5 @@
 .VTHeader {
-  background-color: var(--app-background-5-darker-color);
+  background-color: var(--app-background-base-color);
   border-bottom: 0;
 }
 
@@ -11,17 +11,21 @@
   background-color: var(--app-text-base-color);
 }
 
-.VTRowOdd {
+.VTRow {
+  background-color: var(--app-background-base-color);
+}
+
+/* .VTRowOdd {
   background-color: var(--app-background-5-lighter-color);
 }
 
 .VTRowEven {
   background-color: var(--app-background-base-color);
-}
+} */
 
 .VTRowOdd:hover,
 .VTRowEven:hover {
-  background-color: var(--app-background-10-lighter-color);
+  background-color: #0b1a2e;
 }
 
 .VTRow.selected {
@@ -33,11 +37,16 @@
   border-bottom: 0;
 }
 
-.VTCell,
-.VTHeaderCell {
+.VTCell {
   overflow: hidden;
 }
 
 .NotesWrapper {
   flex: 1;
+
+  margin-left: 15px;
+}
+
+.VTList {
+  overflow: auto !important;
 }

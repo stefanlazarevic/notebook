@@ -29,7 +29,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
       parent: undefined,
       title: "/",
       updatedAt: now,
-      type: "Group",
+      type: "Folder",
       children: ["fakultet", "ostalo"]
     },
     fakultet: {
@@ -37,7 +37,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
       parent: "root",
       title: "Fakultet",
       updatedAt: now,
-      type: "Group",
+      type: "Folder",
       children: []
     },
     ostalo: {
@@ -45,7 +45,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
       parent: "root",
       title: "Ostalo",
       updatedAt: now,
-      type: "Group",
+      type: "Folder",
       children: []
     }
   };
@@ -58,7 +58,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
       parent: "root",
       title: id,
       updatedAt: now,
-      type: "Group",
+      type: "Folder",
       children: []
     };
 
