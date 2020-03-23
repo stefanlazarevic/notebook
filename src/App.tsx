@@ -14,6 +14,7 @@ import RecordPrintContainer from "./components/RecordPrint";
 import NotesTable from "./components/NotesTable/NotesTable";
 import { MdHome, MdFolder } from "react-icons/md";
 import { IoMdTrash, IoMdStar } from "react-icons/io";
+import Aside from "./components/Aside/Aside";
 
 function App() {
   return (
@@ -30,13 +31,14 @@ function App() {
         <div className="AppPanel">
           <AutoSizer>
             {({ width, height }) => (
-              <Container style={{ width, height }}>
+              <Container className="ResizeContainer" style={{ width, height }}>
                 <Section
-                  style={{ background: "#27282d" }}
+                  className="ResizeSection"
                   defaultSize={300}
                   maxSize={300}
                 >
-                  <div className="Aside">
+                  <Aside />
+                  {/* <div className="Aside">
                     <div className="AsideItem">
                       <MdHome /> Home
                     </div>
@@ -55,12 +57,9 @@ function App() {
                         <MdFolder /> Ostalo
                       </div>
                     </details>
-                  </div>
+                  </div> */}
                 </Section>
-                <Bar
-                  size={5}
-                  style={{ background: "#888888", cursor: "col-resize" }}
-                />
+                <Bar size={5} className="ResizerBar" />
                 <Section minSize={600}>
                   <NotesTable />
                 </Section>

@@ -1,33 +1,41 @@
 .VTHeader {
-  background-color: #040404;
-  border-bottom: 2px solid #888888;
+  background-color: var(--background-darker-color);
+  border-bottom: 1px solid var(--border-darker-color);
 }
 
 .VTHeaderCell {
   border-right: 0;
+
+  color: var(--text-darker-color);
+
+  font-weight: 300;
+}
+
+.VTCellContent {
+  padding: 0 5px;
 }
 
 .VTColumnResizer {
-  background-color: #040404;
+  background-color: var(--background-darker-color);
 }
 
 .VTColumnResizer:hover,
 .VTColumnResizer:focus,
 .VTColumnResizer:active {
-  background-color: #fff;
+  background-color: var(--text-base-color);
 }
 
 .VTHeader:hover .VTColumnResizer {
-  background-color: #fff;
+  background-color: var(--text-lighter-color);
 }
 
 .VTRow {
-  background-color: #040404;
+  background-color: var(--background-darker-color);
 }
 
 .VTRowOdd:hover,
 .VTRowEven:hover {
-  background-color: var(--app-background-base-color);
+  background-color: var(--background-base-color);
 }
 
 .VTRow.selected {
@@ -49,9 +57,9 @@
 }
 
 .NotesWrapper {
-  height: 100%;
+  height: calc(100% - 40px);
 
-  background-color: #040404;
+  background-color: var(--background-darker-color);
 }
 
 .VTList {

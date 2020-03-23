@@ -9,8 +9,7 @@ import "./NotesTable.css";
 
 import { AppState } from "../../redux/types";
 import NoteRow from "./components/NoteRow/NoteRow";
-import { NoteGroupID } from "../../redux/notes/groups/types";
-import utils from "../../utils";
+import TableFooter from "./components/TableFooter/TableFooter";
 
 export default function NotesTable(props: any) {
   const currentGroupId = useSelector(
@@ -24,8 +23,6 @@ export default function NotesTable(props: any) {
   const children = useSelector(
     (state: AppState) => state.notes.groups[currentGroupId].children
   );
-
-  const [selected, setSelected] = useState<{ [id: string]: boolean }>({});
 
   function open(event: React.MouseEvent, data: any) {
     event.preventDefault();
@@ -59,20 +56,6 @@ export default function NotesTable(props: any) {
     }
   }
 
-  function handleRowClick(event: React.MouseEvent, id: NoteGroupID) {
-    if (event.ctrlKey) {
-      if (selected[id]) {
-        setSelected(utils.object.deleteProperty(id, selected));
-      } else {
-        setSelected({ ...selected, [id]: true });
-      }
-    } else {
-      if (Object.keys(selected).length) {
-        setSelected({});
-      }
-    }
-  }
-
   function rowRenderer(props: any) {
     const { index, style, isScrolling } = props;
     const { getRowWidth, getColumnWidth } = props.data.rowProps;
@@ -86,49 +69,49 @@ export default function NotesTable(props: any) {
         getColumnWidth={getColumnWidth}
         className={index % 2 ? "VTRowEven" : "VTRowOdd"}
         isScrolling={isScrolling}
-        onClick={handleRowClick}
-        selected={selected[children[index]]}
-        hasSelected={Object.keys(selected).length !== 0}
       />
     );
   }
 
   return (
-    <div className="NotesWrapper">
-      <AutoSizer>
-        {({ width, height }) => (
-          <Table
-            data={children.length ? children : ["empty"]}
-            width={width}
-            height={height}
-            rowHeight={40}
-            headerHeight={40}
-            minColumnWidth={30}
-            rowRenderer={rowRenderer}
-            listProps={{
-              overscanCount: 20,
-              useIsScrolling: true
-            }}
-          >
-            <Column label="Name" width={240} />
-            <Column label="Last Modified" width={200} />
-            <Column label="Type" width={100} />
-          </Table>
-        )}
-      </AutoSizer>
-      <ContextMenu id="group-menu">
-        <MenuItem onClick={open}>Open</MenuItem>
-        <MenuItem divider />
-        <MenuItem disabled={true}>Copy</MenuItem>
-        <MenuItem disabled={true}>Cut</MenuItem>
-        <MenuItem onClick={rename}>Rename</MenuItem>
-        <MenuItem divider />
-        <MenuItem disabled={!Boolean(parentGroupID)} onClick={ungroup}>
-          Ungroup
-        </MenuItem>
-        <MenuItem divider />
-        <MenuItem onClick={remove}>Remove</MenuItem>
-      </ContextMenu>
-    </div>
+    <>
+      <div className="NotesWrapper">
+        <AutoSizer>
+          {({ width, height }) => (
+            <Table
+              data={children.length ? children : ["empty"]}
+              width={width}
+              height={height}
+              rowHeight={40}
+              headerHeight={40}
+              minColumnWidth={30}
+              rowRenderer={rowRenderer}
+              listProps={{
+                overscanCount: 20,
+                useIsScrolling: true
+              }}
+            >
+              <Column label="Name" width={240} />
+              <Column label="Last Modified" width={200} />
+              <Column label="Type" width={100} />
+            </Table>
+          )}
+        </AutoSizer>
+        <ContextMenu id="group-menu">
+          <MenuItem onClick={open}>Open</MenuItem>
+          <MenuItem divider />
+          <MenuItem disabled={true}>Copy</MenuItem>
+          <MenuItem disabled={true}>Cut</MenuItem>
+          <MenuItem onClick={rename}>Rename</MenuItem>
+          <MenuItem divider />
+          <MenuItem disabled={!Boolean(parentGroupID)} onClick={ungroup}>
+            Ungroup
+          </MenuItem>
+          <MenuItem divider />
+          <MenuItem onClick={remove}>Remove</MenuItem>
+        </ContextMenu>
+      </div>
+      <TableFooter items={children.length} />
+    </>
   );
 }

@@ -14,8 +14,8 @@
   line-height: 1.4rem;
 
   /* Colors */
-  background-color: var(--app-background-5-lighter-color);
-  color: var(--app-text-base-color);
+  background-color: var(--background-base-color);
+  color: var(--text-base-color);
 
   /* Border */
   border-radius: 4px;
@@ -23,12 +23,9 @@
 
 .AppHeaderButton:hover,
 .AppHeaderButton:focus {
-  /* Colors */
-  background-color: var(--app-background-10-lighter-color);
-  color: var(--app-text-5-lighter-color);
+  color: var(--text-lighter-color);
 }
 
 .AppHeaderButton:disabled {
-  /* Colors */
-  color: var(--app-text-40-darker-color);
+  color: var(--text-darker-color);
 }

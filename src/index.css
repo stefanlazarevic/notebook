@@ -29,6 +29,22 @@
   --app-text-danger-color: rgb(255, 99, 67);
 }
 
+:root {
+  --background-base-color: #262626;
+  --background-darker-color: #111111;
+  --background-lighter-color: #424242;
+
+  --border-base-color: #888888;
+  --border-darker-color: #212121;
+  --border-lighter-color: #777777;
+
+  --text-base-color: #bfbfbf;
+  --text-darker-color: #626262;
+  --text-lighter-color: #ffffff;
+
+  --primary-color: #00a4ef;
+}
+
 /* RESET */
 *,
 *:before,
@@ -45,8 +61,8 @@ body {
 }
 
 body {
-  background-color: var(--app-background-base-color);
-  color: var(--app-text-base-color);
+  background-color: var(--background-base-color);
+  color: var(--text-base-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

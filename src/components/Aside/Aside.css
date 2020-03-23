@@ -1,0 +1,13 @@
+.Aside {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding-top: 20px;
+
+  background-color: var(--background-base-color);
+}

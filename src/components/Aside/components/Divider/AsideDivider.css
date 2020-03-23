@@ -1,0 +1,9 @@
+.AsideDivider {
+  width: 90%;
+
+  height: 1px;
+
+  border: 0;
+
+  background-color: var(--border-base-color);
+}

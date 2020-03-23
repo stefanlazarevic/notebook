@@ -5,11 +5,11 @@
   font-size: 1.4rem;
   line-height: 1rem;
 
-  color: var(--app-text-base-color);
+  color: var(--text-base-color);
 
   border: 0;
 
-  background-color: var(--app-background-10-lighter-color);
+  background-color: var(--background-lighter-color);
 
   cursor: pointer;
 
@@ -18,5 +18,9 @@
 
 .HomeButton:hover,
 .HomeButton:focus {
-  background-color: var(--app-background-5-lighter-color);
+  color: var(--text-lighter-color);
+}
+
+.HomeButton:disabled {
+  color: var(--text-darker-color);
 }
