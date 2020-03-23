@@ -11,7 +11,6 @@ import {
 } from "../../../../redux/notes/actions";
 import { showOverlay } from "../../../../redux/overlays/actions";
 import { OverlayType } from "../../../../redux/overlays/types";
-import { MdFolder } from "react-icons/md";
 
 export default function Group(props: GroupProps) {
   const dispatch = useDispatch();

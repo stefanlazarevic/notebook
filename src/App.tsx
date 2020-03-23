@@ -12,8 +12,6 @@ import AppEditorContainer from "./components/AppEditor";
 import OverlayContainer from "./components/Overlay";
 import RecordPrintContainer from "./components/RecordPrint";
 import NotesTable from "./components/NotesTable/NotesTable";
-import { MdHome, MdFolder } from "react-icons/md";
-import { IoMdTrash, IoMdStar } from "react-icons/io";
 import Aside from "./components/Aside/Aside";
 
 function App() {
@@ -38,26 +36,6 @@ function App() {
                   maxSize={300}
                 >
                   <Aside />
-                  {/* <div className="Aside">
-                    <div className="AsideItem">
-                      <MdHome /> Home
-                    </div>
-                    <div className="AsideItem">
-                      <IoMdTrash /> Recycle
-                    </div>
-                    <hr />
-                    <details className="AsideItem">
-                      <summary>
-                        <IoMdStar /> Favorites
-                      </summary>
-                      <div className="AsideItem">
-                        <MdFolder /> Fakultet
-                      </div>
-                      <div className="AsideItem">
-                        <MdFolder /> Ostalo
-                      </div>
-                    </details>
-                  </div> */}
                 </Section>
                 <Bar size={5} className="ResizerBar" />
                 <Section minSize={600}>
