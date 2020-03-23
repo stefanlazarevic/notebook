@@ -29,7 +29,8 @@ export default function CreateGroupOverlay(props: any) {
       id: utils.string.generateRandom(),
       title: "",
       children: [],
-      type: "Group",
+      updatedAt: Date.now(),
+      type: "Folder",
       parent: currentGroupID
     };
 
