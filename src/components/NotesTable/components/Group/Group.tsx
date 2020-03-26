@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { ContextMenuTrigger } from "react-contextmenu";
+import { FaFolder } from "react-icons/fa";
 
 import { GroupProps } from "./GroupProps";
 import {
@@ -111,7 +112,10 @@ export default function Group(props: GroupProps) {
       }}
     >
       <div className="VTCell" style={{ width: props.getColumnWidth(0) }}>
-        <span>{props.title}</span>
+        <div className="VTCellContent">
+          <FaFolder className="VTCellIcon" />
+          <span>{props.title}</span>
+        </div>
       </div>
       <div className="VTCell" style={{ width: props.getColumnWidth(1) }}>
         <span>{props.updatedAt ? timeConverter(props.updatedAt) : "-"}</span>

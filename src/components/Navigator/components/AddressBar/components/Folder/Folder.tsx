@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BreadcrumbElement from "../../../../../UI/Breadcrumb/components/BreadcrumbElement/BreadcrumbElement";
 import { openGroup } from "../../../../../../redux/notes/actions";
 import { AppState } from "../../../../../../redux/types";
+import { MdComputer } from "react-icons/md";
 
 export default function Folder(props: any) {
   const dispatch = useDispatch();
@@ -15,5 +16,9 @@ export default function Folder(props: any) {
     dispatch(openGroup(props.id));
   }
 
-  return <BreadcrumbElement onClick={open}>{title}</BreadcrumbElement>;
+  return (
+    <BreadcrumbElement onClick={open}>
+      {props.id === "root" ? <MdComputer /> : <span>{title}</span>}
+    </BreadcrumbElement>
+  );
 }

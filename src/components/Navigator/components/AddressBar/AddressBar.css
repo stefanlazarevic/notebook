@@ -8,6 +8,16 @@
   overflow: hidden;
 }
 
+.BreadcrumbElement {
+  vertical-align: middle;
+}
+
+.BreadcrumbElement svg {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.2rem;
+}
+
 .BreadcrumbElement:hover {
   color: var(--text-lighter-color);
 }

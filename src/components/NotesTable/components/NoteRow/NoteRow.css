@@ -1,3 +1,7 @@
+.VTRow .VTCellContent {
+  overflow: visible;
+}
+
 .VTCell span,
 .VTCell .GroupTitle {
   padding: 0 5px;

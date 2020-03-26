@@ -89,3 +89,18 @@
 .VTList::-webkit-scrollbar-corner {
   background: var(--background-darker-color);
 }
+
+.VTCellContent > * {
+  display: inline-block;
+}
+
+.VTCellIcon {
+  color: #f0ca55;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.FileRow .VTCellIcon {
+  color: var(--text-lighter-color);
+}

@@ -7,6 +7,7 @@ import { showOverlay } from "../../../../redux/overlays/actions";
 import { OverlayType } from "../../../../redux/overlays/types";
 import { ungroupRecord } from "../../../../redux/notes/actions";
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
+import { FaFile, FaFileAlt } from "react-icons/fa";
 
 export default function Record(props: any) {
   const dispatch = useDispatch();
@@ -89,7 +90,7 @@ export default function Record(props: any) {
       holdToDisplay={-1}
       collect={forwardDataToContextMenu}
       attributes={{
-        className: `VTRow ${props.className}`,
+        className: `VTRow FileRow ${props.className}`,
         style: { ...props.style, width: props.getRowWidth() },
         tabIndex: props.index,
         onDoubleClick: open,
@@ -105,7 +106,10 @@ export default function Record(props: any) {
           width: props.getColumnWidth(0)
         }}
       >
-        <span>{props.title}</span>
+        <div className="VTCellContent">
+          <FaFileAlt className="VTCellIcon" />
+          <span>{props.title}</span>
+        </div>
       </div>
       <div
         className="VTCell"
