@@ -38,7 +38,7 @@ function App() {
                   <Aside />
                 </Section>
                 <Bar size={5} className="ResizerBar" />
-                <Section minSize={600}>
+                <Section>
                   <NotesTable />
                 </Section>
               </Container>

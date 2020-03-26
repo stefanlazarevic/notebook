@@ -31,15 +31,16 @@
 
 .VTRow {
   background-color: var(--background-darker-color);
+  outline: 0;
+  border: 0;
 }
 
-.VTRowOdd:hover,
-.VTRowEven:hover {
+.VTRow:hover {
   background-color: var(--background-base-color);
 }
 
-.VTRow.selected {
-  background-color: var(--app-background-15-lighter-color);
+.VTRow:focus {
+  background-color: var(--background-lighter-color);
 }
 
 .VTHeaderCell {

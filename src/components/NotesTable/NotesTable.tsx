@@ -13,6 +13,7 @@ import TableFooter from "./components/TableFooter/TableFooter";
 import { showOverlay } from "../../redux/overlays/actions";
 import { OverlayType } from "../../redux/overlays/types";
 import { openEditor } from "../../redux/editor/actions";
+import utils from "../../utils";
 
 export default function NotesTable(props: any) {
   const dispatch = useDispatch();
@@ -21,8 +22,8 @@ export default function NotesTable(props: any) {
     (state: AppState) => state.notes.currentGroupID
   );
 
-  const parentGroupID = useSelector(
-    (state: AppState) => state.notes.groups[currentGroupId].parent
+  const parentGroupID = useSelector((state: AppState) =>
+    utils.array.last(state.notes.groups[currentGroupId].path)
   );
 
   const children = useSelector(
@@ -34,6 +35,14 @@ export default function NotesTable(props: any) {
 
     if (typeof data.open === "function") {
       data.open();
+    }
+  }
+
+  function print(event: React.MouseEvent, data: any) {
+    event.preventDefault();
+
+    if (typeof data.print === "function") {
+      data.print();
     }
   }
 
@@ -117,6 +126,20 @@ export default function NotesTable(props: any) {
           </AutoSizer>
           <ContextMenu id="group-menu">
             <MenuItem onClick={open}>Open</MenuItem>
+            <MenuItem divider />
+            <MenuItem disabled={true}>Copy</MenuItem>
+            <MenuItem disabled={true}>Cut</MenuItem>
+            <MenuItem onClick={rename}>Rename</MenuItem>
+            <MenuItem divider />
+            <MenuItem disabled={!Boolean(parentGroupID)} onClick={ungroup}>
+              Ungroup
+            </MenuItem>
+            <MenuItem divider />
+            <MenuItem onClick={remove}>Remove</MenuItem>
+          </ContextMenu>
+          <ContextMenu id="record-menu">
+            <MenuItem onClick={open}>Open</MenuItem>
+            <MenuItem onClick={print}>Print</MenuItem>
             <MenuItem divider />
             <MenuItem disabled={true}>Copy</MenuItem>
             <MenuItem disabled={true}>Cut</MenuItem>

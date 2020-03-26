@@ -1,0 +1,47 @@
+.Breadcrumb {
+  display: block;
+
+  width: 100%;
+
+  word-wrap: none;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+}
+
+.BreadcrumbElement {
+  position: relative;
+
+  display: inline-block;
+
+  padding-right: 10px;
+
+  margin-right: 15px;
+
+  cursor: pointer;
+}
+
+.BreadcrumbElement:last-child {
+  padding-right: 0;
+
+  margin-right: 0;
+}
+
+.BreadcrumbElement:not(:last-child):after {
+  content: "›";
+
+  position: absolute;
+
+  top: 50%;
+
+  left: 100%;
+
+  transform: translateY(-50%);
+
+  font-size: 1rem;
+}
+
+.BreadcrumbElement.hidden {
+  display: none !important;
+}

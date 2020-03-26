@@ -1,0 +1,36 @@
+.BreadcrumbWrapper {
+  flex: 1;
+
+  padding: 5px 10px;
+
+  background: var(--background-base-color);
+
+  overflow: hidden;
+}
+
+.PathStep {
+  position: relative;
+
+  padding-right: 10px;
+
+  margin-right: 15px;
+
+  cursor: pointer;
+}
+
+.PathStep:hover {
+  color: var(--text-lighter-color);
+}
+
+.PathStep:not(:last-child):after {
+  content: "›";
+
+  position: absolute;
+
+  top: 50%;
+  left: 100%;
+
+  font-size: 1.2rem;
+
+  transform: translateY(-52%);
+}

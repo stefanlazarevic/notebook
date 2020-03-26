@@ -66,6 +66,7 @@ export default function Group(props: GroupProps) {
     return { id: props.id, index: props.index, open, rename, remove, ungroup };
   }
 
+  // @todo move to utility.
   function timeConverter(UNIX_timestamp: number) {
     const d = new Date(UNIX_timestamp);
     const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
@@ -79,7 +80,6 @@ export default function Group(props: GroupProps) {
     <ContextMenuTrigger
       id="group-menu"
       holdToDisplay={-1}
-      disable={props.hasSelected && !props.selected}
       collect={forwardDataToContextMenu}
       attributes={{
         className: `VTRow ${props.selected ? "selected" : ""} ${
@@ -96,7 +96,7 @@ export default function Group(props: GroupProps) {
       }}
     >
       <div className="VTCell" style={{ width: props.getColumnWidth(0) }}>
-        <div className="GroupTitle">{props.title}</div>
+        <span>{props.title}</span>
       </div>
       <div className="VTCell" style={{ width: props.getColumnWidth(1) }}>
         <span>{props.updatedAt ? timeConverter(props.updatedAt) : "-"}</span>

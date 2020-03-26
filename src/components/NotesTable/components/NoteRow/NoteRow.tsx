@@ -5,6 +5,7 @@ import { AppState } from "../../../../redux/types";
 import "./NoteRow.css";
 
 import Group from "../Group/Group";
+import Record from "../Record/Record";
 
 export default function NoteRow(props: any) {
   const record = useSelector(
@@ -15,7 +16,14 @@ export default function NoteRow(props: any) {
 
   if (record) {
     return (
-      <div className="VTRow" style={props.style} tabIndex={props.index}></div>
+      <Record
+        {...record}
+        className={props.className}
+        style={props.style}
+        index={props.index}
+        getRowWidth={props.getRowWidth}
+        getColumnWidth={props.getColumnWidth}
+      />
     );
   }
 
@@ -30,7 +38,6 @@ export default function NoteRow(props: any) {
         getColumnWidth={props.getColumnWidth}
         selected={props.selected}
         onClick={props.onClick}
-        hasSelected={props.hasSelected}
       />
     );
   }

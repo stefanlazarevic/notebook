@@ -4,11 +4,12 @@ export type NoteGroupID = string;
 
 export interface NoteGroup {
   id: NoteGroupID;
-  parent?: string;
+  path: string[];
   title: string;
-  updatedAt?: number;
   type: string;
   children: string[];
+
+  updatedAt?: number;
 }
 
 export interface NotesGroups {
@@ -26,27 +27,27 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
   const groups: NotesGroups = {
     root: {
       id: "root",
-      parent: undefined,
+      path: [],
       title: "/",
       updatedAt: now,
       type: "Folder",
-      children: ["fakultet", "ostalo"]
+      children: ["fakultet"]
     },
     fakultet: {
       id: "fakultet",
-      parent: "root",
+      path: ["root"],
       title: "Fakultet",
       updatedAt: now,
       type: "Folder",
-      children: []
+      children: ["ostalo"]
     },
     ostalo: {
       id: "ostalo",
-      parent: "root",
+      path: ["root", "fakultet"],
       title: "Ostalo",
       updatedAt: now,
       type: "Folder",
-      children: []
+      children: ["instruction"]
     }
   };
 
@@ -55,7 +56,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
 
     groups[id] = {
       id,
-      parent: "root",
+      path: ["root"],
       title: id,
       updatedAt: now,
       type: "Folder",

@@ -30,9 +30,9 @@ export default function groupsReducer(
     case NotesActions.CREATE_GROUP:
       return {
         ...state,
-        [action.payload.parent]: {
-          ...state[action.payload.parent],
-          children: state[action.payload.parent].children.concat(
+        [action.payload.targetGroupID]: {
+          ...state[action.payload.targetGroupID],
+          children: state[action.payload.targetGroupID].children.concat(
             action.payload.id
           )
         },
@@ -51,9 +51,9 @@ export default function groupsReducer(
     case NotesActions.REMOVE_GROUP:
       return {
         ...utils.object.deleteProperty(action.payload.id, state),
-        [action.payload.parent]: {
-          ...state[action.payload.parent],
-          children: state[action.payload.parent].children.filter(
+        [action.payload.targetGroupID]: {
+          ...state[action.payload.targetGroupID],
+          children: state[action.payload.targetGroupID].children.filter(
             id => id !== action.payload.id
           )
         }
@@ -67,15 +67,15 @@ export default function groupsReducer(
             action.payload.id
           )
         },
-        [action.payload.parent]: {
-          ...state[action.payload.parent],
-          children: state[action.payload.parent].children.filter(
+        [action.payload.parentGroupID]: {
+          ...state[action.payload.parentGroupID],
+          children: state[action.payload.parentGroupID].children.filter(
             id => id !== action.payload.id
           )
         },
         [action.payload.id]: {
           ...state[action.payload.id],
-          parent: action.payload.targetGroupID
+          path: action.payload.path
         }
       };
     case NotesActions.MOVE_RECORD:

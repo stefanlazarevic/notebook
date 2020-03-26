@@ -20,6 +20,10 @@ export default function CreateGroupOverlay(props: any) {
     (state: AppState) => state.notes.currentGroupID
   );
 
+  const currentGroup = useSelector(
+    (state: AppState) => state.notes.groups[currentGroupID]
+  );
+
   const nameReference = useRef<HTMLInputElement>(null);
 
   function create(event: React.FormEvent) {
@@ -31,7 +35,7 @@ export default function CreateGroupOverlay(props: any) {
       children: [],
       updatedAt: Date.now(),
       type: "Folder",
-      parent: currentGroupID
+      path: currentGroup.path.concat(currentGroup.id)
     };
 
     if (nameReference.current) {
