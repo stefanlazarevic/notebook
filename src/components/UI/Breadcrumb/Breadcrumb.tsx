@@ -9,9 +9,7 @@ export default function Breadcrumb(props: any) {
   const hiddenWidth = useRef<number[]>([]);
 
   function resize() {
-    console.log("resizing");
     if (elementOverflow()) {
-      console.log("overflow");
       while (elementOverflow()) {
         if (breadcrumbElements.current) {
           if (firstVisibleIndex.current > breadcrumbElements.current.length) {
