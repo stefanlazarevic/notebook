@@ -8,29 +8,10 @@
   overflow: hidden;
 }
 
-.PathStep {
-  position: relative;
-
-  padding-right: 10px;
-
-  margin-right: 15px;
-
-  cursor: pointer;
-}
-
-.PathStep:hover {
+.BreadcrumbElement:hover {
   color: var(--text-lighter-color);
 }
 
-.PathStep:not(:last-child):after {
-  content: "›";
-
-  position: absolute;
-
-  top: 50%;
-  left: 100%;
-
-  font-size: 1.2rem;
-
-  transform: translateY(-52%);
+.BreadcrumbElement:last-child {
+  color: var(--text-lighter-color);
 }
