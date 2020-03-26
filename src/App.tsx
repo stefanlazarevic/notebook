@@ -7,12 +7,13 @@ import "./App.css";
 import AppHeader from "./components/AppHeader/AppHeader";
 import Navigator from "./components/Navigator";
 import AppEditorContainer from "./components/AppEditor";
-// import SettingsDrawerContainer from "./components/SettingsDrawer/SettingsDrawerContainer";
-// import NotesContainer from "./components/Notes";
 import OverlayContainer from "./components/Overlay";
 import RecordPrintContainer from "./components/RecordPrint";
 import NotesTable from "./components/NotesTable/NotesTable";
 import Aside from "./components/Aside/Aside";
+import TableMenu from "./components/ContextMenu/TableMenu/TableMenu";
+import FolderMenu from "./components/ContextMenu/FolderMenu/FolderMenu";
+import FileMenu from "./components/ContextMenu/FileMenu/FileMenu";
 
 function App() {
   return (
@@ -46,6 +47,9 @@ function App() {
           </AutoSizer>
         </div>
         <OverlayContainer />
+        <TableMenu />
+        <FolderMenu />
+        <FileMenu />
       </div>
       <RecordPrintContainer />
     </>

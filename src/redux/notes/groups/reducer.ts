@@ -51,9 +51,9 @@ export default function groupsReducer(
     case NotesActions.REMOVE_GROUP:
       return {
         ...utils.object.deleteProperty(action.payload.id, state),
-        [action.payload.targetGroupID]: {
-          ...state[action.payload.targetGroupID],
-          children: state[action.payload.targetGroupID].children.filter(
+        [action.payload.parentGroupId]: {
+          ...state[action.payload.parentGroupId],
+          children: state[action.payload.parentGroupId].children.filter(
             id => id !== action.payload.id
           )
         }
