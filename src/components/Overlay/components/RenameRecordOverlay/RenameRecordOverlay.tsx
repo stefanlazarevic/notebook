@@ -11,6 +11,7 @@ import OverlayBody from "../../template/OverlayBody/OverlayBody";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
 import FormInput from "../../../UI/FormInput/FormInput";
 import { AppState } from "../../../../redux/types";
+import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 
 export default function RenameRecordOverlay(props: any) {
   const dispatch = useDispatch();
@@ -21,9 +22,7 @@ export default function RenameRecordOverlay(props: any) {
 
   const titleReference = useRef<HTMLInputElement>(null);
 
-  function save(event: React.FormEvent) {
-    event.preventDefault();
-
+  function save() {
     let title = record.title;
 
     if (titleReference.current) {
@@ -38,8 +37,19 @@ export default function RenameRecordOverlay(props: any) {
     });
   }
 
+  function handleKeyDown(event: React.KeyboardEvent) {
+    const { keyCode } = event;
+    const key = KeycodeMap[keyCode];
+
+    if (key === "enter") {
+      event.preventDefault();
+
+      save();
+    }
+  }
+
   return (
-    <form className="RenameRecordOverlay" onSubmit={save}>
+    <div className="RenameRecordOverlay" onKeyDown={handleKeyDown}>
       <OverlayHeader
         id={props.overlayID}
         title="Rename Note"
@@ -55,9 +65,9 @@ export default function RenameRecordOverlay(props: any) {
         />
       </OverlayBody>
       <OverlayFooter>
-        <button type="submit">Save</button>
+        <button onClick={save}>Save</button>
         <button onClick={props.onClose}>Cancel</button>
       </OverlayFooter>
-    </form>
+    </div>
   );
 }

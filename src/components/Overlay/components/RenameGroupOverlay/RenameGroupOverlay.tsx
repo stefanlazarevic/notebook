@@ -11,6 +11,7 @@ import { useDispatch, useSelector, batch } from "react-redux";
 import { AppState } from "../../../../redux/types";
 import { updateGroup } from "../../../../redux/notes/actions";
 import { closeOverlay } from "../../../../redux/overlays/actions";
+import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 
 export default function RenameGroupOverlay(props: any) {
   const dispatch = useDispatch();
@@ -19,9 +20,7 @@ export default function RenameGroupOverlay(props: any) {
 
   const titleReference = useRef<HTMLInputElement>(null);
 
-  function save(event: React.FormEvent) {
-    event.preventDefault();
-
+  function save() {
     let title = group.title;
 
     if (titleReference.current) {
@@ -36,8 +35,19 @@ export default function RenameGroupOverlay(props: any) {
     });
   }
 
+  function handleKeyDown(event: React.KeyboardEvent) {
+    const { keyCode } = event;
+    const key = KeycodeMap[keyCode];
+
+    if (key === "enter") {
+      event.preventDefault();
+
+      save();
+    }
+  }
+
   return (
-    <form className="RenameGroupOverlay" onSubmit={save}>
+    <div className="RenameGroupOverlay" onKeyDown={handleKeyDown}>
       <OverlayHeader
         id={props.overlayID}
         title="Rename Group"
@@ -53,9 +63,9 @@ export default function RenameGroupOverlay(props: any) {
         />
       </OverlayBody>
       <OverlayFooter>
-        <button type="submit">Save</button>
+        <button onClick={save}>Save</button>
         <button onClick={props.onClose}>Cancel</button>
       </OverlayFooter>
-    </form>
+    </div>
   );
 }

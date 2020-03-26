@@ -12,6 +12,7 @@ import FormInput from "../../../UI/FormInput/FormInput";
 import { createNewGroup } from "../../../../redux/notes/actions";
 import { closeOverlay } from "../../../../redux/overlays/actions";
 import { AppState } from "../../../../redux/types";
+import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 
 export default function CreateGroupOverlay(props: any) {
   const dispatch = useDispatch();
@@ -26,9 +27,7 @@ export default function CreateGroupOverlay(props: any) {
 
   const nameReference = useRef<HTMLInputElement>(null);
 
-  function create(event: React.FormEvent) {
-    event.preventDefault();
-
+  function create() {
     const group: NoteGroup = {
       id: utils.string.generateRandom(),
       title: "",
@@ -48,8 +47,19 @@ export default function CreateGroupOverlay(props: any) {
     });
   }
 
+  function handleKeyDown(event: React.KeyboardEvent) {
+    const { keyCode } = event;
+    const key = KeycodeMap[keyCode];
+
+    if (key === "enter") {
+      event.preventDefault();
+
+      create();
+    }
+  }
+
   return (
-    <form className="CreateGroupOverlay" onSubmit={create}>
+    <div className="CreateGroupOverlay" onKeyDown={handleKeyDown}>
       <OverlayHeader
         id={props.overlayID}
         title="Create Group"
@@ -64,9 +74,9 @@ export default function CreateGroupOverlay(props: any) {
         />
       </OverlayBody>
       <OverlayFooter>
-        <button type="submit">Create Group</button>
+        <button onClick={create}>Create Group</button>
         <button onClick={props.onClose}>Cancel</button>
       </OverlayFooter>
-    </form>
+    </div>
   );
 }

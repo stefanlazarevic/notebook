@@ -66,3 +66,26 @@
 .VTList {
   overflow: auto !important;
 }
+
+.VTList::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.VTList::-webkit-scrollbar-track {
+  background: var(--background-base-color);
+}
+
+.VTList::-webkit-scrollbar-thumb {
+  background: var(--background-lighter-color);
+
+  cursor: grab;
+}
+
+.VTList::-webkit-scrollbar-track-piece {
+  background: var(--background-base-color);
+}
+
+.VTList::-webkit-scrollbar-corner {
+  background: var(--background-darker-color);
+}

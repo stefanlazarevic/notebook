@@ -11,6 +11,7 @@ import {
 } from "../../../../redux/notes/actions";
 import { showOverlay } from "../../../../redux/overlays/actions";
 import { OverlayType } from "../../../../redux/overlays/types";
+import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 
 export default function Group(props: GroupProps) {
   const dispatch = useDispatch();
@@ -62,6 +63,19 @@ export default function Group(props: GroupProps) {
     }
   }
 
+  function handleKeyDown(event: React.KeyboardEvent) {
+    const { keyCode } = event;
+    const key = KeycodeMap[keyCode];
+
+    if (key === "f2") {
+      dispatch(showOverlay(OverlayType.RENAME_GROUP, { id: props.id }));
+    }
+
+    if (key === "delete") {
+      dispatch(removeGroup(props.id));
+    }
+  }
+
   function forwardDataToContextMenu() {
     return { id: props.id, index: props.index, open, rename, remove, ungroup };
   }
@@ -92,7 +106,8 @@ export default function Group(props: GroupProps) {
         onDragOver: allowDrop,
         onDragStart: dragStart,
         onDrop: drop,
-        onClick: handleClick
+        onClick: handleClick,
+        onKeyDown: handleKeyDown
       }}
     >
       <div className="VTCell" style={{ width: props.getColumnWidth(0) }}>
