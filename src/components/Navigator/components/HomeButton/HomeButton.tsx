@@ -5,17 +5,20 @@ import { MdHome } from "react-icons/md";
 import "./HomeButton.css";
 
 import { openGroup } from "../../../../redux/notes/actions";
+import Button from "../../../UI/Button";
 
-export default function HomeButton(props: any) {
+export default function HomeButton() {
   const dispatch = useDispatch();
 
-  function goHome() {
+  const label = "Open root folder";
+
+  function onClick() {
     dispatch(openGroup("root"));
   }
 
   return (
-    <button className="HomeButton" onClick={goHome} title="Back to root">
-      <MdHome />
-    </button>
+    <Button onClick={onClick} title={label} aria-label={label}>
+      <MdHome aria-hidden={true} />
+    </Button>
   );
 }
