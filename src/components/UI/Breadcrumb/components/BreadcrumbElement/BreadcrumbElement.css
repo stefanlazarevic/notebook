@@ -4,6 +4,10 @@
   display: inline-block;
 
   cursor: pointer;
+
+  outline: 0;
+
+  border: 0;
 }
 
 .BreadcrumbElement.hidden {

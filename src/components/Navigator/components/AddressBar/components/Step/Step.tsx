@@ -17,7 +17,12 @@ export default function Step(props: any) {
   }
 
   return (
-    <BreadcrumbElement tabIndex={props.index} title={title} onClick={onClick}>
+    <BreadcrumbElement
+      tabIndex={props.tabIndex}
+      role="link"
+      title={title}
+      onClick={onClick}
+    >
       {title}
     </BreadcrumbElement>
   );

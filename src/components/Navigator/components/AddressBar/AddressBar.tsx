@@ -8,6 +8,7 @@ import Breadcrumb from "../../../UI/Breadcrumb/Breadcrumb";
 
 import Step from "./components/Step";
 import RootStep from "./components/RootStep/RootStep";
+import { NoteGroupID } from "../../../../redux/notes/groups/types";
 
 export default function AddressBar(props: any) {
   const currentGroupId = useSelector(
@@ -25,9 +26,15 @@ export default function AddressBar(props: any) {
   return (
     <div className="AddressBar">
       <Breadcrumb>
-        <RootStep />
-        {path.map(folderId => {
-          return <Step key={folderId} id={folderId} />;
+        <RootStep tabIndex={0} />
+        {path.map((folderId: NoteGroupID, index: number) => {
+          return (
+            <Step
+              key={folderId}
+              id={folderId}
+              tabIndex={index === path.length - 1 ? -1 : 0}
+            />
+          );
         })}
       </Breadcrumb>
     </div>

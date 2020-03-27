@@ -31,7 +31,8 @@
   left: 100%;
 }
 
-.AddressBar .BreadcrumbElement:hover {
+.AddressBar .BreadcrumbElement:hover,
+.AddressBar .BreadcrumbElement:focus {
   color: var(--text-lighter-color);
 }
 

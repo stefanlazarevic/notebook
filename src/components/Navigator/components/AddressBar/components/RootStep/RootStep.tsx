@@ -15,7 +15,13 @@ export default function RootStep(props: any) {
   }
 
   return (
-    <BreadcrumbElement onClick={open} title={label} aria-label={label}>
+    <BreadcrumbElement
+      onClick={open}
+      tabIndex={props.tabIndex}
+      role="link"
+      title={label}
+      aria-label={label}
+    >
       <MdComputer aria-hidden={true} />
     </BreadcrumbElement>
   );
