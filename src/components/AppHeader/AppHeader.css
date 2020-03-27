@@ -1,14 +1,23 @@
 .AppHeader {
+  position: relative;
+
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+
+  height: 50px;
+
+  padding-left: 15px;
+  padding-right: 15px;
+
   background-color: var(--background-base-color);
 }
 
 .AppHeader__title {
-  font-family: "Roboto", "Lato";
-  margin: 0;
-  font-size: 1.6rem;
   flex: 1;
+
+  margin: 0;
+
+  font-size: 1.4rem;
+
   color: var(--text-lighter-color);
 }

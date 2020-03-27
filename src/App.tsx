@@ -4,7 +4,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 
 import "./App.css";
 
-import AppHeader from "./components/AppHeader/AppHeader";
+import AppHeader from "./components/AppHeader";
 import Navigator from "./components/Navigator";
 import AppEditorContainer from "./components/AppEditor";
 import OverlayContainer from "./components/Overlay";

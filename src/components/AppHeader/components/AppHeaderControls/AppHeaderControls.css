@@ -1,7 +1,0 @@
-.AppHeaderControls {
-  display: flex;
-}
-
-.AppHeaderControls .AppHeaderButton:not(:last-child) {
-  margin-right: 2px;
-}

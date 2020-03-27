@@ -1,0 +1,21 @@
+.AppHeaderMenu {
+  display: flex;
+  align-items: center;
+}
+
+.AppHeaderMenu .Button {
+  color: var(--text-base-color);
+
+  font-size: 1.5rem;
+
+  line-height: 0;
+}
+
+.AppHeaderMenu .Button:hover,
+.AppHeaderMenu .Button:focus {
+  color: var(--text-lighter-color);
+}
+
+.AppHeaderMenu .Button:first-child {
+  margin-right: 15px;
+}
