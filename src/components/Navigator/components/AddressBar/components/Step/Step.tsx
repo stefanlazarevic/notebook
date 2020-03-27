@@ -1,24 +1,24 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import BreadcrumbElement from "../../../../../UI/Breadcrumb/components/BreadcrumbElement/BreadcrumbElement";
-import { openGroup } from "../../../../../../redux/notes/actions";
-import { AppState } from "../../../../../../redux/types";
-import { MdComputer } from "react-icons/md";
 
-export default function Folder(props: any) {
+import BreadcrumbElement from "../../../../../UI/Breadcrumb/components/BreadcrumbElement/BreadcrumbElement";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../../../../../redux/types";
+import { openGroup } from "../../../../../../redux/notes/actions";
+
+export default function Step(props: any) {
   const dispatch = useDispatch();
 
   const title = useSelector(
     (state: AppState) => state.notes.groups[props.id].title
   );
 
-  function open() {
+  function onClick() {
     dispatch(openGroup(props.id));
   }
 
   return (
-    <BreadcrumbElement onClick={open}>
-      {props.id === "root" ? <MdComputer /> : <span>{title}</span>}
+    <BreadcrumbElement tabIndex={props.index} title={title} onClick={onClick}>
+      {title}
     </BreadcrumbElement>
   );
 }

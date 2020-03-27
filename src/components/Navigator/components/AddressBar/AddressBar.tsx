@@ -1,11 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import "./AddressBar.css";
 
-import { useSelector } from "react-redux";
 import { AppState } from "../../../../redux/types";
 import Breadcrumb from "../../../UI/Breadcrumb/Breadcrumb";
-import Folder from "./components/Folder/Folder";
+
+import Step from "./components/Step";
+import RootStep from "./components/RootStep/RootStep";
 
 export default function AddressBar(props: any) {
   const currentGroupId = useSelector(
@@ -14,13 +16,20 @@ export default function AddressBar(props: any) {
 
   const path = useSelector(
     (state: AppState) => state.notes.groups[currentGroupId].path
-  );
+  ).slice(1);
+
+  if (currentGroupId !== "root") {
+    path.push(currentGroupId);
+  }
 
   return (
-    <Breadcrumb>
-      {path.concat(currentGroupId).map(folderId => {
-        return <Folder key={folderId} id={folderId} />;
-      })}
-    </Breadcrumb>
+    <div className="AddressBar">
+      <Breadcrumb>
+        <RootStep />
+        {path.map(folderId => {
+          return <Step key={folderId} id={folderId} />;
+        })}
+      </Breadcrumb>
+    </div>
   );
 }

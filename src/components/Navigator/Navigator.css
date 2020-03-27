@@ -23,6 +23,10 @@
   color: var(--text-lighter-color);
 }
 
+.Navigator .Button:disabled {
+  color: var(--text-darker-color);
+}
+
 .Navigator .Button:not(:last-child) {
   margin-right: 15px;
 }

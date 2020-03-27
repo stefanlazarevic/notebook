@@ -118,10 +118,8 @@ export default function Breadcrumb(props: any) {
   }, []);
 
   return (
-    <div className="BreadcrumbWrapper">
-      <div ref={breadcrumb} className="Breadcrumb">
-        {props.children}
-      </div>
+    <div ref={breadcrumb} className="Breadcrumb">
+      {props.children}
     </div>
   );
 }

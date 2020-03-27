@@ -2,8 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { MdHome } from "react-icons/md";
 
-import "./HomeButton.css";
-
 import { openGroup } from "../../../../redux/notes/actions";
 import Button from "../../../UI/Button";
 

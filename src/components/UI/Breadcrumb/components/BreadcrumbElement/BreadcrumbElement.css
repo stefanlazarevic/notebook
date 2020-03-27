@@ -1,0 +1,11 @@
+.BreadcrumbElement {
+  position: relative;
+
+  display: inline-block;
+
+  cursor: pointer;
+}
+
+.BreadcrumbElement.hidden {
+  display: none !important;
+}

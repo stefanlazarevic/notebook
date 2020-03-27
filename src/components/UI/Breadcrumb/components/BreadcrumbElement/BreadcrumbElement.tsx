@@ -1,15 +1,12 @@
 import React from "react";
 
-export default function BreadcrumbElement(props: any) {
+import "./BreadcrumbElement.css";
+
+import BreadcrumbElementProps from "./BreadcrumbElementProps";
+
+export default function BreadcrumbElement(props: BreadcrumbElementProps) {
   return (
-    <div
-      id={props.id}
-      className="BreadcrumbElement"
-      onDrop={props.onDrop}
-      tabIndex={props.index}
-      onClick={props.onClick}
-      onDoubleClick={props.onDoubleClick}
-    >
+    <div {...props} className="BreadcrumbElement">
       {props.children}
     </div>
   );
