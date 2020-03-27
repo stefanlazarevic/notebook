@@ -117,10 +117,6 @@ export default function Breadcrumb(props: any) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(breadcrumbElements.current);
-  }, [props.children]);
-
   return (
     <div className="BreadcrumbWrapper">
       <div ref={breadcrumb} className="Breadcrumb">

@@ -68,6 +68,10 @@ export default function Group(props: GroupProps) {
     const { keyCode } = event;
     const key = KeycodeMap[keyCode];
 
+    if (key === "enter") {
+      dispatch(openGroup(props.id));
+    }
+
     if (key === "f2") {
       dispatch(showOverlay(OverlayType.RENAME_GROUP, { id: props.id }));
     }
@@ -87,8 +91,17 @@ export default function Group(props: GroupProps) {
     const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
     const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
     const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+    const hours = d.getHours();
+    const minutes = d.getMinutes();
+    const ampm = hours >= 12 ? "pm" : "am";
 
-    return `${da}/${mo}/${ye}`;
+    let HH = hours % 12;
+    HH = HH ? HH : 12; // the hour '0' should be '12'
+    let MM = minutes < 10 ? "0" + minutes : minutes;
+
+    const strTime = HH + ":" + MM + " " + ampm;
+
+    return `${da}/${mo}/${ye} ${strTime}`;
   }
 
   return (

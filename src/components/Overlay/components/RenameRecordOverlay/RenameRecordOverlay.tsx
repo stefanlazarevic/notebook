@@ -62,6 +62,7 @@ export default function RenameRecordOverlay(props: any) {
           name="title"
           defaultValue={record.title}
           autoFocus={true}
+          autoComplete={false}
         />
       </OverlayBody>
       <OverlayFooter>

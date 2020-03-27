@@ -1,4 +1,6 @@
 .AsideButton {
+  position: relative;
+
   appearance: none;
 
   background-color: var(--background-base-color);

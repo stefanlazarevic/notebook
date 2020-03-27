@@ -60,6 +60,7 @@ export default function RenameGroupOverlay(props: any) {
           name="title"
           defaultValue={group.title}
           autoFocus={true}
+          autoComplete={false}
         />
       </OverlayBody>
       <OverlayFooter>

@@ -7,7 +7,7 @@ import { showOverlay } from "../../../../redux/overlays/actions";
 import { OverlayType } from "../../../../redux/overlays/types";
 import { ungroupRecord } from "../../../../redux/notes/actions";
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
-import { FaFile, FaFileAlt } from "react-icons/fa";
+import { FaFileAlt } from "react-icons/fa";
 
 export default function Record(props: any) {
   const dispatch = useDispatch();
@@ -53,6 +53,10 @@ export default function Record(props: any) {
     const { keyCode } = event;
     const key = KeycodeMap[keyCode];
 
+    if (key === "enter") {
+      dispatch(openEditor(props.id));
+    }
+
     if (key === "delete") {
       remove();
     }
@@ -80,8 +84,17 @@ export default function Record(props: any) {
     const ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
     const mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
     const da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+    const hours = d.getHours();
+    const minutes = d.getMinutes();
+    const ampm = hours >= 12 ? "pm" : "am";
 
-    return `${da}/${mo}/${ye}`;
+    let HH = hours % 12;
+    HH = HH ? HH : 12; // the hour '0' should be '12'
+    let MM = minutes < 10 ? "0" + minutes : minutes;
+
+    const strTime = HH + ":" + MM + " " + ampm;
+
+    return `${da}/${mo}/${ye} ${strTime}`;
   }
 
   return (
