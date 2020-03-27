@@ -1,0 +1,27 @@
+.BreadcrumbWrapper {
+  flex: 1;
+
+  padding: 5px 10px;
+
+  background: var(--background-base-color);
+
+  overflow: hidden;
+}
+
+.BreadcrumbElement {
+  vertical-align: middle;
+}
+
+.BreadcrumbElement svg {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.2rem;
+}
+
+.BreadcrumbElement:hover {
+  color: var(--text-lighter-color);
+}
+
+.BreadcrumbElement:last-child {
+  color: var(--text-lighter-color);
+}

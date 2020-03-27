@@ -1,11 +1,20 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { MdHome } from "react-icons/md";
 
 import "./HomeButton.css";
 
-export function HomeButton(props: any) {
+import { openGroup } from "../../../../redux/notes/actions";
+
+export default function HomeButton(props: any) {
+  const dispatch = useDispatch();
+
+  function goHome() {
+    dispatch(openGroup("root"));
+  }
+
   return (
-    <button className="HomeButton" onClick={props.onClick} title="Back to root">
+    <button className="HomeButton" onClick={goHome} title="Back to root">
       <MdHome />
     </button>
   );

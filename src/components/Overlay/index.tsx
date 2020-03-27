@@ -22,14 +22,13 @@ function OverlayContainer(props: OverlayContainerProps) {
             if (OverlayComponent) {
               return (
                 <Overlay
-                  key={overlay.id}
-                  id={overlay.id}
+                  key={overlay.overlayID}
+                  overlayID={overlay.overlayID}
                   onClose={props.onClose}
                 >
                   <OverlayComponent
-                    overlayID={overlay.id}
-                    recordID={overlay.recordID}
-                    groupID={overlay.groupID}
+                    overlayID={overlay.overlayID}
+                    id={overlay.id}
                     onClose={props.onClose}
                   />
                 </Overlay>
@@ -52,7 +51,7 @@ function mapStateToProps(state: AppState) {
 
 function mapDispatchToProps(dispatch: IDispatch) {
   return {
-    onClose: (id: OverlayID) => dispatch(closeOverlay(id))
+    onClose: (overlayID: OverlayID) => dispatch(closeOverlay(overlayID))
   };
 }
 

@@ -1,5 +1,5 @@
 import { IDispatch, AppState } from "../types";
-import { OverlaysActions, OverlayType } from "./types";
+import { OverlaysActions, OverlayType, OverlayID } from "./types";
 import utils from "../../utils";
 
 export function showOverlay(type: OverlayType, props?: any) {
@@ -8,18 +8,18 @@ export function showOverlay(type: OverlayType, props?: any) {
       type: OverlaysActions.OPEN_OVERLAY,
       payload: {
         ...props,
-        id: utils.string.generateRandom(3),
+        overlayID: utils.string.generateRandom(3),
         type
       }
     });
   };
 }
 
-export function closeOverlay(id: string) {
+export function closeOverlay(overlayID: OverlayID) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     dispatch({
       type: OverlaysActions.CLOSE_OVERLAY,
-      payload: id
+      payload: overlayID
     });
   };
 }

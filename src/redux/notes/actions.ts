@@ -30,10 +30,10 @@ export function openParentGroup(sourceGroupID: NoteGroupID) {
 
     const group = groups[sourceGroupID];
 
-    if (group && group.parent) {
+    if (group && group.path && group.path.length > 0) {
       dispatch({
         type: NotesActions.OPEN_GROUP,
-        payload: group.parent
+        payload: utils.array.last(group.path)
       });
     }
   };
@@ -161,7 +161,7 @@ export function createNewGroup(targetGroupID: NoteGroupID, group: NoteGroup) {
       type: NotesActions.CREATE_GROUP,
       payload: {
         ...group,
-        parent: targetGroupID
+        targetGroupID
       }
     });
   };
@@ -205,9 +205,9 @@ export function removeGroup(targetGroupID: NoteGroupID) {
 
     dispatch({
       type: NotesActions.REMOVE_GROUP,
-      payload: group,
-      meta: {
-        requiresConfirmation: true
+      payload: {
+        ...group,
+        parentGroupId: utils.array.last(group.path)
       }
     });
   };
@@ -237,6 +237,8 @@ export function moveToGroup(
         type: NotesActions.MOVE_GROUP,
         payload: {
           ...group,
+          path: targetGroup.path.concat(targetGroup.id),
+          parentGroupID: utils.array.last(group.path) || "root",
           targetGroupID: targetGroupID
         }
       });
@@ -254,22 +256,24 @@ export function moveToGroup(
   };
 }
 
-export function ungroup(id: NoteRecordID | NoteGroupID) {
+export function ungroupGroup(id: NoteRecordID | NoteGroupID) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
     const { currentGroupID, groups } = notes;
 
     const currentGroup = groups[currentGroupID];
 
-    if (!currentGroup.parent) {
+    if (!currentGroup.path || currentGroup.path.length < 1) {
       throw Error(`Ungroup is not allowed in root group.`);
     }
 
-    const targetGroup = groups[currentGroup.parent];
+    const targetGroup = groups[utils.array.last(currentGroup.path)];
 
     dispatch(moveToGroup(targetGroup.id, id));
   };
 }
+
+export const ungroupRecord = ungroupGroup;
 
 export function swapCurrentGroupChildren(
   sourceIndex: number,

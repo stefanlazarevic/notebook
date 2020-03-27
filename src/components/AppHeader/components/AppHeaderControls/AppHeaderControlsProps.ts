@@ -1,4 +1,1 @@
-export interface AppHeaderControlsProps {
-  onCreateNewFolder: () => void;
-  onCreateNewFile: () => void;
-}
+export interface AppHeaderControlsProps {}

@@ -11,11 +11,10 @@ export enum OverlayType {
 export type OverlayID = string;
 
 export interface Overlay {
-  id: OverlayID;
+  overlayID: OverlayID;
   type: OverlayType;
 
-  recordID?: NoteRecordID;
-  groupID?: NoteGroupID;
+  id?: NoteRecordID | NoteGroupID;
 }
 
 export type OverlayState = Overlay[];

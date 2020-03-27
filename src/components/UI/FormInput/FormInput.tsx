@@ -12,6 +12,7 @@ export default forwardRef((props: any, ref: any) => {
       autoFocus={props.autoFocus}
       defaultValue={props.defaultValue}
       name={props.name}
+      autoComplete={props.autoComplete}
     />
   );
 });

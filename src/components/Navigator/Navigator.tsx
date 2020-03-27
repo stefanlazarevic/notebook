@@ -1,26 +1,19 @@
 import React from "react";
 
 import "./Navigator.css";
+
+import { NavigatorProps } from "./NavigatorProps";
+
+import HomeButton from "./components/HomeButton/HomeButton";
 import BackButton from "./components/BackButton/BackButton";
-import { HomeButton } from "./components/HomeButton/HomeButton";
+import AddressBar from "./components/AddressBar/AddressBar";
 
-export default function Navigator(props: any) {
-  function goBack() {
-    if (typeof props.openParentGroup === "function") {
-      props.openParentGroup(props.currentGroupID);
-    }
-  }
-
-  function goHome() {
-    if (typeof props.openGroup === "function") {
-      props.openGroup("root");
-    }
-  }
-
+export default function Navigator(props: NavigatorProps) {
   return (
-    <div className="Navigator" data-open={props.open}>
-      <BackButton onClick={goBack} />
-      <HomeButton onClick={goHome} />
+    <div className="Navigator" data-open={true}>
+      <BackButton />
+      <HomeButton />
+      <AddressBar />
     </div>
   );
 }

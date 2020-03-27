@@ -9,13 +9,16 @@ export const KeycodeMap: IKeycodeMap = {
   9: "tab",
   13: "enter",
   27: "esc",
+  32: "space",
+  46: "delete",
   66: "b",
   67: "c",
   73: "i",
   83: "s",
   85: "u",
   87: "y",
-  97: "z"
+  97: "z",
+  113: "f2"
 };
 
 export function keyBindingFunction(

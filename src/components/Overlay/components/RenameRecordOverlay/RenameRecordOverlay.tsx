@@ -1,41 +1,57 @@
 import React, { useRef } from "react";
-import { connect, batch } from "react-redux";
+import { batch, useDispatch, useSelector } from "react-redux";
 
 import "./RenameRecordOverlay.css";
 
 import OverlayHeader from "../../template/OverlayHeader/OverlayHeader";
 
-import { IDispatch, AppState } from "../../../../redux/types";
-import { NoteRecord } from "../../../../redux/notes/records/types";
 import { updateRecord } from "../../../../redux/notes/actions";
 import { closeOverlay } from "../../../../redux/overlays/actions";
 import OverlayBody from "../../template/OverlayBody/OverlayBody";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
 import FormInput from "../../../UI/FormInput/FormInput";
+import { AppState } from "../../../../redux/types";
+import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 
-function RenameRecordOverlay(props: any) {
+export default function RenameRecordOverlay(props: any) {
+  const dispatch = useDispatch();
+
+  const record = useSelector(
+    (state: AppState) => state.notes.records[props.id]
+  );
+
   const titleReference = useRef<HTMLInputElement>(null);
 
-  function save(event: React.FormEvent) {
-    event.preventDefault();
+  function save() {
+    let title = record.title;
 
-    if (typeof props.onSave === "function") {
-      let title = props.record.title;
+    if (titleReference.current) {
+      title = titleReference.current.value;
+    }
 
-      if (titleReference.current) {
-        title = titleReference.current.value;
-      }
+    const updatedRecord = { ...record, title };
 
-      const record = { ...props.record, title };
+    batch(() => {
+      dispatch(updateRecord(updatedRecord));
+      dispatch(closeOverlay(props.overlayID));
+    });
+  }
 
-      props.onSave(record, props.overlayID);
+  function handleKeyDown(event: React.KeyboardEvent) {
+    const { keyCode } = event;
+    const key = KeycodeMap[keyCode];
+
+    if (key === "enter") {
+      event.preventDefault();
+
+      save();
     }
   }
 
   return (
-    <form className="RenameRecordOverlay" onSubmit={save}>
+    <div className="RenameRecordOverlay" onKeyDown={handleKeyDown}>
       <OverlayHeader
-        id={props.id}
+        id={props.overlayID}
         title="Rename Note"
         onClose={props.onClose}
       ></OverlayHeader>
@@ -44,40 +60,15 @@ function RenameRecordOverlay(props: any) {
           ref={titleReference}
           type="text"
           name="title"
-          defaultValue={props.record.title}
+          defaultValue={record.title}
           autoFocus={true}
+          autoComplete={false}
         />
       </OverlayBody>
       <OverlayFooter>
-        <button type="button">Save</button>
+        <button onClick={save}>Save</button>
         <button onClick={props.onClose}>Cancel</button>
       </OverlayFooter>
-    </form>
+    </div>
   );
 }
-
-function mapStateToProps(state: AppState, ownProps: any) {
-  const { notes } = state;
-  const { records } = notes;
-  const record = records[ownProps.recordID];
-
-  return {
-    record
-  };
-}
-
-function mapDispatchToProps(dispatch: IDispatch) {
-  return {
-    onSave: (record: NoteRecord, id: string) => {
-      batch(() => {
-        dispatch(updateRecord(record));
-        dispatch(closeOverlay(id));
-      });
-    }
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RenameRecordOverlay);

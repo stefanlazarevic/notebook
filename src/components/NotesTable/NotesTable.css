@@ -1,0 +1,106 @@
+.VTHeader {
+  background-color: var(--background-darker-color);
+  border-bottom: 1px solid var(--border-darker-color);
+}
+
+.VTHeaderCell {
+  border-right: 0;
+
+  color: var(--text-darker-color);
+
+  font-weight: 300;
+}
+
+.VTCellContent {
+  padding: 0 5px;
+}
+
+.VTColumnResizer {
+  background-color: var(--background-darker-color);
+}
+
+.VTColumnResizer:hover,
+.VTColumnResizer:focus,
+.VTColumnResizer:active {
+  background-color: var(--text-base-color);
+}
+
+.VTHeader:hover .VTColumnResizer {
+  background-color: var(--text-lighter-color);
+}
+
+.VTRow {
+  background-color: var(--background-darker-color);
+  outline: 0;
+  border: 0;
+}
+
+.VTRow:hover {
+  background-color: var(--background-base-color);
+}
+
+.VTRow:focus {
+  background-color: var(--background-lighter-color);
+}
+
+.VTHeaderCell {
+  padding: 0 15px;
+}
+
+.VTCell {
+  border-right: 0;
+  border-bottom: 0;
+  padding: 0 15px;
+}
+
+.VTCell {
+  overflow: hidden;
+}
+
+.NotesWrapper {
+  height: calc(100% - 40px);
+
+  background-color: var(--background-darker-color);
+}
+
+.VTList {
+  overflow: auto !important;
+}
+
+.VTList::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.VTList::-webkit-scrollbar-track {
+  background: var(--background-base-color);
+}
+
+.VTList::-webkit-scrollbar-thumb {
+  background: var(--background-lighter-color);
+
+  cursor: grab;
+}
+
+.VTList::-webkit-scrollbar-track-piece {
+  background: var(--background-base-color);
+}
+
+.VTList::-webkit-scrollbar-corner {
+  background: var(--background-darker-color);
+}
+
+.VTCellContent > * {
+  display: inline-block;
+}
+
+.VTCellIcon {
+  color: #f0ca55;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.FileRow .VTCellIcon {
+  color: var(--text-lighter-color);
+}

@@ -12,6 +12,12 @@ export type NoteRecord = {
   parent: NoteGroupID;
   title: string;
   content: RawDraftContentState;
+  type: string;
+  createdAt: number;
+
+  // Temporary typescript workaround.
+  children?: any;
+  updatedAt?: number;
 };
 
 export type NotesRecords = {
@@ -21,8 +27,11 @@ export type NotesRecords = {
 export const DEFAULT_RECORDS_STATE: NotesRecords = {
   instruction: {
     id: "instruction",
-    parent: "root",
+    parent: "ostalo",
     title: "INSTRUCTIONS",
-    content: instructionsContentState
+    content: instructionsContentState,
+    type: "File",
+    createdAt: Date.now(),
+    updatedAt: Date.now()
   }
 };

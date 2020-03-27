@@ -29,7 +29,9 @@ export default function AppEditor(props: AppEditorProps) {
       id: props.id || utils.string.generateRandom(),
       parent: props.currentGroupID,
       title: "",
-      content: { entityMap: {}, blocks: [] }
+      content: { entityMap: {}, blocks: [] },
+      type: "File",
+      createdAt: Date.now()
     };
 
     if (nameInputReference.current) {
@@ -53,6 +55,7 @@ export default function AppEditor(props: AppEditorProps) {
     }
 
     if (typeof props.onUpdate === "function" && props.id) {
+      record.updatedAt = Date.now();
       props.onUpdate(record);
 
       if (props.saveAndClose && !props.autoSave) {

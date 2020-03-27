@@ -1,45 +1,67 @@
 import React, { useRef } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector, batch } from "react-redux";
 
 import "./CreateGroupOverlay.css";
 
 import OverlayHeader from "../../template/OverlayHeader/OverlayHeader";
 import OverlayBody from "../../template/OverlayBody/OverlayBody";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
-import { IDispatch, AppState } from "../../../../redux/types";
-import { NoteGroupID, NoteGroup } from "../../../../redux/notes/groups/types";
-import { createNewGroup } from "../../../../redux/notes/actions";
+import { NoteGroup } from "../../../../redux/notes/groups/types";
 import utils from "../../../../utils";
 import FormInput from "../../../UI/FormInput/FormInput";
+import { createNewGroup } from "../../../../redux/notes/actions";
+import { closeOverlay } from "../../../../redux/overlays/actions";
+import { AppState } from "../../../../redux/types";
+import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 
-function CreateGroupOverlay(props: any) {
+export default function CreateGroupOverlay(props: any) {
+  const dispatch = useDispatch();
+
+  const currentGroupID = useSelector(
+    (state: AppState) => state.notes.currentGroupID
+  );
+
+  const currentGroup = useSelector(
+    (state: AppState) => state.notes.groups[currentGroupID]
+  );
+
   const nameReference = useRef<HTMLInputElement>(null);
 
-  function create(event: React.FormEvent) {
-    event.preventDefault();
-
+  function create() {
     const group: NoteGroup = {
       id: utils.string.generateRandom(),
       title: "",
       children: [],
-      parent: props.currentGroupID
+      updatedAt: Date.now(),
+      type: "Folder",
+      path: currentGroup.path.concat(currentGroup.id)
     };
 
     if (nameReference.current) {
       group.title = nameReference.current.value;
     }
 
-    if (typeof props.createNewGroup === "function") {
-      props.createNewGroup(group.parent, group);
-    }
+    batch(() => {
+      dispatch(createNewGroup(currentGroupID, group));
+      dispatch(closeOverlay(props.overlayID));
+    });
+  }
 
-    props.onClose();
+  function handleKeyDown(event: React.KeyboardEvent) {
+    const { keyCode } = event;
+    const key = KeycodeMap[keyCode];
+
+    if (key === "enter") {
+      event.preventDefault();
+
+      create();
+    }
   }
 
   return (
-    <form className="CreateGroupOverlay" onSubmit={create}>
+    <div className="CreateGroupOverlay" onKeyDown={handleKeyDown}>
       <OverlayHeader
-        id={props.id}
+        id={props.overlayID}
         title="Create Group"
         onClose={props.onClose}
       />
@@ -49,31 +71,13 @@ function CreateGroupOverlay(props: any) {
           type="text"
           placeholder="Group name"
           autoFocus={true}
+          autoComplete={false}
         />
       </OverlayBody>
       <OverlayFooter>
-        <button type="submit">Create Group</button>
+        <button onClick={create}>Create Group</button>
         <button onClick={props.onClose}>Cancel</button>
       </OverlayFooter>
-    </form>
+    </div>
   );
 }
-
-function mapStateToProps(state: AppState) {
-  const { notes } = state;
-  const { currentGroupID } = notes;
-
-  return {
-    currentGroupID
-  };
-}
-
-function mapDispatchToProps(dispatch: IDispatch) {
-  return {
-    createNewGroup: (targetGroupID: NoteGroupID, group: NoteGroup) => {
-      dispatch(createNewGroup(targetGroupID, group));
-    }
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateGroupOverlay);

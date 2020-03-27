@@ -10,7 +10,6 @@ import { queuePrintRecords } from "../../redux/print/actions";
 
 function RecordPrintContainer(props: any) {
   useEffect(() => {
-    console.log(props.printHTML);
     if (props.printHTML) {
       if (document && window) {
         const titleBeforePrinting = document.title;

@@ -9,7 +9,9 @@ export default function Overlay(props: any) {
 
   useEffect(() => {
     if (overlayTabElements.current) {
-      overlayTabElements.current = utils.dom.getTabbableElements(props.id);
+      overlayTabElements.current = utils.dom.getTabbableElements(
+        props.overlayID
+      );
     }
 
     return () => {
@@ -17,11 +19,11 @@ export default function Overlay(props: any) {
         overlayTabElements.current = [];
       }
     };
-  }, [props.id]);
+  }, [props.overlayID]);
 
   function close() {
     if (typeof props.onClose === "function") {
-      props.onClose(props.id);
+      props.onClose(props.overlayID);
     }
   }
 
@@ -61,7 +63,7 @@ export default function Overlay(props: any) {
   }
 
   return (
-    <div id={props.id} className="Overlay" onKeyDown={handleKeyDown}>
+    <div id={props.overlayID} className="Overlay" onKeyDown={handleKeyDown}>
       {React.Children.map(props.children, (child: any) => {
         return React.cloneElement(child, { ...child.props, onClose: close });
       })}

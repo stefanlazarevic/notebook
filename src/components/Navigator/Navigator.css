@@ -10,7 +10,7 @@
 
   overflow: hidden;
 
-  background: var(--app-background-5-darker-color);
+  background: var(--background-lighter-color);
 
   padding: 0 15px;
 }
@@ -19,12 +19,6 @@
   height: 40px;
 }
 
-.NavigatorLinkSeparator {
-  margin: 0 5px;
-}
-
-.NavigatorLink {
-  display: flex;
-  font-size: 1.2rem;
-  cursor: pointer;
+.Navigator .HomeButton {
+  margin-right: 10px;
 }
