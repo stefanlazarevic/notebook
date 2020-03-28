@@ -3,15 +3,15 @@
 }
 
 .RenameRecordOverlay .FormInput {
-  background-color: var(--app-background-5-lighter-color);
-  color: var(--app-text-base-color);
+  background-color: var(--background-darker-color);
+  color: var(--text-base-color);
 }
 
 .RenameRecordOverlay .OverlayFooter button {
   appearance: none;
 
-  color: var(--app-text-base-color);
-  background-color: var(--app-background-base-color);
+  color: var(--text-base-color);
+  background-color: var(--background-base-color);
 
   cursor: pointer;
 
@@ -28,7 +28,7 @@
 }
 
 .RenameRecordOverlay .OverlayFooter button:focus {
-  outline: 1px dotted var(--app-text-base-color);
+  outline: 1px dotted var(--text-base-color);
 }
 
 .RenameRecordOverlay .OverlayFooter button:first-child {

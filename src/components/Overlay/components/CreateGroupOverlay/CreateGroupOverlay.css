@@ -3,7 +3,7 @@
 }
 
 .CreateGroupOverlay .FormInput {
-  background-color: var(--app-background-5-lighter-color);
+  background-color: var(--background-darker-color);
   color: var(--app-text-color);
 }
 

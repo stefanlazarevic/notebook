@@ -30,7 +30,7 @@ export default function AppEditor(props: AppEditorProps) {
       parent: props.currentGroupID,
       title: "",
       content: { entityMap: {}, blocks: [] },
-      type: "File",
+      type: "Note",
       createdAt: Date.now()
     };
 

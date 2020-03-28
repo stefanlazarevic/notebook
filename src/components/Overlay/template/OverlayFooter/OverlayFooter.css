@@ -1,7 +1,7 @@
 .OverlayFooter {
   padding: 0 10px;
 
-  background-color: var(--app-background-base-color);
+  background-color: var(--background-base-color);
 
   margin-top: -1px;
 }

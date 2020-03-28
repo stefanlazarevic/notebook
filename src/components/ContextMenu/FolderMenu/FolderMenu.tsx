@@ -21,6 +21,14 @@ export default function FolderMenu(props: any) {
     }
   }
 
+  function openInNewTab(event: React.MouseEvent, data: any) {
+    event.preventDefault();
+
+    if (typeof data.openInNewTab === "function") {
+      data.openInNewTab();
+    }
+  }
+
   function rename(event: React.MouseEvent, data: any) {
     event.preventDefault();
 
@@ -48,6 +56,7 @@ export default function FolderMenu(props: any) {
   return (
     <ContextMenu id="group-menu">
       <MenuItem onClick={open}>Open</MenuItem>
+      <MenuItem onClick={openInNewTab}>Open in new tab</MenuItem>
       <MenuItem divider />
       <MenuItem disabled={true}>Copy</MenuItem>
       <MenuItem disabled={true}>Cut</MenuItem>

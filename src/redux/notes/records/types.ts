@@ -30,7 +30,7 @@ export const DEFAULT_RECORDS_STATE: NotesRecords = {
     parent: "ostalo",
     title: "INSTRUCTIONS",
     content: instructionsContentState,
-    type: "File",
+    type: "Note",
     createdAt: Date.now(),
     updatedAt: Date.now()
   }

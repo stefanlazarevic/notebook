@@ -13,23 +13,28 @@ import {
 import { showOverlay } from "../../../../redux/overlays/actions";
 import { OverlayType } from "../../../../redux/overlays/types";
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
+import { createNewTab } from "../../../../redux/tabs/actions";
 
 export default function Group(props: GroupProps) {
   const dispatch = useDispatch();
 
-  function open(event?: React.MouseEvent) {
+  function open() {
     dispatch(openGroup(props.id));
   }
 
-  function rename(event?: React.MouseEvent) {
+  function openInNewTab() {
+    dispatch(createNewTab(props.id));
+  }
+
+  function rename() {
     dispatch(showOverlay(OverlayType.RENAME_GROUP, { id: props.id }));
   }
 
-  function remove(event?: React.MouseEvent) {
+  function remove() {
     dispatch(removeGroup(props.id));
   }
 
-  function ungroup(event?: React.MouseEvent) {
+  function ungroup() {
     dispatch(ungroupGroup(props.id));
   }
 
@@ -82,7 +87,15 @@ export default function Group(props: GroupProps) {
   }
 
   function forwardDataToContextMenu() {
-    return { id: props.id, index: props.index, open, rename, remove, ungroup };
+    return {
+      id: props.id,
+      index: props.index,
+      open,
+      openInNewTab,
+      rename,
+      remove,
+      ungroup
+    };
   }
 
   // @todo move to utility.

@@ -8,8 +8,8 @@
 .DeleteRecordOverlay .OverlayFooter button {
   appearance: none;
 
-  color: var(--app-text-base-color);
-  background-color: var(--app-background-base-color);
+  color: var(--text-base-color);
+  background-color: var(--background-base-color);
 
   cursor: pointer;
 
@@ -26,10 +26,10 @@
 }
 
 .DeleteRecordOverlay .OverlayFooter button:focus {
-  outline: 1px dotted var(--app-text-base-color);
+  outline: 1px dotted var(--text-base-color);
 }
 
 .DeleteRecordOverlay .OverlayFooter button:first-child {
   margin-right: 15px;
-  color: var(--app-text-danger-color);
+  color: var(--danger-color);
 }

@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
 
-  background: var(--app-background-5-lighter-color);
+  background: var(--background-lighter-color);
 
   padding: 5px 10px;
 
@@ -24,8 +24,8 @@
 
   cursor: pointer;
 
-  background-color: var(--app-background-5-ligher-color);
-  color: var(--app-text-base-color);
+  background-color: var(--background-lighter-color);
+  color: var(--text-base-color);
 
   border: 0;
   border-radius: 4px;
@@ -36,5 +36,6 @@
 
 .OverlayHeaderButton:hover,
 .OverlayHeaderButton:focus {
-  background-color: var(--app-background-base-color);
+  background-color: var(--background-lighter-color);
+  color: var(--text-lighter-color);
 }

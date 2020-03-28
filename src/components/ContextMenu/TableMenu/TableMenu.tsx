@@ -24,7 +24,7 @@ export default function TableMenu(props: any) {
   return (
     <ContextMenu id="table-menu">
       <MenuItem onClick={createGroup}>Create Folder</MenuItem>
-      <MenuItem onClick={createRecord}>Create File</MenuItem>
+      <MenuItem onClick={createRecord}>Create Note</MenuItem>
     </ContextMenu>
   );
 }
