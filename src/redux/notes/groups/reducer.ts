@@ -60,23 +60,7 @@ export default function groupsReducer(
       };
     case NotesActions.MOVE_GROUP:
       return {
-        ...state,
-        [action.payload.targetGroupID]: {
-          ...state[action.payload.targetGroupID],
-          children: state[action.payload.targetGroupID].children.concat(
-            action.payload.id
-          )
-        },
-        [action.payload.parentGroupID]: {
-          ...state[action.payload.parentGroupID],
-          children: state[action.payload.parentGroupID].children.filter(
-            id => id !== action.payload.id
-          )
-        },
-        [action.payload.id]: {
-          ...state[action.payload.id],
-          path: action.payload.path
-        }
+        ...action.payload
       };
     case NotesActions.MOVE_RECORD:
       return {

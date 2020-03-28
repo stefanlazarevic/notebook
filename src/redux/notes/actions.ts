@@ -233,14 +233,51 @@ export function moveToGroup(
     }
 
     if (group) {
+      const parentFolderID = utils.array.last(group.path) || "root";
+
+      const newFolderTree = {
+        ...groups,
+        [parentFolderID]: {
+          ...groups[parentFolderID],
+          children: groups[parentFolderID].children.filter(_id => _id !== id)
+        },
+        [targetGroupID]: {
+          ...groups[targetGroupID],
+          children: groups[targetGroupID].children.concat(id)
+        },
+        [id]: { ...groups[id], path: targetGroup.path.concat(targetGroupID) }
+      };
+
+      const queue: string[] = [id];
+
+      // Breath first traverse.
+      (function processQueue() {
+        if (queue.length === 0) {
+          return;
+        }
+
+        const id = queue.pop()!;
+        const parentFolder = newFolderTree[id];
+
+        const children = parentFolder.children;
+
+        for (let i = 0; i < children.length; i++) {
+          const childFolder = newFolderTree[children[i]];
+
+          if (childFolder && childFolder.children !== undefined) {
+            childFolder.path = parentFolder.path.concat(parentFolder.id);
+            newFolderTree[childFolder.id] = childFolder;
+
+            queue.push(childFolder.id);
+          }
+        }
+
+        processQueue();
+      })();
+
       dispatch({
         type: NotesActions.MOVE_GROUP,
-        payload: {
-          ...group,
-          path: targetGroup.path.concat(targetGroup.id),
-          parentGroupID: utils.array.last(group.path) || "root",
-          targetGroupID: targetGroupID
-        }
+        payload: newFolderTree
       });
     }
 
