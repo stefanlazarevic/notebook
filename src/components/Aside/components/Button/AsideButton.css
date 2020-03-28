@@ -1,51 +1,33 @@
 .AsideButton {
-  position: relative;
+  display: block;
 
-  appearance: none;
-
-  background-color: var(--background-base-color);
-
-  border: 0;
-
-  border-radius: 0;
-
-  outline: 0;
-
-  border-left: 4px solid transparent;
-
-  color: var(--text-base-color);
-
-  padding: 10px 15px;
+  width: 300px;
 
   text-align: left;
 
+  border: 0;
+
+  padding: 10px 15px 10px 30px;
+
   font-size: 1rem;
 
-  white-space: nowrap;
+  background-color: var(--background-base-color);
+
+  color: var(--text-base-color);
+
+  outline: 0;
 
   cursor: pointer;
+
+  overflow: hidden;
 }
 
-.AsideButton:hover {
-  background-color: var(--background-lighter-color);
+.AsideButton > * {
+  display: inline-block;
 
-  color: var(--text-lighter-color);
-}
-
-.AsideButton[data-active="true"] {
-  border-left-color: var(--primary-color);
-
-  background-color: var(--background-darker-color);
-
-  color: var(--text-lighter-color);
-}
-
-.AsideButton span,
-.AsideButton svg {
   vertical-align: middle;
 }
 
-.AsideButton svg {
-  font-size: 1.1rem;
-  margin-right: 20px;
+.AsideButton > svg:first-child {
+  margin-right: 15px;
 }
