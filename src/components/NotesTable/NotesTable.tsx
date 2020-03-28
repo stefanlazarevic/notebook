@@ -1,7 +1,7 @@
 import React from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { Table, Column } from "react-vt-table";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ContextMenuTrigger } from "react-contextmenu";
 
 import "react-vt-table/dist/style.css";
@@ -10,14 +10,17 @@ import "./NotesTable.css";
 import { AppState } from "../../redux/types";
 import NoteRow from "./components/NoteRow/NoteRow";
 import Ribbon from "./components/Ribbon/Ribbon";
+import { moveToGroup } from "../../redux/notes/actions";
 
 export default function NotesTable(props: any) {
+  const dispatch = useDispatch();
+
   const currentGroupId = useSelector(
     (state: AppState) => state.notes.currentGroupID
   );
 
-  const children = useSelector(
-    (state: AppState) => state.notes.groups[currentGroupId].children
+  const currentFolder = useSelector(
+    (state: AppState) => state.notes.groups[currentGroupId]
   );
 
   function rowRenderer(props: any) {
@@ -26,7 +29,7 @@ export default function NotesTable(props: any) {
 
     return (
       <NoteRow
-        id={children[index]}
+        id={currentFolder.children[index]}
         index={index}
         style={style}
         getRowWidth={getRowWidth}
@@ -37,14 +40,49 @@ export default function NotesTable(props: any) {
     );
   }
 
+  function allowDrag(event: React.DragEvent) {
+    event.preventDefault();
+  }
+
+  function drop(event: React.DragEvent) {
+    event.preventDefault();
+
+    const data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    const floatingID = data && data.id;
+
+    // Prevent moving parent to child folder.
+    if (currentFolder.path.includes(floatingID)) {
+      return;
+    }
+
+    if (currentFolder.children.includes(floatingID)) {
+      return;
+    }
+
+    if (floatingID && floatingID !== currentGroupId) {
+      dispatch(moveToGroup(currentGroupId, floatingID));
+    }
+  }
+
   return (
     <>
       <div className="NotesWrapper">
-        <ContextMenuTrigger id="table-menu" holdToDisplay={-1}>
+        <ContextMenuTrigger
+          id="table-menu"
+          holdToDisplay={-1}
+          attributes={{
+            onDragOver: allowDrag,
+            onDrop: drop
+          }}
+        >
           <AutoSizer>
             {({ width, height }) => (
               <Table
-                data={children.length ? children : ["empty"]}
+                data={
+                  currentFolder.children.length
+                    ? currentFolder.children
+                    : ["empty"]
+                }
                 width={width}
                 height={height}
                 rowHeight={40}
@@ -65,7 +103,7 @@ export default function NotesTable(props: any) {
           </AutoSizer>
         </ContextMenuTrigger>
       </div>
-      <Ribbon length={children.length} />
+      <Ribbon length={currentFolder.children.length} />
     </>
   );
 }

@@ -12,7 +12,7 @@ export default function FolderTabs() {
 
   return (
     <div className="FolderTabs">
-      {Array.from({ length }, (_: any, index: number) => {
+      {React.Children.map(Array.from({ length }), (_: any, index: number) => {
         return <Tab index={index} />;
       })}
       <NewTabButton />
