@@ -42,8 +42,16 @@ function App() {
                 </Section>
                 <Bar size={5} className="ResizerBar" />
                 <Section>
-                  <NotesTable />
-                  <FolderTabs />
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      height: "100%"
+                    }}
+                  >
+                    <NotesTable />
+                    <FolderTabs />
+                  </div>
                 </Section>
               </Container>
             )}

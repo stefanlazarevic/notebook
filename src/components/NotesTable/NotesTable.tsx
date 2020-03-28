@@ -9,7 +9,7 @@ import "./NotesTable.css";
 
 import { AppState } from "../../redux/types";
 import NoteRow from "./components/NoteRow/NoteRow";
-import TableFooter from "./components/TableFooter/TableFooter";
+import Ribbon from "./components/Ribbon/Ribbon";
 
 export default function NotesTable(props: any) {
   const currentGroupId = useSelector(
@@ -51,6 +51,7 @@ export default function NotesTable(props: any) {
                 headerHeight={40}
                 minColumnWidth={30}
                 rowRenderer={rowRenderer}
+                autoScroll={true}
                 listProps={{
                   overscanCount: 20,
                   useIsScrolling: true
@@ -62,9 +63,9 @@ export default function NotesTable(props: any) {
               </Table>
             )}
           </AutoSizer>
-          {/* <TableFooter items={children.length} /> */}
         </ContextMenuTrigger>
       </div>
+      <Ribbon length={children.length} />
     </>
   );
 }

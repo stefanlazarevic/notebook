@@ -1,0 +1,13 @@
+.Ribbon {
+  display: flex;
+
+  width: 100%;
+
+  padding: 15px;
+
+  background-color: var(--background-darker-color);
+}
+
+.Ribbon span {
+  font-size: 0.9rem;
+}

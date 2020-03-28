@@ -58,7 +58,8 @@
 }
 
 .NotesWrapper {
-  height: calc(100% - 40px);
+  /* height: calc(100% - 40px); */
+  flex: 1;
 
   background-color: var(--background-darker-color);
 }
@@ -73,17 +74,21 @@
 }
 
 .VTList::-webkit-scrollbar-track {
-  background: var(--background-base-color);
+  background: transparent;
 }
 
 .VTList::-webkit-scrollbar-thumb {
   background: var(--background-lighter-color);
 
   cursor: grab;
+
+  border-radius: 4px;
 }
 
 .VTList::-webkit-scrollbar-track-piece {
-  background: var(--background-base-color);
+  background: transparent;
+
+  height: 10px;
 }
 
 .VTList::-webkit-scrollbar-corner {
