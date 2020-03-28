@@ -36,6 +36,11 @@ export default function tabReducer(
           action.payload
         )
       };
+    case NotesActions.REMOVE_GROUP:
+      return {
+        ...state,
+        records: action.payload.records
+      };
     default:
       return state;
   }

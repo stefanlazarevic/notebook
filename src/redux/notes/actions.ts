@@ -190,8 +190,9 @@ export function updateGroup(updatedGroup: NoteGroup) {
 
 export function removeGroup(targetGroupID: NoteGroupID) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
-    const { notes } = getState();
+    const { notes, tabs } = getState();
     const { groups } = notes;
+    const { records } = tabs;
 
     const group = groups[targetGroupID];
 
@@ -203,11 +204,26 @@ export function removeGroup(targetGroupID: NoteGroupID) {
       throw Error(`NoteGroup must be empty before removing.`);
     }
 
+    const newRecords = Array(records.length);
+
+    for (let i = 0; i < records.length; i++) {
+      const folderID = records[i];
+
+      if (folderID === targetGroupID) {
+        const id = utils.array.last(groups[folderID].path);
+
+        newRecords[i] = id;
+      } else {
+        newRecords[i] = records[i];
+      }
+    }
+
     dispatch({
       type: NotesActions.REMOVE_GROUP,
       payload: {
         ...group,
-        parentGroupId: utils.array.last(group.path)
+        parentGroupId: utils.array.last(group.path),
+        records: newRecords
       }
     });
   };
