@@ -32,7 +32,6 @@ export default function Tab(props: any) {
   const length = useSelector((state: AppState) => state.tabs.records.length);
 
   function open() {
-    console.log("Opening");
     dispatch(openTab(props.index));
   }
 
@@ -41,9 +40,7 @@ export default function Tab(props: any) {
   }
 
   function close(event?: React.MouseEvent) {
-    console.log("Closing");
     if (event) {
-      console.log("Stop propagating");
       event.stopPropagation();
     }
 
@@ -70,6 +67,12 @@ export default function Tab(props: any) {
     dispatch(closeTabsAfter(props.index));
   }
 
+  function onDragOver(event: React.DragEvent) {
+    event.preventDefault();
+
+    open();
+  }
+
   function passDataToContextMenu() {
     return { duplicate, close, closeOther, closeAfter };
   }
@@ -82,7 +85,8 @@ export default function Tab(props: any) {
       attributes={{
         className: `Tab ${active ? "active" : ""}`,
         onClick: open,
-        title
+        title,
+        onDragOver
       }}
       collect={passDataToContextMenu}
     >

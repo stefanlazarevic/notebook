@@ -14,6 +14,7 @@ export interface GroupProps extends GroupCallbackProps {
   type: string;
   style: any;
   index: number;
+  path: NoteGroupID[];
 
   updatedAt?: number;
   className?: string;

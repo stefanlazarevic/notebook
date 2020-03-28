@@ -38,7 +38,7 @@ export default function Group(props: GroupProps) {
     dispatch(ungroupGroup(props.id));
   }
 
-  function allowDrop(event: React.DragEvent) {
+  function dragOver(event: React.DragEvent) {
     event.preventDefault();
   }
 
@@ -57,6 +57,11 @@ export default function Group(props: GroupProps) {
 
     const data = JSON.parse(event.dataTransfer.getData("text/plain"));
     const floatingID = data && data.id;
+
+    // Prevent moving parent to child folder.
+    if (props.path.includes(floatingID)) {
+      return;
+    }
 
     if (floatingID && floatingID !== props.id) {
       dispatch(moveToGroup(props.id, floatingID));
@@ -130,7 +135,7 @@ export default function Group(props: GroupProps) {
         tabIndex: props.index,
         onDoubleClick: open,
         draggable: true,
-        onDragOver: allowDrop,
+        onDragOver: dragOver,
         onDragStart: dragStart,
         onDrop: drop,
         onClick: handleClick,
