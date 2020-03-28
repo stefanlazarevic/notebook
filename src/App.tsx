@@ -14,6 +14,8 @@ import Aside from "./components/Aside/Aside";
 import TableMenu from "./components/ContextMenu/TableMenu/TableMenu";
 import FolderMenu from "./components/ContextMenu/FolderMenu/FolderMenu";
 import FileMenu from "./components/ContextMenu/FileMenu/FileMenu";
+import FolderTabs from "./components/FolderTabs";
+import TabMenu from "./components/ContextMenu/TabMenu/TabMenu";
 
 function App() {
   return (
@@ -41,6 +43,7 @@ function App() {
                 <Bar size={5} className="ResizerBar" />
                 <Section>
                   <NotesTable />
+                  <FolderTabs />
                 </Section>
               </Container>
             )}
@@ -50,6 +53,7 @@ function App() {
         <TableMenu />
         <FolderMenu />
         <FileMenu />
+        <TabMenu />
       </div>
       <RecordPrintContainer />
     </>

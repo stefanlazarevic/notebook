@@ -95,3 +95,11 @@ export function map(callback: MapCallbackFunction, array: any = []) {
 
   return output;
 }
+
+export function replaceAtIndex(index: number, array: any[], newValue: any) {
+  return array.slice(0, index).concat(newValue, array.slice(index + 1));
+}
+
+export function removeAtIndex(index: number, array: any[]) {
+  return array.slice(0, index).concat(array.slice(index + 1));
+}

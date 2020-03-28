@@ -85,7 +85,16 @@
 
 .ResizerBar {
   cursor: col-resize;
+
+  transition: 0.2s linear background-color;
+
   background-color: var(--background-darker-color);
+}
+
+.ResizerBar:hover,
+.ResizerBar:focus,
+.ResizerBar:active {
+  background-color: var(--primary-color);
 }
 
 .AppPanel {

@@ -71,7 +71,7 @@ export default function CreateGroupOverlay(props: any) {
           type="text"
           placeholder="Group name"
           autoFocus={true}
-          autoComplete={false}
+          autoComplete="off"
         />
       </OverlayBody>
       <OverlayFooter>

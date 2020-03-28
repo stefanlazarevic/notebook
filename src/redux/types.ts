@@ -5,9 +5,11 @@ import { NoteEditorState } from "./editor/types";
 import { SettingsState } from "./settings/types";
 import { OverlayState } from "./overlays/types";
 import { PrintState } from "./print/types";
+import { TabState } from "./tabs/types";
 
 export type AppState = {
   notes: NotesState;
+  tabs: TabState;
   editor: NoteEditorState;
   settings: SettingsState;
   overlays: OverlayState;

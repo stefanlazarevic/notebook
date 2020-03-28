@@ -39,8 +39,8 @@ export default function NotesTable(props: any) {
 
   return (
     <>
-      <ContextMenuTrigger id="table-menu" holdToDisplay={-1}>
-        <div className="NotesWrapper">
+      <div className="NotesWrapper">
+        <ContextMenuTrigger id="table-menu" holdToDisplay={-1}>
           <AutoSizer>
             {({ width, height }) => (
               <Table
@@ -62,9 +62,9 @@ export default function NotesTable(props: any) {
               </Table>
             )}
           </AutoSizer>
-        </div>
-        <TableFooter items={children.length} />
-      </ContextMenuTrigger>
+          {/* <TableFooter items={children.length} /> */}
+        </ContextMenuTrigger>
+      </div>
     </>
   );
 }
