@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 
 import "./Breadcrumb.css";
 
@@ -8,7 +8,7 @@ export default function Breadcrumb(props: any) {
   const firstVisibleIndex = useRef<number>(0);
   const hiddenWidth = useRef<number[]>([]);
 
-  function resize() {
+  const resize = useCallback(() => {
     if (elementOverflow()) {
       while (elementOverflow()) {
         if (breadcrumbElements.current) {
@@ -53,7 +53,7 @@ export default function Breadcrumb(props: any) {
         }
       }
     }
-  }
+  }, []);
 
   function elementOverflow() {
     if (!breadcrumb.current) {
@@ -115,7 +115,7 @@ export default function Breadcrumb(props: any) {
         window.removeEventListener("resize", resize);
       }
     };
-  }, []);
+  }, [resize]);
 
   return (
     <div ref={breadcrumb} className="Breadcrumb">
