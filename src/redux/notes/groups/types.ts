@@ -52,7 +52,8 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
     }
   };
 
-  for (let i = 0; i < 500; i++) {
+  // Performance testing data.
+  for (let i = 0; i < 0; i++) {
     const id = utils.string.generateRandom(6);
 
     groups[id] = {
