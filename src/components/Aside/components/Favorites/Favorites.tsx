@@ -43,7 +43,13 @@ export default function Favorites(props: any) {
       </Summary>
       <Details>
         <div className="Wrapper">
-          <List height={height} itemCount={length} itemSize={40} width={280}>
+          <List
+            className="FavoritesList"
+            height={height > 280 ? 280 : height}
+            itemCount={length}
+            itemSize={40}
+            width={280}
+          >
             {Row}
           </List>
         </div>

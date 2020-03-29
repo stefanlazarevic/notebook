@@ -1,5 +1,4 @@
 import React from "react";
-import { ContextMenuTrigger } from "react-contextmenu";
 import { useDispatch } from "react-redux";
 import { openEditor } from "../../../../redux/editor/actions";
 import { queuePrintRecords } from "../../../../redux/print/actions";
@@ -8,6 +7,7 @@ import { OverlayType } from "../../../../redux/overlays/types";
 import { ungroupRecord } from "../../../../redux/notes/actions";
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 import { FaFileAlt } from "react-icons/fa";
+import { NoteMenuTrigger, NoteMenu } from "../../../ContextMenu/NoteMenu";
 
 export default function Record(props: any) {
   const dispatch = useDispatch();
@@ -98,20 +98,19 @@ export default function Record(props: any) {
   }
 
   return (
-    <ContextMenuTrigger
-      id="record-menu"
-      holdToDisplay={-1}
-      collect={forwardDataToContextMenu}
-      attributes={{
-        className: `VTRow FileRow ${props.className}`,
-        style: { ...props.style, width: props.getRowWidth() },
-        tabIndex: props.index,
-        onDoubleClick: open,
-        draggable: true,
-        onDragStart: dragStart,
-        onClick: handleClick,
-        onKeyDown: handleKeyDown
-      }}
+    <NoteMenuTrigger
+      id={props.id}
+      tabIndex={props.index}
+      className={
+        props.className ? `VTRow FileRow ${props.className}` : "VTRow FileRow"
+      }
+      style={{ ...props.style, width: props.getRowWidth() }}
+      onDoubleClick={open}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      draggable={true}
+      onDragStart={dragStart}
+      forwardDataToContextMenu={forwardDataToContextMenu}
     >
       <div
         className="VTCell"
@@ -140,6 +139,7 @@ export default function Record(props: any) {
       >
         <span>{props.type}</span>
       </div>
-    </ContextMenuTrigger>
+      <NoteMenu id={props.id} />
+    </NoteMenuTrigger>
   );
 }

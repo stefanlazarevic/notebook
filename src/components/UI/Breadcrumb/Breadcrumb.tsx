@@ -117,6 +117,10 @@ export default function Breadcrumb(props: any) {
     };
   }, [resize]);
 
+  useEffect(() => {
+    resize();
+  }, [resize, props.children]);
+
   return (
     <div ref={breadcrumb} className="Breadcrumb">
       {props.children}

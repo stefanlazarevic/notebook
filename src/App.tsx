@@ -11,7 +11,6 @@ import OverlayContainer from "./components/Overlay";
 import RecordPrintContainer from "./components/RecordPrint";
 import NotesTable from "./components/NotesTable/NotesTable";
 import Aside from "./components/Aside/Aside";
-import FileMenu from "./components/ContextMenu/FileMenu/FileMenu";
 import FolderTabs from "./components/FolderTabs";
 import TabMenu from "./components/ContextMenu/TabMenu/TabMenu";
 
@@ -56,7 +55,6 @@ function App() {
           </AutoSizer>
         </div>
         <OverlayContainer />
-        <FileMenu />
         <TabMenu />
       </div>
       <RecordPrintContainer />

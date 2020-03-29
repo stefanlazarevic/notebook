@@ -1,3 +1,30 @@
 .Favorites .DetailsContent {
   padding: 10px 0;
 }
+
+.FavoritesList::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.FavoritesList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.FavoritesList::-webkit-scrollbar-thumb {
+  background: var(--background-lighter-color);
+
+  cursor: grab;
+
+  border-radius: 4px;
+}
+
+.FavoritesList::-webkit-scrollbar-track-piece {
+  background: transparent;
+
+  height: 10px;
+}
+
+.FavoritesList::-webkit-scrollbar-corner {
+  background: var(--background-darker-color);
+}
