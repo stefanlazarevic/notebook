@@ -28,7 +28,7 @@ export default function FolderMenuProvider(props: any) {
       draggable={props.draggable}
       onDragOver={props.onDragOver}
       onDragStart={props.onDragStart}
-      onDrop={props.drop}
+      onDrop={props.onDrop}
       onKeyDown={props.onKeyDown}
     >
       {props.children}
