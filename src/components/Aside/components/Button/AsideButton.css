@@ -22,6 +22,11 @@
   overflow: hidden;
 }
 
+.AsideButton:hover,
+.AsideButton:focus {
+  color: var(--text-lighter-color);
+}
+
 .AsideButton > * {
   display: inline-block;
 
