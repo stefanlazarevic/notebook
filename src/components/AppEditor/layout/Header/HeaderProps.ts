@@ -10,4 +10,5 @@ export interface AppEditorHeaderProps {
   onResize?: (maximized: boolean) => void;
   onClose?: () => void;
   onChange?: () => void;
+  onSave?: () => void;
 }

@@ -25,6 +25,10 @@ export default function AppEditor(props: AppEditorProps) {
   const saveTimeoutReference = useRef<NodeJS.Timeout>();
 
   function save() {
+    if (saveTimeoutReference.current) {
+      clearTimeout(saveTimeoutReference.current);
+    }
+
     const record: NoteRecord = {
       id: props.id || utils.string.generateRandom(),
       parent: props.currentGroupID,
@@ -78,7 +82,6 @@ export default function AppEditor(props: AppEditorProps) {
       if (saveTimeoutReference.current) {
         clearTimeout(saveTimeoutReference.current);
       }
-
       if (indicatorState === ChangeIndicatorState.UNSAVED) {
         save();
       }
@@ -97,7 +100,6 @@ export default function AppEditor(props: AppEditorProps) {
     if (saveTimeoutReference.current) {
       clearTimeout(saveTimeoutReference.current);
     }
-
     if (props.autoSave && Boolean(props.id)) {
       saveTimeoutReference.current = setTimeout(() => {
         save();
@@ -122,11 +124,12 @@ export default function AppEditor(props: AppEditorProps) {
           <AppEditorHeader
             maximized={maximized}
             ref={nameInputReference}
-            onClose={props.onClose}
+            onClose={closeEditor}
             onResize={setMaximized}
             defaultValue={props.title}
             indicatorState={indicatorState}
             onChange={handleDetectedChange}
+            onSave={save}
           />
           <Editor
             ref={editorReference}
