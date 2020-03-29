@@ -6,10 +6,12 @@ import { SettingsState } from "./settings/types";
 import { OverlayState } from "./overlays/types";
 import { PrintState } from "./print/types";
 import { TabState } from "./tabs/types";
+import { FavoritesState } from "./favorites/types";
 
 export type AppState = {
   notes: NotesState;
   tabs: TabState;
+  favorites: FavoritesState;
   editor: NoteEditorState;
   settings: SettingsState;
   overlays: OverlayState;

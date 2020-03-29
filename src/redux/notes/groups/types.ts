@@ -29,7 +29,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
     root: {
       id: "root",
       path: [],
-      title: "/",
+      title: "My Drive",
       updatedAt: now,
       type: "Folder",
       children: ["fakultet"]

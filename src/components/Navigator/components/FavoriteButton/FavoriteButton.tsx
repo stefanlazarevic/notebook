@@ -4,7 +4,10 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import "./FavoriteButton.css";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../../../redux/types";
-import { updateGroup } from "../../../../redux/notes/actions";
+import {
+  removeFromFavorites,
+  addToFavorites
+} from "../../../../redux/favorites/actions";
 
 export default function FavoriteButton(props: any) {
   const dispatch = useDispatch();
@@ -18,7 +21,11 @@ export default function FavoriteButton(props: any) {
   );
 
   function toggleFavorite() {
-    dispatch(updateGroup(currentFolderID, { favorite: !isFavorite }));
+    if (isFavorite) {
+      dispatch(removeFromFavorites(currentFolderID));
+    } else {
+      dispatch(addToFavorites(currentFolderID));
+    }
   }
 
   return (

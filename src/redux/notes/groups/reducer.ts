@@ -1,6 +1,7 @@
 import { NotesGroups, DEFAULT_NOTES_GROUPS_STATE } from "./types";
 import { NotesActions } from "../types";
 import utils from "../../../utils";
+import { FavoriteActions } from "../../favorites/types";
 
 export default function groupsReducer(
   state: NotesGroups = DEFAULT_NOTES_GROUPS_STATE,
@@ -80,6 +81,22 @@ export default function groupsReducer(
         ...state,
         [action.payload.id]: {
           ...action.payload
+        }
+      };
+    case FavoriteActions.ADD:
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...state[action.payload.id],
+          favorite: true
+        }
+      };
+    case FavoriteActions.REMOVE:
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...state[action.payload.id],
+          favorite: false
         }
       };
     default:
