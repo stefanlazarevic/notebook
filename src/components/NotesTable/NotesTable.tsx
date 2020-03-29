@@ -2,7 +2,6 @@ import React from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { Table, Column } from "react-vt-table";
 import { useSelector, useDispatch } from "react-redux";
-import { ContextMenuTrigger } from "react-contextmenu";
 
 import "react-vt-table/dist/style.css";
 import "./NotesTable.css";
@@ -11,6 +10,7 @@ import { AppState } from "../../redux/types";
 import NoteRow from "./components/NoteRow/NoteRow";
 import Ribbon from "./components/Ribbon/Ribbon";
 import { moveToGroup } from "../../redux/notes/actions";
+import { TableMenuTrigger, TableMenu } from "../ContextMenu/TableMenu";
 
 export default function NotesTable(props: any) {
   const dispatch = useDispatch();
@@ -71,14 +71,7 @@ export default function NotesTable(props: any) {
   return (
     <>
       <div className="NotesWrapper">
-        <ContextMenuTrigger
-          id="table-menu"
-          holdToDisplay={-1}
-          attributes={{
-            onDragOver: allowDrag,
-            onDrop: drop
-          }}
-        >
+        <TableMenuTrigger onDragOver={allowDrag} onDrop={drop}>
           <AutoSizer>
             {({ width, height }) => (
               <Table
@@ -101,7 +94,8 @@ export default function NotesTable(props: any) {
               </Table>
             )}
           </AutoSizer>
-        </ContextMenuTrigger>
+          <TableMenu />
+        </TableMenuTrigger>
       </div>
       <Ribbon length={children.length} />
     </>

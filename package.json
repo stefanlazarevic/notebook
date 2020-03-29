@@ -23,6 +23,7 @@
     "draft-js-export-html": "^1.4.1",
     "gh-pages": "^2.2.0",
     "react": "^16.13.0",
+    "react-contexify": "^4.1.1",
     "react-contextmenu": "^2.13.0",
     "react-dom": "^16.13.0",
     "react-icons": "^3.9.0",

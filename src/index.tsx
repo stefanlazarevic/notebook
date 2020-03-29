@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
+import "react-contexify/dist/ReactContexify.min.css";
 import "./index.css";
 import "./print.css";
 
