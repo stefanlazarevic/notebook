@@ -46,7 +46,9 @@ export default function Collapse(props: any) {
   }
 
   return (
-    <div className="Collapse">
+    <div
+      className={props.className ? `Collapse ${props.className}` : "Collapse"}
+    >
       {React.Children.map(props.children, (child: any) => {
         if (child.type && child.type.displayName === "CollapseSummary") {
           return cloneElement(child, {

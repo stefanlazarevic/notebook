@@ -1,13 +1,14 @@
 .AsideButton {
   display: block;
 
-  width: 300px;
+  width: 280px;
+  height: 40px;
 
   text-align: left;
 
   border: 0;
 
-  padding: 10px 15px 10px 30px;
+  padding: 10px 20px 10px 30px;
 
   font-size: 1rem;
 
