@@ -15,6 +15,8 @@ export default function TableMenuProvider(props: any) {
 
   return (
     <div
+      onDragOver={props.onDragOver}
+      onDrop={props.onDrop}
       className={props.className ? ` ${props.className}` : "TableMenuTrigger"}
       onContextMenu={triggerContextMenu}
     >

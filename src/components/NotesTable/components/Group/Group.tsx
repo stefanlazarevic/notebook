@@ -1,7 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { ContextMenuTrigger } from "react-contextmenu";
-import { FaFolder } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 
 import { GroupProps } from "./GroupProps";
 import {
@@ -14,9 +12,20 @@ import { showOverlay } from "../../../../redux/overlays/actions";
 import { OverlayType } from "../../../../redux/overlays/types";
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
 import { createNewTab } from "../../../../redux/tabs/actions";
+import { FolderMenuTrigger, FolderMenu } from "../../../ContextMenu/FolderMenu";
+import { AppState } from "../../../../redux/types";
+import { MdFolder, MdFolderSpecial } from "react-icons/md";
+import {
+  addToFavorites,
+  removeFromFavorites
+} from "../../../../redux/favorites/actions";
 
 export default function Group(props: GroupProps) {
   const dispatch = useDispatch();
+
+  const isFavorite = useSelector(
+    (state: AppState) => state.notes.groups[props.id].favorite
+  );
 
   function open() {
     dispatch(openGroup(props.id));
@@ -68,6 +77,14 @@ export default function Group(props: GroupProps) {
     }
   }
 
+  function toggleFavorite() {
+    if (isFavorite) {
+      dispatch(removeFromFavorites(props.id));
+    } else {
+      dispatch(addToFavorites(props.id));
+    }
+  }
+
   function handleClick(event: React.MouseEvent) {
     if (typeof props.onClick === "function") {
       props.onClick(event, props.id);
@@ -93,13 +110,12 @@ export default function Group(props: GroupProps) {
 
   function forwardDataToContextMenu() {
     return {
-      id: props.id,
-      index: props.index,
       open,
       openInNewTab,
       rename,
       remove,
-      ungroup
+      ungroup,
+      toggleFavorite
     };
   }
 
@@ -123,37 +139,39 @@ export default function Group(props: GroupProps) {
   }
 
   return (
-    <ContextMenuTrigger
-      id="group-menu"
-      holdToDisplay={-1}
-      collect={forwardDataToContextMenu}
-      attributes={{
-        className: `VTRow ${props.selected ? "selected" : ""} ${
-          props.className
-        }`,
-        style: { ...props.style, width: props.getRowWidth() },
-        tabIndex: props.index,
-        onDoubleClick: open,
-        draggable: true,
-        onDragOver: dragOver,
-        onDragStart: dragStart,
-        onDrop: drop,
-        onClick: handleClick,
-        onKeyDown: handleKeyDown
-      }}
-    >
-      <div className="VTCell" style={{ width: props.getColumnWidth(0) }}>
-        <div className="VTCellContent">
-          <FaFolder className="VTCellIcon" />
-          <span>{props.title}</span>
+    <>
+      <FolderMenuTrigger
+        id={props.id}
+        className={props.selected ? `VTRow selected` : "VTRow"}
+        style={{ ...props.style, width: props.getRowWidth() }}
+        tabIndex={props.index}
+        onDoubleClick={open}
+        onClick={handleClick}
+        draggable={true}
+        onDragOver={dragOver}
+        onDragStart={dragStart}
+        onDrop={drop}
+        onKeyDown={handleKeyDown}
+        forwardDataToContextMenu={forwardDataToContextMenu}
+      >
+        <div className="VTCell" style={{ width: props.getColumnWidth(0) }}>
+          <div className="VTCellContent">
+            {isFavorite ? (
+              <MdFolderSpecial className="VTCellIcon" />
+            ) : (
+              <MdFolder className="VTCellIcon" />
+            )}
+            <span>{props.title}</span>
+          </div>
         </div>
-      </div>
-      <div className="VTCell" style={{ width: props.getColumnWidth(1) }}>
-        <span>{props.updatedAt ? timeConverter(props.updatedAt) : "-"}</span>
-      </div>
-      <div className="VTCell" style={{ width: props.getColumnWidth(2) }}>
-        <span>{props.type}</span>
-      </div>
-    </ContextMenuTrigger>
+        <div className="VTCell" style={{ width: props.getColumnWidth(1) }}>
+          <span>{props.updatedAt ? timeConverter(props.updatedAt) : "-"}</span>
+        </div>
+        <div className="VTCell" style={{ width: props.getColumnWidth(2) }}>
+          <span>{props.type}</span>
+        </div>
+        <FolderMenu id={props.id} />
+      </FolderMenuTrigger>
+    </>
   );
 }

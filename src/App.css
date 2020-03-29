@@ -101,44 +101,19 @@
   flex: 1;
 }
 
-/* Move to separate component. */
-/* .AsideItem {
-  display: flex;
+.react-contexify {
+  background-color: var(--background-base-color);
 
-  align-items: center;
-
-  padding: 10px 0;
-
-  cursor: pointer;
-
-  font-size: 1.2rem;
-
-  overflow: hidden;
-
-  word-wrap: unset;
+  box-shadow: none;
+  border: 1px solid var(--background-lighter-color);
 }
 
-.AsideItem svg {
-  display: inline-block;
-
-  margin-right: 10px;
+.react-contexify__item__content {
+  color: var(--text-base-color);
 }
 
-.Aside hr {
-  background: #888;
-  width: 100%;
-  height: 1px;
-  border: 0;
+.react-contexify__item:not(.react-contexify__item--disabled):hover
+  > .react-contexify__item__content {
+  background-color: var(--background-lighter-color);
+  color: var(--text-lighter-color);
 }
-
-.AsideItem > .AsideItem {
-  padding-left: 15px;
-}
-
-.Aside summary::-webkit-details-marker {
-  display: none;
-}
-
-.Aside summary {
-  margin-bottom: 10px;
-} */
