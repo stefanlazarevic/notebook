@@ -1,12 +1,12 @@
 import React from "react";
-import Collapse from "@devlazarevic/react-collapse";
 import { FiStar } from "react-icons/fi";
 import { FaCaretLeft, FaCaretDown } from "react-icons/fa";
+import Collapse, { Summary, Details } from "../../../UI/Collapse";
 
 export default function Favorites(props: any) {
   return (
     <Collapse className="Favorites">
-      <Collapse.Summary>
+      <Summary>
         {(expanded: boolean) => (
           <h4>
             <FiStar />
@@ -14,8 +14,8 @@ export default function Favorites(props: any) {
             {expanded ? <FaCaretDown /> : <FaCaretLeft />}
           </h4>
         )}
-      </Collapse.Summary>
-      <Collapse.Details></Collapse.Details>
+      </Summary>
+      <Details></Details>
     </Collapse>
   );
 }

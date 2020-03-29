@@ -1,15 +1,15 @@
 import React from "react";
-import Collapse from "@devlazarevic/react-collapse";
 import { FiClock } from "react-icons/fi";
 import { FaCaretLeft, FaCaretDown } from "react-icons/fa";
 
 import HomeButton from "../HomeButton/HomeButton";
 import RecycleButton from "../RecycleButton/RecycleButton";
+import Collapse, { Summary, Details } from "../../../UI/Collapse";
 
 export default function QuickAccess(props: any) {
   return (
-    <Collapse className="QuickAccess" expanded={true}>
-      <Collapse.Summary>
+    <Collapse className="QuickAccess" open={true}>
+      <Summary>
         {(expanded: boolean) => (
           <h4>
             <FiClock />
@@ -17,13 +17,13 @@ export default function QuickAccess(props: any) {
             {expanded ? <FaCaretDown /> : <FaCaretLeft />}
           </h4>
         )}
-      </Collapse.Summary>
-      <Collapse.Details>
+      </Summary>
+      <Details>
         <div className="Wrapper">
           <HomeButton />
           <RecycleButton />
         </div>
-      </Collapse.Details>
+      </Details>
     </Collapse>
   );
 }

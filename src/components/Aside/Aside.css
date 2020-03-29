@@ -16,7 +16,7 @@
   padding: 10px 0;
 }
 
-.Aside .collapse__summary {
+.Aside .Summary {
   outline: 0;
 
   cursor: pointer;
@@ -26,7 +26,7 @@
   padding: 10px 15px;
 }
 
-.Aside .collapse__summary h4 {
+.Aside .Summary h4 {
   display: block;
 
   position: relative;
@@ -34,17 +34,17 @@
   white-space: pre;
 }
 
-.Aside .collapse__summary h4 > * {
+.Aside .Summary h4 > * {
   display: inline-block;
 
   vertical-align: middle;
 }
 
-.Aside .collapse__summary h4 > svg:first-child {
+.Aside .Summary h4 > svg:first-child {
   margin-right: 15px;
 }
 
-.Aside .collapse__summary h4 > svg:last-child {
+.Aside .Summary h4 > svg:last-child {
   position: absolute;
 
   right: 0;
