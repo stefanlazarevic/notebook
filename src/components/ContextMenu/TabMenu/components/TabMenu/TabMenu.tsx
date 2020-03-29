@@ -46,7 +46,10 @@ export default forwardRef((props: any, ref) => {
   }
 
   return (
-    <Menu id={`TabContextMenu-${props.id}-${props.index}`}>
+    <Menu
+      id={`TabContextMenu-${props.id}-${props.index}`}
+      className="react-no-print"
+    >
       <Item onClick={newTab}>New Tab</Item>
       <Item onClick={duplicate}>Duplicate</Item>
       <Separator />

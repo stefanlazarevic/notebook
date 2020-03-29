@@ -55,7 +55,7 @@ export default function NoteMenu(props: any) {
   }
 
   return (
-    <Menu id={`ContextMenu-${props.id}`}>
+    <Menu id={`ContextMenu-${props.id}`} className="react-no-print">
       <Item onClick={open}>Open</Item>
       <Item onClick={print}>Print</Item>
       <Separator />

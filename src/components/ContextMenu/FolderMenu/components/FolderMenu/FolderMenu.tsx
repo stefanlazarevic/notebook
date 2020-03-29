@@ -75,7 +75,7 @@ export default forwardRef((props: any, ref: any) => {
   }
 
   return (
-    <Menu id={`ContextMenu-${props.id}`}>
+    <Menu id={`ContextMenu-${props.id}`} className="react-no-print">
       <Item onClick={open}>Open</Item>
       <Item onClick={openInNewTab}>Open in new tab</Item>
       <Separator />

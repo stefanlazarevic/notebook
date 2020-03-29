@@ -22,7 +22,7 @@ export default forwardRef((props: any, ref) => {
   }
 
   return (
-    <Menu id="table-menu">
+    <Menu id="table-menu" className="react-no-print">
       <Item onClick={createGroup}>Create Folder</Item>
       <Item onClick={createRecord}>Create Note</Item>
     </Menu>
