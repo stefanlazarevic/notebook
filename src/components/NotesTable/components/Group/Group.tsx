@@ -170,8 +170,8 @@ export default function Group(props: GroupProps) {
         <div className="VTCell" style={{ width: props.getColumnWidth(2) }}>
           <span>{props.type}</span>
         </div>
-        <FolderMenu id={props.id} />
       </FolderMenuTrigger>
+      <FolderMenu id={props.id} />
     </>
   );
 }

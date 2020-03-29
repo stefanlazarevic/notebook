@@ -16,7 +16,7 @@ export default function Favorites(props: any) {
 
   const length = favorites.length || 1;
 
-  const height = length * 40;
+  const height = length * 40 + 40;
 
   const Row = ({ index, style }: { index: number; style: any }) => {
     if (favorites.length === 0) {
@@ -27,7 +27,7 @@ export default function Favorites(props: any) {
       );
     }
 
-    return <FavoriteFolder id={favorites[index]} />;
+    return <FavoriteFolder id={favorites[index]} style={style} />;
   };
 
   return (
@@ -49,6 +49,7 @@ export default function Favorites(props: any) {
             itemCount={length}
             itemSize={40}
             width={280}
+            overscanCount={5}
           >
             {Row}
           </List>

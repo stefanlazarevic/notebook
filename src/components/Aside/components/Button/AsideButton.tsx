@@ -15,6 +15,7 @@ export default function AsideButton(props: any) {
       disabled={props.disabled}
       onClick={click}
       data-active={props.active}
+      style={props.style}
     >
       {props.children || props.text}
     </button>

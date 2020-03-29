@@ -7,10 +7,9 @@ export default function groupReducer(state: NoteGroupID = "root", action: any) {
     case NotesActions.OPEN_GROUP:
       return action.payload;
     case TabActions.CREATE_TAB:
-      return action.payload.id;
     case TabActions.OPEN_TAB:
-      return action.payload.id;
     case TabActions.CLOSE_TAB:
+    case TabActions.REPLACE:
       return action.payload.id;
     default:
       return state;

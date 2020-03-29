@@ -52,7 +52,7 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
     }
   };
 
-  for (let i = 0; i < 0; i++) {
+  for (let i = 0; i < 500; i++) {
     const id = utils.string.generateRandom(6);
 
     groups[id] = {
@@ -61,7 +61,8 @@ export const DEFAULT_NOTES_GROUPS_STATE: NotesGroups = ((): NotesGroups => {
       title: id,
       updatedAt: now,
       type: "Folder",
-      children: []
+      children: [],
+      favorite: false
     };
 
     groups.root.children.push(id);

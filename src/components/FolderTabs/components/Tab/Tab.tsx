@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdClose } from "react-icons/md";
-import { ContextMenuTrigger } from "react-contextmenu";
 
 import "./Tab.css";
 
@@ -13,6 +12,8 @@ import {
   createNewTab,
   closeTabsAfter
 } from "../../../../redux/tabs/actions";
+import { TabMenuTrigger, TabMenu } from "../../../ContextMenu/TabMenu";
+import { openGroup } from "../../../../redux/notes/actions";
 
 export default function Tab(props: any) {
   const dispatch = useDispatch();
@@ -31,7 +32,10 @@ export default function Tab(props: any) {
 
   const length = useSelector((state: AppState) => state.tabs.records.length);
 
-  function open() {
+  function open(event: React.MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
     dispatch(openTab(props.index));
   }
 
@@ -70,37 +74,37 @@ export default function Tab(props: any) {
   function onDragOver(event: React.DragEvent) {
     event.preventDefault();
 
-    open();
+    dispatch(openGroup(folderId));
   }
 
-  function passDataToContextMenu() {
+  function forwardDataToContextMenu() {
     return { duplicate, close, closeOther, closeAfter };
   }
 
   return (
-    <ContextMenuTrigger
-      renderTag="button"
-      id="tab-menu"
-      holdToDisplay={-1}
-      attributes={{
-        className: `Tab ${active ? "active" : ""}`,
-        onClick: open,
-        title,
-        onDragOver
-      }}
-      collect={passDataToContextMenu}
-    >
-      <span>{title}</span>
-      {length > 1 && (
-        <div
-          className="Button"
-          onClick={close}
-          title="Close tab"
-          aria-label="Close tab"
-        >
-          <MdClose className="Icon" aria-hidden="true" />
-        </div>
-      )}
-    </ContextMenuTrigger>
+    <>
+      <TabMenuTrigger
+        id={props.folderId}
+        index={props.index}
+        className={active ? "Tab active" : "Tab"}
+        onClick={open}
+        title={title}
+        onDragOver={onDragOver}
+        forwardDataToContextMenu={forwardDataToContextMenu}
+      >
+        <span>{title}</span>
+        {length > 1 && (
+          <div
+            className="Button"
+            onClick={close}
+            title="Close tab"
+            aria-label="Close tab"
+          >
+            <MdClose className="Icon" aria-hidden="true" />
+          </div>
+        )}
+      </TabMenuTrigger>
+      <TabMenu id={props.folderId} index={props.index} />
+    </>
   );
 }

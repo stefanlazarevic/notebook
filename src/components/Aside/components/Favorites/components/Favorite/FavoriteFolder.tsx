@@ -19,8 +19,8 @@ export default function FavoriteFolder(props: any) {
 
   return (
     <AsideButton
-      style={props.style}
       className="FavoriteFolder"
+      style={props.style}
       onClick={open}
       title={title}
     >

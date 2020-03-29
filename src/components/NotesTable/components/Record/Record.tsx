@@ -98,48 +98,50 @@ export default function Record(props: any) {
   }
 
   return (
-    <NoteMenuTrigger
-      id={props.id}
-      tabIndex={props.index}
-      className={
-        props.className ? `VTRow FileRow ${props.className}` : "VTRow FileRow"
-      }
-      style={{ ...props.style, width: props.getRowWidth() }}
-      onDoubleClick={open}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      draggable={true}
-      onDragStart={dragStart}
-      forwardDataToContextMenu={forwardDataToContextMenu}
-    >
-      <div
-        className="VTCell"
-        style={{
-          width: props.getColumnWidth(0)
-        }}
+    <>
+      <NoteMenuTrigger
+        id={props.id}
+        tabIndex={props.index}
+        className={
+          props.className ? `VTRow FileRow ${props.className}` : "VTRow FileRow"
+        }
+        style={{ ...props.style, width: props.getRowWidth() }}
+        onDoubleClick={open}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        draggable={true}
+        onDragStart={dragStart}
+        forwardDataToContextMenu={forwardDataToContextMenu}
       >
-        <div className="VTCellContent">
-          <FaFileAlt className="VTCellIcon" />
-          <span>{props.title}</span>
+        <div
+          className="VTCell"
+          style={{
+            width: props.getColumnWidth(0)
+          }}
+        >
+          <div className="VTCellContent">
+            <FaFileAlt className="VTCellIcon" />
+            <span>{props.title}</span>
+          </div>
         </div>
-      </div>
-      <div
-        className="VTCell"
-        style={{
-          width: props.getColumnWidth(1)
-        }}
-      >
-        <span>{props.updatedAt ? timeConverter(props.updatedAt) : "-"}</span>
-      </div>
-      <div
-        className="VTCell"
-        style={{
-          width: props.getColumnWidth(2)
-        }}
-      >
-        <span>{props.type}</span>
-      </div>
+        <div
+          className="VTCell"
+          style={{
+            width: props.getColumnWidth(1)
+          }}
+        >
+          <span>{props.updatedAt ? timeConverter(props.updatedAt) : "-"}</span>
+        </div>
+        <div
+          className="VTCell"
+          style={{
+            width: props.getColumnWidth(2)
+          }}
+        >
+          <span>{props.type}</span>
+        </div>
+      </NoteMenuTrigger>
       <NoteMenu id={props.id} />
-    </NoteMenuTrigger>
+    </>
   );
 }

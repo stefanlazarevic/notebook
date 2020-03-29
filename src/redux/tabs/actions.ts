@@ -88,6 +88,8 @@ export function closeOtherTabs(index: number) {
       throw Error(`Tab at index ${index} is absent.`);
     }
 
+    console.log(index);
+
     const records = [tabs.records[index]];
 
     dispatch({
