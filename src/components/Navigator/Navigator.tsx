@@ -6,6 +6,7 @@ import HomeButton from "./components/HomeButton";
 import BackButton from "./components/BackButton";
 import AddressBar from "./components/AddressBar";
 import HelpButton from "./components/HelpButton";
+import FavoriteButton from "./components/FavoriteButton/FavoriteButton";
 
 export default function Navigator() {
   return (
@@ -13,6 +14,7 @@ export default function Navigator() {
       <BackButton />
       <HomeButton />
       <AddressBar />
+      <FavoriteButton />
       <HelpButton />
     </div>
   );
