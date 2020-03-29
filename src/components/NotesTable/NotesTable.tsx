@@ -19,8 +19,12 @@ export default function NotesTable(props: any) {
     (state: AppState) => state.notes.currentGroupID
   );
 
-  const currentFolder = useSelector(
-    (state: AppState) => state.notes.groups[currentGroupId]
+  const children = useSelector(
+    (state: AppState) => state.notes.groups[currentGroupId].children
+  );
+
+  const path = useSelector(
+    (state: AppState) => state.notes.groups[currentGroupId].path
   );
 
   function rowRenderer(props: any) {
@@ -29,7 +33,7 @@ export default function NotesTable(props: any) {
 
     return (
       <NoteRow
-        id={currentFolder.children[index]}
+        id={children[index]}
         index={index}
         style={style}
         getRowWidth={getRowWidth}
@@ -51,11 +55,11 @@ export default function NotesTable(props: any) {
     const floatingID = data && data.id;
 
     // Prevent moving parent to child folder.
-    if (currentFolder.path.includes(floatingID)) {
+    if (path.includes(floatingID)) {
       return;
     }
 
-    if (currentFolder.children.includes(floatingID)) {
+    if (children.includes(floatingID)) {
       return;
     }
 
@@ -78,11 +82,7 @@ export default function NotesTable(props: any) {
           <AutoSizer>
             {({ width, height }) => (
               <Table
-                data={
-                  currentFolder.children.length
-                    ? currentFolder.children
-                    : ["empty"]
-                }
+                data={children.length ? children : ["empty"]}
                 width={width}
                 height={height}
                 rowHeight={40}
@@ -103,7 +103,7 @@ export default function NotesTable(props: any) {
           </AutoSizer>
         </ContextMenuTrigger>
       </div>
-      <Ribbon length={currentFolder.children.length} />
+      <Ribbon length={children.length} />
     </>
   );
 }

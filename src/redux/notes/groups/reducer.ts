@@ -43,10 +43,7 @@ export default function groupsReducer(
     case NotesActions.UPDATE_GROUP:
       return {
         ...state,
-        [action.payload.id]: {
-          ...state[action.payload.id],
-          ...action.payload
-        }
+        [action.payload.id]: action.payload
       };
     case NotesActions.REMOVE_GROUP:
       return {

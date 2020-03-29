@@ -167,22 +167,24 @@ export function createNewGroup(targetGroupID: NoteGroupID, group: NoteGroup) {
   };
 }
 
-export function updateGroup(updatedGroup: NoteGroup) {
+export function updateGroup(
+  id: NoteGroupID,
+  updatedAttributes: Partial<NoteGroup>
+) {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { notes } = getState();
     const { groups } = notes;
-    const group = groups[updatedGroup.id];
+    const group = groups[id];
 
     if (!group) {
-      throw Error(`NoteGroup with ID ${updatedGroup.id} is absent.`);
+      throw Error(`NoteGroup with ID ${id} is absent.`);
     }
 
     dispatch({
       type: NotesActions.UPDATE_GROUP,
       payload: {
-        ...updatedGroup,
-        id: group.id,
-        children: group.children
+        ...group,
+        ...updatedAttributes
       }
     });
   };

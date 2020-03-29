@@ -27,10 +27,8 @@ export default function RenameGroupOverlay(props: any) {
       title = titleReference.current.value;
     }
 
-    const updatedGroup = { ...group, title };
-
     batch(() => {
-      dispatch(updateGroup(updatedGroup));
+      dispatch(updateGroup(props.id, { title }));
       dispatch(closeOverlay(props.overlayID));
     });
   }

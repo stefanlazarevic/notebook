@@ -10,6 +10,7 @@ export interface NoteGroup {
   children: string[];
 
   updatedAt?: number;
+  favorite?: boolean;
 }
 
 export interface NotesGroups {
