@@ -2,8 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { MdHome } from "react-icons/md";
 
-import { openGroup } from "../../../../redux/notes/actions";
 import Button from "../../../UI/Button";
+import { openRootDirectory } from "../../../../redux/drive/DriveActions";
 
 export default function HomeButton() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export default function HomeButton() {
   const label = "Open root folder";
 
   function onClick() {
-    dispatch(openGroup("root"));
+    dispatch(openRootDirectory());
   }
 
   return (
