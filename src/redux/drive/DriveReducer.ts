@@ -19,6 +19,10 @@ function CurrentWorkingDirectoryReducer(state: string = '~', action: any): strin
     const {type, payload} = action;
 
     switch (type) {
+        case DriveActionTypes.OPEN_ROOT_DIRECTORY:
+            return '~';
+        case DriveActionTypes.OPEN_TRASH_DIRECTORY:
+            return '~/Trash'
         default: return state;
     }
 }

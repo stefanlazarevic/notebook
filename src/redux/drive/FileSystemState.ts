@@ -5,8 +5,8 @@ const FileSystemState: IFileSystem = {
         path: '~',
         children: []
     },
-    '~/Recycle': {
-        path: '~/Recycle',
+    '~/Trash': {
+        path: '~/Trash',
         children: []
     }
 }

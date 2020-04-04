@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { FiHardDrive } from "react-icons/fi";
 
 import AsideButton from "../Button/AsideButton";
-import { openGroup } from "../../../../redux/notes/actions";
+import { openRootDirectory } from "../../../../redux/drive/DriveActions";
 
 export default function HomeButton(props: any) {
   const dispatch = useDispatch();
 
   function goHome() {
-    dispatch(openGroup("root"));
+    dispatch(openRootDirectory());
   }
 
   return (

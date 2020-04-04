@@ -3,7 +3,7 @@ import { FiClock } from "react-icons/fi";
 import { FaCaretLeft, FaCaretDown } from "react-icons/fa";
 
 import HomeButton from "../HomeButton/HomeButton";
-import RecycleButton from "../RecycleButton/RecycleButton";
+import TrashButton from "../TrashButton/TrashButton";
 import Collapse, { Summary, Details } from "../../../UI/Collapse";
 
 export default function QuickAccess(props: any) {
@@ -21,7 +21,7 @@ export default function QuickAccess(props: any) {
       <Details>
         <div className="Wrapper">
           <HomeButton />
-          <RecycleButton />
+          <TrashButton />
         </div>
       </Details>
     </Collapse>
