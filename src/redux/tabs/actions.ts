@@ -1,20 +1,19 @@
 import { IDispatch, AppState } from "../types";
 import { TabActions } from "./types";
-import { NoteGroupID } from "../notes/groups/types";
 import utils from "../../utils";
 
-export function createNewTab(id: NoteGroupID = "root") {
+export function createNewTab(path: string = "~") {
   return async (dispatch: IDispatch, getState: () => AppState) => {
     const { tabs } = getState();
 
-    const records = tabs.records.concat(id);
+    const records = tabs.records.concat(path);
 
     dispatch({
       type: TabActions.CREATE_TAB,
       payload: {
         currentTabIndex: records.length - 1,
         records,
-        id
+        path
       }
     });
   };
@@ -32,7 +31,7 @@ export function openTab(index: number) {
       type: TabActions.OPEN_TAB,
       payload: {
         currentTabIndex: index,
-        id: tabs.records[index]
+        path: tabs.records[index]
       }
     });
   };
@@ -63,14 +62,14 @@ export function closeTab(index: number) {
     }
 
     const records = utils.array.removeAtIndex(index, tabs.records);
-    const id = records[currentTabIndex];
+    const path = records[currentTabIndex];
 
     dispatch({
       type: TabActions.CLOSE_TAB,
       payload: {
         currentTabIndex,
         records,
-        id
+        path
       }
     });
   };
@@ -88,8 +87,6 @@ export function closeOtherTabs(index: number) {
       throw Error(`Tab at index ${index} is absent.`);
     }
 
-    console.log(index);
-
     const records = [tabs.records[index]];
 
     dispatch({
@@ -97,7 +94,7 @@ export function closeOtherTabs(index: number) {
       payload: {
         currentTabIndex: 0,
         records,
-        id: records[0]
+        path: records[0]
       }
     });
   };
@@ -123,14 +120,14 @@ export function closeTabsAfter(index: number) {
       currentTabIndex = index;
     }
 
-    const id = records[currentTabIndex];
+    const path = records[currentTabIndex];
 
     dispatch({
       type: TabActions.REPLACE,
       payload: {
         currentTabIndex,
         records,
-        id
+        path
       }
     });
   };

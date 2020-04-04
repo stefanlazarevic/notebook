@@ -14,21 +14,21 @@ import {
 } from "../../../../redux/tabs/actions";
 import { TabMenuTrigger, TabMenu } from "../../../ContextMenu/TabMenu";
 import { openGroup } from "../../../../redux/notes/actions";
+import Path from "../../../../redux/drive/Path";
+import { openDirectory } from "../../../../redux/drive/DriveActions";
 
 export default function Tab(props: any) {
   const dispatch = useDispatch();
 
-  const folderId = useSelector(
+  const path = useSelector(
     (state: AppState) => state.tabs.records[props.index]
-  );
-
-  const title = useSelector(
-    (state: AppState) => state.notes.groups[folderId].title
   );
 
   const active = useSelector(
     (state: AppState) => state.tabs.currentTabIndex === props.index
   );
+
+  const title = Path.basename(path);
 
   const length = useSelector((state: AppState) => state.tabs.records.length);
 
@@ -40,7 +40,7 @@ export default function Tab(props: any) {
   }
 
   function duplicate() {
-    dispatch(createNewTab(folderId));
+    dispatch(createNewTab(path));
   }
 
   function close(event?: React.MouseEvent) {
@@ -74,7 +74,7 @@ export default function Tab(props: any) {
   function onDragOver(event: React.DragEvent) {
     event.preventDefault();
 
-    dispatch(openGroup(folderId));
+    dispatch(openDirectory(path));
   }
 
   function forwardDataToContextMenu() {
@@ -84,7 +84,7 @@ export default function Tab(props: any) {
   return (
     <>
       <TabMenuTrigger
-        id={props.folderId}
+        id={`${path}_${props.index}`}
         index={props.index}
         className={active ? "Tab active" : "Tab"}
         onClick={open}
@@ -104,7 +104,7 @@ export default function Tab(props: any) {
           </div>
         )}
       </TabMenuTrigger>
-      <TabMenu id={props.folderId} index={props.index} />
+      <TabMenu id={`${path}_${props.index}`} index={props.index} />
     </>
   );
 }

@@ -12,7 +12,8 @@ export function openDirectory(path: string) {
 
     if (fs[path]) {
       dispatch({
-        type: DriveActionTypes.OPEN_DIRECTORY
+        type: DriveActionTypes.OPEN_DIRECTORY,
+        payload: path
       })
     }
   };

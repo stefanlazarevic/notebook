@@ -7,7 +7,7 @@ export type TabState = {
 
 export const DEFAULT_TAB_STATE = {
   currentTabIndex: 0,
-  records: ["root"]
+  records: ["~"]
 };
 
 export enum TabActions {
