@@ -21,5 +21,6 @@ export interface IDrive {
 
 export enum DriveActionTypes {
   OPEN_ROOT_DIRECTORY = "Drive/Actions/OPEN_ROOT_DIRECTORY",
-  OPEN_TRASH_DIRECTORY = 'Drive/Actions/OPEN_TRASH_DIRECTORY'
+  OPEN_TRASH_DIRECTORY = 'Drive/Actions/OPEN_TRASH_DIRECTORY',
+  OPEN_DIRECTORY = 'Drive/Actions/OPEN_DIRECTORY'
 }

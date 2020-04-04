@@ -1,19 +1,19 @@
 import React from "react";
 
 import BreadcrumbElement from "../../../../../UI/Breadcrumb/components/BreadcrumbElement/BreadcrumbElement";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../../../../../redux/types";
-import { openGroup } from "../../../../../../redux/notes/actions";
+import { useDispatch } from "react-redux";
+import Path from "../../../../../../redux/drive/Path";
+import { openDirectory } from "../../../../../../redux/drive/DriveActions";
 
 export default function Step(props: any) {
   const dispatch = useDispatch();
 
-  const title = useSelector(
-    (state: AppState) => state.notes.groups[props.id].title
-  );
+  const title = Path.basename(props.path);
+
+  console.log(props.path, title);
 
   function onClick() {
-    dispatch(openGroup(props.id));
+    dispatch(openDirectory(props.path));
   }
 
   return (

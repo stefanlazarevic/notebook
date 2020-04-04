@@ -15,7 +15,7 @@ export default function TrashButton(props: any) {
   return (
     <AsideButton onClick={onClick}>
       <FiTrash2 />
-      <span>Recycle</span>
+      <span>Trash</span>
     </AsideButton>
   );
 }

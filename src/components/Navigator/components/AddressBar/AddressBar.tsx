@@ -8,19 +8,21 @@ import Breadcrumb from "../../../UI/Breadcrumb/Breadcrumb";
 
 import Step from "./components/Step";
 import RootStep from "./components/RootStep/RootStep";
-import { NoteGroupID } from "../../../../redux/notes/groups/types";
+import TrashStep from "./components/TrashStep/TrashStep";
 
 export default function AddressBar(props: any) {
   const cwd = useSelector(
     (state: AppState) => state.drive.cwd
   );
 
-  const breadcrumbs = cwd.split('/');
+  const isTrashDirectory = /^~\/Trash/.test(cwd);
+
+  const breadcrumbs = isTrashDirectory ? cwd.split('/').slice(1) : cwd.split('/');
 
   return (
     <div className="AddressBar">
       <Breadcrumb>
-        <RootStep tabIndex={0} />
+        {isTrashDirectory ? <TrashStep tabIndex={0}/> : <RootStep tabIndex={0} />}
         {breadcrumbs.map((breadcrumb: string, index: number) => {
           const path = breadcrumbs.slice(0, index);
           return (

@@ -1,17 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { MdComputer } from "react-icons/md";
+import { FiTrash2 } from "react-icons/fi";
 
 import BreadcrumbElement from "../../../../../UI/Breadcrumb/components/BreadcrumbElement/BreadcrumbElement";
-import { openRootDirectory } from "../../../../../../redux/drive/DriveActions";
+import { openTrashDirectory } from "../../../../../../redux/drive/DriveActions";
 
-export default function RootStep(props: any) {
+export default function TrashStep(props: any) {
   const dispatch = useDispatch();
 
-  const label = "Open root folder";
+  const label = "Open trash";
 
   function open() {
-    dispatch(openRootDirectory());
+    dispatch(openTrashDirectory());
   }
 
   return (
@@ -22,7 +22,7 @@ export default function RootStep(props: any) {
       title={label}
       aria-label={label}
     >
-      <MdComputer aria-hidden={true} />
+      <FiTrash2 aria-hidden={true} />
     </BreadcrumbElement>
   );
 }

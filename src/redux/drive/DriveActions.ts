@@ -6,7 +6,16 @@ export function createDirectory(path: string) {
 }
 
 export function openDirectory(path: string) {
-  return async (dispatch: IDispatch, getState: () => AppState) => {};
+  return async (dispatch: IDispatch, getState: () => AppState) => {
+    const {drive} = getState();
+    const {fs} = drive;
+
+    if (fs[path]) {
+      dispatch({
+        type: DriveActionTypes.OPEN_DIRECTORY
+      })
+    }
+  };
 }
 
 export function openParentDirectory(path?: string) {
