@@ -15,7 +15,7 @@ export default function AddressBar(props: any) {
     (state: AppState) => state.drive.cwd
   );
 
-  const breadcrumbs = cwd.slice('/');
+  const breadcrumbs = cwd.split('/');
 
   return (
     <div className="AddressBar">
