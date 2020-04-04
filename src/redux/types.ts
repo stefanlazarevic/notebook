@@ -7,6 +7,7 @@ import { OverlayState } from "./overlays/types";
 import { PrintState } from "./print/types";
 import { TabState } from "./tabs/types";
 import { FavoritesState } from "./favorites/types";
+import { IDrive } from "./drive/DriveTypes";
 
 export type AppState = {
   notes: NotesState;
@@ -16,6 +17,7 @@ export type AppState = {
   settings: SettingsState;
   overlays: OverlayState;
   print: PrintState;
+  drive: IDrive
 };
 
 export interface IDispatch extends ThunkDispatch<AppState, {}, AnyAction> {}

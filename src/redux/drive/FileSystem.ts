@@ -15,12 +15,13 @@ export default class FileSystem {
     this.normalize = this.normalize.bind(this);
     this.exists = this.exists.bind(this);
     this.basename = this.basename.bind(this);
+    this.extname = this.extname.bind(this);
     this.toObject = this.toObject.bind(this);
   }
 
   normalize(path: string): string {
     if (!/^~\//.test(path)) {
-      path = this.cwd + path;
+      path = `~/${path}`;
     }
 
     path = path.trim().replace(/\/+/g, "/");
