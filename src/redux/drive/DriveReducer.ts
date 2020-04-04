@@ -1,5 +1,5 @@
-import { IDrive, DriveActionTypes } from './DriveTypes';
-import DriveState from './DriveState';
+import { IFileSystem, DriveActionTypes } from './DriveTypes';
+import FileSystemState from './FileSystemState';
 import { combineReducers } from 'redux';
 
 interface Action {
@@ -7,7 +7,7 @@ interface Action {
     payload: any
 }
 
-function DriveReducer(state: IDrive = DriveState, action: Action): IDrive {
+function FileSystemReducer(state: IFileSystem = FileSystemState, action: Action): IFileSystem {
     const {type, payload} = action;
 
     switch (type) {
@@ -25,5 +25,5 @@ function CurrentWorkingDirectoryReducer(state: string = '~', action: any): strin
 
 export default combineReducers({
     cwd: CurrentWorkingDirectoryReducer,
-    drive: DriveReducer
+    fs: FileSystemReducer
 });

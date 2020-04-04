@@ -1,15 +1,15 @@
-import { IDrive } from "./DriveTypes";
+import { IFileSystem } from "./DriveTypes";
 
-export default class Drive {
-  private drive: IDrive;
+export default class FileSystem {
+  private fs: IFileSystem;
   private cwd: string;
 
-  static fromDrive(drive: IDrive, cwd?: string) {
-    return new Drive(drive, cwd);
+  static fromFileSystem(fs: IFileSystem, cwd?: string) {
+    return new FileSystem(fs, cwd);
   }
 
-  constructor(drive: IDrive, cwd: string = "~") {
-    this.drive = drive;
+  constructor(fs: IFileSystem, cwd: string = "~") {
+    this.fs = fs;
     this.cwd = cwd;
 
     this.normalize = this.normalize.bind(this);
@@ -36,7 +36,7 @@ export default class Drive {
   exists(path: string): boolean {
     path = this.normalize(path);
 
-    return Boolean(this.drive[path]);
+    return Boolean(this.fs[path]);
   }
 
   basename(path: string): string {
@@ -63,7 +63,7 @@ export default class Drive {
     return '';
   }
 
-  toObject(): IDrive {
-    return this.drive;
+  toObject(): IFileSystem {
+    return this.fs;
   }
 }

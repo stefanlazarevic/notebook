@@ -1,6 +1,6 @@
-import { Drive } from "./DriveTypes";
+import { IFileSystem } from "./DriveTypes";
 
-const DriveState: Drive = {
+const FileSystemState: IFileSystem = {
     '~': {
         path: '~',
         children: []
@@ -11,4 +11,4 @@ const DriveState: Drive = {
     }
 }
 
-export default DriveState;
+export default FileSystemState;

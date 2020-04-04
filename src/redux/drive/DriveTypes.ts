@@ -12,6 +12,6 @@ export interface IFolder extends ITreeNode {}
 
 export interface IFile extends ITreeNode {}
 
-export interface IDrive extends ITree {}
+export interface IFileSystem extends ITree {}
 
 export enum DriveActionTypes {}

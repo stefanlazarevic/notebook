@@ -6,6 +6,7 @@ import overlaysReducer from "./overlays/reducer";
 import printReducer from "./print/reducer";
 import tabReducer from "./tabs/reducer";
 import favoriteReducer from "./favorites/reducer";
+import DriveReducer from "./drive/DriveReducer";
 
 export default combineReducers({
   notes: notesReducers,
@@ -14,5 +15,6 @@ export default combineReducers({
   editor: editorReducer,
   settings: settingsReducers,
   overlays: overlaysReducer,
-  print: printReducer
+  print: printReducer,
+  drive: DriveReducer
 });
