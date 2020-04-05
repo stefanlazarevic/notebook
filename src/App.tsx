@@ -9,9 +9,9 @@ import Navigator from "./components/Navigator";
 import AppEditorContainer from "./components/AppEditor";
 import OverlayContainer from "./components/Overlay";
 import RecordPrintContainer from "./components/RecordPrint";
-import NotesTable from "./components/NotesTable/NotesTable";
 import Aside from "./components/Aside/Aside";
 import FolderTabs from "./components/FolderTabs";
+import Drive from "./components/Drive/Drive";
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
                       height: "100%"
                     }}
                   >
-                    <NotesTable />
+                    <Drive />
                     <FolderTabs />
                   </div>
                 </Section>

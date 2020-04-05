@@ -57,13 +57,12 @@
   overflow: hidden;
 }
 
-.NotesWrapper {
-  /* height: calc(100% - 40px); */
-  flex: 1;
-
-  background-color: var(--background-darker-color);
+.VTCellContent > * {
+  display: inline-block;
+  vertical-align: middle;
 }
 
+/* Table scrollbar */
 .VTList {
   overflow: auto !important;
 }
@@ -93,20 +92,4 @@
 
 .VTList::-webkit-scrollbar-corner {
   background: var(--background-darker-color);
-}
-
-.VTCellContent > * {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.VTCellIcon {
-  color: #f0ca55;
-  margin-right: 5px;
-  font-size: 20px;
-}
-
-.FileRow .VTCellIcon {
-  color: var(--text-lighter-color);
-  font-size: 18px;
 }

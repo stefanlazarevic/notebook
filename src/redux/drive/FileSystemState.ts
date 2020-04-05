@@ -1,13 +1,17 @@
-import { IFileSystem } from "./DriveTypes";
+import { IFileSystem, FileSystemTypes } from "./DriveTypes";
 
 const FileSystemState: IFileSystem = {
     '~': {
         path: '~',
-        children: []
+        children: [],
+        type: FileSystemTypes.DIRECTORY,
+        createdAt: Date.now(),
     },
     '~/Trash': {
         path: '~/Trash',
-        children: []
+        children: [],
+        type: FileSystemTypes.DIRECTORY,
+        createdAt: Date.now(),
     }
 }
 
