@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import './Directory.css';
+
 import DirectoryProps from './DirectoryProps';
 import { DriveView } from '../../Drive';
 import DirectoryTableView from './view/DirectoryTableView/DirectoryTableView';

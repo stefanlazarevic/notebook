@@ -1,11 +1,14 @@
 import React from "react";
 import { MdFolderSpecial, MdFolder } from "react-icons/md";
 
+import './DirectoryTableView.css';
+
 import DirectoryTableViewProps from "./DirectoryTableViewProps";
+import utils from "../../../../../../utils";
 
 export default function DirectoryTableView(props: DirectoryTableViewProps) {
   return (
-    <div className="VTRow">
+    <div className="DirectoryTableView VTRow" style={{...props.style, width: props.getRowWidth()}}>
       <div className="VTCell" style={{ width: props.getColumnWidth(0) }}>
         <div className="VTCellContent">
           {props.favorite ? (
@@ -17,10 +20,14 @@ export default function DirectoryTableView(props: DirectoryTableViewProps) {
         </div>
       </div>
       <div className="VTCell" style={{ width: props.getColumnWidth(1) }}>
-        <span>{props.updatedAt ? props.updatedAt : props.createdAt}</span>
+        <span>
+          {props.updatedAt ?
+          utils.time.timestampToHuman(props.updatedAt) :
+          utils.time.timestampToHuman(props.createdAt)}
+        </span>
       </div>
       <div className="VTCell" style={{ width: props.getColumnWidth(2) }}>
-        <span>{props.type}</span>
+        <span>Directory</span>
       </div>
     </div>
   );

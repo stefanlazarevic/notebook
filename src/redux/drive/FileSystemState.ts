@@ -3,7 +3,7 @@ import { IFileSystem, FileSystemTypes } from "./DriveTypes";
 const FileSystemState: IFileSystem = {
     '~': {
         path: '~',
-        children: [],
+        children: ['Documents'],
         type: FileSystemTypes.DIRECTORY,
         createdAt: Date.now(),
     },
@@ -12,6 +12,12 @@ const FileSystemState: IFileSystem = {
         children: [],
         type: FileSystemTypes.DIRECTORY,
         createdAt: Date.now(),
+    },
+    '~/Documents': {
+        path: '~/Documents',
+        children: [],
+        type: FileSystemTypes.DIRECTORY,
+        createdAt: Date.now()
     }
 }
 
