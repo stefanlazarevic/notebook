@@ -9,10 +9,10 @@ import { OverlayType } from "../../../../redux/overlays/types";
 export default function CreateNewFolderButton() {
   const dispatch = useDispatch();
 
-  const label = "Create new folder";
+  const label = "Create Directory";
 
   function onClick() {
-    dispatch(showOverlay(OverlayType.CREATE_GROUP));
+    dispatch(showOverlay(OverlayType.CREATE_DIRECTORY));
   }
 
   return (

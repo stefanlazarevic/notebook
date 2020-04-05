@@ -1,13 +1,13 @@
-.CreateGroupOverlay {
+.CreateDirectoryOverlay {
   width: 400px;
 }
 
-.CreateGroupOverlay .FormInput {
+.CreateDirectoryOverlay .FormInput {
   background-color: var(--background-darker-color);
   color: var(--app-text-color);
 }
 
-.CreateGroupOverlay .OverlayFooter button {
+.CreateDirectoryOverlay .OverlayFooter button {
   appearance: none;
 
   color: var(--app-text-base-color);
@@ -27,10 +27,10 @@
   margin-bottom: 10px;
 }
 
-.CreateGroupOverlay .OverlayFooter button:focus {
+.CreateDirectoryOverlay .OverlayFooter button:focus {
   outline: 1px dotted var(--app-text-base-color);
 }
 
-.CreateGroupOverlay .OverlayFooter button:first-child {
+.CreateDirectoryOverlay .OverlayFooter button:first-child {
   margin-right: 15px;
 }

@@ -15,16 +15,22 @@ export default function AddressBar(props: any) {
     (state: AppState) => state.drive.cwd
   );
 
-  const isTrashDirectory = /^~\/Trash/.test(cwd);
-
-  const breadcrumbs = isTrashDirectory ? cwd.split('/').slice(1) : cwd.split('/');
+  const breadcrumbs = cwd.split('/');
 
   return (
     <div className="AddressBar">
       <Breadcrumb>
-        {isTrashDirectory ? <TrashStep tabIndex={0}/> : <RootStep tabIndex={0} />}
         {breadcrumbs.map((breadcrumb: string, index: number) => {
-          const path = breadcrumbs.slice(0, index);
+          const path = breadcrumbs.slice(0, index + 1).join('/');
+
+          if (breadcrumb === '~') {
+            return <RootStep tabIndex={0} />
+          }
+
+          if (breadcrumb === 'Trash') {
+            return <TrashStep tabIndex={0} />
+          }
+
           return (
             <Step
               key={path}

@@ -8,9 +8,9 @@ import { openDirectory } from "../../../../../../redux/drive/DriveActions";
 export default function Step(props: any) {
   const dispatch = useDispatch();
 
-  const title = Path.basename(props.path);
+  const name = Path.basename(props.path);
 
-  console.log(props.path, title);
+  console.log(name);
 
   function onClick() {
     dispatch(openDirectory(props.path));
@@ -20,10 +20,10 @@ export default function Step(props: any) {
     <BreadcrumbElement
       tabIndex={props.tabIndex}
       role="link"
-      title={title}
+      title={name}
       onClick={onClick}
     >
-      {title}
+      {name}
     </BreadcrumbElement>
   );
 }

@@ -12,7 +12,7 @@ export default forwardRef((props: any, ref) => {
   function createGroup({ event, props }: { event: any; props: any }) {
     event.preventDefault();
 
-    dispatch(showOverlay(OverlayType.CREATE_GROUP));
+    dispatch(showOverlay(OverlayType.CREATE_DIRECTORY));
   }
 
   function createRecord({ event, props }: { event: any; props: any }) {
@@ -23,7 +23,7 @@ export default forwardRef((props: any, ref) => {
 
   return (
     <Menu id="table-menu" className="react-no-print">
-      <Item onClick={createGroup}>Create Folder</Item>
+      <Item onClick={createGroup}>Create Directory</Item>
       <Item onClick={createRecord}>Create Note</Item>
     </Menu>
   );

@@ -6,4 +6,9 @@ export default interface DirectoryTableViewProps extends DirectoryProps, IDirect
      * Naziv direktorijuma.
      */
     basename: string;
+
+    /**
+     *
+     */
+    open?: () => void;
 }

@@ -7,8 +7,8 @@ const FileSystemState: IFileSystem = {
         type: FileSystemTypes.DIRECTORY,
         createdAt: Date.now(),
     },
-    '~/Trash': {
-        path: '~/Trash',
+    'Trash': {
+        path: 'Trash',
         children: [],
         type: FileSystemTypes.DIRECTORY,
         createdAt: Date.now(),

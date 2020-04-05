@@ -4,7 +4,7 @@ import { NoteGroupID } from "../notes/groups/types";
 export enum OverlayType {
   DELETE_RECORD,
   RENAME_RECORD,
-  CREATE_GROUP,
+  CREATE_DIRECTORY,
   RENAME_GROUP
 }
 

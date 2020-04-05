@@ -1,48 +1,37 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector, batch } from "react-redux";
 
-import "./CreateGroupOverlay.css";
+import "./CreateDirectoryOverlay.css";
 
 import OverlayHeader from "../../template/OverlayHeader/OverlayHeader";
 import OverlayBody from "../../template/OverlayBody/OverlayBody";
 import OverlayFooter from "../../template/OverlayFooter/OverlayFooter";
-import { NoteGroup } from "../../../../redux/notes/groups/types";
-import utils from "../../../../utils";
 import FormInput from "../../../UI/FormInput/FormInput";
-import { createNewGroup } from "../../../../redux/notes/actions";
 import { closeOverlay } from "../../../../redux/overlays/actions";
 import { AppState } from "../../../../redux/types";
 import { KeycodeMap } from "../../../AppEditor/layout/Editor/Shortcuts";
+import { createDirectory } from "../../../../redux/drive/DriveActions";
 
-export default function CreateGroupOverlay(props: any) {
+export default function CreateDirectoryOverlay(props: any) {
   const dispatch = useDispatch();
 
-  const currentGroupID = useSelector(
-    (state: AppState) => state.notes.currentGroupID
-  );
-
-  const currentGroup = useSelector(
-    (state: AppState) => state.notes.groups[currentGroupID]
+  const cwd = useSelector(
+    (state: AppState) => state.drive.cwd
   );
 
   const nameReference = useRef<HTMLInputElement>(null);
 
   function create() {
-    const group: NoteGroup = {
-      id: utils.string.generateRandom(),
-      title: "",
-      children: [],
-      updatedAt: Date.now(),
-      type: "Folder",
-      path: currentGroup.path.concat(currentGroup.id)
-    };
+    let name = '';
 
     if (nameReference.current) {
-      group.title = nameReference.current.value;
+      name = nameReference.current.value;
     }
 
+    const path = `${cwd}/${name}`;
+
     batch(() => {
-      dispatch(createNewGroup(currentGroupID, group));
+      dispatch(createDirectory(path));
       dispatch(closeOverlay(props.overlayID));
     });
   }
@@ -59,23 +48,23 @@ export default function CreateGroupOverlay(props: any) {
   }
 
   return (
-    <div className="CreateGroupOverlay" onKeyDown={handleKeyDown}>
+    <div className="CreateDirectoryOverlay" onKeyDown={handleKeyDown}>
       <OverlayHeader
         id={props.overlayID}
-        title="Create Group"
+        title="Create Directory"
         onClose={props.onClose}
       />
       <OverlayBody>
         <FormInput
           ref={nameReference}
           type="text"
-          placeholder="Group name"
+          placeholder="Directory name"
           autoFocus={true}
           autoComplete="off"
         />
       </OverlayBody>
       <OverlayFooter>
-        <button onClick={create}>Create Group</button>
+        <button onClick={create}>Create Directory</button>
         <button onClick={props.onClose}>Cancel</button>
       </OverlayFooter>
     </div>

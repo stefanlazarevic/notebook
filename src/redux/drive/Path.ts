@@ -14,10 +14,22 @@ export default class Path {
       .join("/");
   }
 
+  static dirname(path: string): string {
+    const match = path.match(/^(.+)\/([^/]+)$/);
+
+    if (match && match[1]) {
+      return match[1];
+    }
+
+    return '';
+  }
+
   static basename(path: string): string {
     path = Path.normalize(path);
 
     const match = path.match(/^(.+)\/([^/]+)$/);
+
+    console.log('Basename', match, path);
 
     if (match && match[2]) {
       return match[2];
