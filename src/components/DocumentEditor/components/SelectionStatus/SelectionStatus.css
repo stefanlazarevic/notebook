@@ -1,0 +1,11 @@
+.SelectionStatus {
+  box-sizing: border-box;
+}
+
+.SelectionStatus > span {
+  box-sizing: border-box;
+}
+
+.SelectionStatus > span:first-child {
+  margin-right: 10px;
+}
