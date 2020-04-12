@@ -1,7 +1,11 @@
-export default interface DriveProps {
-    /**
-     * Putanja foldera koji instanca Drive-a treba da pokazuje.
-     * Ukoliko putanja nije navedena, koristiti cwd putanju iz Redux-a kao rezervnu vrednost.
-     */
-     path?: string;
+export default interface IDriveProps {
+  /**
+   * Тренутна путања коју `Drive` симулира.
+   */
+  currentPath: string;
+
+  /**
+   * Називи фајлова и фолдера које `Drive` симулира на тренутној путањи.
+   */
+  children?: string[];
 }

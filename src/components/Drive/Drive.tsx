@@ -1,22 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
-import './Drive.css';
+import "./Drive.css";
 
-import DriveProps from "./DriveProps";
-import TableView from "./view/TableView/TableView";
+import IDriveProps from "./DriveProps";
 
-export enum DriveView {
-  TABLE,
-  GRID
-}
-
-export default function Drive(props: DriveProps) {
-  // @todo - Move to context.
-  const [view, setView] = useState(DriveView.TABLE);
-
-  return (
-    <div className="Drive">
-        <TableView {...props} />
-    </div>
-  );
+export default function Drive(props: IDriveProps) {
+  return <div className="Drive"></div>;
 }

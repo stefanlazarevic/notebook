@@ -48,7 +48,7 @@ export default function Editor(props: IEditorProps) {
     const target: HTMLElement = event.target as HTMLElement;
     const hasFocus = props.editorState.getSelection().getHasFocus();
 
-    if (target.classList.contains("Editor")) {
+    if (target.classList.contains("DraftEditor")) {
       event.preventDefault();
 
       if (!hasFocus && editorReference.current) {

@@ -1,5 +1,7 @@
 .SelectionStatus {
   box-sizing: border-box;
+
+  position: relative;
 }
 
 .SelectionStatus > span {

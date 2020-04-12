@@ -1,6 +1,8 @@
 .CloseButton {
   box-sizing: border-box;
 
+  position: relative;
+
   fill: #696969;
 
   height: 26px;
