@@ -1,13 +1,7 @@
-.CloseButton {
+.Button {
   box-sizing: border-box;
 
   position: relative;
-
-  fill: #696969;
-
-  height: 26px;
-
-  width: 26px;
 
   cursor: pointer;
 }

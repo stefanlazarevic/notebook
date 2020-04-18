@@ -1,14 +1,19 @@
-export interface Icons {
-  [key: string]: string;
-}
-
 export default {
-  "add-files": "add-files",
+  addFiles: "add-files",
+  archive: "archive",
+  backward: "backward",
   bold: "bold",
   bookmark: "bookmark",
   calculator: "calculator",
   calendar: "calendar",
+  checkmark: "checkmark",
+  chevronLeft: "chevron-left",
   clipboard: "clipboard",
   close: "close",
   code: "code",
-} as Icons;
+  coffeeCup: "coffee-cup",
+  cog: "cog",
+  creativeCommons: "creative-commons",
+  cut: "cut",
+  download: "download",
+};

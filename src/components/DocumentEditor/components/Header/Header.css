@@ -3,3 +3,13 @@
 
   position: relative;
 }
+
+.Header .CloseButton {
+  box-sizing: border-box;
+
+  position: relative;
+
+  fill: #696969;
+
+  cursor: pointer;
+}

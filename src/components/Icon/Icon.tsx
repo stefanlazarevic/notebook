@@ -1,18 +1,15 @@
-import React from "react";
+import * as React from "react";
+import SVG from "react-inlinesvg";
 
 import "./Icon.css";
 
 import IconProps from "./IconProps";
-import Icons from "./Icons";
 
 export default function Icon(props: IconProps) {
-  const icon = Icons[props.icon];
-
   return (
-    <img
+    <SVG
+      src={`/icons/${props.icon}.svg`}
       className="Icon"
-      src={`/icons/${icon}.svg`}
-      alt={icon}
       width={props.size}
       height={props.size}
     />

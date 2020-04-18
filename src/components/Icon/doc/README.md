@@ -12,10 +12,19 @@
 #### Доступне иконице
 
 - add-files
+- archive
+- backwards
 - bold
 - bookmark
 - calculator
 - calendar
+- checkmark
+- chevron-left
 - clipboard
 - close
 - code
+- coffee-cup
+- cog
+- creative-commons
+- cut
+- download
