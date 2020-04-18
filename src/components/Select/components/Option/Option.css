@@ -1,0 +1,13 @@
+.Option {
+  box-sizing: border-box;
+
+  position: relative;
+}
+
+.Option:hover {
+  background-color: #cfcfcf;
+}
+
+.Option[aria-selected="true"] {
+  border: 1px solid #212121;
+}

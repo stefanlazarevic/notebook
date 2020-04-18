@@ -1,0 +1,31 @@
+.Select {
+  box-sizing: border-box;
+
+  position: relative;
+
+  display: inline-block;
+
+  text-align: start;
+
+  cursor: pointer;
+
+  border: 1px solid #212121;
+}
+
+.SelectList {
+  box-sizing: border-box;
+
+  position: absolute;
+
+  top: 100%;
+
+  left: 0;
+
+  display: none;
+
+  min-width: 100%;
+}
+
+.Select[aria-expanded="true"] .SelectList {
+  display: block;
+}

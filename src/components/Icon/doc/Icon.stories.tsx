@@ -8,7 +8,7 @@ import Icons from "../Icons";
 
 const icons = Object.values(Icons);
 
-storiesOf("Icon", module)
+storiesOf("Components/Icon", module)
   .addDecorator(withKnobs)
   .add("Preview", () => {
     return (

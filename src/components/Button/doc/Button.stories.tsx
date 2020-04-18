@@ -7,7 +7,7 @@ import Button, { BackButton, DownloadButton, CloseButton } from "..";
 
 const DEFAULT_ICON_SIZE = 20;
 
-storiesOf("Button", module)
+storiesOf("Components/Button", module)
   .addDecorator(withKnobs)
   .add("Preview", () => {
     return <Button>{text("children", "Button Text")}</Button>;
