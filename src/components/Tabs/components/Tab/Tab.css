@@ -1,0 +1,50 @@
+.Tab {
+  box-sizing: border-box;
+
+  position: relative;
+
+  display: inline-block;
+
+  flex: 1;
+
+  cursor: pointer;
+
+  min-width: 25px;
+
+  height: 100%;
+
+  border-radius: 0;
+
+  border: 0;
+
+  padding-right: 25px;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.Tab .CloseButton {
+  position: absolute;
+
+  top: 0;
+
+  right: 0;
+
+  height: 30px;
+
+  border: 0;
+}
+
+.Tab[aria-pressed="true"],
+.Tab[aria-pressed="true"] .CloseButton {
+  background-color: #d8d8d8;
+}
+
+.Tab:not(:last-child) {
+  border-right: 1px solid #ccc;
+}
+
+

@@ -13,6 +13,8 @@
 
 - add-files
 - archive
+- arrow-left
+- arrow-right
 - backwards
 - bold
 - bookmark
@@ -20,6 +22,7 @@
 - calendar
 - checkmark
 - chevron-left
+- chevron-right
 - clipboard
 - close
 - code

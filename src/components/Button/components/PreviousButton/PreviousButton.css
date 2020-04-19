@@ -1,0 +1,5 @@
+.PreviousButton {}
+
+.PreviousButton:disabled {
+    fill: #ccc;
+}

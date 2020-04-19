@@ -1,5 +1,6 @@
 {
     "files.watcherExclude": {
         "**/build/**": true
-    }
+    },
+    "editor.minimap.maxColumn": 140
 }

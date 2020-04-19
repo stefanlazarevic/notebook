@@ -5,12 +5,12 @@ import Button from "../../Button";
 import Icon, { Icons } from "../../../Icon";
 
 export default function BackButton(props: BackButtonProps) {
-  const { size, ...buttonProps } = props;
+	const { size, ...buttonProps } = props;
 
-  return (
-    <Button className="BackButton" {...buttonProps}>
-      {props.children ? <span>{props.children}</span> : null}
-      <Icon icon={Icons.chevronLeft} size={props.size} />
-    </Button>
-  );
+	return (
+		<Button className="BackButton" {...buttonProps}>
+			{props.children ? <span>{props.children}</span> : null}
+			<Icon icon={Icons.arrowLeft} size={props.size} />
+		</Button>
+	);
 }
