@@ -19,7 +19,7 @@ interface TabsOptionalProps {
 	/**
 	 *
 	 */
-	selectedTabIndex?: number;
+	selectedIndex?: number;
 
 	/**
 	 *
@@ -45,7 +45,7 @@ interface TabsCallbackProps {
 }
 
 export const TABS_DEFAULT_PROPS = {
-	selectedTabIndex: 0,
+	selectedIndex: 0,
 
 	max: 5,
 

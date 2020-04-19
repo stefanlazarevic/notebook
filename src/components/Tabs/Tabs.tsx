@@ -107,7 +107,7 @@ function Tabs(props: TabsProps) {
 						<Tab
 							key={tabData.id}
 							index={viewportStartIndex + index}
-							selected={props.selectedTabIndex === viewportStartIndex + index}
+							selected={props.selectedIndex === viewportStartIndex + index}
 							label={tabData.label}
 							onClose={props.onClose}
 							onClick={props.onSelect}

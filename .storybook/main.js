@@ -1,10 +1,11 @@
 module.exports = {
-  stories: ['../src/**/*.stories.[tj]sx'],
+  stories: ['../src/**/*.stories.([tj]sx|mdx)'],
   addons: [
     '@storybook/preset-create-react-app',
     '@storybook/addon-actions/register',
     '@storybook/addon-links',
     '@storybook/addon-knobs/register',
+    '@storybook/addon-docs'
     // '@storybook/addon-a11y/register',
   ],
   webpackFinal: async config => {

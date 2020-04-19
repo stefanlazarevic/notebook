@@ -1,0 +1,109 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, number } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Tabs from '../index.ts';
+
+<Meta title="Components/Tabs" component={Tabs} decorators={[withKnobs]}/>
+
+# Tabs
+
+Компонента која служи за обележавање група информација под заједничким називом.
+Табови могу да се користе за обележавање тренутне интернет странице, тренутног фолдера
+у систему фајлова итд.
+
+<Preview>
+  <Story name="Preview">
+    <Tabs 
+      tabs={[
+        {id: '0', label: 'Facebook', value: 'https://facebook.com'},
+        {id: '1', label: 'Dev.to', value: 'https://dev.to'},
+        {id: '2', label: 'Youtube', value: 'https://youtube.com'},
+        {id: '3', label: 'Gmail', value: 'https://gmail.com'},
+        {id: '4', label: 'Github', value: 'https://github.com'},
+        {id: "5", label: "Instagram", value: "https://instagram.com" },
+        {id: "6", label: "Medium", value: "https://medium.com" },
+        {id: "7", label: "9 GAG", value: "https://9gag.com" },
+      ]}
+      selectedIndex={number('selectedIndex', 1)}
+      max={number('max', 3)}
+      onClose={action("onClose")}
+      onSelect={action("onSelect")}
+    />
+  </Story>
+</Preview>
+
+## Атрибути
+
+<table>
+  <thead>
+    <tr>
+      <th>Назив</th>
+      <th>Тип</th>
+      <th>Обавезан</th>
+      <th>Подразумевана вредност</th>
+      <th>Опис</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>tabs</td>
+      <td><code>ITabData[]</code></td>
+      <td></td>
+      <td><code>[]</code></td>
+      <td>
+        Низ <code>ITabData</code> објеката који представљају интерну структуру података
+        која се приказује.
+      </td>
+    </tr>
+    <tr>
+      <td>selectedIndex</td>
+      <td>number</td>
+      <td></td>
+      <td>0</td>
+      <td>
+        Индекс тренутно активног таба. Уколико индекс прелази величину <code>tabs</code>
+        низа или је мањи од нула, на екрану немамо фокусирани таб.
+      </td>
+    </tr>
+    <tr>
+      <td>max</td>
+      <td>number</td>
+      <td></td>
+      <td>5</td>
+      <td>
+        Максималан број табова који се налази у једном приказу.
+        Уколико величина табова прелази максималан број елемената, дугмићи за
+        мењање приказа се појављују.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Повратни позиви
+
+Функције које се позивају приликом извршења одређених акција над компонентом.
+
+### onSelect
+
+Функција која се позива приликом одабира активног таба.
+
+<code>(event: React.SyntheticEvent, tabIndex: number) => void</code>
+
+### onClose
+
+Функција која се позива приликом затварања таба.
+
+<code>(event: React.SyntheticEvent, tabIndex: number) => void</code>
+
+
+## Стилизовање
+
+- .Tabs
+- .TabContainer
+- .Tab
+- .Tabs .BackButton
+- .Tabs .NextButton
+- .Tab .CloseButton
+
