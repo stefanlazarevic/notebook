@@ -1,0 +1,33 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, number } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Listbox, {ListboxOption} from '../index.ts';
+
+<Meta title="Components/Listbox" component={Listbox} decorators={[withKnobs]}/>
+
+# Listbox
+
+https://www.w3.org/TR/wai-aria-practices-1.2/#Listbox
+
+<Preview>
+    <Story name="Preview">
+        <Listbox 
+            onHome={action('onHome')} 
+            onEnd={action('onEnd')} 
+            onArrowDown={action('onArrowDown')} 
+            onArrowUp={action('onArrowUp')}
+            onEsc={action('onEsc')}
+            onSelect={action('onSelect')}
+        >
+            <ListboxOption selected={true}>Apple</ListboxOption>
+			<ListboxOption>Banana</ListboxOption>
+			<ListboxOption>Carrot</ListboxOption>
+			<ListboxOption>Cherry</ListboxOption>
+			<ListboxOption>Garlic</ListboxOption>
+			<ListboxOption>Lemon</ListboxOption>
+			<ListboxOption>Mango</ListboxOption>
+        </Listbox>
+    </Story>
+</Preview>

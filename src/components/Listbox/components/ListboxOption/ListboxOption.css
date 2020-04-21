@@ -1,0 +1,9 @@
+.ListboxOption {
+    box-sizing: border-box;
+
+    position: relative;
+}
+
+.ListboxOption[aria-selected="true"] {
+    background-color: #efefef;
+}
