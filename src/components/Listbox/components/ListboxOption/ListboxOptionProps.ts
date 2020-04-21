@@ -3,6 +3,14 @@ export interface ListboxOptionOptionalProps {
 	 *
 	 */
 	selected?: boolean;
+	/**
+	 *
+	 */
+	disabled?: boolean;
+	/**
+	 *
+	 */
+	className?: string;
 }
 
 export interface ListboxOptionCallbackProps {
@@ -34,6 +42,10 @@ export interface ListboxOptionCallbackProps {
 	 *
 	 */
 	onFocus?: (event: React.SyntheticEvent, index: number) => void;
+	/**
+	 *
+	 */
+	onTab?: (event: React.SyntheticEvent) => void;
 }
 
 export default interface ListboxOptionProps extends ListboxOptionOptionalProps, ListboxOptionCallbackProps {

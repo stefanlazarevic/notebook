@@ -5,10 +5,14 @@ import "./ListboxOption.css";
 import ListboxOptionProps from "./ListboxOptionProps";
 
 function ListboxOption(props: ListboxOptionProps) {
+	const className = props.className ? `ListboxOption ${props.className}` : "ListboxOption";
+
 	function onKeyDown(event: React.KeyboardEvent) {
 		const { keyCode } = event;
 
-		console.log(keyCode);
+		if (props.disabled) {
+			return;
+		}
 
 		if (keyCode === 38 && typeof props.onArrowUp === "function") {
 			props.onArrowUp(event, props.index);
@@ -33,15 +37,27 @@ function ListboxOption(props: ListboxOptionProps) {
 		if (keyCode === 27 && typeof props.onEsc === "function") {
 			props.onEsc(event);
 		}
+
+		if (keyCode === 9 && typeof props.onTab === "function") {
+			props.onTab(event);
+		}
 	}
 
 	function onFocus(event: React.SyntheticEvent) {
+		if (props.disabled) {
+			return;
+		}
+
 		if (typeof props.onFocus === "function") {
 			props.onFocus(event, props.index);
 		}
 	}
 
-	function onClick(event: React.SyntheticEvent) {
+	function onClick(event: React.MouseEvent) {
+		if (props.disabled) {
+			return;
+		}
+
 		if (typeof props.onSelect === "function") {
 			props.onSelect(event, props.index);
 		}
@@ -49,13 +65,14 @@ function ListboxOption(props: ListboxOptionProps) {
 
 	return (
 		<div
-			className="ListboxOption"
+			className={className}
 			role="option"
 			onKeyDown={onKeyDown}
-			tabIndex={0}
+			tabIndex={-1}
 			onFocus={onFocus}
 			onClick={onClick}
 			aria-selected={props.selected}
+			aria-disabled={props.disabled}
 		>
 			{props.children}
 		</div>

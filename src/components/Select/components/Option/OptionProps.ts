@@ -1,19 +1,25 @@
-import { OptionHTMLAttributes, SyntheticEvent } from "react";
+import ListboxOptionProps, {
+	ListboxOptionOptionalProps,
+	ListboxOptionCallbackProps,
+} from "../../../Listbox/components/ListboxOption/ListboxOptionProps";
 
-export default interface OptionProps extends OptionHTMLAttributes<any> {
-  index: number;
-
-  selectedIndex: number;
-
-  expanded: boolean;
-
-  value: string | number;
-
-  label: string;
-
-  onSelected?: (
-    event: SyntheticEvent,
-    index: number,
-    value: string | number
-  ) => void;
+export interface IOptionData {
+	/**
+	 *
+	 */
+	id: string;
+	/**
+	 *
+	 */
+	value: string;
+	/**
+	 *
+	 */
+	label: string;
 }
+
+export interface OptionOptionalProps extends ListboxOptionOptionalProps {}
+
+export interface OptionCallbackProps extends ListboxOptionCallbackProps {}
+
+export default interface OptionProps extends ListboxOptionProps, OptionOptionalProps, OptionCallbackProps {}

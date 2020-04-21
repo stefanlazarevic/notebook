@@ -4,7 +4,11 @@ export interface ListboxOptionalProps {
 	/**
 	 *
 	 */
-	children?: React.ReactElement;
+	children?: React.ReactElement | React.ReactElement[];
+	/**
+	 *
+	 */
+	className?: string;
 }
 
 export interface ListboxCallbackProps extends ListboxOptionCallbackProps {}

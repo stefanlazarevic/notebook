@@ -5,8 +5,12 @@ import "./Listbox.css";
 import ListboxProps from "./ListboxProps";
 
 function Listbox(props: ListboxProps) {
+	const className = props.className ? `Listbox ${props.className}` : "Listbox";
+
+	console.log(props);
+
 	return (
-		<div className="Listbox" role="listbox" tabIndex={0}>
+		<div className={className} role="listbox" tabIndex={0} aria-multiselectable={false}>
 			{React.Children.map(props.children!, (child, index: number) => {
 				return React.cloneElement(child, {
 					...child.props,
@@ -18,6 +22,7 @@ function Listbox(props: ListboxProps) {
 					onEsc: props.onEsc,
 					onArrowUp: props.onArrowUp,
 					onArrowDown: props.onArrowDown,
+					onTab: props.onTab,
 				});
 			})}
 		</div>

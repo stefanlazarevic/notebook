@@ -10,22 +10,10 @@
   cursor: pointer;
 
   border: 1px solid #212121;
-}
 
-.SelectList {
-  box-sizing: border-box;
+  width: 100%;
 
-  position: absolute;
+  padding: 5px;
 
-  top: 100%;
-
-  left: 0;
-
-  display: none;
-
-  min-width: 100%;
-}
-
-.Select[aria-expanded="true"] .SelectList {
-  display: block;
+  margin: 0;
 }

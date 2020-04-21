@@ -1,0 +1,28 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, boolean, text } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Select from "../Select";
+
+<Meta title="Components/Select" component={Select} decorators={[withKnobs]}/>
+
+# Select
+
+<Preview>
+    <Story name="Preview" style={{marginBottom: 40}}>
+        <Select 
+			options={[
+				{ id: "0", value: "apple", label: "Apple" },
+				{ id: "1", value: "grape", label: "Grape" },
+				{ id: "2", value: "orange", label: "Orange" },
+				{ id: "3", value: "lemon", label: "Lemon" },
+				{ id: "4", value: "lime", label: "Lime" },
+			]}
+			selectedIndex={number('selectedIndex', 3)}
+			disabled={boolean('disabled', false)}
+			onSelect={action('onSelect')}
+			placeholder={text('placeholder', 'Select value')}
+		/>
+    </Story>
+</Preview>

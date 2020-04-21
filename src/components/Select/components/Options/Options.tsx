@@ -1,16 +1,15 @@
 import React from "react";
 
-import "./Option.css";
+import "./Options.css";
 
-import OptionProps from "./OptionProps";
+import OptionsProps from "./OptionsProps";
 
-import { ListboxOption } from "../../../Listbox";
+import Listbox from "../../../Listbox";
 
-export default function Option(props: OptionProps) {
+export default function Options(props: OptionsProps) {
 	return (
-		<ListboxOption
-			className="Option"
-			index={props.index}
+		<Listbox
+			className="Options"
 			onSelect={props.onSelect}
 			onHome={props.onHome}
 			onEnd={props.onEnd}
@@ -20,6 +19,6 @@ export default function Option(props: OptionProps) {
 			onTab={props.onTab}
 		>
 			{props.children}
-		</ListboxOption>
+		</Listbox>
 	);
 }

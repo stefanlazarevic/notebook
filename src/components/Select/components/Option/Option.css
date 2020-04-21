@@ -2,9 +2,12 @@
   box-sizing: border-box;
 
   position: relative;
+
+  padding: 5px;
 }
 
-.Option:hover {
+.Option:hover,
+.Option:focus {
   background-color: #cfcfcf;
 }
 

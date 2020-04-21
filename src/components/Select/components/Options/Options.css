@@ -1,0 +1,11 @@
+.Options {
+    box-sizing: border-box;
+
+    position: absolute;
+
+    left: 0;
+
+    top: 110%;
+
+    min-width: 100%;
+}
