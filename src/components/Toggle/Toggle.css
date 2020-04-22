@@ -1,0 +1,68 @@
+.Toggle {
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: inline-block;
+
+    /** */
+    width: 40px;
+
+    height: 26px;
+
+    cursor: pointer;
+}
+
+.Toggle > input {
+    box-sizing: border-box;
+    
+    appearance: none;
+
+    display: none;
+}
+
+.Toggle > .ToggleSlider {
+    box-sizing: border-box;
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    background-color: #ccc;
+
+    transition: 0.4s;
+}
+
+.Toggle > .ToggleSlider:before {
+    box-sizing: border-box;
+
+    content: '';
+
+    position: absolute;
+
+    width: 16px;
+
+    height: 18px;   
+
+    left: 4px;
+
+    bottom: 4px;
+
+    background-color: white;
+
+    transition: 0.4s;
+}
+
+.Toggle > input:checked + .ToggleSlider {
+  background-color: #2196F3;
+}
+
+.Toggle > input:checked + .ToggleSlider:before {
+  transform: translateX(16px);
+}

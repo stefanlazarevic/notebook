@@ -1,0 +1,19 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, boolean } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Toggle from '../index.ts';
+
+<Meta title="Components/Toggle" component={Toggle} decorators={[withKnobs]}/>
+
+# Toggle
+
+<Preview>
+    <Story name="Preview">
+        <Toggle 
+            checked={boolean('checked', true)}
+            onChange={action('onChange')}
+        />
+    </Story>
+</Preview>
