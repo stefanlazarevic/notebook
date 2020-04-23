@@ -1,0 +1,24 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, text } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+import {EditorState} from 'draft-js';
+
+import Editor from '../index.ts';
+
+<Meta title="Components/Editor" component={Editor} decorators={[withKnobs]}/>
+
+# Editor
+
+<Preview>
+  <Story name="Preview">
+    <Editor 
+      editorState={EditorState.createEmpty()} 
+      fontSize={number('fontSize', 16)} 
+      zoom={number('zoom', 100)}  
+      placeholder={text('placeholder', 'Write your content here...')}
+      onChange={action('onChange')}
+      onZoomIn={action("onZoomIn")}
+      onZoomOut={action("onZoomOut")}/>
+  </Story>
+</Preview>
