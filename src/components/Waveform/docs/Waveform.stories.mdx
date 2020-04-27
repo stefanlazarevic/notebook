@@ -1,0 +1,21 @@
+import PropTypes from "prop-types";
+import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
+import { withKnobs, number, text, color } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Waveform from "./DocumentationWaveform.tsx";
+
+<Meta title="Components/Waveform" component={Waveform} decorators={[withKnobs]} />
+
+# Waveform
+
+<Preview>
+    <Story name="Preview">
+        <Waveform 
+            samples={number('samples', 700)} 
+            progressX={number('progressX', 0)} 
+            progressColor={color('progressColor', '#a16409')} 
+            sampleColor={color('sampleColor', '#1f1003')}
+        />
+    </Story>
+</Preview>
