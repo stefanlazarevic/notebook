@@ -24,6 +24,11 @@ export interface WaveformOptionalProps {
 	sampleColor?: string;
 }
 
-export interface WaveformCallbackProps {}
+export interface WaveformCallbackProps {
+	/**
+	 *
+	 */
+	onClick?: (event: MouseEvent, x?: number, y?: number) => void;
+}
 
 export default interface WaveformProps extends WaveformOptionalProps, WaveformCallbackProps {}

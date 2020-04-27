@@ -1,44 +1,29 @@
-import React, { useRef, useCallback, useEffect } from "react";
+import React, { useRef, useCallback, useEffect, useMemo } from "react";
 import useComponentDidMount from "../hooks/componentDidMount";
 
 import "./Waveform.css";
 
 import WaveformProps from "./WaveformProps";
+import useComponentWillUnmount from "../hooks/componentWillUnmount";
 
 function Waveform(props: WaveformProps) {
 	const canvasReference = useRef<HTMLCanvasElement>(null);
 
 	/**
 	 *
+	 * @param data
 	 */
-	const paint = useCallback(() => {
-		if (!canvasReference.current) {
-			return;
-		}
+	function scaleData(data: number[]) {
+		const multiplier = Math.pow(Math.max(...data), -1);
 
-		const canvas = canvasReference.current;
-		const context = canvas.getContext("2d");
+		return data.map((n) => n * multiplier);
+	}
 
-		if (!context) {
-			return;
-		}
-
-		canvas.width = canvas.offsetWidth;
-		canvas.height = canvas.offsetHeight;
-
+	/**
+	 *
+	 */
+	const data = useMemo(() => {
 		const samples = props.samples! > props.channelData!.length ? props.channelData!.length : props.samples!;
-
-		// Израчунавамо y координату на средини канваса.
-		const middleY = canvas.height / 2;
-
-		// Чистимо канвас и припремамо га за ново исцртавање.
-		context.clearRect(0, 0, canvas.width, canvas.height);
-
-		// Скалирање канваса.
-		context.scale(1, 1);
-
-		// Цртамо хоризонталну линију на средини канваса.
-		context.fillRect(0, middleY, canvas.width, 1);
 
 		const blockSize = Math.floor(props.channelData!.length / samples);
 
@@ -59,39 +44,81 @@ function Waveform(props: WaveformProps) {
 			sampledData.push(average > 1 ? 1 : average);
 		}
 
-		const renderData = scaleData(sampledData);
+		return scaleData(sampledData);
+	}, [props.channelData, props.samples]);
+
+	/**
+	 *
+	 */
+	const paint = useCallback(() => {
+		if (!canvasReference.current) {
+			return;
+		}
+
+		const canvas = canvasReference.current;
+		const context = canvas.getContext("2d");
+
+		if (!context) {
+			return;
+		}
+
+		canvas.width = canvas.offsetWidth;
+		canvas.height = canvas.offsetHeight;
+
+		// Израчунавамо y координату на средини канваса.
+		const middleY = canvas.height / 2;
+
+		// Чистимо канвас и припремамо га за ново исцртавање.
+		context.clearRect(0, 0, canvas.width, canvas.height);
+
+		// Скалирање канваса.
+		context.scale(1, 1);
+
+		// Цртамо хоризонталну линију на средини канваса.
+		context.fillRect(0, middleY, canvas.width, 1);
 
 		// На основу броја примерака које желимо да прикажемо на екрану, одређијемо ширину сваког бара.
-		const width = canvas.width / props.samples!;
+		const width = canvas.width / data.length;
 
 		let x = 0;
 
-		for (let index = 0; index < props.samples!; index++) {
+		for (let index = 0; index < data.length; index++) {
 			context.fillStyle = props.sampleColor!;
 
 			if (x < props.progressX!) {
 				context.fillStyle = props.progressColor!;
 			}
 
-			const height = renderData[index] * canvas.height;
+			const height = data[index] * canvas.height;
 
 			context.fillRect(x, middleY - height / 2, width, height);
 			x += width;
 		}
-	}, [props.channelData, props.samples, props.progressX, props.sampleColor, props.progressColor]);
+	}, [data, props.progressX, props.sampleColor, props.progressColor]);
 
-	/**
-	 *
-	 * @param data
-	 */
-	function scaleData(data: number[]) {
-		const multiplier = Math.pow(Math.max(...data), -1);
+	function onClick(event: MouseEvent) {
+		if (typeof props.onClick === "function") {
+			const canvas = canvasReference.current;
 
-		return data.map((n) => n * multiplier);
+			const x = event.offsetX - canvas!.offsetLeft + canvas!.clientLeft;
+			const y = event.offsetY - canvas!.offsetTop + canvas!.clientTop;
+
+			props.onClick(event, x, y);
+		}
 	}
 
 	useComponentDidMount(() => {
 		paint();
+
+		if (canvasReference.current) {
+			canvasReference.current.addEventListener("click", onClick, false);
+		}
+	});
+
+	useComponentWillUnmount(() => {
+		if (canvasReference.current) {
+			canvasReference.current.removeEventListener("click", onClick, false);
+		}
 	});
 
 	useEffect(
@@ -113,4 +140,4 @@ Waveform.defaultProps = {
 };
 Waveform.displayName = "Waveform";
 
-export default Waveform;
+export default React.memo(Waveform);
