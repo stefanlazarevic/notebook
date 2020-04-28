@@ -19,4 +19,7 @@ export default {
 	creativeCommons: "creative-commons",
 	cut: "cut",
 	download: "download",
+	eraser: "eraser",
+	eye: "eye",
+	folder: "folder",
 };

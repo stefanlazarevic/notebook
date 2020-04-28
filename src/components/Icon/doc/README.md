@@ -31,3 +31,6 @@
 - creative-commons
 - cut
 - download
+- eraser
+- eye
+- folder
