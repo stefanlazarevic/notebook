@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./Password.css";
 
 import Input from "../../Input";
+import { EyeButton } from "../../../Button";
 
 function PasswordInput(props: any) {
 	const [hidden, setHidden] = useState(true);
@@ -14,7 +15,7 @@ function PasswordInput(props: any) {
 	return (
 		<div className="PasswordInput">
 			<Input {...props} type={hidden ? "password" : "text"} />
-			<button onClick={onClick}>{hidden ? "Show" : "Hide"}</button>
+			<EyeButton onClick={onClick} size={16} data-active={hidden} />
 		</div>
 	);
 }
