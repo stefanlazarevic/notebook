@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import "./PictureSlider.css";
-import useComponentDidMount from "../hooks/componentDidMount";
 import { PictureSliderProps } from "./PictureSliderProps";
 
 function PictureSlider(props: PictureSliderProps) {
@@ -9,22 +8,47 @@ function PictureSlider(props: PictureSliderProps) {
 
 	const containerReference = useRef<HTMLDivElement>(null);
 	const imageReference = useRef<HTMLImageElement>(null);
+	const dividerReference = useRef<HTMLDivElement>(null);
 
+	/**
+	 *
+	 * @param event
+	 */
 	function updatePositions(event: React.MouseEvent) {
-		if (containerReference.current && imageReference.current) {
+		if (containerReference.current && imageReference.current && dividerReference.current) {
 			const container = containerReference.current;
 			const image = imageReference.current;
+			const divider = dividerReference.current;
 
-			const x = event.nativeEvent.offsetX - container.offsetLeft + container.clientLeft;
+			const coordinateX = event.nativeEvent.offsetX - container.offsetLeft + container.clientLeft;
+			const x = convertCoordinatetoPercentage(coordinateX);
 
-			image.style.clip = `rect(0px, ${image.width}px, ${image.height}px, ${x}px)`;
+			image.style.clipPath = `polygon(${x}% 0, 100% 0, 100% 100%, ${x}% 100%)`;
+			divider.style.left = `${x}%`;
 		}
 	}
 
-	function setPosition(x: number) {
-		if (imageReference.current) {
+	/**
+	 *
+	 */
+	function setPosition(offsetLeft: number) {
+		if (imageReference.current && dividerReference.current) {
 			const image = imageReference.current;
-			imageReference.current.style.clip = `rect(0px, ${image.width}px, ${image.height}px, ${x}px)`;
+			const divider = dividerReference.current;
+			image.style.clipPath = `polygon(${offsetLeft}% 0, 100% 0, 100% 100%, ${offsetLeft}% 100%)`;
+			divider.style.left = `${offsetLeft}%`;
+		}
+	}
+
+	/**
+	 *
+	 * @param coordinateX
+	 */
+	function convertCoordinatetoPercentage(coordinateX: number) {
+		if (containerReference.current) {
+			const container = containerReference.current;
+
+			return (coordinateX / container.scrollWidth) * 100;
 		}
 	}
 
@@ -38,7 +62,7 @@ function PictureSlider(props: PictureSliderProps) {
 	}
 
 	function onKeyDown(event: React.KeyboardEvent) {
-		const { keyCode, ctrlKey } = event;
+		const { keyCode } = event;
 		const image = imageReference.current!;
 
 		if (keyCode === 36) {
@@ -48,33 +72,35 @@ function PictureSlider(props: PictureSliderProps) {
 
 		if (keyCode === 35) {
 			event.preventDefault();
-			setPosition(image.width);
+			setPosition(100);
 		}
 
 		if (keyCode === 39) {
-			event.preventDefault();
-			const match = image.style.clip.match(/(\d+)px\)$/);
-			if (match) {
-				setPosition(Number(match[1]) + (ctrlKey ? 30 : 10));
+			if (typeof props.onLeftArrow === "function") {
+				const match = image.style.clipPath.match(/\((\d*\.?\d+)%/);
+				if (match) {
+					const offsetLeft = Number(match[1]);
+					props.onLeftArrow(event, offsetLeft);
+				}
 			}
 		}
 
 		if (keyCode === 37) {
-			event.preventDefault();
-			const match = image.style.clip.match(/(\d+)px\)$/);
-			if (match) {
-				const x = Number(match[1]) - (ctrlKey ? 30 : 10);
-				setPosition(x < 0 ? 0 : x);
+			if (typeof props.onRightArrow === "function") {
+				const match = image.style.clipPath.match(/\((\d*\.?\d+)%/);
+				if (match) {
+					const offsetLeft = Number(match[1]);
+					props.onRightArrow(event, offsetLeft);
+				}
 			}
 		}
 	}
 
-	useComponentDidMount(() => {
-		if (imageReference.current) {
-			const image = imageReference.current;
-			setPosition(image.width / 2);
+	useEffect(() => {
+		if (typeof props.offsetLeft === "number") {
+			setPosition(props.offsetLeft);
 		}
-	});
+	}, [props.offsetLeft]);
 
 	return (
 		<div
@@ -87,11 +113,14 @@ function PictureSlider(props: PictureSliderProps) {
 		>
 			<img src={props.images[0]} alt={props.alts[0]} />
 			<img ref={imageReference} src={props.images[1]} alt={props.alts[1]} />
+			<div ref={dividerReference} />
 		</div>
 	);
 }
 
-PictureSlider.defaultProps = {};
+PictureSlider.defaultProps = {
+	offsetLeft: 50,
+};
 PictureSlider.displayName = "PictureSlider";
 
 export default PictureSlider;

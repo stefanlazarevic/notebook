@@ -19,7 +19,7 @@
     height: 100%;
 }
 
-.PictureSlider > img:last-child {
+.PictureSlider > img:nth-child(2) {
     box-sizing: border-box;
 
     position: absolute;
@@ -27,4 +27,22 @@
     top: 0;
 
     left: 0;
+}
+
+.PictureSlider > div {
+    box-sizing: border-box;
+
+    position: absolute;
+
+    top: 0;
+
+    left: 50%;
+
+    width: 2px;
+
+    height: 100%;
+
+    background-color: white;
+
+    pointer-events: none;
 }

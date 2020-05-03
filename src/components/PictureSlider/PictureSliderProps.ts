@@ -1,14 +1,30 @@
-export interface PictureSliderOptionalProps {}
+import { StringTupple } from "../types/Tupple";
 
-export interface PictureSliderCallbackProps {}
+export interface PictureSliderOptionalProps {
+	/**
+	 * Проценат ширине слике
+	 */
+	offsetLeft?: number;
+}
+
+export interface PictureSliderCallbackProps {
+	/**
+	 *
+	 */
+	onLeftArrow?: (event: React.KeyboardEvent, offsetLeft: number) => void;
+	/**
+	 *
+	 */
+	onRightArrow?: (event: React.KeyboardEvent, offsetLeft: number) => void;
+}
 
 export interface PictureSliderProps extends PictureSliderOptionalProps, PictureSliderCallbackProps {
 	/**
 	 * Путање до слика које се приказују унутар слајдера.
 	 */
-	images: [string, string];
+	images: StringTupple;
 	/**
 	 * Описи слика.
 	 */
-	alts: [string, string];
+	alts: StringTupple;
 }
