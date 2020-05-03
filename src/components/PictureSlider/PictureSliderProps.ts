@@ -2,7 +2,7 @@ import { StringTupple } from "../types/Tupple";
 
 export interface PictureSliderOptionalProps {
 	/**
-	 * Проценат ширине слике
+	 * Проценат сакривености десне слике.
 	 */
 	offsetLeft?: number;
 }
@@ -10,10 +10,14 @@ export interface PictureSliderOptionalProps {
 export interface PictureSliderCallbackProps {
 	/**
 	 *
+	 * @param event
+	 * @param offsetLeft Тренутни проценат сакривености десне слике од 0 до 100.
 	 */
 	onLeftArrow?: (event: React.KeyboardEvent, offsetLeft: number) => void;
 	/**
 	 *
+	 * @param event
+	 * @param offsetLeft Тренутни проценат сакривености десне слике од 0 до 100.
 	 */
 	onRightArrow?: (event: React.KeyboardEvent, offsetLeft: number) => void;
 }

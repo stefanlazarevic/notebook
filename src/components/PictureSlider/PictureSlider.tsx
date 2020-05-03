@@ -76,21 +76,21 @@ function PictureSlider(props: PictureSliderProps) {
 		}
 
 		if (keyCode === 39) {
-			if (typeof props.onLeftArrow === "function") {
-				const match = image.style.clipPath.match(/\((\d*\.?\d+)%/);
-				if (match) {
-					const offsetLeft = Number(match[1]);
-					props.onLeftArrow(event, offsetLeft);
-				}
-			}
-		}
-
-		if (keyCode === 37) {
 			if (typeof props.onRightArrow === "function") {
 				const match = image.style.clipPath.match(/\((\d*\.?\d+)%/);
 				if (match) {
 					const offsetLeft = Number(match[1]);
 					props.onRightArrow(event, offsetLeft);
+				}
+			}
+		}
+
+		if (keyCode === 37) {
+			if (typeof props.onLeftArrow === "function") {
+				const match = image.style.clipPath.match(/\((\d*\.?\d+)%/);
+				if (match) {
+					const offsetLeft = Number(match[1]);
+					props.onLeftArrow(event, offsetLeft);
 				}
 			}
 		}
@@ -119,8 +119,11 @@ function PictureSlider(props: PictureSliderProps) {
 }
 
 PictureSlider.defaultProps = {
+	images: ["", ""],
+	alts: ["", ""],
 	offsetLeft: 50,
 };
+
 PictureSlider.displayName = "PictureSlider";
 
-export default PictureSlider;
+export default PictureSlider as React.FC<PictureSliderProps>;

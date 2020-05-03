@@ -1,22 +1,103 @@
 import PropTypes from 'prop-types';
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import { withKnobs, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import PictureSlider from '../index.ts';
+import MoviewSceneSlider from './examples/MovieSceneSlider.tsx';
 
 <Meta title="Components/PictureSlider" component={PictureSlider} decorators={[withKnobs]}/>
 
 # PictureSlider
 
+Компонента за поређење две слике коришћењем клизача, са уграђеним пречицама за 
+већу приступачност особама које не користе показивач.
+
 <Preview>
     <Story name="Preview">
-        <PictureSlider images={[
-            'https://github.com/koenoe/cocoen/blob/master/docs/img/after.jpg?raw=true',
-            'https://github.com/koenoe/cocoen/blob/master/docs/img/before.jpg?raw=true'
-        ]} 
-        alts={['test', 'test']}
-        offsetLeft={40}
-        />
+        <PictureSlider offsetLeft={number('offsetLeft', 50, 0, 100)} onLeftArrow={action('onLeftArrow')} onRightArrow={action('onRightArrow')} />
+    </Story>
+</Preview>
+
+## Атрибути
+
+<table>
+    <thead>
+        <tr>
+            <th>Назив</th>
+            <th>Тип</th>
+            <th>Обавезан</th>
+            <th>Подразумевана вредност</th>
+            <th>Опис</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>images</td>
+            <td><code>[string, string]</code></td>
+            <td>✓</td>
+            <td><code>["", ""]</code></td>
+            <td>Путање до слика које се приказују унутар компоненте.</td>
+        </tr>
+        <tr>
+            <td>alts</td>
+            <td><code>[string, string]</code></td>
+            <td>✓</td>
+            <td><code>["", ""]</code></td>
+            <td>Описи слика које се приказују унутар компоненте.</td>
+        </tr>
+        <tr>
+            <td>offsetLeft</td>
+            <td>number</td>
+            <td></td>
+            <td>50</td>
+            <td>Проценат сакривености десне слике.</td>
+        </tr>
+    </tbody>
+</table>
+
+### Пример
+
+```tsx
+function MovieSceneSlider() {
+	const [offsetLeft, setOffsetLeft] = useState(50);
+
+	const images = [
+		"https://github.com/sneas/img-comparison-slider/blob/master/src/demo/images/before.jpg?raw=true",
+		"https://github.com/sneas/img-comparison-slider/blob/master/src/demo/images/after.jpg?raw=true",
+    ];
+    
+    const alts = [
+        'Фотографија сцене филма у којој су глумци обучени у сива одела.',
+        "Фотографија сцене филма у којој су глумци компјутерски претворени у црвене роботе."
+    ];
+
+	function updateOffsetLeft(event: React.KeyboardEvent, currentOffsetLeft: number) {
+		const offsetLeft = currentOffsetLeft - 2;
+
+		setOffsetLeft(offsetLeft < 0 ? 0 : offsetLeft);
+	}
+
+	function updateOffsetRight(event: React.KeyboardEvent, currentOffsetLeft: number) {
+		const offsetLeft = currentOffsetLeft + 2;
+
+		setOffsetLeft(offsetLeft > 100 ? 100 : offsetLeft);
+	}
+
+	return (
+		<PictureSlider
+			images={images}
+			alts={alts}
+			offsetLeft={offsetLeft}
+			onLeftArrow={updateOffsetLeft}
+			onRightArrow={updateOffsetRight}
+		/>
+	);
+}
+```
+
+<Preview>
+    <Story name="Example">
+        <MoviewSceneSlider />
     </Story>
 </Preview>

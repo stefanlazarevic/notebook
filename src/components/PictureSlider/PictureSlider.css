@@ -5,6 +5,8 @@
 
     /* Temp */
     width: 800px;
+
+    height: 400px;
 }
 
 .PictureSlider img {
@@ -17,6 +19,8 @@
     width: 100%;
 
     height: 100%;
+
+    background-color: #eee;
 }
 
 .PictureSlider > img:nth-child(2) {
@@ -27,6 +31,8 @@
     top: 0;
 
     left: 0;
+
+    background-color: #ccc;
 }
 
 .PictureSlider > div {
