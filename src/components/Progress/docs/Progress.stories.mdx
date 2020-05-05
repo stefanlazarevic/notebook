@@ -1,0 +1,16 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, boolean } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Progress from '../index.ts';
+
+<Meta title="Components/Progress" component={Progress} decorators={[withKnobs]} />
+
+# Progress
+
+<Preview>
+    <Story name="Preview">
+        <Progress value={number('value', 70)} label={boolean('label', true)} />
+    </Story>
+</Preview>
