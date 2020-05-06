@@ -3,15 +3,16 @@ import SVG from "react-inlinesvg";
 
 import "./Icon.css";
 
-import IconProps from "./IconProps";
+import { IconProps, IconPropTypes } from "./IconProps";
 
-export default function Icon(props: IconProps) {
-  return (
-    <SVG
-      src={`/icons/${props.icon}.svg`}
-      className="Icon"
-      width={props.size}
-      height={props.size}
-    />
-  );
+function Icon(props: IconProps) {
+	return <SVG src={`/icons/${props.icon}.svg`} className="Icon" width={props.size} height={props.size} />;
 }
+
+Icon.propTypes = IconPropTypes;
+Icon.defaultProps = {
+	size: 24,
+};
+Icon.displayName = "Icon";
+
+export default Icon;

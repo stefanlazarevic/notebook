@@ -1,0 +1,54 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview, IconGallery, IconItem, Props } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, select } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Icon, {IconPropTypesT} from "../Icon";
+import Icons from "../Icons";
+
+<Meta title="Components/Icon" component={Icon} decorators={[withKnobs]}/>
+
+# Icon
+
+Компонента за приказивање `svg` иконица.
+
+Све иконице у овој библиотеци су преузете са: [lineicons.com](https://lineicons.com/icons/)
+
+<br />
+
+<IconGallery>
+  <IconItem name="add-files"><Icon icon="add-files" /></IconItem>
+  <IconItem name="archive"><Icon icon="archive" /></IconItem>
+  <IconItem name="arrow-left"><Icon icon="arrow-left" /></IconItem>
+  <IconItem name="arrow-right"><Icon icon="arrow-right" /></IconItem>
+  <IconItem name="backward"><Icon icon="backward" /></IconItem>
+  <IconItem name="bold"><Icon icon="bold" /></IconItem>
+  <IconItem name="bookmark"><Icon icon="bookmark" /></IconItem>
+  <IconItem name="calculator"><Icon icon="calculator" /></IconItem>
+  <IconItem name="calendar"><Icon icon="calendar" /></IconItem>
+  <IconItem name="checkmark"><Icon icon="checkmark" /></IconItem>
+  <IconItem name="chevron-left"><Icon icon="chevron-left" /></IconItem>
+  <IconItem name="chevron-right"><Icon icon="chevron-right" /></IconItem>
+  <IconItem name="clipboard"><Icon icon="clipboard" /></IconItem>
+  <IconItem name="close"><Icon icon="close" /></IconItem>
+  <IconItem name="code"><Icon icon="code" /></IconItem>
+  <IconItem name="coffee-cup"><Icon icon="coffee-cup" /></IconItem>
+  <IconItem name="cog"><Icon icon="cog" /></IconItem>
+  <IconItem name="creative-commons"><Icon icon="creative-commons" /></IconItem>
+  <IconItem name="cut"><Icon icon="cut" /></IconItem>
+  <IconItem name="download"><Icon icon="download" /></IconItem>
+  <IconItem name="eraser"><Icon icon="eraser" /></IconItem>
+  <IconItem name="eye"><Icon icon="eye" /></IconItem>
+  <IconItem name="folder"><Icon icon="folder" /></IconItem>
+</IconGallery>
+
+Сви називи иконица су мапирани унутар објекта `Icons` који се може импортовати из пакета `@components/Icon`, а називи су записани као
+"**camel case**" ниске.
+
+```js
+import {Icons} from '@components/Icon';
+```
+
+### Атрибути
+
+<Props of={Icon} />

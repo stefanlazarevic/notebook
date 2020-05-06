@@ -1,11 +1,15 @@
-export default interface IconProps {
-  /**
-   * Назив `.svg` фајла који приказујемо.
-   */
-  icon: string;
+import PropTypes, { InferProps } from "prop-types";
 
-  /**
-   * Величина иконице изражена у броју пиксела или произвољном CSS јединицом величине.
-   */
-  size: string | number;
-}
+export const IconPropTypes = {
+	/**
+	 * Назив `.svg` фајла који приказујемо.
+	 */
+	icon: PropTypes.string.isRequired,
+	/**
+	 * Величина иконице изражена у броју пиксела или произвољном CSS јединицом величине.
+	 * @default 24
+	 */
+	size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
+
+export type IconProps = InferProps<typeof IconPropTypes>;
