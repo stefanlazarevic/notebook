@@ -4,6 +4,7 @@ import { withKnobs, number, boolean, text } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import Select from "../Select";
+import CarSelect from './examples/CarSelect/CarSelect.tsx';
 
 <Meta title="Components/Select" component={Select} decorators={[withKnobs]}/>
 
@@ -13,16 +14,41 @@ import Select from "../Select";
     <Story name="Preview" style={{marginBottom: 40}}>
         <Select 
 			options={[
-				{ id: "0", value: "apple", label: "Apple" },
-				{ id: "1", value: "grape", label: "Grape" },
-				{ id: "2", value: "orange", label: "Orange" },
-				{ id: "3", value: "lemon", label: "Lemon" },
-				{ id: "4", value: "lime", label: "Lime" },
+				{ id: "0", value: "0", label: "Option 0" },
+				{ id: "1", value: "1", label: "Option 1" },
+				{ id: "2", value: "2", label: "Option 2" },
+				{ id: "3", value: "3", label: "Option 3" },
+				{ id: "4", value: "4", label: "Option 4" },
 			]}
 			selectedIndex={number('selectedIndex', 3)}
 			disabled={boolean('disabled', false)}
 			onSelect={action('onSelect')}
 			placeholder={text('placeholder', 'Select value')}
 		/>
+    </Story>
+</Preview>
+
+### Пример
+
+```tsx
+function CarSelect() {
+	const [selectedIndex, setSelectedIndex] = useState(-1);
+
+	const options = [
+		{ id: "volvo", value: "volvo", label: "Volvo" },
+		{ id: "saab", value: "saab", label: "Saab" },
+	];
+
+	function onSelect(event: React.SyntheticEvent, index: number) {
+		setSelectedIndex(index);
+	}
+
+	return <Select options={options} selectedIndex={selectedIndex} onSelect={onSelect} placeholder="Please select your favorite car" />;
+}
+```
+
+<Preview>
+    <Story name="Example" style={{height: 400}}>
+        <CarSelect />
     </Story>
 </Preview>
