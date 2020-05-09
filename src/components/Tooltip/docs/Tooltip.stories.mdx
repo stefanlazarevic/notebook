@@ -1,0 +1,185 @@
+import PropTypes from "prop-types";
+import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
+import { withKnobs, number, boolean, select } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Tooltip from "../index.ts";
+import TooltipRightExample from './examples/RightExample.tsx';
+import TooltipLeftExample from './examples/LeftExample.tsx';
+import TooltipTopExample from './examples/TopExample.tsx';
+import TooltipBottomExample from './examples/BottomExample.tsx';
+import HintExample from './examples/HintExample/HintExample.tsx';
+
+<Meta title="Components/Tooltip" component={Tooltip} decorators={[withKnobs]} />
+
+# Tooltip
+
+<Preview>
+    <Story name="Preview">
+        <Tooltip position={select('position', ['left', 'right', 'top', 'bottom'], 'left')}>
+            I am the tooltip
+        </Tooltip>
+    </Story>
+</Preview>
+
+### Стилизовање
+
+У наставку можете видети CSS за руковање позицијама појашњења који се користи за све
+дате примере у наставку документације.
+
+```css
+.TooltipContainer {
+    position: relative;
+}
+
+.TooltipContainer > .Tooltip[data-position="right"],
+.TooltipContainer > .Tooltip[data-position="left"],
+.TooltipContainer > .Tooltip[data-position="top"],
+.TooltipContainer > .Tooltip[data-position="bottom"]
+ {
+    display: none;
+
+    white-space: nowrap;
+}
+
+.TooltipContainer > .Tooltip[data-position="right"],
+.TooltipContainer > .Tooltip[data-position="left"]
+ {
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+.TooltipContainer > .Tooltip[data-position="top"],
+.TooltipContainer > .Tooltip[data-position="bottom"]
+ {
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+.TooltipContainer > .Tooltip[data-position="right"] {
+    left: calc(100% + 10px);
+}
+
+.TooltipContainer > .Tooltip[data-position="left"] {
+    right: calc(100% + 10px);
+}
+
+.TooltipContainer > .Tooltip[data-position="top"] {
+    bottom: calc(100% + 10px);
+}
+
+.TooltipContainer > .Tooltip[data-position="bottom"] {
+    top: calc(100% + 10px);
+}
+
+.TooltipContainer:hover > .Tooltip[data-position="right"],
+.TooltipContainer:hover > .Tooltip[data-position="left"],
+.TooltipContainer:hover > .Tooltip[data-position="top"],
+.TooltipContainer:hover > .Tooltip[data-position="bottom"] {
+    display: inline-block;
+}
+```
+
+## Примери
+
+### Појашњење десно
+
+```tsx
+function TooltipRightExample() {
+	return (
+		<button id="right-button" className="TooltipContainer" aria-controls="tooltip-right">
+			<Tooltip id="tooltip-right" position="right" aria-describedby="right-button">
+				Right tooltip
+			</Tooltip>
+			Hover me
+		</button>
+	);
+}
+```
+
+<Story name="Example (Right)">
+    <TooltipRightExample />
+</Story>
+
+### Појашњење лево
+
+```tsx
+function TooltipLeftExample() {
+	return (
+		<button id="left-button" className="TooltipContainer" aria-controls="tooltip-left">
+			<Tooltip id="tooltip-left" position="left" aria-describedby="left-button">
+				Left tooltip
+			</Tooltip>
+			Hover me
+		</button>
+	);
+}
+```
+
+<Story name="Example (Left)">
+    <TooltipLeftExample />
+</Story>
+
+### Појашњење изнад
+
+```tsx
+function TooltipTopExample() {
+	return (
+		<button id="top-button" className="TooltipContainer" aria-controls="tooltip-top">
+			<Tooltip id="tooltip-top" position="top" aria-describedby="top-button">
+				Top tooltip
+			</Tooltip>
+			Hover me
+		</button>
+	);
+}
+```
+
+<Story name="Example (Top)">
+    <TooltipTopExample />
+</Story>
+
+### Појашњење испод
+
+```tsx
+function TooltipBottomExample() {
+	return (
+		<button className="TooltipContainer">
+			<Tooltip position="bottom">Bottom tooltip</Tooltip>
+			Hover me
+		</button>
+	);
+}
+```
+
+<Story name="Example (Bottom)">
+    <TooltipBottomExample />
+</Story>
+
+### Наговештавање
+
+```tsx
+function HintExample() {
+	const [showHint, setShowHint] = useState(false);
+
+	function onClick() {
+		setShowHint(!showHint);
+	}
+
+	return (
+		<HelpButton id="help-button" size={20} onClick={onClick} className="HintExample" aria-controls="tooltip-help">
+			{showHint && (
+				<Tooltip id="tooltip-help" position="right" aria-describedby="help-button">
+					You must be over 18.
+				</Tooltip>
+			)}
+		</HelpButton>
+	);
+}
+```
+
+<Story name="Example (Hint)">
+	<HintExample />
+</Story>

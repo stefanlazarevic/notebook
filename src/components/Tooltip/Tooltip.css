@@ -1,0 +1,117 @@
+.Tooltip {
+    box-sizing: border-box;
+
+    position: absolute;
+
+    display: inline-block;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+.Tooltip[data-position="right"] {
+    margin-left: 10px;
+}
+
+.Tooltip[data-position="left"] {
+    margin-left: -10px;
+}
+
+.Tooltip[data-position="top"] {
+    margin-top: -10px;
+}
+
+.Tooltip[data-position="bottom"] {
+    margin-bottom: 10px;
+}
+
+.Tooltip__Arrow {
+    box-sizing: border-box;
+
+    position: absolute;
+
+    width: 0;
+
+    height: 0;
+
+    top: 50%;
+
+    left: 0;
+
+    margin-top: -5px;
+
+    border-width: 5px 5px 5px 0;
+
+    border-color: transparent;
+
+    border-right-color: transparent;
+
+    border-style: solid;
+}
+
+.Tooltip[data-position="right"] > .Tooltip__Arrow {
+    top: 50%;
+
+    left: auto;
+
+    margin-left: -5px;
+
+    border-width: 5px 5px 5px 0;
+
+    border-right-color: #000;
+}
+
+.Tooltip[data-position="left"] > .Tooltip__Arrow {
+    top: 50%;
+
+    margin-top: -5px;
+  
+    border-width: 5px 0 5px 5px;
+  
+    border-left-color: #000;
+  
+    right: -5px;
+  
+    left: auto;
+}
+
+.Tooltip[data-position="top"] > .Tooltip__Arrow {
+   top: auto;
+  
+   bottom: -5px;
+  
+   left: 50%;
+  
+   margin-left: -5px;
+  
+   border-width: 5px 5px 0;
+  
+   border-top-color: #000;
+}
+
+.Tooltip[data-position="bottom"] > .Tooltip__Arrow {
+    top: 0;
+  
+    left: 50%;
+  
+    margin-left: -5px;
+  
+    border-width: 0 5px 5px;
+  
+    border-bottom-color: #000;
+}
+
+.Tooltip__Content {
+    box-sizing: border-box;
+
+    padding: 5px;
+
+    border-radius: 4px;
+
+    text-align: center;
+
+    background-color: #000;
+
+    color: #fff;
+}

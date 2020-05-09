@@ -1,0 +1,52 @@
+.TooltipContainer {
+    position: relative;
+}
+
+.TooltipContainer > .Tooltip[data-position="right"],
+.TooltipContainer > .Tooltip[data-position="left"],
+.TooltipContainer > .Tooltip[data-position="top"],
+.TooltipContainer > .Tooltip[data-position="bottom"]
+ {
+    display: none;
+
+    white-space: nowrap;
+}
+
+.TooltipContainer > .Tooltip[data-position="right"],
+.TooltipContainer > .Tooltip[data-position="left"]
+ {
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+.TooltipContainer > .Tooltip[data-position="top"],
+.TooltipContainer > .Tooltip[data-position="bottom"]
+ {
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+.TooltipContainer > .Tooltip[data-position="right"] {
+    left: 100%;
+}
+
+.TooltipContainer > .Tooltip[data-position="left"] {
+    right: calc(100% + 10px)
+}
+
+.TooltipContainer > .Tooltip[data-position="top"] {
+    bottom: calc(100% + 10px);
+}
+
+.TooltipContainer > .Tooltip[data-position="bottom"] {
+    top: calc(100% + 10px);
+}
+
+.TooltipContainer:hover > .Tooltip[data-position="right"],
+.TooltipContainer:hover > .Tooltip[data-position="left"],
+.TooltipContainer:hover > .Tooltip[data-position="top"],
+.TooltipContainer:hover > .Tooltip[data-position="bottom"] {
+    display: inline-block;
+}
