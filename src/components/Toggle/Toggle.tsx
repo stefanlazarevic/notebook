@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Toggle.css";
 
-import { ToggleProps, TogglePropTypes } from "./ToggleProps";
+import { ToggleProps, SwitchPropTypes } from "./ToggleProps";
 
 function Toggle(props: ToggleProps) {
 	/**
@@ -43,7 +43,7 @@ function Toggle(props: ToggleProps) {
 	);
 }
 
-Toggle.propTypes = TogglePropTypes;
+Toggle.propTypes = SwitchPropTypes;
 
 Toggle.defaultProps = {};
 

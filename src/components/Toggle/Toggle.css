@@ -47,7 +47,7 @@
 
 /* Изглед фокусираног неактивираног прекидача. */
 .Toggle > .ToggleSlider:focus {
-  border-color: #cad0d3;
+  border-color: #c0c7ca;
 }
 
 .Toggle > .ToggleSlider:before {
