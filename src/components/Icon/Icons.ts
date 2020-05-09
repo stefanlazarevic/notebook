@@ -22,4 +22,5 @@ export default {
 	eraser: "eraser",
 	eye: "eye",
 	folder: "folder",
+	questionCircle: "question-circle",
 };
