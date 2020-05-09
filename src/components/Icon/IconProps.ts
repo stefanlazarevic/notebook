@@ -1,10 +1,10 @@
-import PropTypes, { InferProps } from "prop-types";
+import PropTypes, { InferProps, Validator } from "prop-types";
 
 export const IconPropTypes = {
 	/**
 	 * Назив `.svg` фајла који приказујемо.
 	 */
-	icon: PropTypes.string.isRequired,
+	icon: PropTypes.string.isRequired as Validator<NonNullable<string>>,
 	/**
 	 * Величина иконице изражена у броју пиксела или произвољном CSS јединицом величине.
 	 * @default 24

@@ -1,19 +1,23 @@
-export interface ToggleOptionalProps {
-	/**
-	 *
-	 */
-	checked?: boolean;
-	/**
-	 *
-	 */
-	name?: string;
-}
+import PropTypes, { InferProps, Validator } from "prop-types";
 
-export interface ToggleCallbackProps {
+export const SwitchPropTypes = {
 	/**
+	 * Стање у ком се прекидач налази. `true` представља упаљен прекидач док `false`
+	 * означава супротно стање.
 	 *
+	 * @default false
 	 */
-	onChange: (event: React.SyntheticEvent, changedChecked: boolean) => void;
-}
+	checked: PropTypes.bool as Validator<boolean | undefined>,
+	/**
+	 * Назив елемента форме.
+	 *
+	 * @default "fagascq23" Насумично добијена ниска.
+	 */
+	name: PropTypes.string as Validator<string | undefined>,
+	/**
+	 * Повратни позив уколико се стање прекидача промени.
+	 */
+	onChange: PropTypes.func as Validator<(event: React.SyntheticEvent, changedChecked: boolean) => void>,
+};
 
-export default interface ToggleProps extends ToggleOptionalProps, ToggleCallbackProps {}
+export type ToggleProps = InferProps<typeof SwitchPropTypes>;

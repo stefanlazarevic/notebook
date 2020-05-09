@@ -11,6 +11,8 @@
     height: 26px;
 
     cursor: pointer;
+
+    outline: 0;
 }
 
 .Toggle > input {
@@ -34,9 +36,18 @@
 
     bottom: 0;
 
-    background-color: #ccc;
+    background-color: #dde3e4;
+
+    border: 2px solid #dde3e4;
 
     transition: 0.4s;
+
+    outline: 0;
+}
+
+/* Изглед фокусираног неактивираног прекидача. */
+.Toggle > .ToggleSlider:focus {
+  border-color: #cad0d3;
 }
 
 .Toggle > .ToggleSlider:before {
@@ -48,11 +59,11 @@
 
     width: 16px;
 
-    height: 18px;   
+    height: 20px;   
 
-    left: 4px;
+    left: 1px;
 
-    bottom: 4px;
+    bottom: 1px;
 
     background-color: white;
 
@@ -60,9 +71,16 @@
 }
 
 .Toggle > input:checked + .ToggleSlider {
-  background-color: #2196F3;
+  background-color: #a06b9a;
+  
+  border-color: #a06b9a;
+}
+
+/* Изглед активног фокусираног прекидача. */
+.Toggle > input:checked + .ToggleSlider:focus {
+  border-color: #62365c;
 }
 
 .Toggle > input:checked + .ToggleSlider:before {
-  transform: translateX(16px);
+  transform: translateX(18px);
 }

@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import { withKnobs, number, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import Toggle from '../index.ts';
+import ExampleCheckbox from './examples/Example/Example.tsx';
 
 <Meta title="Components/Toggle" component={Toggle} decorators={[withKnobs]}/>
 
@@ -15,5 +16,29 @@ import Toggle from '../index.ts';
             checked={boolean('checked', true)}
             onChange={action('onChange')}
         />
+    </Story>
+</Preview>
+
+### Атрибути
+
+<Props of="Toggle" />
+
+## Пример
+
+```tsx
+function ExampleCheckbox() {
+	const [checked, setChecked] = useState(false);
+
+	function onChange(event: React.SyntheticEvent, currentCheckedState: boolean) {
+		setChecked(!currentCheckedState);
+	}
+
+	return <Toggle checked={checked} onChange={onChange} name="example" />;
+}
+```
+
+<Preview>
+    <Story name="Example">
+        <ExampleCheckbox />
     </Story>
 </Preview>
