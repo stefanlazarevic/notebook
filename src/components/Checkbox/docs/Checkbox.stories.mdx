@@ -1,0 +1,35 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, boolean } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Checkbox from '../index.ts';
+import ExampleCheckbox from './examples/ExampleCheckbox.tsx';
+
+<Meta title="Components/Checkbox" component={Checkbox} decorators={[withKnobs]} />
+
+# Checkbox
+
+<Preview>
+    <Story name='Preview'>
+        <Checkbox checked={boolean('checked', false)} onChange={action('onChange')} />
+    </Story>
+</Preview>
+
+## Пример
+
+```tsx
+function ExampleCheckbox(props: any) {
+	const [checked, setChecked] = useState(false);
+
+	function onChange(event: React.SyntheticEvent, currentState: boolean) {
+		setChecked(!checked);
+	}
+
+	return <Checkbox checked={checked} onChange={onChange} />;
+}
+```
+
+<Story name='Example'>
+    <ExampleCheckbox />
+</Story>
