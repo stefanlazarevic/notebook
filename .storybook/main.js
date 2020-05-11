@@ -6,7 +6,8 @@ module.exports = {
 		"@storybook/addon-links",
 		"@storybook/addon-knobs/register",
 		"@storybook/addon-docs",
-		// '@storybook/addon-a11y/register',
+		'@storybook/addon-a11y/register',
+		'@storybook/addon-jest/register'
 	],
 	webpackFinal: async (config) => {
 		config.module.rules.push({

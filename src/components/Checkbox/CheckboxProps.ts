@@ -7,6 +7,10 @@ export const CheckboxPropTypes = {
 	 */
 	id: PropTypes.string as Validator<string | undefined>,
 	/**
+	 * Јединствени идентификатор намењен за Unit и E2E тестове.
+	 */
+	testid: PropTypes.string as Validator<string | undefined>,
+	/**
 	 * Стање поља ѕа потврду.
 	 *
 	 * @default false
@@ -19,7 +23,17 @@ export const CheckboxPropTypes = {
 	/**
 	 * Повратни позив који се извршава када дође до промене стања поља.
 	 */
-	onChange: PropTypes.func as Validator<(event: React.SyntheticEvent, currentCheckedState: boolean) => void>,
+	onChange: PropTypes.func as Validator<
+		(event: React.SyntheticEvent, currentCheckedState: boolean) => void
+	>,
+	/**
+	 * Називи CSS класа.
+	 */
+	className: PropTypes.string as Validator<string | undefined>,
+	/**
+	 * Индикатор онемогућености поља.
+	 */
+	disabled: PropTypes.bool as Validator<boolean | undefined>,
 };
 
 export type CheckboxProps = InferProps<typeof CheckboxPropTypes>;

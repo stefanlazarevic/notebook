@@ -12,7 +12,11 @@ import ExampleCheckbox from './examples/ExampleCheckbox.tsx';
 
 <Preview>
     <Story name='Preview'>
-        <Checkbox checked={boolean('checked', false)} onChange={action('onChange')} />
+        <Checkbox 
+			checked={boolean('checked', false)} 
+			disabled={boolean('disabled', false)}
+			onChange={action('onChange')} 
+		/>
     </Story>
 </Preview>
 

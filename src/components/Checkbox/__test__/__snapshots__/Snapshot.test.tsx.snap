@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Подразумеванa својства се подударају са последњим снимком. 1`] = `
+<DocumentFragment>
+  <div
+    aria-checked="false"
+    aria-disabled="false"
+    class="Checkbox undefined"
+    role="checkbox"
+    tabindex="0"
+  />
+</DocumentFragment>
+`;
+
+exports[`Сва подешена својства се подударају са последњим снимком. 1`] = `
+<DocumentFragment>
+  <div
+    aria-checked="true"
+    aria-disabled="false"
+    aria-labelledby="test-label"
+    class="Checkbox CustomCheckbox"
+    data-testid="test-id"
+    id="id"
+    role="checkbox"
+    tabindex="0"
+  />
+</DocumentFragment>
+`;

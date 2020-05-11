@@ -55,3 +55,7 @@
 .Checkbox[aria-checked="true"]::before {
     display: inline-block;
 }
+
+.Checkbox[aria-disabled="true"] {
+    cursor: not-allowed;
+}
