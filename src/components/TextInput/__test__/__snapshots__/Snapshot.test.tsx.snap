@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Подразумеванa својства се подударају са последњим снимком. 1`] = `
+<DocumentFragment>
+  <input
+    aria-invalid="false"
+    class="TextInput"
+    placeholder=""
+    type="text"
+    value=""
+  />
+</DocumentFragment>
+`;
+
+exports[`Сва подешена својства се подударају са последњим снимком. 1`] = `
+<DocumentFragment>
+  <input
+    aria-invalid="true"
+    aria-labelledby="test-label"
+    class="TextInput CustomTextInput"
+    data-testid="test-id"
+    id="id"
+    placeholder="Test TextInput"
+    type="text"
+    value="test"
+  />
+</DocumentFragment>
+`;
