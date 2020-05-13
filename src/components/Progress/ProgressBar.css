@@ -1,0 +1,51 @@
+.ProgressBar {
+    box-sizing: border-box;
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 2px;
+
+    height: 20px;
+
+    background-color: #eee;
+
+    border: 1px solid #eee;
+}
+
+.ProgressBar:focus {
+    outline: 2px solid #a06b9a;
+
+    outline-offset: 2px;
+}
+
+.ProgressBar::after {
+    box-sizing: border-box;
+
+    content: attr(aria-valuetext);
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 10px;
+
+    transform: translateY(-50%);
+
+    color: #fff;
+}
+
+.ProgressBar > .Progress {
+    box-sizing: border-box;
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    height: 100%;
+
+    background-color: #a06b9a;
+}
