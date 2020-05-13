@@ -4,11 +4,18 @@ import { withKnobs, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import Checkbox from '../index.ts';
-import ExampleCheckbox from './examples/ExampleCheckbox.tsx';
+
+<!-- Examples -->
+import BasicCheckbox from './examples/BasicCheckbox.tsx';
+import ThreeStateCheckbox from './examples/ThreeStateCheckbox.tsx';
 
 <Meta title="Components/Checkbox" component={Checkbox} decorators={[withKnobs]} />
 
 # Checkbox
+
+Поље за потврду представља компоненту форме која се користи за одабир вишеструких вредности.
+За разлику од прекидача, стање поља за потврду се дефинише једном од три вредности а то су:
+`true`, `false` и `"mixed"`. "Мixed" вредност служи за представљање недефинисаног стања.
 
 <Preview>
     <Story name='Preview'>
@@ -20,10 +27,16 @@ import ExampleCheckbox from './examples/ExampleCheckbox.tsx';
     </Story>
 </Preview>
 
-## Пример
+## Атрибути
+
+<Props of={Checkbox} />
+
+## Радни примери
+
+### Основни пример
 
 ```tsx
-function ExampleCheckbox(props: any) {
+function BasicCheckbox(props: any) {
 	const [checked, setChecked] = useState(false);
 
 	function onChange(event: React.SyntheticEvent, currentState: boolean) {
@@ -34,6 +47,12 @@ function ExampleCheckbox(props: any) {
 }
 ```
 
-<Story name='Example'>
-    <ExampleCheckbox />
+<Story name='Example (Basic)'>
+    <BasicCheckbox />
+</Story>
+
+### Пример неодређеног поља
+
+<Story name="Example (Mixed)">
+	<ThreeStateCheckbox />
 </Story>

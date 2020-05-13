@@ -5,10 +5,7 @@ import "./Checkbox.css";
 import { CheckboxProps, CheckboxPropTypes } from "./CheckboxProps";
 
 function Checkbox(props: CheckboxProps) {
-	const className: string = useMemo(
-		() => `Checkbox ${props.className || ""}`.trim(),
-		[props.className]
-	);
+	const className: string = useMemo(() => `Checkbox ${props.className || ""}`.trim(), [props.className]);
 
 	/**
 	 * Функција која приликом промене стања извршава повратни позив уколико је
@@ -18,7 +15,7 @@ function Checkbox(props: CheckboxProps) {
 	 */
 	function change(event: React.SyntheticEvent) {
 		if (typeof props.onChange === "function" && !props.disabled) {
-			props.onChange(event, props.checked);
+			props.onChange(event, props.checked, props.index);
 		}
 	}
 
@@ -46,6 +43,7 @@ function Checkbox(props: CheckboxProps) {
 		<div
 			id={props.id}
 			data-testid={props.testid}
+			data-index={props.index}
 			tabIndex={props.disabled ? undefined : 0}
 			role="checkbox"
 			className={className}

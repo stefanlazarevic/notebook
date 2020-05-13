@@ -1,0 +1,25 @@
+.ThreeStateCheckbox {
+    padding: 20px 0;
+
+    font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.ThreeStateCheckbox > .Row {
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.ThreeStateCheckbox > .Row > .Checkbox {
+    margin-right: 10px;
+}
+
+.ThreeStateCheckbox > .Row:not(:first-child) {
+    padding-left: 25px;
+}

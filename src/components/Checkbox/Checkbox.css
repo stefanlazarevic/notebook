@@ -13,7 +13,9 @@
 
     font-size: 20px;
 
-    background-color: #dde3e4;
+    background-color: #f8f9fb;
+
+    border: 1px solid #e4e4e4;
 
     user-select: none;
 }
@@ -43,7 +45,7 @@
 
     text-align: center;
 
-    line-height: 1em;
+    line-height: 0.9em;
 }
 
 .Checkbox[aria-checked="mixed"]::before {
@@ -56,6 +58,8 @@
 
 .Checkbox[aria-checked="true"] {
     background-color: #a06b9a;
+
+    border-color: #a06b9a;
 
     color: #fff;
 }

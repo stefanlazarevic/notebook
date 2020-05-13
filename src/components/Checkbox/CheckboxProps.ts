@@ -27,10 +27,7 @@ export const CheckboxPropTypes = {
 	 * Повратни позив који се извршава када дође до промене стања поља.
 	 */
 	onChange: PropTypes.func as Validator<
-		(
-			event: React.SyntheticEvent,
-			currentCheckedState: boolean | "mixed"
-		) => void
+		(event: React.SyntheticEvent, currentCheckedState: boolean | "mixed", index?: number) => void
 	>,
 	/**
 	 * Називи CSS класа.
@@ -40,6 +37,12 @@ export const CheckboxPropTypes = {
 	 * Индикатор онемогућености поља.
 	 */
 	disabled: PropTypes.bool as Validator<boolean | undefined>,
+	/**
+	 * Информација о позицији поља у колекцији.
+	 * Уколико је вредност дефинисана, приликом промене стања поља, ова информација
+	 * се прослеђује као трећи параметар.
+	 */
+	index: PropTypes.number as Validator<number | undefined>,
 };
 
 export type CheckboxProps = InferProps<typeof CheckboxPropTypes>;

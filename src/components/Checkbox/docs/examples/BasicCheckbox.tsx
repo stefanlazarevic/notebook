@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 import Checkbox from "../../Checkbox";
 
-export default function ExampleCheckbox(props: any) {
+export default function BasicCheckbox(props: any) {
 	const [checked, setChecked] = useState(false);
 
-	function onChange(event: React.SyntheticEvent, currentState: boolean) {
+	function onChange(event: React.SyntheticEvent, currentState: boolean | "mixed") {
 		setChecked(!checked);
 	}
 
