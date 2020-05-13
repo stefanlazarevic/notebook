@@ -5,9 +5,7 @@ import "./ProgressBar.css";
 import { ProgressBarProps, ProgressBarPropTypes } from "./ProgressBarProps";
 
 function ProgressBar(props: ProgressBarProps) {
-	const className = useMemo(() => `ProgressBar ${props.className}`.trim(), [
-		props.className,
-	]);
+	const className = useMemo(() => `ProgressBar ${props.className || ""}`.trim(), [props.className]);
 
 	const style = useMemo(() => {
 		if (!props.value || props.value < 0) {
@@ -35,7 +33,7 @@ function ProgressBar(props: ProgressBarProps) {
 			aria-describedby={props["aria-describedby"]}
 			aria-valuetext={props["aria-valuetext"] || `${props.value}%`}
 		>
-			<div className="Progress" style={style} aria-hidden={true} />
+			<div className="Progress" style={style} role="presentation" aria-hidden={true} />
 		</div>
 	);
 }
@@ -46,6 +44,7 @@ ProgressBar.defaultProps = {
 	value: 0,
 	label: false,
 };
+
 ProgressBar.displayName = "ProgressBar";
 
 export default ProgressBar;
