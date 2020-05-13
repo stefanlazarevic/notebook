@@ -14,7 +14,7 @@ function PasswordInput(props: any) {
 	}
 
 	function onChange(event: React.ChangeEvent<HTMLInputElement>) {
-		if (typeof props.onChange === "function") {
+		if (typeof props.onChange === "function" && !props.disabled) {
 			props.onChange(event, event.target.value);
 		}
 	}
