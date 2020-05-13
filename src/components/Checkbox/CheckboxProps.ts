@@ -11,11 +11,14 @@ export const CheckboxPropTypes = {
 	 */
 	testid: PropTypes.string as Validator<string | undefined>,
 	/**
-	 * Стање поља ѕа потврду.
+	 * Вредност овог атрибута дефинише стање поља за потврду.
+	 * Вредности могу бити `true`, `false` и "mixed".
+	 *
+	 * "mixed" вредност представља неодређено стање.
 	 *
 	 * @default false
 	 */
-	checked: PropTypes.bool as Validator<boolean>,
+	checked: PropTypes.bool as Validator<boolean | "mixed">,
 	/**
 	 * Назив ознаке која описује поље за потврду.
 	 */
@@ -24,7 +27,10 @@ export const CheckboxPropTypes = {
 	 * Повратни позив који се извршава када дође до промене стања поља.
 	 */
 	onChange: PropTypes.func as Validator<
-		(event: React.SyntheticEvent, currentCheckedState: boolean) => void
+		(
+			event: React.SyntheticEvent,
+			currentCheckedState: boolean | "mixed"
+		) => void
 	>,
 	/**
 	 * Називи CSS класа.

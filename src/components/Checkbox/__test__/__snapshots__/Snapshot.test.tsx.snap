@@ -5,7 +5,7 @@ exports[`Подразумеванa својства се подударају с
   <div
     aria-checked="false"
     aria-disabled="false"
-    class="Checkbox undefined"
+    class="Checkbox"
     role="checkbox"
     tabindex="0"
   />

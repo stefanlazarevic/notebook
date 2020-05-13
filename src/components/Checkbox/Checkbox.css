@@ -46,6 +46,14 @@
     line-height: 1em;
 }
 
+.Checkbox[aria-checked="mixed"]::before {
+    content: '━';
+
+    color: #333;
+
+    display: inline-block;
+}
+
 .Checkbox[aria-checked="true"] {
     background-color: #a06b9a;
 

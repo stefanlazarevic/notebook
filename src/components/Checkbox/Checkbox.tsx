@@ -6,7 +6,7 @@ import { CheckboxProps, CheckboxPropTypes } from "./CheckboxProps";
 
 function Checkbox(props: CheckboxProps) {
 	const className: string = useMemo(
-		() => `Checkbox ${props.className}`.trim(),
+		() => `Checkbox ${props.className || ""}`.trim(),
 		[props.className]
 	);
 
