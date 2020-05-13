@@ -19,6 +19,8 @@ function ProgressBar(props: ProgressBarProps) {
 		return { width: `${props.value}%` };
 	}, [props.value]);
 
+	console.log("Value", props.value);
+
 	return (
 		<div
 			id={props.id}

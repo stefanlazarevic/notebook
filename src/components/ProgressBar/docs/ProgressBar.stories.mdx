@@ -5,6 +5,9 @@ import { action } from "@storybook/addon-actions";
 
 import ProgressBar from '../index.ts';
 
+<!-- Examples -->
+import BasicExample from '../examples/BasicExample';
+
 <Meta title="Components/ProgressBar" component={ProgressBar} decorators={[withKnobs]} />
 
 # ProgressBar
@@ -18,3 +21,13 @@ import ProgressBar from '../index.ts';
 ## Атрибути
 
 <Props of={ProgressBar} />
+
+## Радни примери
+
+### Основни примери
+
+Пример процеса који се обавља један проценат у пола секунде.
+
+<Story name="Example (Basic)">
+    <BasicExample />
+</Story>
