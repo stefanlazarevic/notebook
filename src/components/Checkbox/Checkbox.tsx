@@ -1,11 +1,13 @@
-import React, { useMemo } from "react";
+import React from "react";
 
 import "./Checkbox.css";
 
 import { CheckboxProps, CheckboxPropTypes } from "./CheckboxProps";
 
+import useClassNames from "../Utils/hooks/classNames";
+
 function Checkbox(props: CheckboxProps) {
-	const className: string = useMemo(() => `Checkbox ${props.className || ""}`.trim(), [props.className]);
+	const className = useClassNames("Radio", props.className);
 
 	/**
 	 * Функција која приликом промене стања извршава повратни позив уколико је
