@@ -9,11 +9,17 @@
 
   cursor: pointer;
 
-  border: 1px solid #212121;
+  background-color: #f8f9fb;
+
+  border: 1px solid #e4e4e4;
 
   width: 100%;
 
   padding: 5px;
 
   margin: 0;
+}
+
+.Select:focus {
+  outline: 2px solid #a06b9a;
 }

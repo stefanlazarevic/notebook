@@ -4,13 +4,21 @@
   position: relative;
 
   padding: 5px;
+
+  border: 2px solid #fff;
 }
 
 .Option:hover,
 .Option:focus {
-  background-color: #cfcfcf;
+  background-color: #f8f9fb;
+}
+
+.Option:focus {
+  outline: 2px solid #a06b9a;
+
+  z-index: 2;
 }
 
 .Option[aria-selected="true"] {
-  border: 1px solid #212121;
+  border-color: #333;
 }
