@@ -5,7 +5,7 @@ import "./ThreeStateCheckbox.css";
 import Checkbox from "../../index";
 
 export default function ThreeStateCheckbox() {
-	const [checked, setChecked] = useState([false, false]);
+	const [checked, setChecked] = useState([false, false, false, false]);
 	const checkedAll = getCheckAllValue(checked);
 
 	function getCheckAllValue(values: boolean[]): boolean | "mixed" {
@@ -55,16 +55,24 @@ export default function ThreeStateCheckbox() {
 			<div className="Row">
 				<Checkbox checked={checkedAll} onChange={onChangeAll} aria-labelledby="check-all" />
 				<label id="check-all" onClick={onChangeAll}>
-					Check all
+					Сви прилози
 				</label>
 			</div>
 			<div className="Row">
 				<Checkbox checked={checked[0]} onChange={onChange} index={0} aria-labelledby="option-one" />
-				<label>Option one</label>
+				<label>Кечап</label>
 			</div>
 			<div className="Row">
 				<Checkbox checked={checked[1]} onChange={onChange} index={1} aria-labelledby="option-two" />
-				<label>Option two</label>
+				<label>Мајонез</label>
+			</div>
+			<div className="Row">
+				<Checkbox checked={checked[2]} onChange={onChange} index={2} aria-labelledby="option-three" />
+				<label>Сенф</label>
+			</div>
+			<div className="Row">
+				<Checkbox checked={checked[3]} onChange={onChange} index={3} aria-labelledby="option-four" />
+				<label>Лук</label>
 			</div>
 		</div>
 	);

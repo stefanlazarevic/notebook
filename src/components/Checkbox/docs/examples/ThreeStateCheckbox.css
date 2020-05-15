@@ -1,7 +1,5 @@
 .ThreeStateCheckbox {
-    padding: 20px 0;
-
-    font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding-top: 10px;
 }
 
 .ThreeStateCheckbox > .Row {

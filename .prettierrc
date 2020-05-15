@@ -4,7 +4,7 @@
   "tabWidth": 2,
   "semi": true,
   "singleQuote": false,
-  "printWidth": 140,
+  "printWidth": 120,
   "arrowParens": "always",
   "parser": "typescript"
 }

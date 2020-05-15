@@ -3,11 +3,11 @@ module.exports = {
 	addons: [
 		"@storybook/preset-create-react-app",
 		"@storybook/addon-actions/register",
-		"@storybook/addon-links",
+		'@storybook/addon-links/register',
 		"@storybook/addon-knobs/register",
 		"@storybook/addon-docs",
 		'@storybook/addon-a11y/register',
-		'@storybook/addon-jest/register'
+		'@storybook/addon-jest/register',
 	],
 	webpackFinal: async (config) => {
 		config.module.rules.push({

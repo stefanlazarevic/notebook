@@ -7,7 +7,7 @@ import { CheckboxProps, CheckboxPropTypes } from "./CheckboxProps";
 import useClassNames from "../Utils/hooks/classNames";
 
 function Checkbox(props: CheckboxProps) {
-	const className = useClassNames("Radio", props.className);
+	const className = useClassNames("Checkbox", props.className);
 
 	/**
 	 * Функција која приликом промене стања извршава повратни позив уколико је

@@ -33,25 +33,19 @@ import ThreeStateCheckbox from './examples/ThreeStateCheckbox.tsx';
 
 ## Радни примери
 
+Примери употребе `Checkbox` компоненте.
+
 ### Основни пример
-
-```tsx
-function BasicCheckbox(props: any) {
-	const [checked, setChecked] = useState(false);
-
-	function onChange(event: React.SyntheticEvent, currentState: boolean) {
-		setChecked(!checked);
-	}
-
-	return <Checkbox checked={checked} onChange={onChange} />;
-}
-```
 
 <Story name='Example (Basic)'>
     <BasicCheckbox />
 </Story>
 
 ### Пример неодређеног поља
+
+<br />
+
+#### Изаберите прилоге за пљескавицу:
 
 <Story name="Example (Mixed)">
 	<ThreeStateCheckbox />
