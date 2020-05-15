@@ -9,6 +9,7 @@ import Alert from '../index.ts';
 <!-- Examples -->
 import WarningExample from '../examples/WarningExample';
 import ErrorExample from '../examples/ErrorExample';
+import InfoExample from '../examples/InfoExample';
 
 <Meta title="Components/Alert" component={Alert} decorators={[withKnobs]}/>
 
@@ -34,14 +35,22 @@ import ErrorExample from '../examples/ErrorExample';
 
 ## Радни примери
 
-### Упозорење
+Примери употребе `Alert` компоненте.
+
+### Порука упозорења
 
 <Story name="Example (Warning)">
     <WarningExample />
 </Story>
 
-### Грешка
+### Порука грешке
 
 <Story name="Example (Error)">
     <ErrorExample />
+</Story>
+
+### Порука обавештења
+
+<Story name="Example (Info)">
+    <InfoExample />
 </Story>

@@ -5,5 +5,9 @@ import "./WarningExample.css";
 import Alert from "../../Alert";
 
 export default function WarningExample() {
-	return <Alert className="WarningExample">Daily limit has been reached. Please upgrade to premium.</Alert>;
+	return (
+		<Alert className="WarningExample">
+			Дневно ограничење ускоро истиче. Уколико вам је потребно више времена размотрите надоградњу на премиум верзију.
+		</Alert>
+	);
 }
