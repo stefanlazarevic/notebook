@@ -1,0 +1,13 @@
+.Alert {
+    box-sizing: border-box;
+
+    position: relative;
+
+    width: 100%;
+
+    padding: 10px;
+
+    background-color: #f8f9fb;
+
+    border: 1px solid #e4e4e4;
+}

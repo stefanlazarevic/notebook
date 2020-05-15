@@ -10,7 +10,7 @@ export const AccordionHeaderPropTypes = {
 	 */
 	testid: PropTypes.string as Validator<string | undefined>,
 	/**
-	 * @default -1
+	 *
 	 */
 	index: PropTypes.number as Validator<number | undefined>,
 	/**

@@ -1,0 +1,47 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { withKnobs, number } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+import { LinkTo, linkTo } from '@storybook/addon-links';
+
+import Alert from '../index.ts';
+
+<!-- Examples -->
+import WarningExample from '../examples/WarningExample';
+import ErrorExample from '../examples/ErrorExample';
+
+<Meta title="Components/Alert" component={Alert} decorators={[withKnobs]}/>
+
+# Alert
+
+Компонента за приказивање важне, често временски ограничене поруке.
+
+Ово је компонента коју корисник не може затворити, стога, програмер мора спровести самоуништавање ове компоненте
+уколико по дизајну није замишљена да трајно буде приказана на екрану.
+
+Уколико је корисник у обавези да фокусира компоненту како би је затворио, програмер 
+треба да користи `AlertDialog` уместо `Alert` компоненте.
+
+<Preview>
+    <Story name="Preview">
+        <Alert>Alert content preview.</Alert>
+    </Story>
+</Preview>
+
+## Атрибути
+
+<Props of={Alert} />
+
+## Радни примери
+
+### Упозорење
+
+<Story name="Example (Warning)">
+    <WarningExample />
+</Story>
+
+### Грешка
+
+<Story name="Example (Error)">
+    <ErrorExample />
+</Story>
