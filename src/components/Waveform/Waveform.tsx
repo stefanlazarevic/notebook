@@ -1,10 +1,10 @@
 import React, { useRef, useCallback, useEffect, useMemo } from "react";
-import useComponentDidMount from "../hooks/componentDidMount";
+import useComponentDidMount from "../Utils/hooks/componentDidMount";
 
 import "./Waveform.css";
 
 import WaveformProps from "./WaveformProps";
-import useComponentWillUnmount from "../hooks/componentWillUnmount";
+import useComponentWillUnmount from "../Utils/hooks/componentWillUnmount";
 
 function Waveform(props: WaveformProps) {
 	const canvasReference = useRef<HTMLCanvasElement>(null);

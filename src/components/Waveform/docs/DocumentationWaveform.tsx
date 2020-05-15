@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Waveform from "../Waveform";
-import useComponentDidMount from "../../hooks/componentDidMount";
+import useComponentDidMount from "../../Utils/hooks/componentDidMount";
 
 export default function DocumentationWaveform(props: any) {
 	const [data, setData] = useState(new Float32Array());
