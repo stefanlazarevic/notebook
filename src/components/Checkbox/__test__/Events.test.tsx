@@ -7,9 +7,7 @@ afterEach(cleanup);
 it("Приликом клика на поље, `onChange` позив се извршава.", () => {
 	const onChange = jest.fn();
 
-	const { getByTestId } = render(
-		<Checkbox testid="testid" onChange={onChange} />
-	);
+	const { getByTestId } = render(<Checkbox testid="testid" onChange={onChange} />);
 
 	fireEvent.click(getByTestId("testid"));
 
@@ -19,9 +17,7 @@ it("Приликом клика на поље, `onChange` позив се изв
 it("Приликом клика на 'space' дугме, `onChange` позив се извршава.", () => {
 	const onChange = jest.fn();
 
-	const { getByTestId } = render(
-		<Checkbox testid="testid" onChange={onChange} />
-	);
+	const { getByTestId } = render(<Checkbox testid="testid" onChange={onChange} />);
 
 	fireEvent.keyDown(getByTestId("testid"), { keyCode: 32 });
 
@@ -31,9 +27,7 @@ it("Приликом клика на 'space' дугме, `onChange` позив �
 it("Приликом клика на онемогућено поље, `onChange` позив се не извршава.", () => {
 	const onChange = jest.fn();
 
-	const { getByTestId } = render(
-		<Checkbox testid="testid" disabled={true} onChange={onChange} />
-	);
+	const { getByTestId } = render(<Checkbox testid="testid" disabled={true} onChange={onChange} />);
 
 	fireEvent.click(getByTestId("testid"));
 
@@ -43,11 +37,29 @@ it("Приликом клика на онемогућено поље, `onChange`
 it("Приликом клика на 'space' дугме, `onChange` позив се не извршава уколико је поље онемогућено.", () => {
 	const onChange = jest.fn();
 
-	const { getByTestId } = render(
-		<Checkbox testid="testid" disabled={true} onChange={onChange} />
-	);
+	const { getByTestId } = render(<Checkbox testid="testid" disabled={true} onChange={onChange} />);
 
 	fireEvent.keyDown(getByTestId("testid"), { keyCode: 32 });
 
 	expect(onChange).not.toHaveBeenCalled();
+});
+
+it("Приликом клика на `Shift` + `F10`, `onContext` позив се извршава.", () => {
+	const onContext = jest.fn();
+
+	const { getByTestId } = render(<Checkbox testid="testid" onContext={onContext} />);
+
+	fireEvent.keyDown(getByTestId("testid"), { keyCode: 121, shiftKey: true });
+
+	expect(onContext).toHaveBeenCalled();
+});
+
+it("Приликом клика на `Shift` + `F10`, `onContext` позив се не извршава уколико је поље онемогућено.", () => {
+	const onContext = jest.fn();
+
+	const { getByTestId } = render(<Checkbox testid="testid" disabled={true} onContext={onContext} />);
+
+	fireEvent.keyDown(getByTestId("testid"), { keyCode: 121, shiftKey: true });
+
+	expect(onContext).not.toHaveBeenCalled();
 });

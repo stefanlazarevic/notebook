@@ -3,8 +3,6 @@
 exports[`Подразумеванa својства се подударају са последњим снимком. 1`] = `
 <DocumentFragment>
   <div
-    aria-checked="false"
-    aria-disabled="false"
     class="Checkbox"
     role="checkbox"
     tabindex="0"

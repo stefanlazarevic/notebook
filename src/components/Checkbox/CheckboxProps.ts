@@ -1,5 +1,5 @@
 import PropTypes, { InferProps } from "prop-types";
-import { Validator } from "react";
+import { Validator, AriaAttributes } from "react";
 
 export const CheckboxPropTypes = {
 	/**
@@ -18,17 +18,37 @@ export const CheckboxPropTypes = {
 	 *
 	 * @default false
 	 */
-	checked: PropTypes.bool as Validator<boolean | "mixed">,
+	checked: PropTypes.oneOf([true, false, "true", "false", "mixed"]) as Validator<AriaAttributes["aria-checked"]>,
 	/**
 	 * Назив ознаке која описује поље за потврду.
 	 */
 	"aria-labelledby": PropTypes.string as Validator<string | undefined>,
 	/**
+	 *
+	 */
+	"aria-label": PropTypes.string as Validator<string | undefined>,
+	/**
+	 *
+	 */
+	"aria-describedby": PropTypes.string as Validator<string | undefined>,
+	/**
+	 *
+	 */
+	"aria-haspopup": PropTypes.oneOf([true, false, "true", "false"]) as Validator<boolean | "false" | "true" | undefined>,
+	/**
 	 * Повратни позив који се извршава када дође до промене стања поља.
 	 */
 	onChange: PropTypes.func as Validator<
-		(event: React.SyntheticEvent, currentCheckedState: boolean | "mixed", index?: number) => void
+		(
+			event: React.SyntheticEvent,
+			currentCheckedState: boolean | "false" | "mixed" | "true" | undefined,
+			index?: number
+		) => void | undefined
 	>,
+	/**
+	 * Повратни позив који се извршава приликом употребе `Shift` + `F10` пречице.
+	 */
+	onContext: PropTypes.func as Validator<(event: React.SyntheticEvent) => void | undefined>,
 	/**
 	 * Називи CSS класа.
 	 */

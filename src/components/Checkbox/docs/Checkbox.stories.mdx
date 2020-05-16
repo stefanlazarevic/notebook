@@ -1,28 +1,33 @@
 import PropTypes from 'prop-types';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import { withKnobs, select, boolean } from "@storybook/addon-knobs";
+import { withKnobs, select, boolean, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
 import Checkbox from '../index.ts';
 
 <!-- Examples -->
-import BasicCheckbox from './examples/BasicCheckbox.tsx';
-import ThreeStateCheckbox from './examples/ThreeStateCheckbox.tsx';
+import BasicCheckbox from '../examples/BasicExample';
+import ThreeStateCheckbox from '../examples/ThreeStateCheckbox.tsx';
 
 <Meta title="Components/Checkbox" component={Checkbox} decorators={[withKnobs]} />
 
 # Checkbox
 
-Поље за потврду представља компоненту форме која се користи за одабир вишеструких вредности.
-За разлику од прекидача, стање поља за потврду се дефинише једном од три вредности а то су:
-`true`, `false` и `"mixed"`. "Мixed" вредност служи за представљање недефинисаног стања.
+Поље за потврду представља контролни унос који поседује три стања дефинисана вредностима `true`, `false` и `mixed`.
+Приликом употребе ове компоненте од великог је значаја коришћење експлицитне ознаке било путем атрибута `aria-labelledby` или `aria-label`.
+Уколико је поље онемогућено, вредност `aria-disabled` атрибута **мора** бити постављено на вредност `true` и свака интеракција са пољем **мора** бити онемогућена.
+Уколико поље поседује засебан контекстуални мени, атрибут `aria-haspopup` **мора** бити постављен на вредност `true`, а програмер **мора** омогућити
+кориснику отварање истог путем пречице `Shift` + `F10`.
+
 
 <Preview>
     <Story name='Preview'>
-        <Checkbox 
+        <Checkbox
 			checked={select('checked', [true, false, "mixed"], false)} 
+			index={number('index', -1)}
 			disabled={boolean('disabled', false)}
 			onChange={action('onChange')} 
+			onContext={action('onContext')}
 		/>
     </Story>
 </Preview>

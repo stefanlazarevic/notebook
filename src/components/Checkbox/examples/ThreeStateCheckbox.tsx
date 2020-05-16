@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./ThreeStateCheckbox.css";
 
-import Checkbox from "../../index";
+import Checkbox from "../index";
 
 export default function ThreeStateCheckbox() {
 	const [checked, setChecked] = useState([false, false, false, false]);

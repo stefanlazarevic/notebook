@@ -34,10 +34,14 @@ function Checkbox(props: CheckboxProps) {
 	 * @param event Акција извршена путем тастатуре.
 	 */
 	function onKeyDown(event: React.KeyboardEvent) {
-		const { keyCode } = event;
+		const { keyCode, shiftKey } = event;
 
 		if (keyCode === 32) {
 			change(event);
+		}
+
+		if (shiftKey && keyCode === 121 && typeof props.onContext === "function") {
+			props.onContext(event);
 		}
 	}
 
@@ -51,19 +55,19 @@ function Checkbox(props: CheckboxProps) {
 			className={className}
 			aria-checked={props.checked}
 			aria-labelledby={props["aria-labelledby"]}
+			aria-label={props["aria-label"]}
+			aria-describedby={props["aria-describedby"]}
+			aria-haspopup={props["aria-haspopup"]}
 			aria-disabled={props.disabled}
-			onClick={onClick}
-			onKeyDown={onKeyDown}
+			onClick={props.disabled ? undefined : onClick}
+			onKeyDown={props.disabled ? undefined : onKeyDown}
 		/>
 	);
 }
 
 Checkbox.propTypes = CheckboxPropTypes;
 
-Checkbox.defaultProps = {
-	checked: false,
-	disabled: false,
-};
+Checkbox.defaultProps = {};
 
 Checkbox.displayName = "Checkbox";
 
