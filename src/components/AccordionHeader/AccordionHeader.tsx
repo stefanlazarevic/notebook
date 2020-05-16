@@ -37,6 +37,8 @@ function AccordionHeader(props: AccordionHeaderProps) {
 		const { keyCode } = event;
 
 		if ((keyCode === 32 || keyCode === 13) && typeof props.onClick === "function") {
+			event.preventDefault();
+
 			props.onClick(event, props.index);
 		}
 
@@ -63,6 +65,7 @@ function AccordionHeader(props: AccordionHeaderProps) {
 				id={props.id}
 				data-testid={props.testid}
 				data-index={props.index}
+				tabIndex={0}
 				className={className}
 				aria-expanded={props.expanded}
 				aria-controls={props.controls}

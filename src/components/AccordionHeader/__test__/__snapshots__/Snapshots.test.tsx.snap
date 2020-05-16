@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Подразумеванa својства се подударају са последњим снимком. 1`] = `
+<DocumentFragment>
+  <div
+    aria-level="2"
+    role="heading"
+  >
+    <button
+      aria-expanded="false"
+      class="AccordionHeader"
+      tabindex="0"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Сва подешена својства се подударају са последњим снимком. 1`] = `
+<DocumentFragment>
+  <div
+    aria-level="2"
+    role="heading"
+  >
+    <button
+      aria-expanded="false"
+      class="AccordionHeader CustomAccordionHeader"
+      data-testid="testid"
+      id="id"
+      tabindex="0"
+    />
+  </div>
+</DocumentFragment>
+`;

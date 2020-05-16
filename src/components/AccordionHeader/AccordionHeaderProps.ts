@@ -28,7 +28,7 @@ export const AccordionHeaderPropTypes = {
 	/**
 	 *
 	 */
-	children: PropTypes.node as Validator<React.ReactNode | React.ReactNodeArray>,
+	children: PropTypes.node as Validator<React.ReactNode | React.ReactNodeArray | undefined>,
 	/**
 	 * @default 2
 	 */
@@ -40,31 +40,31 @@ export const AccordionHeaderPropTypes = {
 	/**
 	 *
 	 */
-	onFocus: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void>,
+	onFocus: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
 	/**
 	 *
 	 */
-	onBlur: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void>,
+	onBlur: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
 	/**
 	 *
 	 */
-	onClick: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void>,
+	onClick: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
 	/**
 	 *
 	 */
-	onArrowDown: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void>,
+	onArrowDown: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
 	/**
 	 *
 	 */
-	onArrowUp: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void>,
+	onArrowUp: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
 	/**
 	 *
 	 */
-	onHome: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void>,
+	onHome: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
 	/**
 	 *
 	 */
-	onEnd: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void>,
+	onEnd: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
 };
 
 export type AccordionHeaderProps = InferProps<typeof AccordionHeaderPropTypes>;
