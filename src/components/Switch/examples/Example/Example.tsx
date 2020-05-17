@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Toggle from "../../../Toggle";
+import Switch from "../../Switch";
 
 export default function Example() {
 	const [checked, setChecked] = useState(false);
@@ -9,5 +9,5 @@ export default function Example() {
 		setChecked(!currentCheckedState);
 	}
 
-	return <Toggle checked={checked} onChange={onChange} name="example" />;
+	return <Switch checked={checked} onChange={onChange} />;
 }

@@ -1,0 +1,58 @@
+.Switch {
+  box-sizing: border-box;
+
+  position: relative;
+
+  display: inline-block;
+
+  /** */
+  width: 40px;
+
+  height: 26px;
+
+  cursor: pointer;
+
+  background-color: #f8f9fb;
+
+  border: 1px solid #e4e4e4;
+
+  transition: 0.2s linear background-color;
+}
+
+.Switch:focus {
+  outline: 2px solid #a06b9a;
+
+  outline-offset: 2px;
+}
+
+.Switch::after {
+    content: '';
+    
+    box-sizing: border-box;
+
+    position: absolute;
+
+    display: block;
+
+    bottom: 2px;
+
+    left: 2px;
+
+    background-color: #e4e4e4;
+
+    width: 16px;
+
+    height: 20px;
+
+    transition: 0.2s linear transform;
+}
+
+.Switch[aria-checked="true"] {
+  background-color: #a06b9a;
+}
+
+.Switch[aria-checked="true"]::after {
+  background-color: #fff;
+
+  transform: translateX(18px);
+}
