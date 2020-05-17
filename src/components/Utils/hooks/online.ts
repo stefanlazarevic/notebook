@@ -5,7 +5,7 @@ import useComponentWillUnmount from "./componentWillUnmount";
 /**
  *
  */
-export function useOnline() {
+export default function useOnline() {
 	const [online, setOnline] = useState(window.navigator.onLine);
 
 	function changeOnlineState(event: Event) {

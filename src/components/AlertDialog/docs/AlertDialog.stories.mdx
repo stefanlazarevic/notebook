@@ -1,0 +1,45 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, boolean } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+import { LinkTo, linkTo } from '@storybook/addon-links';
+
+import AlertDialog from '../index.ts';
+
+<!-- Examples -->
+import InfoExample from '../examples/InfoExample';
+
+<Meta title="Components/AlertDialog" component={AlertDialog} decorators={[withKnobs]}/>
+
+# AlertDialog
+
+Ова компонента представља тип дијалога који приказује поруку попут оне која се приказује путем `Alert` компоненте. 
+За разлику од `Alert` компоненте, поред поруке `AlertDialog` оставља могућност употребе интерактивних елемената унутар дијалога.
+
+Корисник **треба** да обезбеди идентификатор за `aria-describedby` атрибут који уперује ка садржају, односно поруци која се приказује.
+Када је компонента постављена, фокус **треба** да буде постављен на први интерактивни елемент унутар дијалога.
+
+Уколико дијалог функционише као модал, корисник компоненте је дужан да постави вредност атрибута `aria-modal` на `true`.
+Када је `aria-modal` атрибут постављен на `true`, навигација путем `Tab` и `Shift` + `Tab` **не сме** излазити изван оквира `AlertDialog` компоненте. 
+
+<Preview>
+    <Story name="Preview">
+        <AlertDialog aria-modal={boolean('aria-modal', false)} aria-describedby="content">
+            <p id="content">Садржај компоненте.</p> <button>прва акција</button> <button>друга акција</button>
+        </AlertDialog>
+    </Story>
+</Preview>
+
+## Атрибути
+
+<Props of={AlertDialog} />
+
+## Радни примери
+
+Примери употребе `AlertDialog` компоненте.
+
+### Порука обавештења
+
+<Story name="Example (Info)">
+    <InfoExample />
+</Story>

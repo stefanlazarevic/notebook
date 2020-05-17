@@ -1,0 +1,37 @@
+.InfoExample {
+    background-color: #ddffff;
+
+    border-color: #a1c9f5;
+
+    color: #222;
+}
+
+.InfoExample .Row:first-child {
+    margin-bottom: 10px;
+}
+
+.InfoExample > .Row > button:first-child {
+    margin-right: 10px;
+}
+
+.InfoExample a {
+    text-decoration: none;
+
+    color: #1634c5;
+    
+    font-weight: 600;
+}
+
+.InfoExample button {
+    background-color: #ddffff;
+
+    border: 1px solid #ddffff;
+
+    padding: 0;
+
+    color: #1634c5;
+
+    font-weight: 600;
+
+    letter-spacing: 0.03em;
+}
