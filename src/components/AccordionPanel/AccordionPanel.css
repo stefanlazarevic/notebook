@@ -1,0 +1,32 @@
+.AccordionPanel {
+    box-sizing: content-box;
+
+    position: relative;
+
+    display: block;
+
+    overflow: hidden;
+
+    transition: max-height 0.15s linear;
+
+    background-color: #f8f9fb;
+
+    border: 1px solid #e4e4e4;
+
+    border-radius: 0;
+    
+    padding: 0 10px;
+}
+
+.AccordionPanel[aria-hidden="true"] {
+    /* Background color */
+    border-color: #fff;
+
+    max-height: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .AccordionPanel {
+        transition: none;
+    }
+}

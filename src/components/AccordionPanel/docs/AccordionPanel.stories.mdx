@@ -1,0 +1,38 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { withKnobs, select, boolean, number } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import AccordionPanel from '../index.ts';
+
+<!-- Examples -->
+import BasicExample from '../examples/BasicExample';
+
+<Meta title="Components/AccordionPanel" component={AccordionPanel} decorators={[withKnobs]} />
+
+# AccordionPanel
+
+`AccordionPanel` уз `AccordionHeader` представља градивну компоненту сваке `Accordion` компоненте.
+
+Корисник ове компоненте **мора** обезбедити да `aria-labelledby` атрибут има вредност идентификатора
+`AccordionHeader` компоненте која је контролише. 
+
+<Preview>
+    <Story name="Preview">
+        <AccordionPanel hidden={boolean('hidden', false)}>
+            <p>Тест се састоји од десет питања на која тестирани има тридесет минута да одговори.</p>
+        </AccordionPanel>
+    </Story>
+</Preview>
+
+## Атрибути
+
+<Props of={AccordionPanel} />
+
+## Радни примери
+
+### Основни примери
+
+<Story name="Example (Basic)">
+    <BasicExample />
+</Story>
