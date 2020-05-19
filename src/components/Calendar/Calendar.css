@@ -1,0 +1,47 @@
+.Calendar {
+    box-sizing: border-box;
+
+    position: relative;
+
+    width: 100%;
+
+    height: 100%;
+
+    background-color: #f8f9fb;
+
+    border: 1px solid #e4e4e4;
+}
+
+.Calendar > .YearRow,
+.Calendar > .MonthRow {
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: flex;
+
+    padding: 5px 0;
+}
+
+.Calendar > .YearRow > div,
+.Calendar > .MonthRow > div {
+    flex: 1;
+
+    text-align: center;
+}
+
+.Calendar > .Days {
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.Calendar > .Days > .Day[aria-disabled="true"] {
+    color: #ccc;
+}
