@@ -1,0 +1,24 @@
+.Day {
+    box-sizing: border-box;
+
+    position: relative;
+
+    background-color: #f8f9fb;
+
+    border: 1px solid #e4e4e4;
+
+    padding: 10px 0;
+}
+
+.Day:focus,
+.Day.focused {
+    background-color: #8882f9;
+
+    color: #fff;
+}
+
+.Day[aria-current="date"] {
+    background-color: #3a33d1;
+
+    color: #fff;
+}

@@ -30,7 +30,8 @@
     text-align: center;
 }
 
-.Calendar > .Days {
+.Calendar > .Days,
+.Calendar > .DayLabels {
     box-sizing: border-box;
 
     position: relative;
@@ -40,8 +41,10 @@
     grid-template-columns: repeat(7, 1fr);
 
     grid-template-rows: repeat(6, 1fr);
+
+    text-align: center;
 }
 
-.Calendar > .Days > .Day[aria-disabled="true"] {
-    color: #ccc;
+.Calendar > .DayLabels {
+    grid-template-rows: 1fr;
 }
