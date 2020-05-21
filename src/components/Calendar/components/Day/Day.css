@@ -17,6 +17,12 @@
     color: #fff;
 }
 
+.Day[aria-hidden="true"] {
+    /* background-color: #efefef; */
+
+    color: #cbcbcb;
+}
+
 .Day[aria-current="date"] {
     background-color: #3a33d1;
 

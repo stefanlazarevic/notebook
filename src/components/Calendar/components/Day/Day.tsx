@@ -9,12 +9,18 @@ function Day(props: any) {
 
 	function onClick(event: React.MouseEvent<HTMLButtonElement>) {
 		if (typeof props.onClick === "function" && !props.disabled) {
-			props.onClick(event, getTimecode());
+			props.onClick(event, props.index, getTimecode());
 		}
 	}
 
 	return (
-		<button tabIndex={-1} className="Day" aria-current={props.selected ? "date" : undefined} onClick={onClick}>
+		<button
+			tabIndex={-1}
+			className="Day"
+			aria-current={props.selected ? "date" : undefined}
+			aria-hidden={props.hidden}
+			onClick={onClick}
+		>
 			<span>{props.day}</span>
 		</button>
 	);

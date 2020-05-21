@@ -6,6 +6,10 @@ import useClassNames from "../Utils/hooks/classNames";
 
 import Day from "./components/Day";
 
+import useComponentDidMount from "../Utils/hooks/componentDidMount";
+import useNextMonth from "../Utils/hooks/nextMonth";
+import usePreviousMonth from "../Utils/hooks/previousMonth";
+
 function Calendar(props: any) {
 	const className = useClassNames("Calendar", props.className);
 
@@ -51,7 +55,24 @@ function Calendar(props: any) {
 	 */
 	const [month, setMonth] = useState(date.getMonth());
 
-	const currentDayOffset = useMemo(() => getFirstDayInMonth(year, month), [year, month]);
+	const [nextMonth, nextYear] = useNextMonth(month, year);
+
+	const [previousMonth, previousYear] = usePreviousMonth(month, year);
+
+	const previousMonthOffset = useMemo(() => getFirstDayInMonth(previousYear, previousMonth), [
+		previousYear,
+		previousMonth,
+	]);
+
+	const currentMonthOffset = useMemo(() => getFirstDayInMonth(year, month), [year, month]);
+
+	const nextMonthOffset = useMemo(() => getFirstDayInMonth(nextYear, nextMonth), [nextYear, nextMonth]);
+
+	const numberOfDaysInPreviousMonth = getNumberOfDaysInMonth(previousYear, previousMonth);
+
+	const numberOfDaysInCurrentMonth = getNumberOfDaysInMonth(year, month);
+
+	const remainingDays = 42 - (currentMonthOffset + 1) - numberOfDaysInCurrentMonth;
 
 	/*=== Референце потребне за приступачност. ===*/
 
@@ -65,7 +86,7 @@ function Calendar(props: any) {
 	 * Колекција дугмића који се добављају након сваке промене године или месеца.
 	 * Дугмићима се директно приступа како би се манипулисао фокус над њима.
 	 */
-	const days = useRef<HTMLCollection | null>(null);
+	const days = useRef<Element[] | null>(null);
 
 	/**
 	 * Индекс тренутно фокусираног дугмета.
@@ -112,10 +133,15 @@ function Calendar(props: any) {
 			if (focusedDay) {
 				focusedDay.setAttribute("tabIndex", "-1");
 				focusedDay.classList.remove("focused");
+				focusedDay.blur();
 			}
 		}
 	}
 
+	/**
+	 * Постављање фокуса на задати индекс дана.
+	 * @param index
+	 */
 	function focusDayAt(index: number) {
 		if (days.current && days.current.length) {
 			const dayToFocus = days.current[index] as HTMLButtonElement;
@@ -134,24 +160,26 @@ function Calendar(props: any) {
 
 		blurFocusedDay();
 
-		if (indexToFocus < 0) {
+		if (indexToFocus <= currentMonthOffset) {
 			navigateToPreviousMonth();
-			focusDayAt(41);
+			focusDayAt(previousMonthOffset + numberOfDaysInPreviousMonth);
 		} else {
 			focusDayAt(indexToFocus);
 		}
 	}
 
 	function focusNextDay() {
-		const indexToFocus = focusedDayIndex.current + 1;
+		if (days.current) {
+			const indexToFocus = focusedDayIndex.current + 1;
 
-		blurFocusedDay();
+			blurFocusedDay();
 
-		if (indexToFocus > 41) {
-			navigateToNextMonth();
-			focusDayAt(0);
-		} else {
-			focusDayAt(indexToFocus);
+			if (indexToFocus >= numberOfDaysInCurrentMonth + currentMonthOffset + 1) {
+				navigateToNextMonth();
+				focusDayAt(nextMonthOffset + 1);
+			} else {
+				focusDayAt(indexToFocus);
+			}
 		}
 	}
 
@@ -160,9 +188,9 @@ function Calendar(props: any) {
 
 		blurFocusedDay();
 
-		if (indexToFocus < 0) {
+		if (indexToFocus <= currentMonthOffset) {
 			navigateToPreviousMonth();
-			focusDayAt(5 * indexToFocus);
+			focusDayAt(previousMonthOffset + numberOfDaysInPreviousMonth - (currentMonthOffset - indexToFocus));
 		} else {
 			focusDayAt(indexToFocus);
 		}
@@ -170,9 +198,20 @@ function Calendar(props: any) {
 
 	function focusNextWeek() {
 		const indexToFocus = focusedDayIndex.current + 7;
+		const currentDay = focusedDayIndex.current % 7;
 
 		blurFocusedDay();
-		focusDayAt(indexToFocus);
+
+		if (indexToFocus >= numberOfDaysInCurrentMonth + currentMonthOffset + 1) {
+			navigateToNextMonth();
+			if (nextMonthOffset >= currentDay) {
+				focusDayAt(currentDay + 7);
+			} else {
+				focusDayAt(currentDay);
+			}
+		} else {
+			focusDayAt(indexToFocus);
+		}
 	}
 
 	function onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
@@ -233,8 +272,12 @@ function Calendar(props: any) {
 
 	useLayoutEffect(() => {
 		if (daysContainer.current) {
-			days.current = daysContainer.current.children;
+			days.current = Array.from(daysContainer.current.children);
+		}
+	}, [year, month]);
 
+	useComponentDidMount(() => {
+		if (days.current && days.current.length) {
 			const focusedDay = days.current[focusedDayIndex.current] as HTMLButtonElement;
 
 			if (focusedDay) {
@@ -242,54 +285,59 @@ function Calendar(props: any) {
 				focusedDay.focus();
 			}
 		}
-	}, [year, month]);
+	});
+
+	function onClick(event: React.MouseEvent, index: number, timestamp: number) {
+		blurFocusedDay();
+		focusDayAt(index);
+
+		if (typeof props.onSelect === "function") {
+			props.onSelect(event, timestamp);
+		}
+	}
 
 	/**
 	 *
 	 */
 	function renderDays() {
-		const previousMonth = month === 0 ? 11 : month - 1;
-		const previousYear = month === 0 ? year - 1 : year;
-
-		const currentMonth = month;
-		const currentYear = year;
-
-		const nextMonth = month === 11 ? 0 : month + 1;
-		const nextYear = month === 11 ? year + 1 : year;
-
-		const previousDays = getNumberOfDaysInMonth(previousYear, previousMonth);
-		const numberOfDaysInSelectedMonth = getNumberOfDaysInMonth(year, month);
-
 		const selectedDay = date.getDate();
 		const selectedMonth = date.getMonth();
 		const selectedYear = date.getFullYear();
-
-		const remainingDays = 42 - (currentDayOffset + 1) - numberOfDaysInSelectedMonth;
 
 		const output = [];
 
 		let index = 0;
 
-		while (index <= currentDayOffset) {
-			const day = previousDays - currentDayOffset + index;
+		while (index <= currentMonthOffset) {
+			const day = numberOfDaysInPreviousMonth - currentMonthOffset + index;
 			const selected = selectedDay === day && selectedMonth === previousMonth && selectedYear === previousYear;
 
 			if (selected && focusedDayIndex.current === -1) {
 				focusedDayIndex.current = index;
 			}
 
-			output.push(<Day index={index} day={day} month={previousMonth} year={previousYear} selected={selected} />);
+			output.push(
+				<Day
+					index={index}
+					day={day}
+					month={previousMonth}
+					year={previousYear}
+					selected={selected}
+					hidden={true}
+					onClick={onClick}
+				/>
+			);
 			index++;
 		}
 
-		for (let day = 1; day <= numberOfDaysInSelectedMonth; day++, index++) {
-			const selected = selectedDay === day && selectedMonth === currentMonth && selectedYear === currentYear;
+		for (let day = 1; day <= numberOfDaysInCurrentMonth; day++, index++) {
+			const selected = selectedDay === day && selectedMonth === month && selectedYear === year;
 
 			if (selected && focusedDayIndex.current === -1) {
 				focusedDayIndex.current = index;
 			}
 
-			output.push(<Day index={index} day={day} month={currentMonth} year={currentYear} selected={selected} />);
+			output.push(<Day index={index} day={day} month={month} year={year} selected={selected} onClick={onClick} />);
 		}
 
 		for (let day = 1; day <= remainingDays; day++) {
@@ -299,7 +347,17 @@ function Calendar(props: any) {
 				focusedDayIndex.current = index;
 			}
 
-			output.push(<Day index={index} day={day} month={nextMonth} year={nextYear} selected={selected} />);
+			output.push(
+				<Day
+					index={index}
+					day={day}
+					month={nextMonth}
+					year={nextYear}
+					selected={selected}
+					hidden={true}
+					onClick={onClick}
+				/>
+			);
 		}
 
 		return output;
@@ -308,38 +366,28 @@ function Calendar(props: any) {
 	return (
 		<div role="application">
 			<div id={props.id} data-testid={props.testid} className={className} role="presentation" onKeyDown={onKeyDown}>
-				{/* <div className="YearRow" role="presentation">
-					<button
-						ref={previousYearButton}
-						aria-label="Previous year"
-						title="Previous year"
-						onClick={navigateToPreviousYear}
-					>
+				<div className="YearRow" role="presentation">
+					<button aria-label="Previous year" title="Previous year" onClick={navigateToPreviousYear}>
 						<span aria-hidden={true}>⇐</span>
 					</button>
 					<div role="presentation">
 						<span>{year}</span>
 					</div>
-					<button ref={nextYearButton} aria-label="Next year" title="Next year" onClick={navigateToNextYear}>
+					<button aria-label="Next year" title="Next year" onClick={navigateToNextYear}>
 						<span aria-hidden={true}>⇒</span>
 					</button>
 				</div>
 				<div className="MonthRow" role="presentation">
-					<button
-						ref={previousYearButton}
-						aria-label="Previous month"
-						title="Previous month"
-						onClick={navigateToPreviousMonth}
-					>
+					<button aria-label="Previous month" title="Previous month" onClick={navigateToPreviousMonth}>
 						<span aria-hidden={true}>⇐</span>
 					</button>
 					<div role="presentation">
 						<span>{monthLabels[month]}</span>
 					</div>
-					<button ref={nextYearButton} aria-label="Next month" title="Next month" onClick={navigateToNextMonth}>
+					<button aria-label="Next month" title="Next month" onClick={navigateToNextMonth}>
 						<span aria-hidden={true}>⇒</span>
 					</button>
-				</div> */}
+				</div>
 				<div className="DayLabels">
 					{dayLabels.map((dayLabel: string) => (
 						<div aria-hidden={true} title={dayLabel}>
