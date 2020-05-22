@@ -8,13 +8,24 @@
     border: 1px solid #e4e4e4;
 
     padding: 10px 0;
+
+    outline: 0;
+
+    color: #333;
 }
 
-.Day:focus,
 .Day.focused {
-    background-color: #8882f9;
+    border-color: #8882f9;
 
-    color: #fff;
+    color: #333;
+}
+
+.Day.focused:focus {
+    outline: 2px solid #8882f9;
+
+    outline-offset: 1px;
+
+    z-index: 1;
 }
 
 .Day[aria-hidden="true"] {

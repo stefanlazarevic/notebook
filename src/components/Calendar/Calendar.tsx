@@ -16,7 +16,12 @@ function Calendar(props: any) {
 	/**
 	 * Датум објекат који се добија из `timestamp` броја. Овај датум представља одабрани датум у календару.
 	 */
-	const date = useMemo(() => new Date(props.timestamp), [props.timestamp]);
+	const selectedDate = useMemo(() => new Date(props.timestamp), [props.timestamp]);
+
+	/**
+	 * Одабрани дан у месецу који се приказује на календару.
+	 */
+	const selectedDay = selectedDate.getDate();
 
 	/**
 	 * Називи дана у недељи који се приказују у заглављу календара. Дани почињу од недеље због тога
@@ -48,316 +53,248 @@ function Calendar(props: any) {
 	/**
 	 * Одабрана календарска година која се приказује у заглављу.
 	 */
-	const [year, setYear] = useState(date.getFullYear());
+	const [currentYear, setCurrentYear] = useState(selectedDate.getFullYear());
 
 	/**
 	 * Одабрани календарски месец који се приказује у заглављу.
 	 */
-	const [month, setMonth] = useState(date.getMonth());
+	const [currentMonth, setCurrentMonth] = useState(selectedDate.getMonth());
 
-	const [nextMonth, nextYear] = useNextMonth(month, year);
+	const [nextMonth, nextYear] = useNextMonth(currentMonth, currentYear);
 
-	const [previousMonth, previousYear] = usePreviousMonth(month, year);
+	const [previousMonth, previousYear] = usePreviousMonth(currentMonth, currentYear);
 
-	const previousMonthOffset = useMemo(() => getFirstDayInMonth(previousYear, previousMonth), [
-		previousYear,
-		previousMonth,
-	]);
+	const currentMonthOffset = getFirstDayInMonth(currentMonth, currentYear);
 
-	const currentMonthOffset = useMemo(() => getFirstDayInMonth(year, month), [year, month]);
+	const numberOfDaysInCurrentMonth = getNumberOfDaysInMonth(currentMonth, currentYear);
 
-	const nextMonthOffset = useMemo(() => getFirstDayInMonth(nextYear, nextMonth), [nextYear, nextMonth]);
+	const numberOfDaysInPreviousMonth = getNumberOfDaysInMonth(previousMonth, previousYear);
 
-	const numberOfDaysInPreviousMonth = getNumberOfDaysInMonth(previousYear, previousMonth);
-
-	const numberOfDaysInCurrentMonth = getNumberOfDaysInMonth(year, month);
-
-	const remainingDays = 42 - (currentMonthOffset + 1) - numberOfDaysInCurrentMonth;
-
-	/*=== Референце потребне за приступачност. ===*/
-
-	/**
-	 * Контејнер који садржи све дане у одабраном месецу и години.
-	 * `daysContainer.current.children` колекција се складишти у `days` променљивој.
-	 */
-	const daysContainer = useRef<HTMLDivElement | null>(null);
-
-	/**
-	 * Колекција дугмића који се добављају након сваке промене године или месеца.
-	 * Дугмићима се директно приступа како би се манипулисао фокус над њима.
-	 */
-	const days = useRef<Element[] | null>(null);
-
-	/**
-	 * Индекс тренутно фокусираног дугмета.
-	 */
 	const focusedDayIndex = useRef<number>(-1);
 
-	/**
-	 * Пребацивање на претходну годину у календару.
-	 */
+	const days = useRef<Element[]>([]);
+
+	const calendarDaysContainer = useRef<HTMLDivElement | null>(null);
+
+	useComponentDidMount(() => {
+		focusedDayIndex.current = selectedDay - 1;
+		focusDayAt(focusedDayIndex.current);
+	});
+
+	useLayoutEffect(() => {
+		console.log("Layout effect");
+		if (calendarDaysContainer.current) {
+			days.current = Array.from(calendarDaysContainer.current.children).filter(
+				(element) => !element.getAttribute("aria-hidden")
+			);
+
+			if (focusedDayIndex.current > days.current.length - 1) {
+				focusedDayIndex.current = days.current.length - 1;
+			}
+
+			console.log(focusedDayIndex.current);
+
+			focusDayAt(focusedDayIndex.current);
+		}
+	}, [currentMonth, currentYear]);
+
+	function getFirstDayInMonth(month: number, year: number): number {
+		return new Date(year, month, 0).getDay();
+	}
+
+	function getNumberOfDaysInMonth(month: number, year: number): number {
+		return 32 - new Date(year, month, 32).getDate();
+	}
+
 	function navigateToPreviousYear() {
-		setYear(year - 1);
+		setCurrentYear(currentYear - 1);
 	}
 
-	/**
-	 * Пребацивање на следећу годину у календару.
-	 */
-	function navigateToNextYear() {
-		setYear(year + 1);
-	}
-
-	/**
-	 * Пребацивање на следећи месец у календару.
-	 */
-	function navigateToNextMonth() {
-		setMonth(month === 11 ? 0 : month + 1);
-		setYear(month === 11 ? year + 1 : year);
-	}
-
-	/**
-	 * Пребацивање на претходни месец у календару.
-	 */
 	function navigateToPreviousMonth() {
-		setMonth(month === 0 ? 11 : month - 1);
-		setYear(month === 0 ? year - 1 : year);
+		setCurrentMonth(previousMonth);
 	}
 
-	/**
-	 * Уклањање фокуса са тренутно фокусираног дана.
-	 */
-	function blurFocusedDay() {
-		if (typeof focusedDayIndex.current === "number" && days.current && days.current.length) {
-			const focusedDay = days.current[focusedDayIndex.current] as HTMLButtonElement;
+	function navigateToNextMonth() {
+		setCurrentMonth(nextMonth);
+	}
 
-			if (focusedDay) {
-				focusedDay.setAttribute("tabIndex", "-1");
-				focusedDay.classList.remove("focused");
-				focusedDay.blur();
+	function navigateToNextYear() {
+		setCurrentYear(currentYear + 1);
+	}
+
+	function blurFocusedDay() {
+		if (typeof focusedDayIndex.current === "number") {
+			const dayToBlur = days.current[focusedDayIndex.current] as HTMLButtonElement;
+
+			if (dayToBlur) {
+				dayToBlur.setAttribute("tabIndex", "-1");
+				dayToBlur.classList.remove("focused");
+				dayToBlur.blur();
 			}
 		}
 	}
 
-	/**
-	 * Постављање фокуса на задати индекс дана.
-	 * @param index
-	 */
 	function focusDayAt(index: number) {
-		if (days.current && days.current.length) {
+		if (days.current && days.current.length && typeof focusedDayIndex.current === "number") {
 			const dayToFocus = days.current[index] as HTMLButtonElement;
 
 			if (dayToFocus) {
 				dayToFocus.setAttribute("tabIndex", "0");
 				dayToFocus.classList.add("focused");
 				dayToFocus.focus();
-				focusedDayIndex.current = index;
 			}
+		}
+	}
+
+	function selectAndFocus(index: number) {
+		focusedDayIndex.current = index;
+		focusDayAt(focusedDayIndex.current);
+	}
+
+	function focusNextDay() {
+		if (focusedDayIndex.current === days.current.length - 1) {
+			focusedDayIndex.current = 0;
+			navigateToNextMonth();
+		} else {
+			selectAndFocus(focusedDayIndex.current + 1);
 		}
 	}
 
 	function focusPreviousDay() {
-		const indexToFocus = focusedDayIndex.current - 1;
-
-		blurFocusedDay();
-
-		if (indexToFocus <= currentMonthOffset) {
+		if (focusedDayIndex.current === 0) {
+			focusedDayIndex.current = numberOfDaysInPreviousMonth - 1;
 			navigateToPreviousMonth();
-			focusDayAt(previousMonthOffset + numberOfDaysInPreviousMonth);
 		} else {
-			focusDayAt(indexToFocus);
-		}
-	}
-
-	function focusNextDay() {
-		if (days.current) {
-			const indexToFocus = focusedDayIndex.current + 1;
-
-			blurFocusedDay();
-
-			if (indexToFocus >= numberOfDaysInCurrentMonth + currentMonthOffset + 1) {
-				navigateToNextMonth();
-				focusDayAt(nextMonthOffset + 1);
-			} else {
-				focusDayAt(indexToFocus);
-			}
+			selectAndFocus(focusedDayIndex.current - 1);
 		}
 	}
 
 	function focusPreviousWeek() {
-		const indexToFocus = focusedDayIndex.current - 7;
+		const previousWeekIndex = focusedDayIndex.current - 7;
 
-		blurFocusedDay();
-
-		if (indexToFocus <= currentMonthOffset) {
+		if (previousWeekIndex < 0) {
+			console.log(previousWeekIndex);
+			focusedDayIndex.current = numberOfDaysInPreviousMonth - -previousWeekIndex;
 			navigateToPreviousMonth();
-			focusDayAt(previousMonthOffset + numberOfDaysInPreviousMonth - (currentMonthOffset - indexToFocus));
 		} else {
-			focusDayAt(indexToFocus);
+			selectAndFocus(previousWeekIndex);
 		}
 	}
 
 	function focusNextWeek() {
-		const indexToFocus = focusedDayIndex.current + 7;
-		const currentDay = focusedDayIndex.current % 7;
+		const nextWeekIndex = focusedDayIndex.current + 7;
 
+		if (nextWeekIndex >= numberOfDaysInCurrentMonth) {
+			focusedDayIndex.current = nextWeekIndex - numberOfDaysInCurrentMonth;
+			navigateToNextMonth();
+		} else {
+			selectAndFocus(nextWeekIndex);
+		}
+
+		console.log(nextWeekIndex);
+	}
+
+	function focusFirstDay() {
+		selectAndFocus(0);
+	}
+
+	function focusLastDay() {
+		selectAndFocus(days.current.length - 1);
+	}
+
+	function onClick(event: React.MouseEvent<HTMLButtonElement>, index: number, timestamp: number) {
 		blurFocusedDay();
 
-		if (indexToFocus >= numberOfDaysInCurrentMonth + currentMonthOffset + 1) {
+		if (index < 0) {
+			focusedDayIndex.current = numberOfDaysInPreviousMonth + index;
+			navigateToPreviousMonth();
+		} else if (index >= days.current.length) {
+			focusedDayIndex.current = index - (numberOfDaysInCurrentMonth - 1) - 1;
 			navigateToNextMonth();
-			if (nextMonthOffset >= currentDay) {
-				focusDayAt(currentDay + 7);
-			} else {
-				focusDayAt(currentDay);
-			}
 		} else {
-			focusDayAt(indexToFocus);
+			selectAndFocus(index);
 		}
 	}
 
 	function onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
 		const { keyCode, altKey } = event;
 
+		// Alt + Page down
 		if (altKey && keyCode === 33) {
-			event.preventDefault();
-
+			blurFocusedDay();
 			navigateToNextYear();
-
-			return;
 		}
 
+		// Alt + Page up
 		if (altKey && keyCode === 34) {
-			event.preventDefault();
-
+			blurFocusedDay();
 			navigateToPreviousYear();
-
-			return;
 		}
 
-		if (keyCode === 33) {
+		// Page down
+		if (!altKey && keyCode === 33) {
+			blurFocusedDay();
 			navigateToNextMonth();
 		}
 
-		if (keyCode === 34) {
+		// Page up
+		if (!altKey && keyCode === 34) {
+			blurFocusedDay();
 			navigateToPreviousMonth();
 		}
 
-		if (keyCode === 27 && typeof props.onEscape === "function") {
-			props.onEscape(event);
-		}
-
-		if (keyCode === 37) {
-			focusPreviousDay();
-		}
-
+		// Arrow right
 		if (keyCode === 39) {
+			blurFocusedDay();
 			focusNextDay();
 		}
 
+		// Arrow left
+		if (keyCode === 37) {
+			blurFocusedDay();
+			focusPreviousDay();
+		}
+
+		// Arrow down
+		if (keyCode === 40) {
+			blurFocusedDay();
+			focusNextWeek();
+		}
+
+		// Arrow up
 		if (keyCode === 38) {
+			blurFocusedDay();
 			focusPreviousWeek();
 		}
 
-		if (keyCode === 40) {
-			focusNextWeek();
+		// Home
+		if (keyCode === 36) {
+			blurFocusedDay();
+			focusFirstDay();
+		}
+
+		if (keyCode === 35) {
+			blurFocusedDay();
+			focusLastDay();
 		}
 	}
 
-	function getNumberOfDaysInMonth(year: number, month: number): number {
-		return 32 - new Date(year, month, 32).getDate();
-	}
-
-	function getFirstDayInMonth(year: number, month: number): number {
-		return new Date(year, month, 0).getDay();
-	}
-
-	useLayoutEffect(() => {
-		if (daysContainer.current) {
-			days.current = Array.from(daysContainer.current.children);
-		}
-	}, [year, month]);
-
-	useComponentDidMount(() => {
-		if (days.current && days.current.length) {
-			const focusedDay = days.current[focusedDayIndex.current] as HTMLButtonElement;
-
-			if (focusedDay) {
-				focusedDay.setAttribute("tabIndex", "0");
-				focusedDay.focus();
-			}
-		}
-	});
-
-	function onClick(event: React.MouseEvent, index: number, timestamp: number) {
-		blurFocusedDay();
-		focusDayAt(index);
-
-		if (typeof props.onSelect === "function") {
-			props.onSelect(event, timestamp);
-		}
-	}
-
-	/**
-	 *
-	 */
 	function renderDays() {
-		const selectedDay = date.getDate();
-		const selectedMonth = date.getMonth();
-		const selectedYear = date.getFullYear();
-
 		const output = [];
 
-		let index = 0;
+		let index = -(currentMonthOffset + 1);
 
-		while (index <= currentMonthOffset) {
-			const day = numberOfDaysInPreviousMonth - currentMonthOffset + index;
-			const selected = selectedDay === day && selectedMonth === previousMonth && selectedYear === previousYear;
-
-			if (selected && focusedDayIndex.current === -1) {
-				focusedDayIndex.current = index;
-			}
-
-			output.push(
-				<Day
-					index={index}
-					day={day}
-					month={previousMonth}
-					year={previousYear}
-					selected={selected}
-					hidden={true}
-					onClick={onClick}
-				/>
-			);
-			index++;
+		for (let offset = currentMonthOffset; offset >= 0; offset--, index++) {
+			const day = numberOfDaysInPreviousMonth - offset;
+			output.push(<Day hidden={true} index={index} day={day} onClick={onClick} />);
 		}
 
 		for (let day = 1; day <= numberOfDaysInCurrentMonth; day++, index++) {
-			const selected = selectedDay === day && selectedMonth === month && selectedYear === year;
-
-			if (selected && focusedDayIndex.current === -1) {
-				focusedDayIndex.current = index;
-			}
-
-			output.push(<Day index={index} day={day} month={month} year={year} selected={selected} onClick={onClick} />);
+			output.push(<Day index={index} day={day} month={currentMonth} year={currentYear} onClick={onClick} />);
 		}
 
-		for (let day = 1; day <= remainingDays; day++) {
-			const selected = selectedDay === day && selectedMonth === nextMonth && selectedYear === nextYear;
-
-			if (selected && focusedDayIndex.current === -1) {
-				focusedDayIndex.current = index;
-			}
-
-			output.push(
-				<Day
-					index={index}
-					day={day}
-					month={nextMonth}
-					year={nextYear}
-					selected={selected}
-					hidden={true}
-					onClick={onClick}
-				/>
-			);
+		for (let day = 41; day > currentMonthOffset + numberOfDaysInCurrentMonth; day--, index++) {
+			output.push(<Day hidden={true} index={index} day={42 - day} onClick={onClick} />);
 		}
 
 		return output;
@@ -366,28 +303,6 @@ function Calendar(props: any) {
 	return (
 		<div role="application">
 			<div id={props.id} data-testid={props.testid} className={className} role="presentation" onKeyDown={onKeyDown}>
-				<div className="YearRow" role="presentation">
-					<button aria-label="Previous year" title="Previous year" onClick={navigateToPreviousYear}>
-						<span aria-hidden={true}>⇐</span>
-					</button>
-					<div role="presentation">
-						<span>{year}</span>
-					</div>
-					<button aria-label="Next year" title="Next year" onClick={navigateToNextYear}>
-						<span aria-hidden={true}>⇒</span>
-					</button>
-				</div>
-				<div className="MonthRow" role="presentation">
-					<button aria-label="Previous month" title="Previous month" onClick={navigateToPreviousMonth}>
-						<span aria-hidden={true}>⇐</span>
-					</button>
-					<div role="presentation">
-						<span>{monthLabels[month]}</span>
-					</div>
-					<button aria-label="Next month" title="Next month" onClick={navigateToNextMonth}>
-						<span aria-hidden={true}>⇒</span>
-					</button>
-				</div>
 				<div className="DayLabels">
 					{dayLabels.map((dayLabel: string) => (
 						<div aria-hidden={true} title={dayLabel}>
@@ -395,7 +310,7 @@ function Calendar(props: any) {
 						</div>
 					))}
 				</div>
-				<div ref={daysContainer} className="Days">
+				<div ref={calendarDaysContainer} className="Days">
 					{renderDays()}
 				</div>
 			</div>
