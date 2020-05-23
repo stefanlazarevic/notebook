@@ -1,0 +1,9 @@
+.Weekday {
+    box-sizing: border-box;
+
+    position: relative;
+
+    text-align: center;
+
+    cursor: help;
+}

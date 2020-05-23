@@ -1,0 +1,35 @@
+.Day {
+    box-sizing: border-box;
+
+    position: relative;
+}
+
+.Day > button {
+    width: 100%;
+
+    height: 100%;
+
+    background-color: #fff;
+
+    border: 1px solid #fff;
+
+    color: #333;
+
+    font-weight: bold;
+
+    padding: 4px;
+}
+
+.Day > button[aria-hidden="true"] {
+    font-weight: normal;
+}
+
+.Day > button:focus {
+    outline: 2px solid #8882f9;
+}
+
+.Day[aria-selected="true"] > button {
+    background-color: #3a33d1;
+
+    color: #fff;
+}
