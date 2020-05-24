@@ -27,7 +27,7 @@ function Day(props: any) {
 				aria-hidden={props["aria-hidden"]}
 				onClick={!props.disabled && typeof props.onClick === "function" ? onClick : undefined}
 			>
-				<span>{props.day}</span>
+				{props.day}
 			</button>
 		</td>
 	);
