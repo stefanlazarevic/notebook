@@ -54,6 +54,14 @@ export const CalendarGridPropTypes = {
 	/**
 	 *
 	 */
+	onArrowUp: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
+	/**
+	 *
+	 */
+	onArrowDown: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
+	/**
+	 *
+	 */
 	onPageUp: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
 	/**
 	 *
