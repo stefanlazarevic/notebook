@@ -146,17 +146,45 @@ function DatePicker(props: any) {
 		navigateToNextYear();
 	}
 
-	function onCalendarPageUp(event: React.SyntheticEvent<HTMLTableElement>) {
+	function onCalendarPageUp(event: React.KeyboardEvent<HTMLTableElement>) {
+		const { shiftKey } = event;
 		autoFocus.current = true;
-		navigateToNextMonth();
+
+		if (shiftKey) {
+			navigateToNextYear();
+		} else {
+			navigateToNextMonth();
+		}
 	}
 
-	function onCalendarPageDown(event: React.SyntheticEvent<HTMLTableElement>) {
+	function onCalendarPageDown(event: React.KeyboardEvent<HTMLTableElement>) {
+		const { shiftKey } = event;
+
 		autoFocus.current = true;
-		navigateToPreviousMonth();
+
+		if (shiftKey) {
+			navigateToPreviousYear();
+		} else {
+			navigateToPreviousMonth();
+		}
 	}
 
-	function onCalendarHome(event: React.SyntheticEvent<HTMLTableElement>) {
+	function onCalendarHome(event: React.KeyboardEvent<HTMLTableElement>) {
+		const { shiftKey } = event;
+
+		if (shiftKey) {
+			if (calendarButtons.current) {
+				const focusedButton = calendarButtons.current[focusedButtonIndex.current];
+				focusedButton.setAttribute("tabIndex", "-1");
+				focusedButtonIndex.current = 0;
+				const toFocusButton = calendarButtons.current[focusedButtonIndex.current];
+				toFocusButton.setAttribute("tabIndex", "0");
+				toFocusButton.focus();
+			}
+
+			return;
+		}
+
 		const offset = new Date(calendarView[1], calendarView[0], 0).getDay();
 		const focusedDay = focusedButtonIndex.current + 1;
 		const weekDay = (offset + focusedDay) % 7;
@@ -180,7 +208,22 @@ function DatePicker(props: any) {
 		}
 	}
 
-	function onCalendarEnd(event: React.SyntheticEvent<HTMLTableElement>) {
+	function onCalendarEnd(event: React.KeyboardEvent<HTMLTableElement>) {
+		const { shiftKey } = event;
+
+		if (shiftKey) {
+			if (calendarButtons.current) {
+				const focusedButton = calendarButtons.current[focusedButtonIndex.current];
+				focusedButton.setAttribute("tabIndex", "-1");
+				focusedButtonIndex.current = calendarButtons.current.length - 1;
+				const toFocusButton = calendarButtons.current[focusedButtonIndex.current];
+				toFocusButton.setAttribute("tabIndex", "0");
+				toFocusButton.focus();
+			}
+
+			return;
+		}
+
 		const offset = new Date(calendarView[1], calendarView[0], 0).getDay();
 		const focusedDay = focusedButtonIndex.current + 1;
 		const weekDay = (offset + focusedDay) % 7;
@@ -190,7 +233,6 @@ function DatePicker(props: any) {
 		} else {
 			if (calendarButtons.current) {
 				const focusedButton = calendarButtons.current[focusedButtonIndex.current];
-				console.log(focusedButton);
 				focusedButton.setAttribute("tabIndex", "-1");
 				focusedButtonIndex.current = focusedDay + (6 - weekDay) - 1;
 
