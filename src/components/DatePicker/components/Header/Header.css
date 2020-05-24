@@ -1,0 +1,27 @@
+.DatePickerHeader {
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+
+    grid-template-rows: 1fr;
+}
+
+.DatePickerHeader > h2 {
+    text-align: center;
+
+    font-size: 1rem;
+}
+
+.DatePickerHeader > button {
+    background-color: #fff;
+
+    border-style: solid;
+
+    border-color: #fff;
+
+    cursor: pointer;
+}

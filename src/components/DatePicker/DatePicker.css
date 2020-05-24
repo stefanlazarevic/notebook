@@ -1,0 +1,27 @@
+.DatePicker {
+    box-sizing: border-box;
+
+    position: relative;
+}
+
+.DatePicker > .DatePickerHeader {
+    margin-bottom: 20px;
+}
+
+.DatePicker > .CalendarGrid {
+    width: 100%;
+}
+
+.DatePicker > .CalendarGrid > thead > tr,
+.DatePicker > .CalendarGrid > tbody > tr {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    grid-template-rows: 1fr;
+
+}
+
+.DatePicker > .CalendarGrid > tbody > tr > td > button {
+    padding: 4px;
+}
