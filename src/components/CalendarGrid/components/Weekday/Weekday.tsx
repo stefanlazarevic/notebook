@@ -18,4 +18,4 @@ Weekday.defultProps = {};
 
 Weekday.displayName = "Weekday";
 
-export default Weekday;
+export default React.memo(Weekday);

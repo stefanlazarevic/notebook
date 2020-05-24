@@ -2,6 +2,8 @@
     box-sizing: border-box;
 
     position: relative;
+
+    padding: 2px;
 }
 
 .Day > button {
@@ -18,14 +20,22 @@
     font-weight: bold;
 
     padding: 4px;
+
+    outline: 0;
 }
 
 .Day > button[aria-hidden="true"] {
     font-weight: normal;
 }
 
-.Day > button:focus {
-    outline: 2px solid #8882f9;
+.Day > button[tabIndex="0"] {
+    outline: 1px solid #8882f9;
+
+    z-index: 1;
+}
+
+.Day > button[tabIndex="0"]:focus {
+    outline-width: 3px;
 }
 
 .Day[aria-selected="true"] > button {

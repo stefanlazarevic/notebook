@@ -39,6 +39,22 @@ export const CalendarGridPropTypes = {
 	onSelect: PropTypes.func as Validator<
 		(event: React.SyntheticEvent, day: number, month: number, year: number) => void
 	>,
+	/**
+	 *
+	 */
+	onEscape: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
+	/**
+	 *
+	 */
+	onArrowLeft: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
+	/**
+	 *
+	 */
+	onArrowRight: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
+	/**
+	 *
+	 */
+	onDomReady: PropTypes.func as Validator<() => void>,
 };
 
 export type CalendarGridProps = InferProps<typeof CalendarGridPropTypes>;

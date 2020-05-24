@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import "./Day.css";
 
@@ -7,9 +7,9 @@ import useClassNames from "../../../Utils/hooks/classNames";
 function Day(props: any) {
 	const className = useClassNames("Day", props.className);
 
-	function onClick(event: React.MouseEvent<HTMLButtonElement>) {
+	const onClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
 		props.onClick(event, props.day, props.month, props.year);
-	}
+	}, []);
 
 	return (
 		<td
@@ -22,6 +22,7 @@ function Day(props: any) {
 				tabIndex={-1}
 				type="button"
 				disabled={props.disabled}
+				data-day={props.day}
 				aria-label={props["aria-label"]}
 				aria-hidden={props["aria-hidden"]}
 				onClick={!props.disabled && typeof props.onClick === "function" ? onClick : undefined}
@@ -36,4 +37,4 @@ Day.defaultProps = {};
 
 Day.displayName = "Day";
 
-export default Day;
+export default React.memo(Day);

@@ -2,6 +2,8 @@
     box-sizing: border-box;
 
     position: relative;
+
+    border-collapse: collapse;
 }
 
 .CalendarGrid button {

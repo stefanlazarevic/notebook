@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useCallback } from "react";
+import React, { useMemo, useCallback, useLayoutEffect } from "react";
 
 import "./CalendarGrid.css";
 
@@ -7,19 +7,19 @@ import { weekdays, months } from "./i18n/en";
 import { CalendarGridProps } from "./CalendarGridProps";
 
 import useClassNames from "../Utils/hooks/classNames";
-import useComponentDidMount from "../Utils/hooks/componentDidMount";
 
 import Day from "./components/Day";
 import Weekday from "./components/Weekday";
+import Utils from "../Utils";
 
 interface CalendarGridRecord {
 	day: number;
 	month: number;
 	year: number;
 	dayOfWeek: number;
-	hidden: boolean;
-	disabled: boolean;
-	selected: boolean;
+	hidden?: boolean;
+	disabled?: boolean;
+	selected?: boolean;
 }
 
 function CalendarGrid(props: CalendarGridProps, tableReference: React.Ref<HTMLTableElement>) {
@@ -27,13 +27,11 @@ function CalendarGrid(props: CalendarGridProps, tableReference: React.Ref<HTMLTa
 
 	const rows = useMemo(() => Array.from({ length: 6 }, (_, index: number) => index), []);
 
-	const [records, setRecords] = useState<any[]>([]);
-
-	const buildGrid = useCallback(() => {
+	const getGridRecords = useCallback((): CalendarGridRecord[] => {
 		const today = new Date();
 
-		const month = props.month || today.getMonth();
-		const year = props.year || today.getFullYear();
+		const month = typeof props.month === "number" ? props.month : today.getMonth();
+		const year = typeof props.year === "number" ? props.year : today.getFullYear();
 		const numberOfDays = 32 - new Date(year, month, 32).getDate();
 		const offset = new Date(year, month, 0).getDay();
 		const previousMonth = month === 0 ? 11 : month - 1;
@@ -43,7 +41,7 @@ function CalendarGrid(props: CalendarGridProps, tableReference: React.Ref<HTMLTa
 		const nextMonth = month === 11 ? 0 : month + 1;
 		const nextYear = month === 11 ? year + 1 : year;
 
-		const records = [];
+		const records: CalendarGridRecord[] = [];
 
 		// Build previous month.
 		for (let day = lastDayInPreviousMonth - offset; day <= lastDayInPreviousMonth; day++) {
@@ -87,16 +85,25 @@ function CalendarGrid(props: CalendarGridProps, tableReference: React.Ref<HTMLTa
 			});
 		}
 
-		setRecords(records);
+		return records;
 	}, [props.month, props.year, props.selectedDay, props.selectedMonth, props.selectedYear]);
 
-	useComponentDidMount(() => {
-		buildGrid();
-	});
+	function onKeyDown(event: React.KeyboardEvent<HTMLTableElement>) {
+		const { keyCode } = event;
+		const key = Utils.Keyboard.KeyMap.get(keyCode);
 
-	useEffect(() => {
-		buildGrid();
-	}, [buildGrid]);
+		if (key === Utils.Keyboard.Key.ESCAPE && typeof props.onEscape === "function") {
+			props.onEscape(event);
+		}
+
+		if (key === Utils.Keyboard.Key.ARROW_LEFT && typeof props.onArrowLeft === "function") {
+			props.onArrowLeft(event);
+		}
+
+		if (key === Utils.Keyboard.Key.ARROW_RIGHT && typeof props.onArrowRight === "function") {
+			props.onArrowRight(event);
+		}
+	}
 
 	return (
 		<table
@@ -106,6 +113,7 @@ function CalendarGrid(props: CalendarGridProps, tableReference: React.Ref<HTMLTa
 			role="grid"
 			className={className}
 			aria-multiselectable={false}
+			onKeyDown={onKeyDown}
 		>
 			<thead>
 				<tr role="row">
@@ -118,25 +126,27 @@ function CalendarGrid(props: CalendarGridProps, tableReference: React.Ref<HTMLTa
 				{rows.map((row: number) => {
 					return (
 						<tr key={row} role="row">
-							{records.slice(row * 7, row * 7 + 7).map((record: CalendarGridRecord) => {
-								const label = `${record.day} ${months[record.month]} ${record.year} ${
-									weekdays[record.dayOfWeek]
-								}`;
+							{getGridRecords()
+								.slice(row * 7, row * 7 + 7)
+								.map((record: CalendarGridRecord) => {
+									const label = `${record.day} ${months[record.month]} ${record.year} ${
+										weekdays[record.dayOfWeek]
+									}`;
 
-								return (
-									<Day
-										key={label}
-										day={record.day}
-										month={record.month}
-										disabled={record.disabled}
-										year={record.year}
-										aria-label={label}
-										aria-hidden={record.hidden}
-										aria-selected={record.selected}
-										onClick={props.onSelect}
-									/>
-								);
-							})}
+									return (
+										<Day
+											key={label}
+											day={record.day}
+											month={record.month}
+											disabled={record.disabled}
+											year={record.year}
+											aria-label={label}
+											aria-hidden={record.hidden}
+											aria-selected={record.selected}
+											onClick={props.onSelect}
+										/>
+									);
+								})}
 						</tr>
 					);
 				})}
