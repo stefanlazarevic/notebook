@@ -54,10 +54,10 @@ function DatePicker(props: any) {
 
 	const navigateToNextMonth = useCallback(function navigateToNextMonthCallback() {
 		setCalendarView((calendarView: [number, number]) => {
-			const previousMonth = calendarView[0] === 11 ? 0 : calendarView[0] + 1;
-			const previousYear = calendarView[0] === 11 ? calendarView[1] + 1 : calendarView[1];
+			const nextMonth = calendarView[0] === 11 ? 0 : calendarView[0] + 1;
+			const nextYear = calendarView[0] === 11 ? calendarView[1] + 1 : calendarView[1];
 
-			return [previousMonth, previousYear];
+			return [nextMonth, nextYear];
 		});
 	}, []);
 
@@ -247,6 +247,45 @@ function DatePicker(props: any) {
 		}
 	}
 
+	function onCalendarArrowLeft(event: React.KeyboardEvent<HTMLTableElement>) {
+		if (calendarButtons.current) {
+			const focusedButton = calendarButtons.current[focusedButtonIndex.current];
+			focusedButton.setAttribute("tabIndex", "-1");
+
+			if (focusedButtonIndex.current === 0) {
+				autoFocus.current = true;
+				const previousMonth = calendarView[0] === 0 ? 11 : calendarView[0] - 1;
+				const previousYear = calendarView[0] === 0 ? calendarView[1] - 1 : calendarView[1];
+				const lastDayIndex = 31 - new Date(previousYear, previousMonth, 32).getDate();
+				focusedButtonIndex.current = lastDayIndex;
+				navigateToPreviousMonth();
+			} else {
+				focusedButtonIndex.current = focusedButtonIndex.current - 1;
+				const toFocusButton = calendarButtons.current[focusedButtonIndex.current];
+				toFocusButton.setAttribute("tabIndex", "0");
+				toFocusButton.focus();
+			}
+		}
+	}
+
+	function onCalendarArrowRight(event: React.KeyboardEvent<HTMLTableElement>) {
+		if (calendarButtons.current) {
+			const focusedButton = calendarButtons.current[focusedButtonIndex.current];
+			focusedButton.setAttribute("tabIndex", "-1");
+
+			if (focusedButtonIndex.current === calendarButtons.current.length - 1) {
+				autoFocus.current = true;
+				focusedButtonIndex.current = 0;
+				navigateToNextMonth();
+			} else {
+				focusedButtonIndex.current = focusedButtonIndex.current + 1;
+				const toFocusButton = calendarButtons.current[focusedButtonIndex.current];
+				toFocusButton.setAttribute("tabIndex", "0");
+				toFocusButton.focus();
+			}
+		}
+	}
+
 	useComponentDidMount(function datePickerMountCallback() {
 		const day = getSelectedDay() || today.getDate();
 		focusedButtonIndex.current = day - 1;
@@ -297,6 +336,8 @@ function DatePicker(props: any) {
 				onPageDown={onCalendarPageDown}
 				onHome={onCalendarHome}
 				onEnd={onCalendarEnd}
+				onArrowLeft={onCalendarArrowLeft}
+				onArrowRight={onCalendarArrowRight}
 			/>
 		</div>
 	);
