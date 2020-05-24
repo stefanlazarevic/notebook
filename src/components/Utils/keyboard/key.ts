@@ -9,6 +9,10 @@ const Key = {
 	ENTER: "enter",
 	BACKSPACE: "backspace",
 	DELETE: "delete",
+	PAGE_UP: "page_up",
+	PAGE_DOWN: "page_down",
+	HOME: "home",
+	END: "end",
 };
 
 export default Key;

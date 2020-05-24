@@ -59,4 +59,4 @@ DatePickerHeader.defaultProps = {};
 
 DatePickerHeader.displayName = "DatePickerHeader";
 
-export default DatePickerHeader;
+export default React.memo(DatePickerHeader);

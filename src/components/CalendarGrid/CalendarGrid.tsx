@@ -103,6 +103,22 @@ function CalendarGrid(props: CalendarGridProps, tableReference: React.Ref<HTMLTa
 		if (key === Utils.Keyboard.Key.ARROW_RIGHT && typeof props.onArrowRight === "function") {
 			props.onArrowRight(event);
 		}
+
+		if (key === Utils.Keyboard.Key.PAGE_UP && typeof props.onPageUp === "function") {
+			props.onPageUp(event);
+		}
+
+		if (key === Utils.Keyboard.Key.PAGE_DOWN && typeof props.onPageDown === "function") {
+			props.onPageDown(event);
+		}
+
+		if (key === Utils.Keyboard.Key.HOME && typeof props.onHome === "function") {
+			props.onHome(event);
+		}
+
+		if (key === Utils.Keyboard.Key.END && typeof props.onEnd === "function") {
+			props.onEnd(event);
+		}
 	}
 
 	return (

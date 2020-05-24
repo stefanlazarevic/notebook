@@ -54,7 +54,19 @@ export const CalendarGridPropTypes = {
 	/**
 	 *
 	 */
-	onDomReady: PropTypes.func as Validator<() => void>,
+	onPageUp: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
+	/**
+	 *
+	 */
+	onPageDown: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
+	/**
+	 *
+	 */
+	onHome: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
+	/**
+	 *
+	 */
+	onEnd: PropTypes.func as Validator<(event: React.SyntheticEvent) => void>,
 };
 
 export type CalendarGridProps = InferProps<typeof CalendarGridPropTypes>;

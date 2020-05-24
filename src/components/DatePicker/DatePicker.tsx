@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useLayoutEffect } from "react";
+import React, { useState, useMemo, useRef, useLayoutEffect, useCallback } from "react";
 
 import "./DatePicker.css";
 
@@ -26,33 +26,40 @@ function DatePicker(props: any) {
 
 	const [selectedDate, setSelectedDate] = useState<Date | undefined>(props.selectedDate);
 
-	const [month, setMonth] = useState(getSelectedMonth() || today.getMonth());
+	/**
+	 * Променљива која у себи садржи месец и годину коју календар приказује на екрану.
+	 * Ова променљива је конструисана као `Tupple` при чему је прва вредност месец а друга година.
+	 */
+	const [calendarView, setCalendarView] = useState<[number, number]>([
+		getSelectedMonth() || today.getMonth(),
+		getSelectedYear() || today.getFullYear(),
+	]);
 
-	const [year, setYear] = useState(getSelectedYear() || today.getFullYear());
+	const navigateToPreviousYear = useCallback(function navigateToPreviousYearCallback() {
+		setCalendarView((calendarView: [number, number]) => [calendarView[0], calendarView[1] - 1]);
+	}, []);
 
-	function onSelect(
-		event: React.SyntheticEvent,
-		selectedDay: number,
-		selectedMonth: number,
-		selectedYear: number
-	) {
-		const date = new Date(selectedYear, selectedMonth, selectedDay);
+	const navigateToNextYear = useCallback(function navigateToNextYearCallback() {
+		setCalendarView((calendarView: [number, number]) => [calendarView[0], calendarView[1] + 1]);
+	}, []);
 
-		if (month !== selectedMonth || year !== selectedYear) {
-			setMonth(selectedMonth);
-			setYear(selectedYear);
-		} else {
-			if (calendarButtons.current) {
-				const focusedButton = calendarButtons.current[focusedButtonIndex.current];
-				focusedButton.setAttribute("tabIndex", "-1");
-			}
-		}
+	const navigateToPreviousMonth = useCallback(function navigateToPreviousMonthCallback() {
+		setCalendarView((calendarView: [number, number]) => {
+			const previousMonth = calendarView[0] === 0 ? 11 : calendarView[0] - 1;
+			const previousYear = calendarView[0] === 0 ? calendarView[1] - 1 : calendarView[1];
 
-		focusedButtonIndex.current = selectedDay - 1;
-		autoFocus.current = true;
+			return [previousMonth, previousYear];
+		});
+	}, []);
 
-		setSelectedDate(date);
-	}
+	const navigateToNextMonth = useCallback(function navigateToNextMonthCallback() {
+		setCalendarView((calendarView: [number, number]) => {
+			const previousMonth = calendarView[0] === 11 ? 0 : calendarView[0] + 1;
+			const previousYear = calendarView[0] === 11 ? calendarView[1] + 1 : calendarView[1];
+
+			return [previousMonth, previousYear];
+		});
+	}, []);
 
 	function getSelectedDay(): number | undefined {
 		return selectedDate && selectedDate.getDate();
@@ -64,34 +71,6 @@ function DatePicker(props: any) {
 
 	function getSelectedYear(): number | undefined {
 		return selectedDate && selectedDate.getFullYear();
-	}
-
-	function navigateToPreviousMonth() {
-		const previousMonth = month === 0 ? 11 : month - 1;
-		const previousYear = month === 0 ? year - 1 : year;
-		autoFocus.current = false;
-
-		setMonth(previousMonth);
-		setYear(previousYear);
-	}
-
-	function navigateToPreviousYear() {
-		setYear((currentYear: number) => currentYear - 1);
-		autoFocus.current = false;
-	}
-
-	function navigateToNextMonth() {
-		const nextMonth = month === 11 ? 0 : month + 1;
-		const nextYear = month === 11 ? year + 1 : year;
-		autoFocus.current = false;
-
-		setMonth(nextMonth);
-		setYear(nextYear);
-	}
-
-	function navigateToNextYear() {
-		setYear((currentYear: number) => currentYear + 1);
-		autoFocus.current = false;
 	}
 
 	function updateCalendarButtons() {
@@ -113,6 +92,115 @@ function DatePicker(props: any) {
 				if (autoFocus.current) {
 					focusedButton.focus();
 				}
+			}
+		}
+	}
+
+	/**
+	 * Функција која обрађује акцију одабира дана у календару.
+	 * Приликом одабира дана, уколико се дан налази у истом месецу где и фокусирани дан,
+	 * фокус се пребацује на одабрани дан. Уколико се одабрани дан налази у претходном или
+	 * следећем месецу, функција пребацује календар на месец и годину у ком се одабрани дан налази,
+	 * а затим функција покушава да фокусира исти дан у новом месецу.
+	 */
+	function onSelect(
+		event: React.SyntheticEvent,
+		selectedDay: number,
+		selectedMonth: number,
+		selectedYear: number
+	) {
+		const date = new Date(selectedYear, selectedMonth, selectedDay);
+
+		if (calendarView[0] !== selectedMonth || calendarView[1] !== selectedYear) {
+			setCalendarView([selectedMonth, selectedYear]);
+		} else {
+			if (calendarButtons.current) {
+				const focusedButton = calendarButtons.current[focusedButtonIndex.current];
+				focusedButton.setAttribute("tabIndex", "-1");
+			}
+		}
+
+		focusedButtonIndex.current = selectedDay - 1;
+		autoFocus.current = true;
+
+		setSelectedDate(date);
+	}
+
+	function onPreviousYearNavigation(event: React.SyntheticEvent<HTMLButtonElement>) {
+		autoFocus.current = false;
+		navigateToPreviousYear();
+	}
+
+	function onPreviousMonthNavigation(event: React.SyntheticEvent<HTMLButtonElement>) {
+		autoFocus.current = false;
+		navigateToPreviousMonth();
+	}
+
+	function onNextMonthNavigation(event: React.SyntheticEvent<HTMLButtonElement>) {
+		autoFocus.current = false;
+		navigateToNextMonth();
+	}
+
+	function onNextYearNavigation(event: React.SyntheticEvent<HTMLButtonElement>) {
+		autoFocus.current = false;
+		navigateToNextYear();
+	}
+
+	function onCalendarPageUp(event: React.SyntheticEvent<HTMLTableElement>) {
+		autoFocus.current = true;
+		navigateToNextMonth();
+	}
+
+	function onCalendarPageDown(event: React.SyntheticEvent<HTMLTableElement>) {
+		autoFocus.current = true;
+		navigateToPreviousMonth();
+	}
+
+	function onCalendarHome(event: React.SyntheticEvent<HTMLTableElement>) {
+		const offset = new Date(calendarView[1], calendarView[0], 0).getDay();
+		const focusedDay = focusedButtonIndex.current + 1;
+		const weekDay = (offset + focusedDay) % 7;
+
+		if (weekDay === 0) {
+			return;
+		} else {
+			if (calendarButtons.current) {
+				const focusedButton = calendarButtons.current[focusedButtonIndex.current];
+				focusedButton.setAttribute("tabIndex", "-1");
+				focusedButtonIndex.current = focusedDay - weekDay - 1;
+
+				if (focusedButtonIndex.current < 0) {
+					focusedButtonIndex.current = 0;
+				}
+
+				const toFocusButton = calendarButtons.current[focusedButtonIndex.current];
+				toFocusButton.setAttribute("tabIndex", "0");
+				toFocusButton.focus();
+			}
+		}
+	}
+
+	function onCalendarEnd(event: React.SyntheticEvent<HTMLTableElement>) {
+		const offset = new Date(calendarView[1], calendarView[0], 0).getDay();
+		const focusedDay = focusedButtonIndex.current + 1;
+		const weekDay = (offset + focusedDay) % 7;
+
+		if (weekDay === 6) {
+			return;
+		} else {
+			if (calendarButtons.current) {
+				const focusedButton = calendarButtons.current[focusedButtonIndex.current];
+				console.log(focusedButton);
+				focusedButton.setAttribute("tabIndex", "-1");
+				focusedButtonIndex.current = focusedDay + (6 - weekDay) - 1;
+
+				if (focusedButtonIndex.current > calendarButtons.current.length - 1) {
+					focusedButtonIndex.current = calendarButtons.current.length - 1;
+				}
+
+				const toFocusButton = calendarButtons.current[focusedButtonIndex.current];
+				toFocusButton.setAttribute("tabIndex", "0");
+				toFocusButton.focus();
 			}
 		}
 	}
@@ -148,21 +236,25 @@ function DatePicker(props: any) {
 	return (
 		<div id={props.id} data-testid={props.testid} className={className}>
 			<Header
-				month={months[month]}
-				year={year}
-				onPreviousYearNavigation={navigateToPreviousYear}
-				onPreviousMonthNavigation={navigateToPreviousMonth}
-				onNextMonthNavigation={navigateToNextMonth}
-				onNextYearNavigation={navigateToNextYear}
+				month={months[calendarView[0]]}
+				year={calendarView[1]}
+				onPreviousYearNavigation={onPreviousYearNavigation}
+				onPreviousMonthNavigation={onPreviousMonthNavigation}
+				onNextMonthNavigation={onNextMonthNavigation}
+				onNextYearNavigation={onNextYearNavigation}
 			/>
 			<CalendarGrid
 				ref={calendarGrid}
-				onSelect={onSelect}
 				selectedDay={getSelectedDay()}
 				selectedMonth={getSelectedMonth()}
 				selectedYear={getSelectedYear()}
-				month={month}
-				year={year}
+				month={calendarView[0]}
+				year={calendarView[1]}
+				onSelect={onSelect}
+				onPageUp={onCalendarPageUp}
+				onPageDown={onCalendarPageDown}
+				onHome={onCalendarHome}
+				onEnd={onCalendarEnd}
 			/>
 		</div>
 	);
