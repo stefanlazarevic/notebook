@@ -10,6 +10,10 @@ export const IconPropTypes = {
 	 * @default 24
 	 */
 	size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	/**
+	 *
+	 */
+	className: PropTypes.string as Validator<string | undefined>,
 };
 
 export type IconProps = InferProps<typeof IconPropTypes>;
