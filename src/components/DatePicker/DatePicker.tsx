@@ -286,13 +286,33 @@ function DatePicker(props: any) {
 		}
 	}
 
-	function onCalendarArrowUp(event: React.KeyboardEvent<HTMLTableElement>) {}
+	function onCalendarArrowUp(event: React.KeyboardEvent<HTMLTableElement>) {
+		if (calendarButtons.current) {
+			const focusedButton = calendarButtons.current[focusedButtonIndex.current];
+			focusedButton.setAttribute("tabIndex", "-1");
+			let toFocusButtonIndex = focusedButtonIndex.current - 7;
+
+			if (toFocusButtonIndex < 0) {
+				const previousMonth = calendarView[0] === 0 ? 11 : calendarView[0] - 1;
+				const previousYear = calendarView[0] === 0 ? calendarView[1] - 1 : calendarView[1];
+				const lastDay = 32 - new Date(previousYear, previousMonth, 32).getDate();
+				focusedButtonIndex.current = lastDay - -toFocusButtonIndex;
+				autoFocus.current = true;
+				navigateToPreviousMonth();
+			} else {
+				focusedButtonIndex.current = toFocusButtonIndex;
+				const toFocusButton = calendarButtons.current[focusedButtonIndex.current];
+				toFocusButton.setAttribute("tabIndex", "0");
+				toFocusButton.focus();
+			}
+		}
+	}
 
 	function onCalendarArrowDown(event: React.KeyboardEvent<HTMLTableElement>) {
 		if (calendarButtons.current) {
 			const focusedButton = calendarButtons.current[focusedButtonIndex.current];
 			focusedButton.setAttribute("tabIndex", "-1");
-			let toFocusButtonIndex = (focusedButtonIndex.current += 7);
+			let toFocusButtonIndex = focusedButtonIndex.current + 7;
 
 			if (toFocusButtonIndex > calendarButtons.current.length - 1) {
 				autoFocus.current = true;
@@ -359,6 +379,7 @@ function DatePicker(props: any) {
 				onEnd={onCalendarEnd}
 				onArrowLeft={onCalendarArrowLeft}
 				onArrowRight={onCalendarArrowRight}
+				onArrowUp={onCalendarArrowUp}
 				onArrowDown={onCalendarArrowDown}
 			/>
 		</div>
