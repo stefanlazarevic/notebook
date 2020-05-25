@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 import "./Day.css";
 
@@ -7,9 +7,9 @@ import useClassNames from "../../../Utils/hooks/classNames";
 function Day(props: any) {
 	const className = useClassNames("Day", props.className);
 
-	const onClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+	function onClick(event: React.MouseEvent<HTMLButtonElement>) {
 		props.onClick(event, props.day, props.month, props.year);
-	}, []);
+	}
 
 	return (
 		<td

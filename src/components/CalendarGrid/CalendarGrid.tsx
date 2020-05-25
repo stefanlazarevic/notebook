@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useLayoutEffect } from "react";
+import React, { useMemo, useCallback } from "react";
 
 import "./CalendarGrid.css";
 
