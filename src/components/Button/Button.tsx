@@ -14,7 +14,11 @@ function Button(props: ButtonProps) {
 			id={props.id}
 			data-testid={props.testid}
 			className={className}
+			title={props.title}
 			aria-label={props["aria-label"]}
+			aria-labelledby={props["aria-labelledby"]}
+			aria-pressed={props["aria-pressed"]}
+			aria-expanded={props["aria-expanded"]}
 		>
 			{props.children}
 		</button>

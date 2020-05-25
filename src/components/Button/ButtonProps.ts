@@ -20,7 +20,27 @@ export const ButtonPropTypes = {
 	/**
 	 *
 	 */
+	title: PropTypes.string as Validator<string | undefined>,
+	/**
+	 *
+	 */
 	"aria-label": PropTypes.string as Validator<string | undefined>,
+	/**
+	 *
+	 */
+	"aria-labelledby": PropTypes.string as Validator<string | undefined>,
+	/**
+	 *
+	 */
+	"aria-pressed": PropTypes.oneOf([true, false, "true", "false", "mixed"]) as Validator<
+		boolean | "false" | "mixed" | "true" | undefined
+	>,
+	/**
+	 *
+	 */
+	"aria-expanded": PropTypes.oneOf([true, false, "true", "false"]) as Validator<
+		boolean | "false" | "true" | undefined
+	>,
 };
 
 export type ButtonProps = InferProps<typeof ButtonPropTypes>;
