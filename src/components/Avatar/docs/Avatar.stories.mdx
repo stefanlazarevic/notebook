@@ -1,0 +1,19 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, text } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+import { LinkTo, linkTo } from '@storybook/addon-links';
+
+import Avatar from '../index.ts';
+
+<!-- Examples -->
+
+<Meta title="Components/Avatar" component={Avatar} decorators={[withKnobs]}/>
+
+# Avatar
+
+<Preview>
+    <Story name="Preview">
+        <Avatar src={text('src', 'https://avatars3.githubusercontent.com/u/21370204?s=460&u=02dda74e646ea063d32bc65bedf4d5ccf353f434&v=4')} alt={text('alt', 'Profile image of Stefan Lazarević')}/>
+    </Story>
+</Preview>
