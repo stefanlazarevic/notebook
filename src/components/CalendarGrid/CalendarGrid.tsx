@@ -49,7 +49,7 @@ function CalendarGrid(props: CalendarGridProps, tableReference: React.Ref<HTMLTa
 				day,
 				month: previousMonth,
 				year: previousYear,
-				dayOfWeek: day % 7,
+				dayOfWeek: (offset + day) % 7,
 				hidden: true,
 				selected:
 					props.selectedDay === day &&
@@ -64,7 +64,7 @@ function CalendarGrid(props: CalendarGridProps, tableReference: React.Ref<HTMLTa
 				day,
 				month,
 				year,
-				dayOfWeek: day % 7,
+				dayOfWeek: (offset + day) % 7,
 				selected:
 					props.selectedDay === day && props.selectedMonth === month && props.selectedYear === year,
 			});

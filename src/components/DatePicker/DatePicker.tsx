@@ -286,6 +286,27 @@ function DatePicker(props: any) {
 		}
 	}
 
+	function onCalendarArrowUp(event: React.KeyboardEvent<HTMLTableElement>) {}
+
+	function onCalendarArrowDown(event: React.KeyboardEvent<HTMLTableElement>) {
+		if (calendarButtons.current) {
+			const focusedButton = calendarButtons.current[focusedButtonIndex.current];
+			focusedButton.setAttribute("tabIndex", "-1");
+			let toFocusButtonIndex = (focusedButtonIndex.current += 7);
+
+			if (toFocusButtonIndex > calendarButtons.current.length - 1) {
+				autoFocus.current = true;
+				focusedButtonIndex.current = toFocusButtonIndex - calendarButtons.current.length;
+				navigateToNextMonth();
+			} else {
+				focusedButtonIndex.current = toFocusButtonIndex;
+				const toFocusButton = calendarButtons.current[focusedButtonIndex.current];
+				toFocusButton.setAttribute("tabIndex", "0");
+				toFocusButton.focus();
+			}
+		}
+	}
+
 	useComponentDidMount(function datePickerMountCallback() {
 		const day = getSelectedDay() || today.getDate();
 		focusedButtonIndex.current = day - 1;
@@ -338,6 +359,7 @@ function DatePicker(props: any) {
 				onEnd={onCalendarEnd}
 				onArrowLeft={onCalendarArrowLeft}
 				onArrowRight={onCalendarArrowRight}
+				onArrowDown={onCalendarArrowDown}
 			/>
 		</div>
 	);
