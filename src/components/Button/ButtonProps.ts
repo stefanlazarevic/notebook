@@ -16,11 +16,25 @@ export const ButtonPropTypes = {
 	/**
 	 *
 	 */
-	children: PropTypes.node as Validator<React.ReactNode | React.ReactNodeArray>,
+	children: PropTypes.node as Validator<React.ReactNode | React.ReactNodeArray | undefined>,
 	/**
 	 *
 	 */
 	title: PropTypes.string as Validator<string | undefined>,
+	/**
+	 *
+	 */
+	lang: PropTypes.string as Validator<string | undefined>,
+	/**
+	 *
+	 */
+	disabled: PropTypes.bool as Validator<boolean | undefined>,
+	/**
+	 *
+	 */
+	onClick: PropTypes.func as Validator<
+		(event: React.SyntheticEvent<HTMLButtonElement>) => void | undefined
+	>,
 	/**
 	 *
 	 */
@@ -40,6 +54,12 @@ export const ButtonPropTypes = {
 	 */
 	"aria-expanded": PropTypes.oneOf([true, false, "true", "false"]) as Validator<
 		boolean | "false" | "true" | undefined
+	>,
+	/**
+	 *
+	 */
+	"aria-haspopup": PropTypes.oneOf([true, false, "true", "false", "menu"]) as Validator<
+		boolean | "true" | "false" | "menu" | undefined
 	>,
 };
 

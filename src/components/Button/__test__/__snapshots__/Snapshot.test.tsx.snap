@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Подразумеванa својства се подударају са последњим снимком. 1`] = `
+<DocumentFragment>
+  <button
+    class="Button"
+  />
+</DocumentFragment>
+`;
+
+exports[`Сва подешена својства се подударају са последњим снимком. 1`] = `
+<DocumentFragment>
+  <button
+    aria-expanded="false"
+    aria-haspopup="false"
+    aria-label="test-label-text"
+    aria-labelledby="test-label"
+    aria-pressed="mixed"
+    class="Button TestButton"
+    data-testid="test-id"
+    id="id"
+    lang="en"
+    title="Button title"
+  >
+    Test
+  </button>
+</DocumentFragment>
+`;
