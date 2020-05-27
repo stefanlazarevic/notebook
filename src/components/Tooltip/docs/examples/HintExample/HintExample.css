@@ -1,9 +1,0 @@
-.HintExample > .Tooltip[data-position="right"] {
-    white-space: nowrap;
-
-    left: calc(100% + 10px);
-
-    top: 50%;
-
-    transform: translateY(-50%);
-}
