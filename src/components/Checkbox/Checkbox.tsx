@@ -67,7 +67,10 @@ function Checkbox(props: CheckboxProps) {
 
 Checkbox.propTypes = CheckboxPropTypes;
 
-Checkbox.defaultProps = {};
+Checkbox.defaultProps = {
+	onChange: undefined,
+	onContext: undefined,
+};
 
 Checkbox.displayName = "Checkbox";
 
