@@ -1,7 +1,8 @@
 import Key from "./key";
 
-const KeyMap = new Map<number, string>();
+const KeyMap = new Map<number, number>();
 
+KeyMap.set(8, Key.BACKSPACE);
 KeyMap.set(9, Key.TAB);
 KeyMap.set(13, Key.ENTER);
 KeyMap.set(27, Key.ESCAPE);
