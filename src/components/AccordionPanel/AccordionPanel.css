@@ -19,7 +19,6 @@
 }
 
 .AccordionPanel[aria-hidden="true"] {
-    /* Background color */
     border-color: #fff;
 
     max-height: 0 !important;

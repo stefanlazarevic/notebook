@@ -16,6 +16,12 @@
     cursor: pointer;
 }
 
+.AccordionHeader:hover {
+    background-color: #f4f4f4;
+}
+
 .AccordionHeader:focus {
-    outline: 2px solid #a06b9a;
+    outline: 2px solid #7e6ee6;
+
+    outline-offset: -1px;
 }

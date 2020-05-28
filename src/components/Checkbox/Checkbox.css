@@ -21,9 +21,9 @@
 }
 
 .Checkbox:focus {
-    outline: 2px solid #a06b9a;
+    outline: 2px solid #5149b8;
 
-    outline-offset: 2px;
+    outline-offset: -1px;
 }
 
 .Checkbox::before {
@@ -39,7 +39,7 @@
 
     height: 100%;
 
-    top: 0;
+    top: 1px;
 
     left: 0;
 
@@ -54,12 +54,16 @@
     color: #333;
 
     display: inline-block;
+
+    font-size: 10px;
+    
+    line-height: 1rem;
 }
 
 .Checkbox[aria-checked="true"] {
-    background-color: #a06b9a;
+    background-color: #7e6ee6;
 
-    border-color: #a06b9a;
+    border-color: #7e6ee6;
 
     color: #fff;
 }

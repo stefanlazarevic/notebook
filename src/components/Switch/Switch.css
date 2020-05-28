@@ -19,10 +19,14 @@
   transition: 0.2s linear background-color;
 }
 
-.Switch:focus {
-  outline: 2px solid #a06b9a;
+.Switch:hover {
+  background-color: #f4f4f4;
+}
 
-  outline-offset: 2px;
+.Switch:focus {
+  outline: 2px solid #5149b8;
+
+  outline-offset: -1px;
 }
 
 .Switch::after {
@@ -48,7 +52,7 @@
 }
 
 .Switch[aria-checked="true"] {
-  background-color: #a06b9a;
+  background-color: #7e6ee6;
 }
 
 .Switch[aria-checked="true"]::after {

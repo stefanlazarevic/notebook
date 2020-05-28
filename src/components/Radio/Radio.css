@@ -20,10 +20,14 @@
     cursor: pointer;
 }
 
-.Radio:focus {
-    outline: 2px solid #a06b9a;
+.Radio:hover {
+    background-color: #f4f4f4;
+}
 
-    outline-offset: 2px;
+.Radio:focus {
+    outline: 2px solid #5149b8;
+
+    outline-offset: -1px;
 }
 
 .Radio[aria-checked="true"]::after {
@@ -41,7 +45,7 @@
 
     height: 100%;
 
-    border: 5px solid #a06b9a;
+    border: 5px solid #7e6ee6;
 
     border-radius: 50%;
 }
