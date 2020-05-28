@@ -5,13 +5,18 @@ import "./Button.css";
 import { ButtonProps, ButtonPropTypes } from "./ButtonProps";
 
 import useClassNames from "../Utils/hooks/classNames";
+import Key from "../Utils/keyboard/key";
 
 function Button(props: ButtonProps) {
 	const className = useClassNames("Button", props.className);
 
 	const onKeyDown = useCallback(
 		(event: React.KeyboardEvent<HTMLButtonElement>) => {
-			if (typeof props.onClick === "function") {
+			const { keyCode } = event;
+
+			if ((keyCode === Key.ENTER || keyCode === Key.SPACE) && typeof props.onClick === "function") {
+				event.preventDefault();
+
 				props.onClick(event);
 			}
 		},
@@ -41,9 +46,7 @@ function Button(props: ButtonProps) {
 
 Button.propTypes = ButtonPropTypes;
 
-Button.defaultProps = {
-	onClick: undefined,
-};
+Button.defaultProps = {};
 
 Button.displayName = "Button";
 

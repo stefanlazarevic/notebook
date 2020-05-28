@@ -33,7 +33,7 @@ export const ButtonPropTypes = {
 	 *
 	 */
 	onClick: PropTypes.func as Validator<
-		(event: React.SyntheticEvent<HTMLButtonElement>) => void | undefined
+		((event: React.SyntheticEvent<HTMLButtonElement>) => void) | undefined
 	>,
 	/**
 	 *
