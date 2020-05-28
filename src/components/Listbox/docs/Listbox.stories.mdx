@@ -9,7 +9,16 @@ import Listbox, {ListboxOption} from '../index.ts';
 
 # Listbox
 
+`Listbox` је компонента која приказује елементе као листу при чему крајњи корисник може да изабере
+једну или више понуђених опција. За разлику од `Select` компоненте, `Listbox` може садржати и слике.
+
+`Listbox` компонента поседује имплицитну вредност `aria-orientation` атрибута постављену на `vertical`.
+
 https://www.w3.org/TR/wai-aria-practices-1.2/#Listbox
+
+## Атрибути
+
+<Props of={Listbox} />
 
 <Preview>
     <Story name="Preview">
@@ -25,7 +34,7 @@ https://www.w3.org/TR/wai-aria-practices-1.2/#Listbox
             <ListboxOption selected={true}>Apple</ListboxOption>
 			<ListboxOption>Banana</ListboxOption>
 			<ListboxOption>Carrot</ListboxOption>
-			<ListboxOption>Cherry</ListboxOption>
+			<ListboxOption disabled={true}>Cherry</ListboxOption>
 			<ListboxOption>Garlic</ListboxOption>
 			<ListboxOption>Lemon</ListboxOption>
 			<ListboxOption>Mango</ListboxOption>

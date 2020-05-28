@@ -11,6 +11,14 @@ export interface ListboxOptionOptionalProps {
 	 *
 	 */
 	className?: string;
+	/**
+	 *
+	 */
+	id?: string;
+	/**
+	 *
+	 */
+	testid?: string;
 }
 
 export interface ListboxOptionCallbackProps {
@@ -48,7 +56,9 @@ export interface ListboxOptionCallbackProps {
 	onTab?: (event: React.SyntheticEvent) => void;
 }
 
-export default interface ListboxOptionProps extends ListboxOptionOptionalProps, ListboxOptionCallbackProps {
+export default interface ListboxOptionProps
+	extends ListboxOptionOptionalProps,
+		ListboxOptionCallbackProps {
 	/**
 	 *
 	 */

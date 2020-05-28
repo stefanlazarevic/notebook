@@ -1,11 +1,16 @@
-import React, { memo } from "react";
+import React, { useMemo } from "react";
 
 import "./ListboxOption.css";
 
 import ListboxOptionProps from "./ListboxOptionProps";
+import Key from "../../../Utils/keyboard/key";
+import Utils from "../../../Utils";
+import useClassNames from "../../../Utils/hooks/classNames";
 
 function ListboxOption(props: ListboxOptionProps) {
-	const className = props.className ? `ListboxOption ${props.className}` : "ListboxOption";
+	const className = useClassNames("ListboxOption", props.className);
+
+	const id = useMemo(() => props.id || Utils.string.generateRandom(), [props.id]);
 
 	function onKeyDown(event: React.KeyboardEvent) {
 		const { keyCode } = event;
@@ -14,31 +19,31 @@ function ListboxOption(props: ListboxOptionProps) {
 			return;
 		}
 
-		if (keyCode === 38 && typeof props.onArrowUp === "function") {
+		if (keyCode === Key.ARROW_UP && typeof props.onArrowUp === "function") {
 			props.onArrowUp(event, props.index);
 		}
 
-		if (keyCode === 40 && typeof props.onArrowDown === "function") {
+		if (keyCode === Key.ARROW_DOWN && typeof props.onArrowDown === "function") {
 			props.onArrowDown(event, props.index);
 		}
 
-		if (keyCode === 36 && typeof props.onHome === "function") {
+		if (keyCode === Key.HOME && typeof props.onHome === "function") {
 			props.onHome(event);
 		}
 
-		if (keyCode === 35 && typeof props.onEnd === "function") {
+		if (keyCode === Key.END && typeof props.onEnd === "function") {
 			props.onEnd(event);
 		}
 
-		if ((keyCode === 13 || keyCode === 32) && typeof props.onSelect === "function") {
+		if ((keyCode === Key.ENTER || keyCode === Key.SPACE) && typeof props.onSelect === "function") {
 			props.onSelect(event, props.index);
 		}
 
-		if (keyCode === 27 && typeof props.onEsc === "function") {
+		if (keyCode === Key.ESCAPE && typeof props.onEsc === "function") {
 			props.onEsc(event);
 		}
 
-		if (keyCode === 9 && typeof props.onTab === "function") {
+		if (keyCode === Key.TAB && typeof props.onTab === "function") {
 			props.onTab(event);
 		}
 	}
@@ -64,22 +69,25 @@ function ListboxOption(props: ListboxOptionProps) {
 	}
 
 	return (
-		<div
+		<li
+			id={id}
+			data-testid={props.testid}
 			className={className}
 			role="option"
 			onKeyDown={onKeyDown}
-			tabIndex={-1}
+			tabIndex={props.disabled ? undefined : -1}
 			onFocus={onFocus}
 			onClick={onClick}
 			aria-selected={props.selected}
 			aria-disabled={props.disabled}
 		>
 			{props.children}
-		</div>
+		</li>
 	);
 }
 
 ListboxOption.defaultProps = {};
+
 ListboxOption.displayName = "ListboxOption";
 
-export default memo(ListboxOption);
+export default React.memo(ListboxOption);

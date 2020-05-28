@@ -2,8 +2,35 @@
     box-sizing: border-box;
 
     position: relative;
+
+    list-style: none;
+
+    background-color: #ffffff;
+
+    padding: 0 4px;
 }
 
-.ListboxOption[aria-selected="true"] {
-    background-color: #efefef;
+.ListboxOption:not([aria-disabled]):hover {
+    background-color: #f8f7fa;
+}
+
+.ListboxOption[aria-selected="true"],
+.ListboxOption[aria-selected="true"]:hover {
+    background-color: #7e6ee6;
+
+    color: #fff;
+}
+
+.ListboxOption.focused {
+    z-index: 2;
+}
+
+.ListboxOption:focus {
+    outline: 2px solid #5149b8;
+
+    outline-offset: -1px;
+}
+
+.ListboxOption[aria-disabled] {
+    opacity: 0.7;
 }

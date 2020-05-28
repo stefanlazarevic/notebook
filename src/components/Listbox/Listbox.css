@@ -3,5 +3,11 @@
 
     position: relative;
 
-    border: 1px solid #ccc;
+    background-color: #ffffff;
+
+    border: 1px solid #eae8ee;
+
+    padding-left: 0;
+
+    margin: 0;
 }
