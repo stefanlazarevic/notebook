@@ -19,11 +19,13 @@ export const TagPropTypes = {
 	 */
 	children: PropTypes.node as Validator<ReactElement[] | undefined>,
 	/**
-	 *
+	 * @default 0
 	 */
 	tabIndex: PropTypes.number as Validator<number | undefined>,
 	/**
 	 * Величина иконице за уклањање компоненте.
+	 *
+	 * @default 14
 	 */
 	size: PropTypes.number as Validator<number | undefined>,
 	/**

@@ -45,7 +45,7 @@ Tag.propTypes = TagPropTypes;
 Tag.defaultProps = {
 	tabIndex: 0,
 	size: 14,
-};
+} as Partial<TagProps>;
 
 Tag.displayName = "Tag";
 
