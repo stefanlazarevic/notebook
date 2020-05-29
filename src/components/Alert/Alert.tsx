@@ -10,7 +10,13 @@ function Alert(props: AlertProps) {
 	const className = useClassNames("Alert", props.className);
 
 	return (
-		<div id={props.id} data-testid={props.testid} role="alert" className={className}>
+		<div
+			id={props.id}
+			data-testid={props.testid}
+			role="alert"
+			className={className}
+			lang={props.lang}
+		>
 			{props.children}
 		</div>
 	);

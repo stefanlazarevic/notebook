@@ -17,6 +17,10 @@ export const AlertPropTypes = {
 	 *
 	 */
 	children: PropTypes.node as Validator<React.ReactNode | React.ReactNodeArray | undefined>,
+	/**
+	 *
+	 */
+	lang: PropTypes.string as Validator<string | undefined>,
 };
 
 export type AlertProps = InferProps<typeof AlertPropTypes>;
