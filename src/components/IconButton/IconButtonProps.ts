@@ -16,15 +16,15 @@ export const IconButtonPropTypes = {
 	/**
 	 *
 	 */
-	children: PropTypes.node as Validator<React.ReactNode | React.ReactNodeArray | undefined>,
-	/**
-	 *
-	 */
 	title: PropTypes.string as Validator<string | undefined>,
 	/**
 	 *
 	 */
 	lang: PropTypes.string as Validator<string | undefined>,
+	/**
+	 *
+	 */
+	tabIndex: PropTypes.number as Validator<number | undefined>,
 	/**
 	 *
 	 */
@@ -40,33 +40,43 @@ export const IconButtonPropTypes = {
 	/**
 	 *
 	 */
-	tabIndex: PropTypes.number as Validator<number | undefined>,
-	/**
-	 *
-	 */
 	onClick: PropTypes.func as Validator<
-		((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined
+		((event: React.SyntheticEvent<HTMLButtonElement>) => void) | undefined
 	>,
 	/**
 	 *
 	 */
-	"aria-label": PropTypes.string as Validator<string | undefined>,
+	"aria-label": PropTypes.string as Validator<React.AriaAttributes["aria-label"]>,
 	/**
 	 *
 	 */
-	"aria-labelledby": PropTypes.string as Validator<string | undefined>,
+	"aria-labelledby": PropTypes.string as Validator<React.AriaAttributes["aria-labelledby"]>,
 	/**
 	 *
 	 */
 	"aria-pressed": PropTypes.oneOf([true, false, "true", "false", "mixed"]) as Validator<
-		boolean | "false" | "mixed" | "true" | undefined
+		React.AriaAttributes["aria-pressed"]
 	>,
 	/**
 	 *
 	 */
 	"aria-expanded": PropTypes.oneOf([true, false, "true", "false"]) as Validator<
-		boolean | "false" | "true" | undefined
+		React.AriaAttributes["aria-expanded"]
 	>,
+	/**
+	 *
+	 */
+	"aria-haspopup": PropTypes.oneOf([
+		true,
+		false,
+		"false",
+		"true",
+		"menu",
+		"listbox",
+		"tree",
+		"grid",
+		"dialog",
+	]) as Validator<React.AriaAttributes["aria-haspopup"]>,
 };
 
 export type IconButtonProps = InferProps<typeof IconButtonPropTypes>;

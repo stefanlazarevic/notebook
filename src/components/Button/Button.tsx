@@ -30,7 +30,7 @@ function Button(props: ButtonProps) {
 			className={className}
 			title={props.title}
 			lang={props.lang}
-			tabIndex={!props.disabled ? props.tabIndex : undefined}
+			tabIndex={!props.disabled && typeof props.tabIndex === "number" ? props.tabIndex : undefined}
 			disabled={props.disabled}
 			aria-label={props["aria-label"]}
 			aria-labelledby={props["aria-labelledby"]}
