@@ -40,6 +40,18 @@ export const ListboxPropTypes = {
 	onSelect: PropTypes.func as Validator<
 		((event: React.SyntheticEvent<HTMLLIElement>, index: number) => void) | undefined
 	>,
+	/**
+	 *
+	 */
+	onEscape: PropTypes.func as Validator<
+		((event: React.KeyboardEvent<HTMLLIElement>) => void) | undefined
+	>,
+	/**
+	 *
+	 */
+	onTab: PropTypes.func as Validator<
+		((event: React.KeyboardEvent<HTMLLIElement>) => void) | undefined
+	>,
 };
 
 export type ListboxProps = InferProps<typeof ListboxPropTypes>;

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Preview, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
 import { withKnobs, number } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 
@@ -42,3 +42,18 @@ https://www.w3.org/TR/wai-aria-practices-1.2/#Listbox
         </Listbox>
     </Story>
 </Preview>
+
+## Colors
+
+<ColorPalette>
+  <ColorItem
+    title="Gray"
+    subtitle="Some of the greys"
+    colors={['#fcfcfc', '#f4f4f4', '#e4e4e4']}
+  />
+  <ColorItem
+    title="Theme"
+    subtitle="Some of the greys"
+    colors={['#7e6ee6', '#5149b8']}
+  />
+</ColorPalette>

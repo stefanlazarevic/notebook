@@ -29,7 +29,7 @@ export const ListboxOptionPropTypes = {
 	/**
 	 *
 	 */
-	children: PropTypes.node as Validator<ReactElement[]>,
+	children: PropTypes.node as Validator<ReactElement[] | undefined>,
 	/**
 	 *
 	 */

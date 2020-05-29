@@ -146,6 +146,24 @@ function Listbox(props: ListboxProps) {
 		[props.children, blurFocusedOption]
 	);
 
+	const onTab = useCallback(
+		function ListboxTabCallback(event: React.KeyboardEvent<HTMLLIElement>) {
+			if (typeof props.onTab === "function") {
+				props.onTab!(event);
+			}
+		},
+		[props.onTab]
+	);
+
+	const onEscape = useCallback(
+		function onListboxEscape(event: React.KeyboardEvent<HTMLLIElement>) {
+			if (typeof props.onEscape === "function") {
+				props.onEscape!(event);
+			}
+		},
+		[props.onEscape]
+	);
+
 	const onSelect = useCallback(
 		function onListboxSelect(event: React.SyntheticEvent<HTMLLIElement>, index: number) {
 			blurFocusedOption();
@@ -156,7 +174,7 @@ function Listbox(props: ListboxProps) {
 			option.classList.add("focused");
 
 			if (typeof props.onSelect === "function") {
-				props.onSelect(event, index);
+				props.onSelect!(event, index);
 			}
 		},
 		[props.onSelect, blurFocusedOption]
@@ -170,14 +188,28 @@ function Listbox(props: ListboxProps) {
 
 	useComponentDidMount(function listboxMountCallback() {
 		if (options.current) {
-			onHome();
+			if (focusedIndex.current === -1) {
+				let startIndex = 0;
 
-			const toFocusOption = options.current[focusedIndex.current] as HTMLLIElement;
+				for (let index = startIndex; index < props.children!.length; index++) {
+					const child = props.children![index];
 
-			toFocusOption.setAttribute("tabIndex", "0");
+					if (!child.props.disabled) {
+						focusedIndex.current = index;
+						break;
+					}
+				}
+			}
 
-			if (props.autofocus) {
-				toFocusOption.focus();
+			if (focusedIndex.current > -1) {
+				const option = options.current[focusedIndex.current] as HTMLLIElement;
+
+				option.setAttribute("tabIndex", "0");
+				option.classList.add("focused");
+
+				if (props.autofocus) {
+					option.focus();
+				}
 			}
 		}
 	});
@@ -200,13 +232,15 @@ function Listbox(props: ListboxProps) {
 				React.cloneElement(option, {
 					...option.props,
 					index,
-					onHome,
-					onEnd,
-					onArrowUp,
-					onArrowDown,
-					onEnter: onSelect,
-					onSpace: onSelect,
-					onClick: onSelect,
+					onHome: option.props.disabled ? undefined : onHome,
+					onEnd: option.props.disabled ? undefined : onEnd,
+					onArrowUp: option.props.disabled ? undefined : onArrowUp,
+					onArrowDown: option.props.disabled ? undefined : onArrowDown,
+					onTab: option.props.disabled && typeof props.onTab === "function" ? undefined : onTab,
+					onEscape: option.props.disabled ? undefined : onEscape,
+					onEnter: option.props.disabled ? undefined : onSelect,
+					onSpace: option.props.disabled ? undefined : onSelect,
+					onClick: option.props.disabled ? undefined : onSelect,
 				})
 			);
 		}
