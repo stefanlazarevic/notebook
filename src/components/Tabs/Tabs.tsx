@@ -5,7 +5,8 @@ import "./Tabs.css";
 import TabsProps, { ITabData, TABS_DEFAULT_PROPS } from "./TabsProps";
 
 import Tab from "./components/Tab";
-import { NextButton, PreviousButton } from "../Button";
+import IconButton from "../IconButton";
+import { Icons } from "../Icon";
 
 function Tabs(props: TabsProps) {
 	/**
@@ -100,7 +101,9 @@ function Tabs(props: TabsProps) {
 
 	return (
 		<div className="Tabs" onKeyDown={onKeyDown}>
-			{length > props.max! ? <PreviousButton size={20} disabled={isFirstPage()} onClick={previous} /> : null}
+			{length > props.max! ? (
+				<IconButton size={20} icon={Icons.chevronLeft} disabled={isFirstPage()} onClick={previous} />
+			) : null}
 			<div className="TabContainer">
 				{visibleTabs.map((tabData: ITabData, index: number) => {
 					return (
@@ -115,7 +118,9 @@ function Tabs(props: TabsProps) {
 					);
 				})}
 			</div>
-			{length > props.max! ? <NextButton size={20} disabled={isLastPage()} onClick={next} /> : null}
+			{length > props.max! ? (
+				<IconButton size={20} icon={Icons.chevronRight} disabled={isLastPage()} onClick={next} />
+			) : null}
 		</div>
 	);
 }

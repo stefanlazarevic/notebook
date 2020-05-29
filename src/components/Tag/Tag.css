@@ -1,0 +1,29 @@
+.Tag {
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    background-color: #f8f9fb;
+
+    padding: 0 5px;
+}
+
+.Tag:focus {
+    outline: 2px solid #5149b8;
+
+    outline-offset: -1px;
+}
+
+.Tag > .IconButton {
+    padding: 0;
+
+    background-color: transparent;
+
+    border: 0;
+
+    margin-left: 5px;
+}
