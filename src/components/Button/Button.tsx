@@ -11,13 +11,13 @@ function Button(props: ButtonProps) {
 	const className = useClassNames("Button", props.className);
 
 	const onKeyDown = useCallback(
-		(event: React.KeyboardEvent<HTMLButtonElement>) => {
+		function ButtonKeyDownCallback(event: React.KeyboardEvent<HTMLButtonElement>) {
 			const { keyCode } = event;
 
-			if ((keyCode === Key.ENTER || keyCode === Key.SPACE) && typeof props.onClick === "function") {
+			if (keyCode === Key.ENTER || keyCode === Key.SPACE) {
 				event.preventDefault();
 
-				props.onClick(event);
+				props.onClick!(event);
 			}
 		},
 		[props.onClick]
@@ -30,14 +30,15 @@ function Button(props: ButtonProps) {
 			className={className}
 			title={props.title}
 			lang={props.lang}
+			tabIndex={!props.disabled ? props.tabIndex : undefined}
 			disabled={props.disabled}
 			aria-label={props["aria-label"]}
 			aria-labelledby={props["aria-labelledby"]}
 			aria-pressed={props["aria-pressed"]}
 			aria-expanded={props["aria-expanded"]}
 			aria-haspopup={props["aria-haspopup"]}
-			onClick={props.onClick}
-			onKeyDown={onKeyDown}
+			onClick={!props.disabled ? props.onClick : undefined}
+			onKeyDown={!props.disabled ? onKeyDown : undefined}
 		>
 			{props.children}
 		</button>

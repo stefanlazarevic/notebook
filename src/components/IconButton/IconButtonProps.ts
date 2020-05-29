@@ -40,6 +40,10 @@ export const IconButtonPropTypes = {
 	/**
 	 *
 	 */
+	tabIndex: PropTypes.number as Validator<number | undefined>,
+	/**
+	 *
+	 */
 	onClick: PropTypes.func as Validator<
 		((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined
 	>,

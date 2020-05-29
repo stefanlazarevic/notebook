@@ -32,6 +32,10 @@ export const ButtonPropTypes = {
 	/**
 	 *
 	 */
+	tabIndex: PropTypes.number as Validator<number | undefined>,
+	/**
+	 *
+	 */
 	onClick: PropTypes.func as Validator<
 		((event: React.SyntheticEvent<HTMLButtonElement>) => void) | undefined
 	>,
