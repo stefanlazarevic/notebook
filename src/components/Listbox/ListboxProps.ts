@@ -38,7 +38,7 @@ export const ListboxPropTypes = {
 	 *
 	 */
 	onSelect: PropTypes.func as Validator<
-		((event: React.SyntheticEvent, index: number) => void) | undefined
+		((event: React.SyntheticEvent<HTMLLIElement>, index: number) => void) | undefined
 	>,
 };
 

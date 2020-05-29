@@ -147,7 +147,7 @@ function Listbox(props: ListboxProps) {
 	);
 
 	const onSelect = useCallback(
-		function onListboxSelect(event: React.SyntheticEvent, index: number) {
+		function onListboxSelect(event: React.SyntheticEvent<HTMLLIElement>, index: number) {
 			blurFocusedOption();
 
 			const option = options.current[index] as HTMLLIElement;
@@ -159,7 +159,7 @@ function Listbox(props: ListboxProps) {
 				props.onSelect(event, index);
 			}
 		},
-		[props.onSelect]
+		[props.onSelect, blurFocusedOption]
 	);
 
 	useLayoutEffect(() => {
@@ -170,7 +170,7 @@ function Listbox(props: ListboxProps) {
 
 	useComponentDidMount(function listboxMountCallback() {
 		if (options.current) {
-			onHome(null);
+			onHome();
 
 			const toFocusOption = options.current[focusedIndex.current] as HTMLLIElement;
 
@@ -204,7 +204,9 @@ function Listbox(props: ListboxProps) {
 					onEnd,
 					onArrowUp,
 					onArrowDown,
-					onSelect,
+					onEnter: onSelect,
+					onSpace: onSelect,
+					onClick: onSelect,
 				})
 			);
 		}

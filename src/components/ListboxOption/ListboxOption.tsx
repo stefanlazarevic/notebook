@@ -2,17 +2,18 @@ import React, { useMemo } from "react";
 
 import "./ListboxOption.css";
 
-import ListboxOptionProps from "./ListboxOptionProps";
-import Key from "../../../Utils/keyboard/key";
-import Utils from "../../../Utils";
-import useClassNames from "../../../Utils/hooks/classNames";
+import { ListboxOptionProps, ListboxOptionPropTypes } from "./ListboxOptionProps";
+
+import Key from "../Utils/keyboard/key";
+import Utils from "../Utils";
+import useClassNames from "../Utils/hooks/classNames";
 
 function ListboxOption(props: ListboxOptionProps) {
 	const className = useClassNames("ListboxOption", props.className);
 
 	const id = useMemo(() => props.id || Utils.string.generateRandom(), [props.id]);
 
-	function onKeyDown(event: React.KeyboardEvent) {
+	function onKeyDown(event: React.KeyboardEvent<HTMLLIElement>) {
 		const { keyCode } = event;
 
 		if (props.disabled) {
@@ -35,36 +36,30 @@ function ListboxOption(props: ListboxOptionProps) {
 			props.onEnd(event);
 		}
 
-		if ((keyCode === Key.ENTER || keyCode === Key.SPACE) && typeof props.onSelect === "function") {
-			props.onSelect(event, props.index);
+		if (keyCode === Key.ENTER && typeof props.onEnter === "function") {
+			props.onEnter(event, props.index);
 		}
 
-		if (keyCode === Key.ESCAPE && typeof props.onEsc === "function") {
-			props.onEsc(event);
+		if (keyCode === Key.SPACE && typeof props.onSpace === "function") {
+			props.onSpace(event, props.index);
+		}
+
+		if (keyCode === Key.ESCAPE && typeof props.onEscape === "function") {
+			props.onEscape(event);
 		}
 
 		if (keyCode === Key.TAB && typeof props.onTab === "function") {
-			props.onTab(event);
+			props.onTab(event, props.index);
 		}
 	}
 
-	function onFocus(event: React.SyntheticEvent) {
+	function onClick(event: React.MouseEvent<HTMLLIElement>) {
 		if (props.disabled) {
 			return;
 		}
 
-		if (typeof props.onFocus === "function") {
-			props.onFocus(event, props.index);
-		}
-	}
-
-	function onClick(event: React.MouseEvent) {
-		if (props.disabled) {
-			return;
-		}
-
-		if (typeof props.onSelect === "function") {
-			props.onSelect(event, props.index);
+		if (typeof props.onClick === "function") {
+			props.onClick(event, props.index);
 		}
 	}
 
@@ -76,7 +71,6 @@ function ListboxOption(props: ListboxOptionProps) {
 			role="option"
 			onKeyDown={onKeyDown}
 			tabIndex={props.disabled ? undefined : -1}
-			onFocus={onFocus}
 			onClick={onClick}
 			aria-selected={props.selected}
 			aria-disabled={props.disabled}
@@ -85,6 +79,8 @@ function ListboxOption(props: ListboxOptionProps) {
 		</li>
 	);
 }
+
+ListboxOption.propTypes = ListboxOptionPropTypes;
 
 ListboxOption.defaultProps = {};
 
