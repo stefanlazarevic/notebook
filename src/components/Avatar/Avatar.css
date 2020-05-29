@@ -11,3 +11,39 @@
 
     height: 40px;
 }
+
+.Avatar > img {
+    display: none;
+
+    width: 100%;
+
+    height: 100%;
+}
+
+.Avatar > img[data-error="false"] {
+    display: inline-block;
+}
+
+.AvatarInitials {
+    box-sizing: border-box;
+
+    position: absolute;
+
+    display: flex;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background-color: #f8f9fb;
+
+    border: 1px solid #e4e4e4;
+
+    justify-content: center;
+
+    align-items: center;
+}
