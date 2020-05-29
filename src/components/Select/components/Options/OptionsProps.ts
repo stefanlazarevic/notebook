@@ -1,7 +1,27 @@
-import ListboxProps, { ListboxCallbackProps, ListboxOptionalProps } from "../../../Listbox/ListboxProps";
+import PropTypes, { InferProps, Validator } from "prop-types";
+import { ReactElement } from "react";
 
-export interface OptionsOptionalProps extends ListboxOptionalProps {}
+export const OptionsPropTypes = {
+	/**
+	 *
+	 */
+	className: PropTypes.string as Validator<string | undefined>,
+	/**
+	 *
+	 */
+	children: PropTypes.node as Validator<ReactElement[] | undefined>,
+	/**
+	 *
+	 */
+	onSelect: PropTypes.func as Validator<
+		((event: React.SyntheticEvent<HTMLLIElement>, index: number) => void) | undefined
+	>,
+	/**
+	 *
+	 */
+	onEscape: PropTypes.func as Validator<
+		((event: React.KeyboardEvent<HTMLLIElement>) => void) | undefined
+	>,
+};
 
-export interface OptionsCallbackProps extends ListboxCallbackProps {}
-
-export default interface OptionsProps extends ListboxProps, OptionsOptionalProps, OptionsCallbackProps {}
+export type OptionsProps = InferProps<typeof OptionsPropTypes>;

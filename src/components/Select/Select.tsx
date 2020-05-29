@@ -6,7 +6,6 @@ import SelectProps from "./SelectProps";
 
 import Option from "./components/Option";
 import Options from "./components/Options";
-import { IOptionData } from "./components/Option/OptionProps";
 
 function Select(props: SelectProps) {
 	const [expanded, setExpanded] = useState(false);
@@ -122,31 +121,7 @@ function Select(props: SelectProps) {
 	 *
 	 * @param event
 	 */
-	function onHome(event: React.SyntheticEvent) {
-		event.stopPropagation();
-
-		if (options.current) {
-			options.current[0].focus();
-		}
-	}
-
-	/**
-	 *
-	 * @param event
-	 */
-	function onEnd(event: React.SyntheticEvent) {
-		event.stopPropagation();
-
-		if (options.current) {
-			options.current[options.current.length - 1].focus();
-		}
-	}
-
-	/**
-	 *
-	 * @param event
-	 */
-	function onEsc(event: React.SyntheticEvent) {
+	function onEscape(event: React.SyntheticEvent) {
 		event.stopPropagation();
 
 		close();
@@ -163,80 +138,50 @@ function Select(props: SelectProps) {
 		close();
 	}
 
-	/**
-	 *
-	 * @param event
-	 * @param index
-	 */
-	function onArrowDown(event: React.SyntheticEvent, index: number) {
-		event.stopPropagation();
-
-		const indexToFocus = index + 1;
-
-		if (options.current) {
-			if (indexToFocus < options.current.length) {
-				options.current[indexToFocus].focus();
-			} else {
-				options.current[0].focus();
-			}
-		}
-	}
-
-	/**
-	 *
-	 * @param event
-	 * @param index
-	 */
-	function onArrowUp(event: React.SyntheticEvent, index: number) {
-		event.stopPropagation();
-
-		const indexToFocus = index - 1;
-
-		if (options.current) {
-			if (indexToFocus >= 0) {
-				options.current[indexToFocus].focus();
-			} else {
-				options.current[options.current.length - 1].focus();
-			}
-		}
-	}
-
 	return (
-		<button
-			ref={buttonReference}
-			className={className}
-			tabIndex={0}
-			aria-haspopup="listbox"
-			onKeyDown={onKeyDown}
-			aria-expanded={expanded}
-			onClick={onClick}
-		>
-			{props.options[props.selectedIndex!] ? props.options[props.selectedIndex!].label : props.placeholder}
+		<div className={className}>
+			<button
+				ref={buttonReference}
+				tabIndex={0}
+				aria-haspopup="listbox"
+				onKeyDown={onKeyDown}
+				aria-expanded={expanded}
+				onClick={onClick}
+			>
+				<span>
+					{props.options[props.selectedIndex!]
+						? props.options[props.selectedIndex!].label
+						: props.placeholder}
+				</span>
+			</button>
 			{expanded && !props.disabled && (
 				<Options
+					className="Options"
 					onSelect={onSelect}
-					onHome={onHome}
-					onEnd={onEnd}
-					onEsc={onEsc}
-					onArrowDown={onArrowDown}
-					onArrowUp={onArrowUp}
+					onEscape={onEscape}
 					onTab={onTab}
+					autofocus={true}
 				>
 					{props.options.map((optionData: IOptionData, index: number) => {
 						return (
-							<Option key={optionData.id} index={index} selected={props.selectedIndex === index}>
+							<Option
+								key={optionData.id}
+								className="Option"
+								index={index}
+								selected={props.selectedIndex === index}
+								disabled={optionData.disabled}
+							>
 								{optionData.label}
 							</Option>
 						);
 					})}
 				</Options>
 			)}
-		</button>
+		</div>
 	);
 }
 
 Select.defaultProps = {
-	selectedIndex: 0,
 	placeholder: "Select value",
 } as SelectProps;
 

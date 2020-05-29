@@ -2,6 +2,12 @@
   box-sizing: border-box;
 
   position: relative;
+}
+
+.Select > button {
+  box-sizing: border-box;
+
+  position: relative;
 
   display: inline-block;
 
@@ -20,6 +26,12 @@
   margin: 0;
 }
 
-.Select:focus {
-  outline: 2px solid #a06b9a;
+.Select > button:hover {
+  background-color: #f4f4f4;
+}
+
+.Select > button:focus {
+  outline: 2px solid #5149b8;
+
+  outline-offset: -1px;
 }

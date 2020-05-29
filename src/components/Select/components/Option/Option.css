@@ -1,24 +1,3 @@
 .Option {
-  box-sizing: border-box;
-
-  position: relative;
-
-  padding: 5px;
-
-  border: 2px solid #fff;
-}
-
-.Option:hover,
-.Option:focus {
-  background-color: #f8f9fb;
-}
-
-.Option:focus {
-  outline: 2px solid #a06b9a;
-
-  z-index: 2;
-}
-
-.Option[aria-selected="true"] {
-  border-color: #333;
+    padding: 2px 5px;
 }
