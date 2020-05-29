@@ -8,7 +8,6 @@ export default function BasicExample() {
 	const interval = useRef<NodeJS.Timeout>();
 
 	const updateProgress = useCallback(() => {
-		console.log("Progress is called");
 		if (progress >= 100) {
 			if (interval.current) {
 				clearInterval(interval.current);
@@ -31,7 +30,6 @@ export default function BasicExample() {
 	}, [updateProgress]);
 
 	useComponentWillUnmount(() => {
-		console.log("Component is unmounting");
 		if (interval.current) {
 			clearInterval(interval.current);
 		}
