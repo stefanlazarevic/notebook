@@ -1,4 +1,5 @@
 import PropTypes, { InferProps, Validator } from "prop-types";
+import { ReactElement } from "react";
 
 export const ButtonPropTypes = {
 	/**
@@ -16,7 +17,7 @@ export const ButtonPropTypes = {
 	/**
 	 *
 	 */
-	children: PropTypes.node as Validator<React.ReactNode | React.ReactNodeArray | undefined>,
+	children: PropTypes.node as Validator<ReactElement | ReactElement[] | undefined>,
 	/**
 	 *
 	 */
@@ -42,28 +43,28 @@ export const ButtonPropTypes = {
 	/**
 	 *
 	 */
-	"aria-label": PropTypes.string as Validator<string | undefined>,
+	"aria-label": PropTypes.string as Validator<React.AriaAttributes["aria-label"]>,
 	/**
 	 *
 	 */
-	"aria-labelledby": PropTypes.string as Validator<string | undefined>,
+	"aria-labelledby": PropTypes.string as Validator<React.AriaAttributes["aria-labelledby"]>,
 	/**
 	 *
 	 */
 	"aria-pressed": PropTypes.oneOf([true, false, "true", "false", "mixed"]) as Validator<
-		boolean | "false" | "mixed" | "true" | undefined
+		React.AriaAttributes["aria-pressed"]
 	>,
 	/**
 	 *
 	 */
 	"aria-expanded": PropTypes.oneOf([true, false, "true", "false"]) as Validator<
-		boolean | "false" | "true" | undefined
+		React.AriaAttributes["aria-expanded"]
 	>,
 	/**
 	 *
 	 */
 	"aria-haspopup": PropTypes.oneOf([true, false, "true", "false", "menu"]) as Validator<
-		boolean | "true" | "false" | "menu" | undefined
+		React.AriaAttributes["aria-haspopup"]
 	>,
 };
 
