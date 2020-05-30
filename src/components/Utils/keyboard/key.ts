@@ -13,6 +13,7 @@ const Key = {
 	ARROW_RIGHT: 39,
 	ARROW_DOWN: 40,
 	DELETE: 46,
+	F10: 121,
 };
 
 export default Key;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./ThreeStateCheckbox.css";
 
-import Checkbox from "../index";
+import LabeledCheckbox from "../../LabeledCheckbox";
 
 export default function ThreeStateCheckbox() {
 	const [checked, setChecked] = useState([false, false, false, false]);
@@ -53,26 +53,34 @@ export default function ThreeStateCheckbox() {
 	return (
 		<div className="ThreeStateCheckbox">
 			<div className="Row">
-				<Checkbox checked={checkedAll} onChange={onChangeAll} aria-labelledby="check-all" />
-				<label id="check-all" onClick={onChangeAll}>
-					Сви прилози
-				</label>
+				<LabeledCheckbox checked={checkedAll} onChange={onChangeAll}>
+					All
+				</LabeledCheckbox>
 			</div>
 			<div className="Row">
-				<Checkbox checked={checked[0]} onChange={onChange} index={0} aria-labelledby="option-one" />
-				<label>Кечап</label>
+				<LabeledCheckbox
+					checked={checked[0]}
+					onChange={onChange}
+					index={0}
+					aria-labelledby="option-one"
+				>
+					Ketchapp
+				</LabeledCheckbox>
 			</div>
 			<div className="Row">
-				<Checkbox checked={checked[1]} onChange={onChange} index={1} aria-labelledby="option-two" />
-				<label>Мајонез</label>
+				<LabeledCheckbox checked={checked[1]} onChange={onChange} index={1}>
+					Mayo
+				</LabeledCheckbox>
 			</div>
 			<div className="Row">
-				<Checkbox checked={checked[2]} onChange={onChange} index={2} aria-labelledby="option-three" />
-				<label>Сенф</label>
+				<LabeledCheckbox checked={checked[2]} onChange={onChange} index={2}>
+					Mustard
+				</LabeledCheckbox>
 			</div>
 			<div className="Row">
-				<Checkbox checked={checked[3]} onChange={onChange} index={3} aria-labelledby="option-four" />
-				<label>Лук</label>
+				<LabeledCheckbox checked={checked[3]} onChange={onChange} index={3}>
+					Onion
+				</LabeledCheckbox>
 			</div>
 		</div>
 	);

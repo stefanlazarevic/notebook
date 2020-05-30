@@ -50,7 +50,7 @@ function Checkbox(props: CheckboxProps) {
 			id={props.id}
 			data-testid={props.testid}
 			data-index={props.index}
-			tabIndex={props.disabled ? undefined : 0}
+			tabIndex={!props.disabled && typeof props.tabIndex === "number" ? props.tabIndex : undefined}
 			role="checkbox"
 			className={className}
 			aria-checked={props.checked}
@@ -68,8 +68,7 @@ function Checkbox(props: CheckboxProps) {
 Checkbox.propTypes = CheckboxPropTypes;
 
 Checkbox.defaultProps = {
-	onChange: undefined,
-	onContext: undefined,
+	tabIndex: 0,
 };
 
 Checkbox.displayName = "Checkbox";

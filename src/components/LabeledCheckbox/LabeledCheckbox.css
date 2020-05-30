@@ -1,0 +1,19 @@
+.LabeledCheckbox {
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+}
+
+.LabeledCheckbox > label {
+    box-sizing: border-box;
+
+    position: relative;
+
+    cursor: pointer;
+
+    margin-left: 10px;
+}
