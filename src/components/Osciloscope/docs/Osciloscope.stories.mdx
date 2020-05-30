@@ -1,0 +1,46 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, number } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import Osciloscope from '../index.ts';
+import MicrophoneOsciloscope from './MicrophoneOsciloscope.tsx';
+
+<Meta title="Components/Osciloscope" component={Osciloscope} decorators={[withKnobs]}/>
+
+# Осцилоскоп
+
+<Preview>
+    <Story name="Preview">
+        <Osciloscope audioData={[128, 114, 23, 120, 225, 128, 256, 200, 208, 140, 40, 80, 100, 200]} />
+    </Story>
+</Preview>
+
+## Пример осцилоскопа са микрофоном
+
+```tsx
+function MicrophoneOsciloscope() {
+    const [microphone, setMicrophone] = useState<MediaStreamAudioSourceNode>();
+
+    const audioContext = useAudioContext();
+
+    useComponentDidMount(() => {
+		navigator.mediaDevices
+			.getUserMedia({ audio: true, video: false })
+			.then(function handleAccessedMicrophone(microphoneStream: MediaStream) {
+				setMicrophone(audioContext.createMediaStreamSource(microphoneStream));
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+    });
+
+    return <Osciloscope audioSource={microphone} />
+}
+```
+
+<Preview>
+    <Story name="Осцилоскоп са микрофоном">
+        <MicrophoneOsciloscope />
+    </Story>
+</Preview>
