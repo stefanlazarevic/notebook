@@ -1,0 +1,21 @@
+.SimpleAccordion {
+    margin: 0 auto;
+
+    max-width: 400px;
+}
+
+.SimpleAccordion .AccordionHeader {
+    font-size: 1.1rem;
+}
+
+.SimpleAccordion .AccordionHeader[aria-expanded="true"] {
+    border-bottom-color: transparent;
+}
+
+.SimpleAccordion .Highlight {
+    background-color: rgb(234, 191, 49);
+
+    color: #333;
+
+    padding: 12px;
+}

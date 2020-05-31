@@ -1,0 +1,14 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, text, boolean } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import SimpleAccordion from './index.ts';
+
+<Meta title="Examples/SimpleAccordion" component={SimpleAccordion} decorators={[withKnobs]} />
+
+# Simple Accordion
+
+<Story name="Preview">
+    <SimpleAccordion />
+</Story>

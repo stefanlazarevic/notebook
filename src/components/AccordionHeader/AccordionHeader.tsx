@@ -67,8 +67,8 @@ function AccordionHeader(props: AccordionHeaderProps) {
 				data-index={props.index}
 				tabIndex={0}
 				className={className}
-				aria-expanded={props.expanded}
-				aria-controls={props.controls}
+				aria-expanded={props["aria-expanded"]}
+				aria-controls={props["aria-controls"]}
 				disabled={props.disabled}
 				onKeyDown={onKeyDown}
 				onClick={onClick}

@@ -16,11 +16,11 @@ export const AccordionHeaderPropTypes = {
 	/**
 	 * @default false
 	 */
-	expanded: PropTypes.bool as Validator<boolean | undefined>,
+	"aria-expanded": PropTypes.bool as Validator<React.AriaAttributes["aria-expanded"]>,
 	/**
 	 *
 	 */
-	controls: PropTypes.string as Validator<string | undefined>,
+	"aria-controls": PropTypes.string as Validator<React.AriaAttributes["aria-controls"]>,
 	/**
 	 * @default false
 	 */
@@ -28,7 +28,7 @@ export const AccordionHeaderPropTypes = {
 	/**
 	 *
 	 */
-	children: PropTypes.node as Validator<React.ReactNode | React.ReactNodeArray | undefined>,
+	children: PropTypes.node as Validator<PropTypes.ReactNodeLike>,
 	/**
 	 * @default 2
 	 */
@@ -40,31 +40,45 @@ export const AccordionHeaderPropTypes = {
 	/**
 	 *
 	 */
-	onFocus: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
+	onFocus: PropTypes.func as Validator<
+		((event: React.SyntheticEvent, index?: number) => void) | undefined
+	>,
 	/**
 	 *
 	 */
-	onBlur: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
+	onBlur: PropTypes.func as Validator<
+		((event: React.SyntheticEvent, index?: number) => void) | undefined
+	>,
 	/**
 	 *
 	 */
-	onClick: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
+	onClick: PropTypes.func as Validator<
+		((event: React.SyntheticEvent, index?: number) => void) | undefined
+	>,
 	/**
 	 *
 	 */
-	onArrowDown: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
+	onArrowDown: PropTypes.func as Validator<
+		((event: React.SyntheticEvent, index?: number) => void) | undefined
+	>,
 	/**
 	 *
 	 */
-	onArrowUp: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
+	onArrowUp: PropTypes.func as Validator<
+		((event: React.SyntheticEvent, index?: number) => void) | undefined
+	>,
 	/**
 	 *
 	 */
-	onHome: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
+	onHome: PropTypes.func as Validator<
+		((event: React.SyntheticEvent, index?: number) => void) | undefined
+	>,
 	/**
 	 *
 	 */
-	onEnd: PropTypes.func as Validator<(event: React.SyntheticEvent, index?: number) => void | undefined>,
+	onEnd: PropTypes.func as Validator<
+		((event: React.SyntheticEvent, index?: number) => void) | undefined
+	>,
 };
 
 export type AccordionHeaderProps = InferProps<typeof AccordionHeaderPropTypes>;

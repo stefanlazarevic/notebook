@@ -1,32 +1,27 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useLayoutEffect } from "react";
 
 import "./AccordionPanel.css";
 
 import useClassNames from "../Utils/hooks/classNames";
 import useComponentDidMount from "../Utils/hooks/componentDidMount";
+import { AccordionPanelPropTypes, AccordionPanelProps } from "./AccordionPanelProps";
 
-function AccordionPanel(props: any) {
+function AccordionPanel(props: AccordionPanelProps) {
 	const className = useClassNames("AccordionPanel", props.className);
 
 	const accordionPanel = useRef<HTMLDivElement | null>(null);
 
-	const show = useCallback(() => {
+	useComponentDidMount(() => {
 		if (accordionPanel.current) {
 			accordionPanel.current.style.maxHeight = `${accordionPanel.current.scrollHeight}px`;
 		}
-	}, []);
-
-	useComponentDidMount(() => {
-		if (!props.hidden) {
-			show();
-		}
 	});
 
-	useEffect(() => {
-		if (!props.hidden) {
-			show();
+	useLayoutEffect(() => {
+		if (accordionPanel.current) {
+			accordionPanel.current.style.maxHeight = `${accordionPanel.current.scrollHeight}px`;
 		}
-	}, [props.hidden, show]);
+	}, [props.children, props.hidden]);
 
 	return (
 		<div
@@ -43,7 +38,7 @@ function AccordionPanel(props: any) {
 	);
 }
 
-AccordionPanel.propTypes = {};
+AccordionPanel.propTypes = AccordionPanelPropTypes;
 
 AccordionPanel.defaultProps = {};
 
