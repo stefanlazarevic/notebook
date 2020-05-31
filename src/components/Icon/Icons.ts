@@ -23,4 +23,5 @@ export default {
 	eye: "eye",
 	folder: "folder",
 	questionCircle: "question-circle",
+	searchAlt: "search-alt",
 };

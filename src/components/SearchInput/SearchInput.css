@@ -1,0 +1,56 @@
+.SearchInput {
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+}
+
+.SearchInput > input {
+    background-color: #f8f9fb;
+
+    border: 1px solid #e4e4e4;
+
+    border-right: 0;
+
+    padding: 5px 10px;
+
+    border-radius: 0;
+
+    flex: 1;
+}
+
+.SearchInput > input::-ms-clear,
+.SearchInput > input::-ms-reveal,
+.SearchInput > input::-webkit-search-decoration,
+.SearchInput > input::-webkit-search-cancel-button,
+.SearchInput > input::-webkit-search-results-button,
+.SearchInput > input::-webkit-search-results-decoration {
+  display: none;
+}
+
+.SearchInput > input:focus {
+    outline: 2px solid #5149b8;
+
+    outline-offset: -1px;
+
+    z-index: 2;
+}
+
+.SearchInput > .IconButton {
+    padding: 5px;
+
+    border-radius: 0;
+}
+
+.SearchInput > .IconButton:not(:last-child) {
+    border-right: 0;
+}
+
+.SearchInput > .IconButton:focus {
+    z-index: 2;
+}
