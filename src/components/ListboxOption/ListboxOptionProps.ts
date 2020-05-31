@@ -1,5 +1,4 @@
 import PropTypes, { InferProps, Validator } from "prop-types";
-import { ReactElement } from "react";
 
 export const ListboxOptionPropTypes = {
 	/**
@@ -29,7 +28,7 @@ export const ListboxOptionPropTypes = {
 	/**
 	 *
 	 */
-	children: PropTypes.node as Validator<ReactElement[] | undefined>,
+	children: PropTypes.node as Validator<PropTypes.ReactNodeLike>,
 	/**
 	 *
 	 */

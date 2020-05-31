@@ -8,6 +8,8 @@
     background-color: #ffffff;
 
     padding: 0 4px;
+
+    cursor: default;
 }
 
 .ListboxOption:not([aria-disabled]):hover {
@@ -29,6 +31,8 @@
     outline: 2px solid #5149b8;
 
     outline-offset: -1px;
+
+    z-index: 2;
 }
 
 .ListboxOption[aria-disabled] {

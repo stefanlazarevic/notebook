@@ -16,7 +16,7 @@ export const ListboxPropTypes = {
 	/**
 	 *
 	 */
-	children: PropTypes.node as Validator<React.ReactElement[] | undefined>,
+	children: PropTypes.node as Validator<PropTypes.ReactNodeLike>,
 	/**
 	 * Опција која говори компоненти да фокусира селектовани артикал или први артикал у листи
 	 * приликом спровођења.

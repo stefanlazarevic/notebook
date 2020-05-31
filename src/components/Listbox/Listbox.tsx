@@ -1,4 +1,5 @@
 import React, { useRef, useLayoutEffect, useCallback } from "react";
+import { ReactElementLike } from "prop-types";
 
 import "./Listbox.css";
 
@@ -38,9 +39,10 @@ function Listbox(props: ListboxProps) {
 			blurFocusedOption();
 
 			let startIndex = 0;
+			const children = Array.isArray(props.children) ? props.children : [props.children];
 
-			for (let index = startIndex; index < props.children!.length; index++) {
-				const child = props.children![index];
+			for (let index = startIndex; index < children.length; index++) {
+				const child = children[index] as ReactElementLike;
 
 				if (!child.props.disabled) {
 					const option = options.current[index] as HTMLLIElement;
@@ -64,10 +66,11 @@ function Listbox(props: ListboxProps) {
 
 			blurFocusedOption();
 
-			let startIndex = props.children!.length - 1;
+			const children = Array.isArray(props.children) ? props.children : [props.children];
+			let startIndex = children.length - 1;
 
 			for (let index = startIndex; index > -1; index--) {
-				const child = props.children![index];
+				const child = children[index] as ReactElementLike;
 
 				if (!child.props.disabled) {
 					const option = options.current[index] as HTMLLIElement;
@@ -93,10 +96,11 @@ function Listbox(props: ListboxProps) {
 
 				blurFocusedOption();
 
+				const children = Array.isArray(props.children) ? props.children : [props.children];
 				let currentIndex = index - 1;
 
 				while (currentIndex > -1) {
-					const child = props.children![currentIndex];
+					const child = children[currentIndex] as ReactElementLike;
 
 					if (!child.props.disabled) {
 						const option = options.current[currentIndex] as HTMLLIElement;
@@ -119,7 +123,9 @@ function Listbox(props: ListboxProps) {
 			event.preventDefault();
 
 			if (options.current) {
-				if (index === props.children!.length - 1) {
+				const children = Array.isArray(props.children) ? props.children : [props.children];
+
+				if (index === children.length - 1) {
 					return;
 				}
 
@@ -127,8 +133,8 @@ function Listbox(props: ListboxProps) {
 
 				let currentIndex = index + 1;
 
-				while (currentIndex < props.children!.length) {
-					const child = props.children![currentIndex];
+				while (currentIndex < children.length) {
+					const child = children[currentIndex] as ReactElementLike;
 
 					if (!child.props.disabled) {
 						const option = options.current[currentIndex] as HTMLLIElement;
@@ -190,9 +196,10 @@ function Listbox(props: ListboxProps) {
 		if (options.current) {
 			if (focusedIndex.current === -1) {
 				let startIndex = 0;
+				const children = Array.isArray(props.children) ? props.children : [props.children];
 
-				for (let index = startIndex; index < props.children!.length; index++) {
-					const child = props.children![index];
+				for (let index = startIndex; index < children.length; index++) {
+					const child = children[index] as ReactElementLike;
 
 					if (!child.props.disabled) {
 						focusedIndex.current = index;
@@ -220,9 +227,10 @@ function Listbox(props: ListboxProps) {
 
 	function renderOptions() {
 		const options = [];
+		const children = Array.isArray(props.children) ? props.children : [props.children];
 
-		for (let index = 0; index < props.children!.length; index++) {
-			const option = props.children![index];
+		for (let index = 0; index < children.length; index++) {
+			const option = children[index] as ReactElementLike;
 
 			if (option.props.selected) {
 				focusedIndex.current = index;
