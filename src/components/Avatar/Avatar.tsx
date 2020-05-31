@@ -3,8 +3,9 @@ import React, { useState, useCallback } from "react";
 import "./Avatar.css";
 
 import useClassNames from "../Utils/hooks/classNames";
+import { AvatarPropTypes, AvatarProps } from "./AvatarProps";
 
-function Avatar(props: any) {
+function Avatar(props: AvatarProps) {
 	const className = useClassNames("Avatar", props.className);
 
 	const [error, setError] = useState<boolean>(true);
@@ -24,17 +25,17 @@ function Avatar(props: any) {
 			<img src={props.src} alt={props.alt} onLoad={onImageLoad} data-error={error} />
 			{error && (
 				<div className="AvatarInitials" aria-hidden={true}>
-					{props.name.charAt(0)}
+					{props.name!.charAt(0)}
 				</div>
 			)}
 		</div>
 	);
 }
 
-Avatar.propTypes = {};
+Avatar.propTypes = AvatarPropTypes;
 
 Avatar.defaultProps = {
-	name: "Stefan",
+	name: "",
 };
 
 Avatar.displayName = "Avatar";
