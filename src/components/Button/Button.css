@@ -18,10 +18,14 @@
   background-color: #7e6ee6;
 
   color: #fff;
+
+  fill: currentColor;
 }
 
 .Button:focus {
   outline: 2px solid #5149b8;
 
   outline-offset: -1px;
+
+  z-index: 2;
 }
