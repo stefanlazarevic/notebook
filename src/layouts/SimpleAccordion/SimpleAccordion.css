@@ -1,11 +1,19 @@
 .SimpleAccordion {
-    margin: 0 auto;
-
-    max-width: 400px;
+    max-width: 450px;
 }
 
 .SimpleAccordion .AccordionHeader {
     font-size: 1.1rem;
+
+    display: flex;
+}
+
+.SimpleAccordion .AccordionHeader > strong {
+    flex: 1;
+}
+
+.SimpleAccordion .AccordionHeader > .Icon {
+    align-self: center;
 }
 
 .SimpleAccordion .AccordionHeader[aria-expanded="true"] {

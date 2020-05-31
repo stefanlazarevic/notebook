@@ -1,9 +1,12 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, lazy } from "react";
 
 import "./SimpleAccordion.css";
 
-import AccordionHeader from "../../../components/AccordionHeader";
-import AccordionPanel from "../../../components/AccordionPanel";
+import AccordionHeader from "../../components/AccordionHeader";
+import AccordionPanel from "../../components/AccordionPanel";
+import IconButton from "../../components/IconButton";
+import Icon, { Icons } from "../../components/Icon";
+import useComponentDidMount from "../../components/Utils/hooks/componentDidMount";
 
 export default function SimpleAccordion(props: any) {
 	const [expanded, setExpanded] = useState<boolean | undefined>(props.expanded);
@@ -20,6 +23,12 @@ export default function SimpleAccordion(props: any) {
 		setExpanded((expanded) => !expanded);
 	}, []);
 
+	useComponentDidMount(function SimpleAccordionMountedCallback() {
+		// Pre-cache chevron icons.
+		const icon = new Image();
+		icon.src = "/icons/chevron-up.svg";
+	});
+
 	return (
 		<div className="SimpleAccordion">
 			<AccordionHeader
@@ -31,6 +40,7 @@ export default function SimpleAccordion(props: any) {
 				aria-controls="simple-accordion-panel"
 			>
 				<strong>Do I need a unique password for every account?</strong>
+				<Icon icon={expanded ? Icons.chevronUp : Icons.chevronDown} size={18} />
 			</AccordionHeader>
 			<AccordionPanel
 				id="simple-accordion-panel"
