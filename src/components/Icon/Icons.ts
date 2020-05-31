@@ -24,4 +24,8 @@ export default {
 	folder: "folder",
 	questionCircle: "question-circle",
 	searchAlt: "search-alt",
+	volumeHigh: "volume-high",
+	volumeLow: "volume-low",
+	volumeMedium: "volume-medium",
+	volumeMute: "volume-mute",
 };
