@@ -1,0 +1,40 @@
+.Input,
+.Input > input,
+.Input > .InputValidationMessage {
+    box-sizing: border-box;
+
+    position: relative;
+
+    width: 100%;
+}
+
+.Input > input {
+    background-color: #f8f9fb;
+
+    border: 1px solid #e4e4e4;
+
+    border-radius: 0;
+
+    padding: 5px;
+}
+
+.Input > input:hover {
+    background-color: #f8f9fb;
+}
+
+.Input > input:focus {
+    outline: 2px solid #5149b8;
+
+    outline-offset: -1px;
+
+    z-index: 2;
+}
+
+.Input > input[aria-invalid="true"] {
+    border-color: #9f5751;
+}
+
+.Input > .InputValidationMessage {
+    color: #9f5751;
+}
+
