@@ -8,14 +8,24 @@
   background-color: #f8f9fb;
 
   border: 1px solid #e4e4e4;
+
+  border-radius: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 }
 
 .Button:hover {
   background-color: #f4f4f4;
 }
 
-.Button[aria-pressed] {
+.Button[aria-pressed="true"] {
   background-color: #7e6ee6;
+
+  border-color: #7e6ee6;
 
   color: #fff;
 
