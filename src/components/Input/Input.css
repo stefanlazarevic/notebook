@@ -35,6 +35,18 @@
 }
 
 .Input > .InputValidationMessage {
+    box-sizing: border-box;
+
+    position: absolute;
+    
+    top: calc(100% + 5px); 
+
+    left: 0;
+
     color: #9f5751;
+
+    font-size: 0.85rem;
+
+    line-height: 1rem;
 }
 

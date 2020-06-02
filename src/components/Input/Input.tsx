@@ -1,63 +1,46 @@
-import React, { useRef, useState, useCallback, useMemo, useEffect } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 
 import "./Input.css";
 
 import useClassNames from "../Utils/hooks/classNames";
-import utils from "../../utils";
+
 import { InputPropTypes, InputProps } from "./InputProps";
 
 function Input(props: InputProps) {
-	const { id, testid, className, validityMessage, autoValidate, ...inputProps } = props;
+	const { id, testid, className, customValidity, ...inputProps } = props;
 
 	const input = useRef<HTMLInputElement | null>(null);
 
 	const classNames = useClassNames("Input", className);
 
-	const [error, setError] = useState<string>("");
-
-	const errorId = useMemo(() => utils.string.generateRandom(), []);
-
-	const onInvalid = useCallback(function InputInvalidCallback(
-		event: React.InvalidEvent<HTMLInputElement>
-	) {
-		setError(event.target.validationMessage);
-	},
-	[]);
+	const onInvalid = useCallback(
+		function InputInvalidCallback(event: React.InvalidEvent<HTMLInputElement>) {
+			if (typeof props.onInvalid === "function") {
+				props.onInvalid!(event);
+			}
+		},
+		[props.onInvalid]
+	);
 
 	useEffect(
 		function InputUpdateCustomValidityEffect() {
 			if (input.current) {
-				if (validityMessage) {
-					input.current.setCustomValidity(validityMessage);
-				} else {
-					input.current.setCustomValidity("");
-				}
-			}
-
-			if (autoValidate && validityMessage) {
-				setError(validityMessage);
-			} else {
-				setError("");
+				input.current.setCustomValidity(customValidity!);
 			}
 		},
-		[autoValidate, validityMessage]
+		[customValidity]
 	);
 
 	return (
-		<div id={id} data-testid={testid} className={classNames}>
+		<div>
 			<input
-				{...inputProps}
 				ref={input}
+				id={id}
+				data-testid={testid}
+				className={classNames}
+				{...inputProps}
 				onInvalid={onInvalid}
-				aria-invalid={Boolean(error)}
-				aria-describedby={error ? errorId : props["aria-describedby"]}
-				formNoValidate={true}
 			/>
-			{error && (
-				<small id={errorId} className="InputValidationMessage">
-					{error}
-				</small>
-			)}
 		</div>
 	);
 }
@@ -67,6 +50,8 @@ Input.propTypes = InputPropTypes;
 Input.defaultProps = {
 	type: "text",
 	autoValidate: false,
+	validityMessage: "",
+	formNoValidate: true,
 };
 
 Input.displayName = "Input";

@@ -28,6 +28,10 @@ export const InputPropTypes = {
 	/**
 	 *
 	 */
+	autoComplete: PropTypes.string as Validator<"on" | "off" | undefined>,
+	/**
+	 *
+	 */
 	disabled: PropTypes.bool as Validator<boolean | undefined>,
 	/**
 	 *
@@ -52,11 +56,15 @@ export const InputPropTypes = {
 	/**
 	 *
 	 */
-	validityMessage: PropTypes.string as Validator<string | undefined>,
+	customValidity: PropTypes.string as Validator<string | undefined>,
 	/**
 	 *
 	 */
 	value: PropTypes.string.isRequired as Validator<string>,
+	/**
+	 *
+	 */
+	formNoValidate: PropTypes.bool as Validator<boolean | undefined>,
 	/**
 	 *
 	 */
@@ -80,6 +88,10 @@ export const InputPropTypes = {
 	/**
 	 *
 	 */
+	"aria-invalid": PropTypes.string as Validator<React.AriaAttributes["aria-invalid"] | undefined>,
+	/**
+	 *
+	 */
 	onChange: PropTypes.func as Validator<
 		((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined
 	>,
@@ -100,6 +112,12 @@ export const InputPropTypes = {
 	 */
 	onKeyDown: PropTypes.func as Validator<
 		((event: React.KeyboardEvent<HTMLInputElement>) => void) | undefined
+	>,
+	/**
+	 *
+	 */
+	onInvalid: PropTypes.func as Validator<
+		((event: React.InvalidEvent<HTMLInputElement>) => void) | undefined
 	>,
 };
 
