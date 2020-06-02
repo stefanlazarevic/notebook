@@ -1,0 +1,11 @@
+.Label {
+    box-sizing: border-box;
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+.Label.has-error {
+    color: #9f5751;
+}
