@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 
 import "./LabeledSwitch.css";
 
@@ -10,31 +10,46 @@ import Switch from "../Switch";
 import utils from "../../utils";
 
 function LabeledSwitch(props: any) {
-	const className = useClassNames("LabeledSwitch", props.className);
+	const classNames = useClassNames("LabeledSwitch", props.className);
 
 	const labelId = useMemo(() => utils.string.generateRandom(), []);
+
+	const onChange = useCallback(
+		function LabeledSwitchChangedCallback(event: React.SyntheticEvent) {
+			props.onChange!(event, props.checked, props.index);
+		},
+		[props.onChange, props.checked, props.index]
+	);
 
 	const SwitchLabel = useMemo(() => {
 		return function SwitchLabel() {
 			return (
-				<Label id={labelId} className="SwitchLabel" htmlFor={props.id}>
+				<Label
+					id={labelId}
+					className="SwitchLabel"
+					htmlFor={props.id}
+					dir={props.dir}
+					onClick={!props.disabled ? onChange : undefined}
+				>
 					{props.children}
 				</Label>
 			);
 		};
-	}, [labelId, props.id, props.children]);
+	}, [labelId, props.id, props.children, props.dir, props.disabled, onChange]);
 
 	return (
-		<div id={props.id} data-testid={props.testid} className={className}>
+		<div data-testid={props.testid} className={classNames}>
 			{props.dir === "rtl" && <SwitchLabel />}
-			<Switch checked={props.checked} aria-labelledby={labelId} />
+			<Switch {...props} aria-labelledby={labelId} onChange={onChange} />
 			{props.dir !== "rtl" && <SwitchLabel />}
 		</div>
 	);
 }
 
+// LabeledSwitch.propTypes = {};
+
 LabeledSwitch.defaultProps = {};
 
 LabeledSwitch.displayName = "LabeledSwitch";
 
-export default LabeledSwitch;
+export default React.memo(LabeledSwitch);

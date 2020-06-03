@@ -1,0 +1,26 @@
+import PropTypes from 'prop-types';
+import { Meta, Story, Preview, Props, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
+import { withKnobs, number, text, boolean, select } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+
+import LabeledSwitch from '../index.ts';
+
+<Meta title="Components/LabeledSwitch" component={LabeledSwitch} decorators={[withKnobs]}/>
+
+# LabeledSwitch
+
+<Preview>
+    <Story name="Preview">
+        <LabeledSwitch 
+            checked={boolean('checked', false)} 
+            onChange={action('onChange')} 
+            dir={select('dir', ['ltr', 'rtl'], 'ltr')}
+        >
+            Some label
+        </LabeledSwitch>
+    </Story>
+</Preview>
+
+## Атрибути
+
+<Props of={LabeledSwitch} />

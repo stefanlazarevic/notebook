@@ -1,1 +1,19 @@
-.LabeledSwitch {}
+.LabeledSwitch {
+    box-sizing: border-box;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.SwitchLabel {
+    margin-left: 10px;
+}
+
+.SwitchLabel[dir="rtl"] {
+    margin-left: inherit;
+
+    margin-right: 10px;
+}
