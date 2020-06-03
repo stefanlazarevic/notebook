@@ -1,6 +1,6 @@
-import PropTypes, { Validator, InferProps } from "prop-types";
+import PropTypes, { InferProps, Validator, ReactNodeLike } from "prop-types";
 
-export const InputPropTypes = {
+export const LabeledInputPropTypes = {
 	/**
 	 *
 	 */
@@ -68,6 +68,10 @@ export const InputPropTypes = {
 	/**
 	 *
 	 */
+	children: PropTypes.node as Validator<ReactNodeLike>,
+	/**
+	 *
+	 */
 	"aria-describedby": PropTypes.string as Validator<React.AriaAttributes["aria-describedby"]>,
 	/**
 	 *
@@ -117,4 +121,4 @@ export const InputPropTypes = {
 	>,
 };
 
-export type InputProps = InferProps<typeof InputPropTypes>;
+export type LabeledInputProps = InferProps<typeof LabeledInputPropTypes>;
