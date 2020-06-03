@@ -27,6 +27,14 @@ export const SwitchPropTypes = {
 	/**
 	 *
 	 */
+	index: PropTypes.number as Validator<number | undefined>,
+	/**
+	 * @default 0
+	 */
+	tabIndex: PropTypes.number as Validator<number | undefined>,
+	/**
+	 *
+	 */
 	"aria-labelledby": PropTypes.string as Validator<string | undefined>,
 	/**
 	 *
@@ -35,7 +43,9 @@ export const SwitchPropTypes = {
 	/**
 	 *
 	 */
-	"aria-haspopup": PropTypes.oneOf([true, false, "true", "false"]) as Validator<boolean | "true" | "false" | undefined>,
+	"aria-haspopup": PropTypes.oneOf([true, false, "true", "false"]) as Validator<
+		boolean | "true" | "false" | undefined
+	>,
 	/**
 	 *
 	 */
@@ -44,12 +54,14 @@ export const SwitchPropTypes = {
 	 * Повратни позив уколико се стање прекидача промени.
 	 */
 	onChange: PropTypes.func as Validator<
-		(event: React.SyntheticEvent<HTMLDivElement>, changedChecked: boolean) => void | undefined
+		((event: React.SyntheticEvent<HTMLDivElement>, changedChecked: boolean) => void) | undefined
 	>,
 	/**
 	 *
 	 */
-	onContext: PropTypes.func as Validator<(event: React.SyntheticEvent<HTMLDivElement>) => void | undefined>,
+	onContext: PropTypes.func as Validator<
+		((event: React.SyntheticEvent<HTMLDivElement>) => void) | undefined
+	>,
 };
 
 export type SwitchProps = InferProps<typeof SwitchPropTypes>;

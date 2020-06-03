@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import "./Switch.css";
 
 import { SwitchProps, SwitchPropTypes } from "./SwitchProps";
 import useClassNames from "../Utils/hooks/classNames";
+import Key from "../Utils/keyboard/key";
 
 function Switch(props: SwitchProps) {
-	const className = useClassNames("Switch", props.className);
+	const classNames = useClassNames("Switch", props.className);
 
 	/**
 	 *
 	 * @param event
 	 */
-	function change(event: React.SyntheticEvent<HTMLDivElement>) {
-		if (typeof props.onChange === "function" && !props.disabled) {
-			props.onChange(event, Boolean(props.checked));
-		}
-	}
+	const change = useCallback(
+		function SwitchChangeCallback(event: React.SyntheticEvent<HTMLDivElement>) {
+			props.onChange!(event, Boolean(props.checked));
+		},
+		[props.onChange, props.checked]
+	);
 
 	/**
 	 *
 	 * @param event
 	 */
-	function onClick(event: React.MouseEvent<HTMLDivElement>) {
-		change(event);
-	}
+	const onClick = useCallback(
+		function SwitchClickCallback(event: React.MouseEvent<HTMLDivElement>) {
+			change(event);
+		},
+		[change]
+	);
 
 	/**
 	 *
@@ -33,15 +38,11 @@ function Switch(props: SwitchProps) {
 	function onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
 		const { keyCode, shiftKey } = event;
 
-		if (props.disabled) {
-			return;
-		}
-
-		if (keyCode === 13 || keyCode === 32) {
+		if (keyCode === Key.ENTER || keyCode === Key.SPACE) {
 			change(event);
 		}
 
-		if (shiftKey && keyCode === 121 && typeof props.onContext === "function") {
+		if (shiftKey && keyCode === Key.F10 && typeof props.onContext === "function") {
 			props.onContext(event);
 		}
 	}
@@ -50,8 +51,8 @@ function Switch(props: SwitchProps) {
 		<div
 			id={props.id}
 			data-testid={props.testid}
-			className={className}
-			tabIndex={0}
+			className={classNames}
+			tabIndex={props.tabIndex}
 			role="switch"
 			aria-checked={props.checked}
 			aria-disabled={props.disabled}
@@ -59,7 +60,7 @@ function Switch(props: SwitchProps) {
 			aria-label={props["aria-label"]}
 			aria-haspopup={props["aria-haspopup"]}
 			aria-describedby={props["aria-describedby"]}
-			onClick={props.disabled ? undefined : onClick}
+			onClick={!props.disabled && typeof props.onChange === "function" ? onClick : undefined}
 			onKeyDown={props.disabled ? undefined : onKeyDown}
 		/>
 	);
@@ -67,8 +68,10 @@ function Switch(props: SwitchProps) {
 
 Switch.propTypes = SwitchPropTypes;
 
-Switch.defaultProps = {};
+Switch.defaultProps = {
+	tabIndex: 0,
+};
 
 Switch.displayName = "Switch";
 
-export default Switch;
+export default React.memo(Switch);
