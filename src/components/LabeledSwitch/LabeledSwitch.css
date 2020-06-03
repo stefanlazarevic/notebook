@@ -8,12 +8,12 @@
     align-items: center;
 }
 
-.SwitchLabel {
+.LabeledSwitch > .SwitchLabel {
     margin-left: 10px;
 }
 
-.SwitchLabel[dir="rtl"] {
-    margin-left: inherit;
+.LabeledSwitch > .SwitchLabel[dir="rtl"] {
+    margin-left: 0;
 
     margin-right: 10px;
 }

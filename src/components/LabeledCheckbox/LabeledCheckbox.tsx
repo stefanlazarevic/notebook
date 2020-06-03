@@ -2,16 +2,19 @@ import React, { useMemo, useCallback } from "react";
 
 import "./LabeledCheckbox.css";
 
-import Checkbox from "../Checkbox";
-import Utils from "../Utils";
 import { LabeledCheckboxProps, LabeledCheckboxPropTypes } from "./LabeledCheckboxProps";
+
 import useClassNames from "../Utils/hooks/classNames";
-import Key from "../Utils/keyboard/key";
+
+import Checkbox from "../Checkbox";
+import Label from "../Label";
+
+import Utils from "../Utils";
 
 function LabeledCheckbox(props: LabeledCheckboxProps) {
-	const id = useMemo(() => Utils.string.generateRandom(), []);
+	const classNames = useClassNames("LabeledCheckbox", props.className);
 
-	const className = useClassNames("LabeledCheckbox", props.className);
+	const labelId = useMemo(() => Utils.string.generateRandom(), []);
 
 	const onChange = useCallback(
 		function LabeledCheckboxChangeCallback(event: React.SyntheticEvent) {
@@ -20,36 +23,31 @@ function LabeledCheckbox(props: LabeledCheckboxProps) {
 		[props.onChange, props.checked, props.index]
 	);
 
-	const onKeyDown = useCallback(
-		function LabeledCheckboxKeyDownCallback(event: React.KeyboardEvent) {
-			const { keyCode, shiftKey } = event;
-
-			if (shiftKey && keyCode === Key.F10 && typeof props.onContext === "function") {
-				props.onContext!(event);
-			}
-		},
-		[props.onContext]
-	);
+	const CheckboxLabel = useMemo(() => {
+		return function CheckboxLabel() {
+			return (
+				<Label
+					id={labelId}
+					onClick={!props.disabled && typeof props.onChange === "function" ? onChange : undefined}
+					className="CheckboxLabel"
+					htmlFor={props.id}
+					dir={props.dir}
+				>
+					{props.children}
+				</Label>
+			);
+		};
+	}, [labelId, props.id, props.dir, props.children, props.onChange, onChange, props.disabled]);
 
 	return (
-		<div
-			id={props.id}
-			data-testid={props.testid}
-			className={className}
-			onKeyDown={props.disabled ? undefined : onKeyDown}
-		>
+		<div data-testid={props.testid} className={classNames}>
+			{props.dir === "rtl" && <CheckboxLabel />}
 			<Checkbox
-				aria-labelledby={id}
-				disabled={props.disabled}
+				{...props}
+				aria-labelledby={labelId}
 				onChange={!props.disabled && typeof props.onChange === "function" ? onChange : undefined}
-				checked={props.checked}
 			/>
-			<label
-				id={id}
-				onClick={!props.disabled && typeof props.onChange === "function" ? onChange : undefined}
-			>
-				{props.children}
-			</label>
+			{props.dir !== "rtl" && <CheckboxLabel />}
 		</div>
 	);
 }
@@ -58,9 +56,8 @@ LabeledCheckbox.propTypes = LabeledCheckboxPropTypes;
 
 LabeledCheckbox.defaultProps = {
 	checked: false,
-	index: -1,
 };
 
 LabeledCheckbox.displayName = "LabeledCheckbox";
 
-export default LabeledCheckbox;
+export default React.memo(LabeledCheckbox);

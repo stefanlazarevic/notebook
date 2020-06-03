@@ -9,8 +9,17 @@ import LabeledCheckbox from '../index.ts';
 
 # LabeledCheckbox
 
-<Story name="Preview">
-    <LabeledCheckbox checked={boolean('checked', false)} index={number('index', -1)} onChange={action('onChange')}>
-        Some label
-    </LabeledCheckbox>
-</Story>
+<Preview>
+    <Story name="Preview">
+        <LabeledCheckbox 
+            checked={boolean('checked', false)} 
+            index={number('index', -1)} 
+            onChange={action('onChange')}
+            disabled={boolean('disabled', false)}
+        >
+            Some label
+        </LabeledCheckbox>
+    </Story>
+</Preview>
+
+## Атрибути

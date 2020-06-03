@@ -31,12 +31,21 @@ export const LabeledCheckboxPropTypes = {
 	/**
 	 *
 	 */
+	dir: PropTypes.string as Validator<"ltr" | "rtl" | "auto" | undefined>,
+	/**
+	 *
+	 */
 	children: PropTypes.node as Validator<string | ReactElement | ReactElement[] | undefined>,
 	/**
 	 *
 	 */
 	onChange: PropTypes.func as Validator<
-		((event: React.SyntheticEvent, checked: boolean, index: number) => void) | undefined
+		| ((
+				event: React.SyntheticEvent,
+				checked: React.AriaAttributes["aria-checked"],
+				index: number
+		  ) => void)
+		| undefined
 	>,
 	/**
 	 *

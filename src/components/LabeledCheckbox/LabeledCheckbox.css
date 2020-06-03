@@ -3,17 +3,17 @@
 
     position: relative;
 
-    display: inline-flex;
+    display: flex;
 
-    align-items: center;
+    align-content: center;
 }
 
-.LabeledCheckbox > label {
-    box-sizing: border-box;
-
-    position: relative;
-
-    cursor: pointer;
-
+.LabeledCheckbox > .CheckboxLabel { 
     margin-left: 10px;
+}
+
+.LabeledCheckbox > .CheckboxLabel[dir="rtl"] {
+    margin-left: 0;
+
+    margin-right: 10px;
 }
