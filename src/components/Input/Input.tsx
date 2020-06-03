@@ -32,16 +32,14 @@ function Input(props: InputProps) {
 	);
 
 	return (
-		<div>
-			<input
-				ref={input}
-				id={id}
-				data-testid={testid}
-				className={classNames}
-				{...inputProps}
-				onInvalid={onInvalid}
-			/>
-		</div>
+		<input
+			ref={input}
+			id={id}
+			data-testid={testid}
+			className={classNames}
+			{...inputProps}
+			onInvalid={onInvalid}
+		/>
 	);
 }
 
