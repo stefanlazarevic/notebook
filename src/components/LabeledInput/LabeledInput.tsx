@@ -9,20 +9,38 @@ import Input from "../Input";
 import { LabeledInputProps, LabeledInputPropTypes } from "./LabeledInputProps";
 
 function LabeledInput(props: LabeledInputProps) {
-	const { testid, className, children, id, ...inputProps } = props;
-
-	const classNames = useClassNames("LabeledInput", className);
+	const classNames = useClassNames("LabeledInput", props.className);
 
 	const labelId = useMemo(() => utils.string.generateRandom(), []);
 
-	const inputId = useMemo(() => id || utils.string.generateRandom(), [id]);
+	const inputId = useMemo(() => props.id || utils.string.generateRandom(), [props.id]);
 
 	return (
-		<div data-testid={testid} className={classNames}>
+		<div data-testid={props.testid} className={classNames}>
 			<Label id={labelId} htmlFor={inputId}>
-				{children}
+				{props.children}
 			</Label>
-			<Input {...inputProps} id={inputId} aria-labelledby={labelId} />
+			<Input
+				id={inputId}
+				value={props.value}
+				disabled={props.disabled}
+				autoComplete={props.autoComplete}
+				autoFocus={props.autoFocus}
+				customValidity={props.customValidity}
+				placeholder={props.placeholder}
+				form={props.form}
+				readOnly={props.readOnly}
+				type={props.type}
+				formNoValidate={props.formNoValidate}
+				required={props.required}
+				name={props.name}
+				aria-labelledby={labelId}
+				onChange={props.onChange}
+				onInvalid={props.onInvalid}
+				onBlur={props.onBlur}
+				onFocus={props.onFocus}
+				onKeyDown={props.onKeyDown}
+			/>
 		</div>
 	);
 }

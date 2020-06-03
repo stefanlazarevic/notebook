@@ -68,7 +68,7 @@ export const LabeledInputPropTypes = {
 	/**
 	 *
 	 */
-	children: PropTypes.node as Validator<ReactNodeLike>,
+	children: PropTypes.node as Validator<ReactNodeLike | string>,
 	/**
 	 *
 	 */

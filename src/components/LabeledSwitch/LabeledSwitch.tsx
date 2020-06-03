@@ -40,7 +40,16 @@ function LabeledSwitch(props: any) {
 	return (
 		<div data-testid={props.testid} className={classNames}>
 			{props.dir === "rtl" && <SwitchLabel />}
-			<Switch {...props} aria-labelledby={labelId} onChange={onChange} />
+			<Switch
+				id={props.id}
+				checked={props.checked}
+				disabled={props.disabled}
+				index={props.index}
+				tabIndex={props.tabIndex}
+				aria-labelledby={labelId}
+				onChange={onChange}
+				onContext={props.onContext}
+			/>
 			{props.dir !== "rtl" && <SwitchLabel />}
 		</div>
 	);

@@ -12,6 +12,8 @@ import Label from "../Label";
 import Utils from "../Utils";
 
 function LabeledCheckbox(props: LabeledCheckboxProps) {
+	const { className, ...checkboxProps } = props;
+
 	const classNames = useClassNames("LabeledCheckbox", props.className);
 
 	const labelId = useMemo(() => Utils.string.generateRandom(), []);
@@ -43,7 +45,7 @@ function LabeledCheckbox(props: LabeledCheckboxProps) {
 		<div data-testid={props.testid} className={classNames}>
 			{props.dir === "rtl" && <CheckboxLabel />}
 			<Checkbox
-				{...props}
+				{...checkboxProps}
 				aria-labelledby={labelId}
 				onChange={!props.disabled && typeof props.onChange === "function" ? onChange : undefined}
 			/>
